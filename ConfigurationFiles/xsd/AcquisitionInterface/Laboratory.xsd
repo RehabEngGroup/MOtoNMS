@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation/>
+  <xs:complexType name="RotationType">
+    <xs:sequence>
+      <xs:element name="Axis" type="xs:string"/>
+      <xs:element name="Degrees" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlateToGlobalRotations">
+    <xs:sequence maxOccurs="2" minOccurs="0">
+      <xs:element name="Rot" type="RotationType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlatformType">
+    <xs:sequence maxOccurs="1">
+      <xs:element name="ID" type="xs:integer"/>
+      <xs:element name="Brand" type="xs:string"/>
+      <xs:element name="Type" type="xs:integer"/>
+      <xs:element name="FrameRate" type="xs:double"/>
+      <xs:element name="FPtoGlobalRotations" type="ForcePlateToGlobalRotations"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlatformsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element maxOccurs="1" name="ForcePlatform" type="ForcePlatformType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LaboratoryType">
+    <xs:sequence>
+      <xs:element default="required" name="Name" type="xs:string"/>
+      <xs:element name="MotionCaptureSystem" type="xs:string"/>
+      <xs:element name="CoordinateSystemOrientation" type="xs:string"/>
+      <xs:element name="NumberOfForcePlatforms" type="xs:integer"/>
+      <xs:element maxOccurs="unbounded" name="ForcePlatformsList" type="ForcePlatformsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Laboratory" type="LaboratoryType"/>
+</xs:schema>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation/>
+  <xs:complexType name="FcutType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Markers" type="xs:double"/>
+      <xs:element minOccurs="0" name="Forces" type="xs:double"/>
+      <xs:element minOccurs="0" name="CenterOfPressure" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrialWindowType">
+    <xs:sequence>
+      <xs:element name="TrialName" type="xs:string"/>
+      <xs:element name="StartFrame" type="xs:long"/>
+      <xs:element name="EndFrame" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EMGType">
+    <xs:sequence>
+      <xs:element name="OutputLabel" type="xs:string"/>
+      <xs:element name="C3DLabel" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrialType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Fcut" type="FcutType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputeStancePhaseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Offset" type="xs:double"/>
+      <xs:element name="Leg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ManualType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="TrialWindow" type="TrialWindowType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StanceOnFPfromC3DType">
+    <xs:sequence>
+      <xs:element name="Leg" type="xs:string"/>
+      <xs:element name="LabelForHeelStrike" type="xs:string"/>
+      <xs:element name="LabelForToeOff" type="xs:string"/>
+      <xs:element minOccurs="0" name="Offset" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WindowFromC3DType">
+    <xs:sequence>
+      <xs:element name="Leg" type="xs:string"/>
+      <xs:element name="LabelForStartEvent" type="xs:string"/>
+      <xs:element name="LabelForStopEvent" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EMGsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="EMG" type="EMGType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TrialsType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="FilteringType">
+    <xs:sequence minOccurs="1">
+      <xs:element maxOccurs="unbounded" name="Trial" type="TrialType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WindowSelectionProcedureType">
+    <xs:choice>
+      <xs:element name="ComputeStancePhase" type="ComputeStancePhaseType"/>
+      <xs:element name="Manual" type="ManualType"/>
+      <xs:element name="StanceOnFPfromC3D" type="StanceOnFPfromC3DType"/>
+      <xs:element name="WindowFromC3D" type="WindowFromC3DType"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="MarkersType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="EMGMaxTrialsType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="EMGsSelectionType">
+    <xs:sequence>
+      <xs:element name="EMGSet" type="xs:string"/>
+      <xs:element name="EMGs" type="EMGsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElaborationType">
+    <xs:sequence>
+      <xs:element name="FolderName" type="xs:string"/>
+      <xs:element name="Trials" type="TrialsType"/>
+      <xs:element minOccurs="0" name="Filtering" type="FilteringType"/>
+      <xs:element name="WindowSelectionProcedure" type="WindowSelectionProcedureType"/>
+      <xs:element name="Markers" type="MarkersType"/>
+      <xs:element name="EMGMaxTrials" type="EMGMaxTrialsType"/>
+      <xs:element name="EMGsSelection" type="EMGsSelectionType"/>
+      <xs:element name="EMGOffset" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="elaboration" type="ElaborationType"/>
+</xs:schema>

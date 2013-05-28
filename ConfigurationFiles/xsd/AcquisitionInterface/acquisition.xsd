@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="RotationType">
+    <xs:sequence>
+      <xs:element name="Axis" type="xs:string"/>
+      <xs:element name="Degrees" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlateToGlobalRotationsType">
+    <xs:sequence maxOccurs="2" minOccurs="0">
+      <xs:element name="Rot" type="RotationType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StanceOnFPType">
+    <xs:sequence>
+      <xs:element name="Forceplatform" type="xs:integer"/>
+      <xs:element name="Leg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlatformType">
+    <xs:sequence maxOccurs="1">
+      <xs:element name="ID" type="xs:integer"/>
+      <xs:element name="Brand" type="xs:string"/>
+      <xs:element name="Type" type="xs:integer"/>
+      <xs:element name="FrameRate" type="xs:double"/>
+      <xs:element name="FPtoGlobalRotations" type="ForcePlateToGlobalRotationsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FootSwitchType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:integer"/>
+      <xs:element name="Position" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StancesOnForcePlatformsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="StanceOnFP" type="StanceOnFPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForcePlatformsListType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element maxOccurs="1" name="ForcePlatform" type="ForcePlatformType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatorsType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysiotherapistsType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="MarkersSetType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="EMGSystemType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Rate" type="xs:double"/>
+      <xs:element name="NumberOfChannels" type="xs:integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="MuscleType">
+     <xs:list itemType="xs:string"/>   
+  </xs:simpleType>
+  <xs:complexType name="MuscleListType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+       <xs:element name="Muscle" type="MuscleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChannelType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:string"/>
+      <xs:choice>
+        <xs:element name="Muscle" type="xs:string"/>
+        <xs:element name="FootSwitch" type="FootSwitchType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrialType">
+    <xs:sequence>
+      <xs:element name="Type" type="xs:string"/>
+      <xs:element name="RepetitionNumber" type="xs:integer"/>
+      <xs:element name="StancesOnForcePlatforms" type="StancesOnForcePlatformsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LaboratoryType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MotionCaptureSystem" type="xs:string"/>
+      <xs:element name="CoordinateSystemOrientation" type="xs:string"/>
+      <xs:element name="NumberOfForcePlatforms" type="xs:integer"/>
+      <xs:element maxOccurs="unbounded" name="ForcePlatformsList" type="ForcePlatformsListType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StaffType">
+    <xs:sequence>
+      <xs:element name="PersonInCharge" type="xs:string"/>
+      <xs:element name="Operators" type="OperatorsType"/>
+      <xs:element name="Physiotherapists" type="PhysiotherapistsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubjectType">
+    <xs:sequence>
+      <xs:element name="FirstName" type="xs:string"/>
+      <xs:element name="LastName" type="xs:string"/>
+      <xs:element name="Code" type="xs:string"/>
+      <xs:element name="BirthDate" type="xs:date"/>
+      <xs:element name="Age" type="xs:integer"/>
+      <xs:element name="Weight" type="xs:double"/>
+      <xs:element name="Height" type="xs:double"/>
+      <xs:element name="FootSize" type="xs:double"/>
+      <xs:element name="Pathology" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MarkersProtocolType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MarkersSet" type="MarkersSetType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EMGSystemsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="EMGSystem" type="EMGSystemType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EMGsProtocolType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MuscleList" type="MuscleListType"/>
+      <xs:element name="InstrumentedLeg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChannelsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Channel" type="ChannelType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrialsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Trial" type="TrialType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AcquisitionType">
+    <xs:sequence>
+      <xs:element name="Laboratory" type="LaboratoryType"/>
+      <xs:element name="Staff" type="StaffType"/>
+      <xs:element name="Subject" type="SubjectType"/>
+      <xs:element name="AcquisitionDate" type="xs:date"/>
+      <xs:element name="VideoFrameRate" type="xs:double"/>
+      <xs:element name="MarkersProtocol" type="MarkersProtocolType"/>
+      <xs:element name="EMGSystems" type="EMGSystemsType"/>
+      <xs:element name="EMGsProtocol" type="EMGsProtocolType"/>
+      <xs:element name="Channels" type="ChannelsType"/>
+      <xs:element name="Trials" type="TrialsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name= "acquisition" type="AcquisitionType"/>
+</xs:schema>

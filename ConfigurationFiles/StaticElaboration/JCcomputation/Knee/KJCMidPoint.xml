@@ -1,0 +1,35 @@
+<!--   KJC Computation: Mid Point
+       Configuration file to indicate the Required Markers Name according to each Markers Protocol
+	   Specify MarkerNames in the same order of MarkerFullNames    
+-->  
+<Method>
+    <Name>KJCMidPoint</Name>
+    <Input>
+		<MarkerFullNames>
+			<Marker>Left First Point</Marker>
+            <Marker>Right First Point</Marker>
+            <Marker>Left Second Point</Marker>
+            <Marker>Right Second Point</Marker>
+		</MarkerFullNames>
+	</Input>
+    <MarkersDefinition>
+       <Protocol>
+	      <Name>UWA-Fullbody</Name>
+		  <MarkerNames>
+			 <Marker>LeLFC</Marker>
+			 <Marker>RiLFC</Marker>
+			 <Marker>LeMFC</Marker>
+			 <Marker>RiMFC</Marker>
+		  </MarkerNames>
+	    </Protocol>
+        <Protocol>
+          <Name>UNIPD-Fullbody</Name>  
+	      <MarkerNames>
+       	      <Marker>LLE</Marker>
+              <Marker>RLE</Marker>
+              <Marker>LME</Marker>
+              <Marker>RME</Marker>
+          </MarkerNames>			
+        </Protocol>
+    </MarkersDefinition>  
+</Method>  

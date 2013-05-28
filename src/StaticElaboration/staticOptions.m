@@ -1,0 +1,6 @@
+function choice=staticOptions()
+
+
+choice=questdlg('Static Elaboration Options', ...
+                'Matlab Data Processing for OpenSim',...
+                'New Static Elaboration', 'Load and Modify static.xml', ' ');

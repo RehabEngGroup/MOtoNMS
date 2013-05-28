@@ -1,0 +1,36 @@
+ <!--  Harrington et al J. Biomech 2006   HJC Computation
+       Configuration file to indicate the Required Markers Name according to each Markers Protocol
+	   Specify MarkerNames in the same order of MarkerFullNames    
+-->  
+<Method>
+    <Name>HJCHarrington</Name>
+    <Input>
+		<MarkerFullNames>
+			<Marker>Left Anterior Superior Iliac Spine</Marker>
+            <Marker>Right Anterior Superior Iliac Spine</Marker>
+            <Marker>Left Posterior Superior Iliac Spine</Marker>
+            <Marker>Right Posterior Superior Iliac Spine</Marker>
+		</MarkerFullNames>
+	</Input>
+    <MarkersDefinition>
+       <Protocol>
+	      <Name>UWA-Fullbody</Name>
+		  <MarkerNames>
+			 <Marker>LASI</Marker>
+			 <Marker>RASI</Marker>
+			 <Marker>LPSI</Marker>
+			 <Marker>RPSI</Marker>
+		  </MarkerNames>
+	    </Protocol>
+        <Protocol>
+          <Name>UNIPD-Fullbody</Name>  
+	      <MarkerNames>
+       	      <Marker>LASIS</Marker>
+              <Marker>RASIS</Marker>
+              <Marker>LPSIS</Marker>
+              <Marker>RPSIS</Marker>
+          </MarkerNames>			
+        </Protocol>
+    </MarkersDefinition>  
+ </Method>  
+

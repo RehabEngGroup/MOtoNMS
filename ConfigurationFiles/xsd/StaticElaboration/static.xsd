@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pfx="yourNamespaceURI">
+  <xs:complexType name="MarkerNamesType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Marker" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InputType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MarkerNames" type="MarkerNamesType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JointType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Method" type="xs:string"/>
+      <xs:element name="Input" type="InputType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JCcomputationType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Joint" type="JointType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="trcMarkersType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="StaticType">
+    <xs:sequence>
+      <xs:element name="FolderName" type="xs:string"/>
+      <xs:element name="TrialName" type="xs:string"/>
+      <xs:element minOccurs="0" name="Fcut" type="xs:double"/>
+      <xs:element name="JCcomputation" type="JCcomputationType"/>
+      <xs:element name="trcMarkers" type="trcMarkersType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="static" type="StaticType"/>
+</xs:schema>

@@ -1,0 +1,22 @@
+   <EMGsProtocol>
+      <Name>UWA-16muscles-r</Name>
+      <MuscleList>
+		<Muscle>Vast Lat</Muscle>
+	    <Muscle>Gluet Max</Muscle>
+	    <Muscle>Gluet Med</Muscle>
+	    <Muscle>TFL</Muscle>
+        <Muscle>Sart</Muscle>
+        <Muscle>Add Magnus</Muscle>
+        <Muscle>Grac</Muscle>
+        <Muscle>Rec Fem</Muscle>
+        <Muscle>Vast Med</Muscle>
+        <Muscle>Biceps Fem</Muscle>
+        <Muscle>Semi Mem</Muscle>
+	    <Muscle>Lat Gas</Muscle>
+	    <Muscle>Med Gas</Muscle>    
+	    <Muscle>Soleus</Muscle>
+	    <Muscle>Tib Ant</Muscle>
+        <Muscle>Peroneus longus</Muscle>
+	  </MuscleList>
+      <InstrumentedLeg>Right</InstrumentedLeg>
+   </EMGsProtocol>

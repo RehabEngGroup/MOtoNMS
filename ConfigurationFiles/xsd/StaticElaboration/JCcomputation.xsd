@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pfx="yourNamespaceURI">
+  <xs:complexType name="MarkerNamesType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Marker" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProtocolType">
+    <xs:sequence maxOccurs="1">
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MarkerNames" type="MarkerNamesType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InputType">
+    <xs:sequence>
+      <xs:element name="MarkerFullNames" type="MarkerNamesType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MarkersDefinitionType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Protocol" type="ProtocolType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MethodType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Input" type="InputType"/>
+      <xs:element name="MarkersDefinition" type="MarkersDefinitionType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Method" type="MethodType"/>
+</xs:schema>

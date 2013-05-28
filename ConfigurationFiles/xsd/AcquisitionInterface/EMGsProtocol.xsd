@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pfx="yourNamespaceURI">
+  <xs:complexType name="MuscleListType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Muscle" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EMGsProtocolType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MuscleList" type="MuscleListType"/>
+      <xs:element name="InstrumentedLeg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EMGsProtocol" type="EMGsProtocolType"/>
+</xs:schema>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pfx="yourNamespaceURI">
+  <xs:simpleType name="MarkersSetType">
+    <xs:list id="MarkersSet" itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="MarkersProtocolType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="MarkersSet" type="MarkersSetType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MarkersProtocol" type="MarkersProtocolType"/>
+</xs:schema>

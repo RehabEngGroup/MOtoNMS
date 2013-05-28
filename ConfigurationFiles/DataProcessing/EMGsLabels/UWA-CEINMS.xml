@@ -1,0 +1,66 @@
+<EMGSet>
+  <EMG>
+    <OutputLabel>addmag_r</OutputLabel>
+	<C3DLabel>Add Magnus</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>bicfemlh_r</OutputLabel>
+	<C3DLabel>Biceps Fem</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>gaslat_r</OutputLabel>
+	<C3DLabel>Lat Gas</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>gasmed_r</OutputLabel>
+	<C3DLabel>Med Gas</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>gmax_r</OutputLabel>
+	<C3DLabel>Gluet Max</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>gmed_r</OutputLabel>
+	<C3DLabel>Gluet Med</C3DLabel>
+  </EMG>
+  <EMG>
+    <OutputLabel>gra_r</OutputLabel>
+	<C3DLabel>Grac</C3DLabel>
+  </EMG>  
+  <EMG>
+    <OutputLabel>perlong_r</OutputLabel>
+	<C3DLabel>Peroneus longus</C3DLabel>
+  </EMG>  
+  <EMG>
+    <OutputLabel>recfem_r</OutputLabel>
+	<C3DLabel>Rec Fem</C3DLabel>
+  </EMG>    
+  <EMG>
+    <OutputLabel>sar_r</OutputLabel>
+	<C3DLabel>Sart</C3DLabel>
+  </EMG>  
+  <EMG>
+    <OutputLabel>semimem_r</OutputLabel>
+	<C3DLabel>Semi Mem</C3DLabel>
+  </EMG>  
+  <EMG>
+    <OutputLabel>sol_r</OutputLabel>
+	<C3DLabel>Soleus</C3DLabel>
+  </EMG>    
+  <EMG>
+    <OutputLabel>tfl_r</OutputLabel>
+	<C3DLabel>TFL</C3DLabel>
+  </EMG> 
+  <EMG>
+    <OutputLabel>tibant_r</OutputLabel>
+	<C3DLabel>Tib Ant</C3DLabel>
+  </EMG> 
+  <EMG>
+    <OutputLabel>vaslat_r</OutputLabel>
+	<C3DLabel>Vast Lat</C3DLabel>
+  </EMG>   
+  <EMG>
+    <OutputLabel>vasmed_r</OutputLabel>
+	<C3DLabel>Vast Med</C3DLabel>
+  </EMG>  
+</EMGSet>
