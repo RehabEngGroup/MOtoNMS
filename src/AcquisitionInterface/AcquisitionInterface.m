@@ -332,8 +332,8 @@ for k=1:length(c3dFiles)
 
     h=figure('Name', 'Trials','Position',[scrsz(4)/2 scrsz(4)/4 scrsz(3)/3 scrsz(4)/3]);
     
-    uicontrol('Style','text','Position',[160 190 140 20], 'String',['Type: ' trialsName{k}],'FontSize',9)
-    uicontrol('Style','text','Position',[160 160 140 20], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
+    uicontrol('Style','text','Position',[160 190 140 30], 'String',['Type: ' trialsName{k}],'FontSize',9)
+    uicontrol('Style','text','Position',[160 140 140 20], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
     
     uicontrol('Style','text','Position',[10 100 150 20], 'String','Leg on ForcePlatform 1','FontSize',9)
 

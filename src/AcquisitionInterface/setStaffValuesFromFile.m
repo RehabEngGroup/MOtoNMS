@@ -11,7 +11,7 @@ if nargin>0
     end
     
     try
-        if length(oldAcquisition.Staff.Operators.Name)==1
+        if length(oldAcquisition.Staff.Operators)==1
             def_staff{2}=oldAcquisition.Staff.Operators.Name;
         else
             def_staff{2}=oldAcquisition.Staff.Operators.Name{1};
@@ -22,7 +22,7 @@ if nargin>0
         oldAcquisition.Staff.Operators.Name{1}='';       
     end
     
-    if (length(oldAcquisition.Staff.Operators.Name)==1 || isempty(oldAcquisition.Staff.Operators.Name{2}))
+    if (length(oldAcquisition.Staff.Operators)==1 || isempty(oldAcquisition.Staff.Operators.Name{2}))
         def_staff{3}='';
     else
         def_staff{3}=oldAcquisition.Staff.Operators.Name{2};
