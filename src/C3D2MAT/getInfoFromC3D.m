@@ -59,7 +59,7 @@ end
 if nargout > 2
     try
         
-        Forces = getGRForces(itf);
+        Forces = getForcePlatesData(itf);
         
         %alternatively could be useful for future operations to have a 
         %STRUCTURE with forces idenfified by the labels ---> use:
