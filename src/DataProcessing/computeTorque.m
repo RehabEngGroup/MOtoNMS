@@ -6,8 +6,10 @@ function T =  computeTorque(forces, moments, COP,fpInfo)
 %
 %OUTPUT: T=[Tx Ty Tz] 
 %refere to http://www.kwon3d.com/theory/grf/cop.html
-%
+%adapted for Force plate of type 3 from
+%http://www.health.uottawa.ca/biomech/courses/apa6903/kistler.pdf
 %Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
+%Last Update August 2013
 % -------------------------------------------------------------------------
 
 Fx=forces(:,1);
@@ -22,12 +24,23 @@ COPx=COP(:,1);
 COPy=COP(:,2);
 COPz=COP(:,3);
 
-ao=fpInfo.origin(1); %x
-bo=fpInfo.origin(2); %y
-co=fpInfo.origin(3); %z
+%different meaning of origin among different FP type
 
-% Calculate Torque
-Tz = Mz - ((COPx - ao).*Fy) + ((COPy - bo).*Fx);
+if fpInfo.type==3   
+    
+    Tz = Mz - ((COPx).*Fy) + ((COPy).*Fx);
+    
+else
+    
+    ao=fpInfo.origin(1); %x
+    bo=fpInfo.origin(2); %y
+    co=fpInfo.origin(3); %z
+    
+    % Calculate Torque
+    
+    Tz = Mz - ((COPx - ao).*Fy) + ((COPy - bo).*Fx);
+    
+end
 
 %Tz = Mz - ((COPx).*Fy) + ((COPy).*Fx);
 Tx = zeros(1,length(COPx))';

@@ -65,15 +65,32 @@ load([foldersPath.sessionData 'trialsName.mat'])
 
 disp('Data have been loaded from mat files')         
 
-%% ------------------------------------------------------------------------
-%                     Check for markers data missing
+%% -------------------------------------------------------------------------
+%                   Preparing Data for Filtering
 %--------------------------------------------------------------------------
-[MarkersNan,index]=replaceWithNans(MarkersRawData);
 
-%if there are no missing markers, it doesn't interpolate
-[interpData,note] = DataInterpolation(MarkersNan, index);
+%-----------------------Markers Selection----------------------------------
 
-writeInterpolationNote(note,foldersPath.trialOutput);
+%....to do
+%-----------Check for markers data missing and Interpolation--------------
+
+% [MarkersNan,index]=replaceWithNans(MarkersRawData);
+% 
+% %if there are no missing markers, it doesn't interpolate
+% [interpData,note] = DataInterpolation(MarkersNan, index);
+% 
+% writeInterpolationNote(note,foldersPath.trialOutput);
+
+%------------------------Analog Data Split---------------------------------
+%Analog data are organized like this:
+%ForcePlatform type 1: [Fx1 Fy1 Fz1 Px1 Py1 Mz1 Fx2 Fy2 Fz2 Px2 Py2 Mz2...]
+%ForcePlatform type 2: [Fx1 Fy1 Fz1 Mx1 My1 Mz1 Fx2 Fy2 Fz2 Mx2 My2 Mz2...]
+%ForcePlatform type 3: [F1x12 F1y23 F1y14 F1y23 F1z1 F1z2 F1z3 F1z4 ...]
+
+%Separation of information for different filtering taking into account
+%differences in force platform type
+
+[Forces,Moments,COP]= AnalogDataSplit(AnalogRawData,ForcePlatformInfo);
 
 waitbar(1/7);    
 
@@ -85,19 +102,16 @@ waitbar(1/7);
 
 %----------------------------Markers---------------------------------------
 if (exist('fcut','var') && isfield(fcut,'m'))
-    filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m);
-    filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
+   filtMarkers=DataFiltering(MarkersRawData,VideoFrameRate,fcut.m);
+   %filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m);
+   %filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
+   filtMarkersCorrected=filtMarkers;
 else
-    filtMarkersCorrected=interpData;
+    %filtMarkersCorrected=interpData;
+    filtMarkersCorrected=MarkersRawData;
 end
  
 %----------------------------Analog Data-----------------------------------
-%Analog data are organized like this:
-%ForcePlatform type 2: [Fx1 Fy1 Fz1 Mx1 My1 Mz1 Fx2 Fy2 Fz2 Mx2 My2 Mz2...]
-%ForcePlatform type 1: [Fx1 Fy1 Fz1 Px1 Py1 Mz1 Fx2 Fy2 Fz2 Px2 Py2 Mz2 ]
-
-%Separation of information for different filtering
-[Forces,Moments,COP]= AnalogDataSplit(AnalogRawData,ForcePlatformInfo);
 
 if (exist('fcut','var') && isfield(fcut,'f'))
     filtForces=DataFiltering(Forces,AnalogFrameRate,fcut.f);
@@ -107,7 +121,7 @@ else
     filtMoments=Moments;
 end
         
-if (ForcePlatformInfo{1}.type==2 || ForcePlatformInfo{1}.type==4) %FP return Moments (type 2: UWA case) 
+if (ForcePlatformInfo{1}.type==2 || ForcePlatformInfo{1}.type==3 || ForcePlatformInfo{1}.type==4) %FP return Moments (type 2: UWA case) 
     
     %In this case, COP have to be computed
     %Necessary Thresholding for COP computation

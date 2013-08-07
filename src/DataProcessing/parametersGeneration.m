@@ -120,7 +120,6 @@ if nargin>1
     end
       
     %---------Parameters definition throught Acquisition.xml file--------------
-    
     %StancesOnFP
     for k=1:length(acquisitionInfo.Trials.Trial)
         for i=1:length(acquisitionInfo.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP)
