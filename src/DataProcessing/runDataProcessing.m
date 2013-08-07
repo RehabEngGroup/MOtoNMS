@@ -63,23 +63,28 @@ nFP=length(ForcePlatformInfo);
 %Loading AllTrialsName
 load([foldersPath.sessionData 'trialsName.mat'])
 
+%Loading All Markers Labels (Raw)
+load([foldersPath.sessionData 'MLabels.mat'])
+
 disp('Data have been loaded from mat files')         
 
-%% -------------------------------------------------------------------------
-%                   Preparing Data for Filtering
+%% ------------------------------------------------------------------------
+%                     Preparing Data for Filtering
 %--------------------------------------------------------------------------
 
-%-----------------------Markers Selection----------------------------------
-
-%....to do
+%-------------------------Markers Selection--------------------------------
+%markers to be written in the trc file: only those are processed
+for k=1:length(trialsList)
+    markerstrc{k} = selectingMarkers(trcMarkersList,MLabels,MarkersRawData{k});
+end
 %-----------Check for markers data missing and Interpolation--------------
 
-% [MarkersNan,index]=replaceWithNans(MarkersRawData);
-% 
-% %if there are no missing markers, it doesn't interpolate
-% [interpData,note] = DataInterpolation(MarkersNan, index);
-% 
-% writeInterpolationNote(note,foldersPath.trialOutput);
+[MarkersNan,index]=replaceWithNans(markerstrc);
+ 
+%if there are no missing markers, it doesn't interpolate
+[interpData,note] = DataInterpolation(MarkersNan, index);
+ 
+writeInterpolationNote(note,foldersPath.trialOutput);
 
 %------------------------Analog Data Split---------------------------------
 %Analog data are organized like this:
@@ -102,13 +107,14 @@ waitbar(1/7);
 
 %----------------------------Markers---------------------------------------
 if (exist('fcut','var') && isfield(fcut,'m'))
-   filtMarkers=DataFiltering(MarkersRawData,VideoFrameRate,fcut.m);
-   %filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m);
-   %filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
-   filtMarkersCorrected=filtMarkers;
+   %filtMarkers=DataFiltering(MarkersRawData,VideoFrameRate,fcut.m);
+   filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m);
+   filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
+   %filtMarkersCorrected=filtMarkers;
 else
-    %filtMarkersCorrected=interpData;
-    filtMarkersCorrected=MarkersRawData;
+    filtMarkersCorrected=interpData;
+    %filtMarkersCorrected=MarkersRawData;
+    %filtMarkersCorrected=markerstrc;
 end
  
 %----------------------------Analog Data-----------------------------------
@@ -201,10 +207,12 @@ load([foldersPath.sessionData 'MLabels.mat'])
 for k=1:length(trialsList)
     
     FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.trc'];
+    %markers selection anticipates at the beginning to avoid processing 
+    %useless data and problems with interpolation
+    %markerstrc = selectingMarkers(trcMarkersList,MLabels,MarkersFiltered{k});
+    %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
     
-    markerstrc = selectingMarkers(trcMarkersList,MLabels,MarkersFiltered{k});
-   
-    createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+    createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
 end
 
 waitbar(4/7);   
