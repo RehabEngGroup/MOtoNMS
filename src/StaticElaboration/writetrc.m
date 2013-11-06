@@ -4,7 +4,7 @@ time=markers(:,1);
 DataStartFrame=time(1)*VideoFrameRate;
 
 %add frame column
-frameArray=[time(1)*VideoFrameRate:time(end)*VideoFrameRate]';
+frameArray=[(time(1)*VideoFrameRate):round(time(end)*VideoFrameRate)]';
 
 markers=[frameArray markers];
 

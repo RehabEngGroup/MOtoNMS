@@ -17,9 +17,9 @@ for k=1:length(filtData)
     %included in the values of lower frequency time vector because it has
     %been calculated in computeStancePhase converting in VideoFrameRate
     %(that is the lowest)
-    DataAnalysisWindow{k}.startFrame=((AnalysisWindow{k}.startFrame/(AnalysisWindow{k}.rate))-offset)*Rate;
+    DataAnalysisWindow{k}.startFrame=round(((AnalysisWindow{k}.startFrame/(AnalysisWindow{k}.rate))-offset)*Rate);
     %conversion of endFrame into Rate
-    DataAnalysisWindow{k}.endFrame=(AnalysisWindow{k}.endFrame/AnalysisWindow{k}.rate)*Rate;
+    DataAnalysisWindow{k}.endFrame=round((AnalysisWindow{k}.endFrame/AnalysisWindow{k}.rate)*Rate);
     
     time{k}=[DataAnalysisWindow{k}.startFrame/Rate: 1/Rate: DataAnalysisWindow{k}.endFrame/Rate]';
     

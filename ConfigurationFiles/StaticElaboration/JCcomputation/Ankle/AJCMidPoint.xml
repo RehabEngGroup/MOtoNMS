@@ -31,6 +31,15 @@
               <Marker>RMM</Marker>
           </MarkerNames>			
         </Protocol>
+		<Protocol>
+          <Name>GU-10pointsCluster</Name>  
+	      <MarkerNames>
+			 <Marker>LLMAL</Marker>
+			 <Marker>RLMAL</Marker>
+			 <Marker>LMMAL</Marker>
+			 <Marker>RMMAL</Marker>
+          </MarkerNames>			
+        </Protocol>
     </MarkersDefinition>  
 </Method>  
 

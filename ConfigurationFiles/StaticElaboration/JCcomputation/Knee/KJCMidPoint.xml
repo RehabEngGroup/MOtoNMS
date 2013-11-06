@@ -31,5 +31,14 @@
               <Marker>RME</Marker>
           </MarkerNames>			
         </Protocol>
+       <Protocol>
+	      <Name>GU-10pointsCluster</Name>
+		  <MarkerNames>
+			 <Marker>LLFC</Marker>
+			 <Marker>RLFC</Marker>
+			 <Marker>LMFC</Marker>
+			 <Marker>RMFC</Marker>
+		  </MarkerNames>
+	    </Protocol>		
     </MarkersDefinition>  
 </Method>  

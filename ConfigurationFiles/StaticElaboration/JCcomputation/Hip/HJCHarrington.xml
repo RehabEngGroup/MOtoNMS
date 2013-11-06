@@ -31,6 +31,15 @@
               <Marker>RPSIS</Marker>
           </MarkerNames>			
         </Protocol>
+       <Protocol>
+	      <Name>GU-10pointsCluster</Name>
+		  <MarkerNames>
+			 <Marker>LASI</Marker>
+			 <Marker>RASI</Marker>
+			 <Marker>LPSI</Marker>
+			 <Marker>RPSI</Marker>
+		  </MarkerNames>
+	    </Protocol>		
     </MarkersDefinition>  
  </Method>  
 

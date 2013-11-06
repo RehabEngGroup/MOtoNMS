@@ -2,15 +2,16 @@ function trialType = getTrialType(trialName)
 %Extract type without repetition number
 %TrialName should be composed by Type + Repetition number
 
-nRep{1}='1';
-nRep{2}='2';
-nRep{3}='3';
-nRep{4}='4';
-nRep{5}='5';
-nRep{6}='6';
-nRep{7}='7';
-nRep{8}='8';
-nRep{9}='9';
+nRep{1}='0';
+nRep{2}='1';
+nRep{3}='2';
+nRep{4}='3';
+nRep{5}='4';
+nRep{6}='5';
+nRep{7}='6';
+nRep{8}='7';
+nRep{9}='8';
+nRep{10}='9';
 
 ind=[];
 

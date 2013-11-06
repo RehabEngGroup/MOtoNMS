@@ -205,13 +205,12 @@ waitbar(3/7);
 load([foldersPath.sessionData 'MLabels.mat'])
   
 for k=1:length(trialsList)
-    
+
     FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.trc'];
     %markers selection anticipates at the beginning to avoid processing 
     %useless data and problems with interpolation
     %markerstrc = selectingMarkers(trcMarkersList,MLabels,MarkersFiltered{k});
     %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
-    
     createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
 end
 
@@ -322,7 +321,7 @@ if (isempty(EMGRawData)==0 && isempty(EMGLabels)==0)
 %% ------------------------------------------------------------------------
 %                      EMG ANALYSIS WINDOW SELECTION
 %--------------------------------------------------------------------------
-    
+  
     [EMGsFiltered,EMGtime]=selectionData(EMGsEnvelope,AnalysisWindow,AnalogFrameRate,EMGOffset);
     
     %if trials for max computation are the same of those for elaboration, max

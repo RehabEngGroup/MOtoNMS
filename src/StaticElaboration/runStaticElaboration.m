@@ -131,6 +131,8 @@ disp([figName ' has been saved'])
 ind=strfind(foldersPaths.matData,'\');
 trcFileName=[foldersPaths.matData(ind(end)+1:end) '.trc'];
 FullFileName=[foldersPaths.elaboration '\' trcFileName];
+
+
 %Mtime and MarkerListjc must be cell to be able to use createtrc
 Mtime={[1/Markers.Rate: 1/Markers.Rate:  size(markerstrc,1)/Markers.Rate]'};
 

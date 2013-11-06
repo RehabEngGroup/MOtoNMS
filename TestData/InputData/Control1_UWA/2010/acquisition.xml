@@ -41,12 +41,11 @@
       </ForcePlatformsList>
    </Laboratory>
    <Staff>
-      <PersonInCharge>David Llyod</PersonInCharge>
+      <PersonInCharge>D Lylod</PersonInCharge>
    </Staff>
    <Subject>
-      <FirstName>Massimo</FirstName>
-      <LastName>Sartori</LastName>
-      <Code>MasSart</Code>
+      <FirstName>M</FirstName>
+      <LastName>Sart</LastName>
    </Subject>
    <AcquisitionDate>2010</AcquisitionDate>
    <VideoFrameRate>250</VideoFrameRate>
@@ -158,7 +157,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>
@@ -172,7 +171,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>
@@ -186,7 +185,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>
@@ -199,7 +198,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>
@@ -213,7 +212,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>
@@ -227,7 +226,7 @@
             </StanceOnFP>
             <StanceOnFP>
                <Forceplatform>2</Forceplatform>
-               <Leg>None</Leg>
+               <Leg>Left</Leg>
             </StanceOnFP>
          </StancesOnForcePlatforms>
       </Trial>

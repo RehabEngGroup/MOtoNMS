@@ -109,6 +109,7 @@ else
             otherwise
                 def_m{i}=' ';
                 def_f{i}=' ';
+                def_cop{i}=' ';
         end
     end
 end
