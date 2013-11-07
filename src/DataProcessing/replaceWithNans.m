@@ -19,8 +19,10 @@ for k=1:length(data)
             %looking for the first and last frame in which each marker is
             %visible
         else
-            index{k}(1,j)=1;
-            index{k}(2,j)=m;
+%             index{k}(1,j)=1;
+%             index{k}(2,j)=m;
+            index{k}(1,j)=0;
+            index{k}(2,j)=0;            
         end
         
         for i = 1:m
@@ -34,7 +36,6 @@ for k=1:length(data)
     newData{k}=newMarkers;
     
     clear markers newmarkers
-    
 end
 
 

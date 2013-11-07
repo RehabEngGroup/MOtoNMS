@@ -16,10 +16,11 @@ for k=1: length(data)
     
     for j=1:c  %markers(3Columns each)
         
-        if isempty(index{k})==1
+ %       if isempty(index{k})==1
+        if index{k}(:,j)==0
             %There weren't 0 values at the beginning -> whole interpolation
             interpData{k}(:,j) = interp1(x,data{k}(:,j),xi,'pchip' );
-            markerNote{j}=['Column ' num2str(j) ' has been interpolated from the beginning'];
+            markerNote{j}=['Column ' num2str(j) ' visible from the beginning: interpolated from the beginning '];
             
         else
             %Nan at the beggining are re-set to 0
@@ -35,7 +36,7 @@ for k=1: length(data)
             %only if it is missing for few fixed frames
             %probl: it is not a check on consecutive values, just how many
             %frames in total!the legth should be of consecutive missing fr
-            if (length(find(isnan(data{k}(index{k}(1,j):index{k}(2,j),j))==1))>1) % && length(find(isnan(data{k}(index{k}(1,j):index{k}(2,j),j))==1))<4)
+            if (length(find(isnan(data{k}(index{k}(1,j):index{k}(2,j),j))==1))>=1) % && length(find(isnan(data{k}(index{k}(1,j):index{k}(2,j),j))==1))<4)
                 
                 [allMissingFrames{k,j},counterMissing{k}(j)]=MissingFramesCounter(data{k}(index{k}(1,j):index{k}(2,j),j));
                 
@@ -51,8 +52,8 @@ for k=1: length(data)
                %no missing markers: interpData= Data (or missing for more than 10 frames)
                % interpData{k}(index{k}(1,j):index{k}(2,j),j)=data{k}(index{k}(1,j):index{k}(2,j),j);
                % not necessary: at the begininng we did interpData=data
-                markerNote{j}=['Column ' num2str(j) ' not missing frames: no interpolation'];
-            end
+               markerNote{j}=['Column ' num2str(j) ' not missing frames: no interpolation'];
+           end
             
             %NaN at the end are set to the last nn-zero or non-Nan value (keep the last value...not set to 0!)
             %interpData{k}(index{k}(2,j)+1:end,j)=interpData{k}(index{k}(2,j),j);
@@ -62,4 +63,4 @@ for k=1: length(data)
     note{k}=markerNote;
 end
 
-%save_to_base(1)
+
