@@ -470,9 +470,11 @@ if isfield(acquisitionInfo, 'EMGsProtocol')
         elaboration.EMGsSelection.EMGs.EMG(i).OutputLabel=selectedOutputLabels(i);
         elaboration.EMGsSelection.EMGs.EMG(i).C3DLabel=selectedC3DLabels(i);
     end
-    %EMG Offset
+    %EMG Offset: EMGs are considered an offset before the Analysis Window
+    %start frame to allow further applications to account for the 
+    %electromechanical delay
     %not asked to the user for the moment but saved in the xml file
-    elaboration.EMGOffset=1;
+    elaboration.EMGOffset=0.2;  %set to 200ms
 end
 %---------------------Elaboration.xml writting-----------------------------
 Pref.StructItem=false;  %to not have arrays of structs with 'item' notation
