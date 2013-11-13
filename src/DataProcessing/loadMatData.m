@@ -1,4 +1,4 @@
-function data = loadMatData (sessionDataFolder, trialsList, dataType)
+function [data, frames] = loadMatData (sessionDataFolder, trialsList, dataType)
 
     
 for k=1: length(trialsList)
@@ -8,6 +8,9 @@ for k=1: length(trialsList)
     load([trialMatFolder dataType '.mat']);
     
     eval(['data{k}=double(' dataType '.RawData);']);
+    
+    eval(['frames{k}.First=' dataType '.FirstFrame;']);
+    eval(['frames{k}.Last=' dataType '.LastFrame;']);
     
     %check markers units: if == 'mm' ok, else convert
     if strcmp(dataType,'Markers')

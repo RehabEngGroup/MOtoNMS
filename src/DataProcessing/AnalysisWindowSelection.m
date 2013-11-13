@@ -1,6 +1,15 @@
-function AnalysisWindow =AnalysisWindowSelection(WindowsSelectionInfo,StancesOnFP,Forces,Rates)
+function AnalysisWindow =AnalysisWindowSelection(WindowsSelectionInfo,StancesOnFP,Forces,Frames,Rates)
 % Return Analysis Window according to the selected method
 % Implemented by Alice Mantoan, Febraury 2012, <alice.mantoan@dei.unipd.it>
+
+for k=1:length(Forces)
+
+    if Frames{k}.First==1
+        LabeledDataOffset{k}=0;
+    else
+        LabeledDataOffset{k}=Frames{k}.First-1;
+    end
+end
 
 switch WindowsSelectionInfo.Method
     
@@ -33,7 +42,7 @@ switch WindowsSelectionInfo.Method
         
         platesList=setForcePlateList(StancesOnFP,WindowsSelectionInfo.Leg);
 
-        AnalysisWindow=StanceOnFPfromC3D(Forces,platesList,WindowsSelectionInfo, Rates);
+        AnalysisWindow=StanceOnFPfromC3D(Forces,platesList,WindowsSelectionInfo,LabeledDataOffset,Rates);
         
         WindowOffset=WindowsSelectionInfo.Offset;
         
@@ -43,14 +52,14 @@ switch WindowsSelectionInfo.Method
 
     case 'WindowFromC3D'
         %To choose events outside force platform 
-        AnalysisWindow=WindowFromC3D(WindowsSelectionInfo, Rates);
+        AnalysisWindow=WindowFromC3D(WindowsSelectionInfo, LabeledDataOffset, Rates);
               
         
     case 'Manual'
         
         for k=1:length(Forces)
-            AnalysisWindow{k}.startFrame=WindowsSelectionInfo.Events{k}(1);
-            AnalysisWindow{k}.endFrame=WindowsSelectionInfo.Events{k}(2);
+            AnalysisWindow{k}.startFrame=WindowsSelectionInfo.Events{k}(1)-LabeledDataOffset{k};
+            AnalysisWindow{k}.endFrame=WindowsSelectionInfo.Events{k}(2)-LabeledDataOffset{k};
             AnalysisWindow{k}.rate=Rates.VideoFrameRate;
         end
             

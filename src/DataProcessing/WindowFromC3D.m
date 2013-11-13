@@ -1,4 +1,4 @@
-function WindowC3D = WindowFromC3D(WindowsSelectionInfo, Rates)
+function WindowC3D = WindowFromC3D(WindowsSelectionInfo, DataOffset, Rates)
 
 for k=1:length(WindowsSelectionInfo.Events)
        
@@ -29,8 +29,8 @@ for k=1:length(WindowsSelectionInfo.Events)
             else
                 [eord,ind]=sort(eventFrames);
                 
-                WindowC3D{k}.startFrame=eord(1);
-                WindowC3D{k}.endFrame=eord(2);
+                WindowC3D{k}.startFrame=eord(1)-DataOffset{k};
+                WindowC3D{k}.endFrame=eord(2)-DataOffset{k};
                 WindowC3D{k}.rate=Rates.VideoFrameRate;
                 
             end

@@ -47,7 +47,10 @@ foldersPath.trialOutput= mkOutputDir(foldersPath.elaboration,trialsList);
 %                   .mat data from SessionData Folder
 %--------------------------------------------------------------------------
 %loadMatData includes check for markers unit (if 'mm' ok else convert)
-MarkersRawData=loadMatData(foldersPath.sessionData, trialsList, 'Markers');
+%Frames contains indication of first and last frame of labeled data, that
+%must be the same for Markers and Analog Data and depends on the tracking
+%process
+[MarkersRawData, Frames]=loadMatData(foldersPath.sessionData, trialsList, 'Markers');
 AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'Forces');
 
 %Loading FrameRates
@@ -165,7 +168,7 @@ waitbar(2/7);
 %Different AnalysisWindow computation methods may be implemented according
 %to the application
 %To select the AnalysisWindow, noise Thresholded Forces are used
-AnalysisWindow=AnalysisWindowSelection(WindowsSelection,StancesOnFP,filtForces,Rates);
+AnalysisWindow=AnalysisWindowSelection(WindowsSelection,StancesOnFP,filtForces,Frames,Rates);
 
 saveAnalysisWindow(foldersPath.trialOutput,AnalysisWindow)
 
