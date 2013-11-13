@@ -85,7 +85,7 @@ end
 [interpData,note] = DataInterpolation(MarkersNan, index);
  
 writeInterpolationNote(note,foldersPath.trialOutput);
-
+%interpData=markerstrc;
 %------------------------Analog Data Split---------------------------------
 %Analog data are organized like this:
 %ForcePlatform type 1: [Fx1 Fy1 Fz1 Px1 Py1 Mz1 Fx2 Fy2 Fz2 Px2 Py2 Mz2...]

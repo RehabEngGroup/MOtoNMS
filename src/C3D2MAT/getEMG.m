@@ -53,8 +53,13 @@ end
 
 rateIndex = itf.GetParameterIndex('ANALOG', 'RATE');
 
+nStartFrame = itf.GetVideoFrameHeader(0);
+nEndFrame = itf.GetVideoFrameHeader(1);
+
 %EMG struct
 EMG.Rate = double(itf.GetParameterValue(rateIndex, 0));
 EMG.Units=units;
 EMG.RawData=EMGRawData;
 EMG.Labels = EMGLabels;
+EMG.FirstFrame=nStartFrame;
+EMG.LastFrame=nEndFrame;

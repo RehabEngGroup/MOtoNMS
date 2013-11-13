@@ -39,6 +39,15 @@
 			 <Marker>LMFC</Marker>
 			 <Marker>RMFC</Marker>
 		  </MarkerNames>
-	    </Protocol>		
+	    </Protocol>
+        <Protocol>
+          <Name>UNIPD-OpenSimFullbody</Name>  
+	      <MarkerNames>
+       	      <Marker>LLE</Marker>
+              <Marker>RLE</Marker>
+              <Marker>LME</Marker>
+              <Marker>RME</Marker>
+          </MarkerNames>			
+        </Protocol>		
     </MarkersDefinition>  
 </Method>  

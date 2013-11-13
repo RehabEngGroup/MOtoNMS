@@ -12,15 +12,15 @@ for k=1:length(data)
     [m, n] = size(markers);
         
     for j = 1:n
-        
+
         if markers(1,j)==0  %if markers are not visible from the beginning
             index{k}(1,j)=find(markers(:,j), 1, 'first');
             index{k}(2,j)=find(markers(:,j), 1, 'last');
             %looking for the first and last frame in which each marker is
             %visible
         else
-%             index{k}(1,j)=1;
-%             index{k}(2,j)=m;
+%           index{k}(1,j)=1;
+%           index{k}(2,j)=m;
             index{k}(1,j)=0;
             index{k}(2,j)=0;            
         end

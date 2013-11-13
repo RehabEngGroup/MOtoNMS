@@ -41,10 +41,16 @@ function Forces = getForcePlatesData(itf)
      
      rateIndex = itf.GetParameterIndex('ANALOG', 'RATE');
      
+     nStartFrame = itf.GetVideoFrameHeader(0);
+     nEndFrame = itf.GetVideoFrameHeader(1);
+     
      Forces.Rate = itf.GetParameterValue(rateIndex, 0);
      Forces.Units=units;
      Forces.RawData=Values;
      Forces.Labels=Labels;
+     
+     Forces.FirstFrame=nStartFrame;
+     Forces.LastFrame=nEndFrame;
      
  else  %Biodex trials for example
      Forces=[];

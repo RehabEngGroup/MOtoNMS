@@ -134,7 +134,13 @@ if nIndex3 ~= -1
     end
 end
 
+nStartFrame = itf.GetVideoFrameHeader(0);
+nEndFrame = itf.GetVideoFrameHeader(1);
+
 if rateIndex > 0; Markers.Rate =double(itf.GetParameterValue(rateIndex, 0));end
 Markers.Units = itf.GetParameterValue(unitIndex, 0);
 Markers.RawData=Values;
 Markers.Labels=Labels;
+Markers.FirstFrame=nStartFrame;
+Markers.LastFrame=nEndFrame;
+

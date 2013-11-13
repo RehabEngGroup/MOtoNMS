@@ -18,10 +18,13 @@ for k=1: length(data)
         
  %       if isempty(index{k})==1
         if index{k}(:,j)==0
-            %There weren't 0 values at the beginning -> whole interpolation
-            interpData{k}(:,j) = interp1(x,data{k}(:,j),xi,'pchip' );
-            markerNote{j}=['Column ' num2str(j) ' visible from the beginning: interpolated from the beginning '];
-            
+            if (length(find(isnan(data{k}(:,j))==1))>=1)
+                %There weren't 0 values at the beginning -> whole interpolation
+                interpData{k}(:,j) = interp1(x,data{k}(:,j),xi,'pchip' );
+                markerNote{j}=['Column ' num2str(j) ' visible from the beginning: interpolated from the beginning '];
+            else
+                markerNote{j}=['Column ' num2str(j) ' visible from the beginning without gaps: no interpolation'];
+            end
         else
             %Nan at the beggining are re-set to 0
             interpData{k}(1:index{k}(1,j)-1,j)=0;  

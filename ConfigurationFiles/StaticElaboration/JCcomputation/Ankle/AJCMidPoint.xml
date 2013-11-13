@@ -40,6 +40,15 @@
 			 <Marker>RMMAL</Marker>
           </MarkerNames>			
         </Protocol>
+		<Protocol>		
+          <Name>UNIPD-OpenSimFullbody</Name>  
+	      <MarkerNames>
+       	      <Marker>LLM</Marker>
+              <Marker>RLM</Marker>
+              <Marker>LMM</Marker>
+              <Marker>RMM</Marker>
+          </MarkerNames>			
+        </Protocol>		
     </MarkersDefinition>  
 </Method>  
 

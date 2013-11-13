@@ -23,14 +23,23 @@ for k=1:length(filtData)
     
     time{k}=[DataAnalysisWindow{k}.startFrame/Rate: 1/Rate: DataAnalysisWindow{k}.endFrame/Rate]';
     
-    if length(size(filtData{k}))>2
-        for i=1:size(filtData{k},3)
-            
-            %Data selection from filtData
-            DataSelected{k}(:,:,i)=filtData{k}(DataAnalysisWindow{k}.startFrame:DataAnalysisWindow{k}.endFrame,:,i);
-        end
-    else
-        DataSelected{k}=filtData{k}(DataAnalysisWindow{k}.startFrame:DataAnalysisWindow{k}.endFrame,:);
+    try
         
+        if length(size(filtData{k}))>2
+            
+            for i=1:size(filtData{k},3)
+                
+                %Data selection from filtData
+                DataSelected{k}(:,:,i)=filtData{k}(DataAnalysisWindow{k}.startFrame:DataAnalysisWindow{k}.endFrame,:,i);
+            end
+        else
+            DataSelected{k}=filtData{k}(DataAnalysisWindow{k}.startFrame:DataAnalysisWindow{k}.endFrame,:);
+            
+        end
+    catch
+        
+        error('Data selection not working: Analysis Window out of available data. Try to change method or frames of the analysis window')
     end
 end
+
+
