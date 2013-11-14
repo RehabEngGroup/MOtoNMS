@@ -5,7 +5,7 @@ function [] = elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,old
 %create a cell from char values read from acquisition.xml for the selection
 %of Markers to be written in the trc file
 %needed for trcMarkersIndexes computation within case nargin>3
-MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSet, '%s','delimiter', ' ');
+MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSetDynamicTrials, '%s','delimiter', ' ');
 MarkersSet=MarkersSet{1};
 
 load([foldersPath.sessionData 'EMGLabels.mat']);

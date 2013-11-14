@@ -99,7 +99,7 @@ for k=1:length(Joints)
         case 'Ankle'
             
             [LAJC,RAJC,markers_ajc,markerNames_ajc]=AJCcomputation(method,input,protocolMLabels,filtMarkers);
-            save_to_base(1)
+
             drawPoints(f,LAJC,RAJC, markers_ajc,markerNames_ajc,frame,'*g','AJC')
             
             [markerstrc,MarkersListjc]=updatingMarkersList(LAJC,RAJC,markerstrc,'LAJC','RAJC',MarkersListjc);

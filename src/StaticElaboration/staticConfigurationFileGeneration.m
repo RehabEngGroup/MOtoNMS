@@ -165,7 +165,7 @@ staticSettings.JCcomputation.Joint=Joint;
 
 %% ------------Markers Selection to be written in the trc file-------------
 %needed for trcMarkersIndexes computation in the case nargin>3
-MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSet, '%s','delimiter', ' ');
+MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSetStaticTrials, '%s','delimiter', ' ');
 MarkersSet=MarkersSet{1};
 
 %Definition of Lists Initial Values

@@ -6,7 +6,8 @@
   <xs:complexType name="MarkersProtocolType">
     <xs:sequence>
       <xs:element name="Name" type="xs:string"/>
-      <xs:element name="MarkersSet" type="MarkersSetType"/>
+      <xs:element name="MarkersSetStaticTrials" type="MarkersSetType"/>
+      <xs:element name="MarkersSetDynamicTrials" type="MarkersSetType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MarkersProtocol" type="MarkersProtocolType"/>

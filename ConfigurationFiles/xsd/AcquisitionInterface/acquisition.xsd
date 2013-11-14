@@ -43,12 +43,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="OperatorsType">
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+    <xs:sequence maxOccurs="unbounded" minOccurs="1">
       <xs:element name="Name" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="PhysiotherapistsType">
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+    <xs:sequence maxOccurs="unbounded" minOccurs="1">
       <xs:element name="Name" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
@@ -63,11 +63,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="MuscleType">
-     <xs:list itemType="xs:string"/>   
+    <xs:list itemType="xs:string"/>
   </xs:simpleType>
   <xs:complexType name="MuscleListType">
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-       <xs:element name="Muscle" type="MuscleType"/>
+    <xs:sequence maxOccurs="unbounded" minOccurs="1">
+      <xs:element name="Muscle" type="MuscleType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ChannelType">
@@ -118,7 +118,8 @@
   <xs:complexType name="MarkersProtocolType">
     <xs:sequence>
       <xs:element name="Name" type="xs:string"/>
-      <xs:element name="MarkersSet" type="MarkersSetType"/>
+      <xs:element name="MarkersSetStaticTrials" type="MarkersSetType"/>
+      <xs:element name="MarkersSetDynamicTrials" type="MarkersSetType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="EMGSystemsType">
@@ -157,5 +158,5 @@
       <xs:element name="Trials" type="TrialsType"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name= "acquisition" type="AcquisitionType"/>
+  <xs:element name="acquisition" type="AcquisitionType"/>
 </xs:schema>
