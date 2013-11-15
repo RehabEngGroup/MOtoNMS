@@ -1,17 +1,9 @@
 function [AnalogData] = getAnalogData(itf)   
 %getAnalogData
 %Extraction of Analog Data
+%This function reads all data stored in analog channels after forces (EMG,
+%Biodex data, Position and Torque,etc.)
 
-%WARNING!!!
-%An ASSUMPTION is made, that SHOULD BE CONSIDERED:
-%EMG signals are assumed to be immediately after the analog channel corresponding to the last force output channel: it's likely but
-%this may not be true in general (Biodex trials is at the moment the only exception I know)!!
-%This function read as EMG signals all data stored in analog channels after
-%forces, i.e for Biodex trials it includes in EMG also Position and Torque
-%which come after.
-%the already available function getForcesIndex may be used in the future 
-%(when common labels for the c3d files will be defined)to compute correct 
-%indexes of AnalogData data
 
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
 unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
@@ -33,8 +25,7 @@ else
     offsetAnalogDataLabels=lastFchannel;
 end
 
-% if forces are not present, all analog data will be extracted: this MUST
-% be corrected in the future!
+% if forces are not present, all analog data will be extracted:
 nAnalogDataChannels = itf.GetParameterDimension(indexLabels,1)- offsetAnalogDataLabels;
 
 for i=1:(nAnalogDataChannels)
