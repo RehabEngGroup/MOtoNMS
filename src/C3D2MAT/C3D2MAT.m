@@ -33,7 +33,7 @@ for k=1:length(c3dFiles)
     sessionFolder=regexprep(trialMatFolder, [trialsName{k} '\'], '');
     
     %Data Reading    
-    [Markers, EMG, Forces, Events, ForcePlatformInfo, Rates] = getInfoFromC3D(c3dFilePathAndName);
+    [Markers, AnalogData, FPdata, Events, ForcePlatformInfo, Rates] = getInfoFromC3D(c3dFilePathAndName);
     
     %Consistency check and Storing: 
     %only if the trial is not a static because it may have different data
@@ -42,20 +42,20 @@ for k=1:length(c3dFiles)
     if isempty(strfind(upper(trialsName{k}),'STATIC'))
         %Common Session Info (excluding static trials)
         if isempty(Markers)
-            MLabels=[];
+            dMLabels=[];
         else
-            MLabels=Markers.Labels;
+            dMLabels=Markers.Labels;
         end
-        if isempty(EMG)
-            EMGLabels=[];
+        if isempty(AnalogData)
+            AnalogDataLabels=[];
         else
-            EMGLabels=EMG.Labels;
+            AnalogDataLabels=AnalogData.Labels;
         end
         
-        checkAndSaveSessionInfo(ForcePlatformInfo, Rates, MLabels, EMGLabels, sessionFolder);
+        checkAndSaveSessionInfo(ForcePlatformInfo, Rates, dMLabels, AnalogDataLabels, sessionFolder);
     end
     %Data for each trials
-    saveMat(Markers,EMG,Forces, Events, trialMatFolder)
+    saveMat(Markers,AnalogData,FPdata, Events, trialMatFolder)
 
     waitbar(k/length(c3dFiles));    
 end

@@ -16,7 +16,7 @@ switch tag
             if (isempty(checkLabels)&& isempty(checkType) && isempty(checkCorners) && isempty(checkOrigin))
                 return
             else
-                disp('Data Inconsistency: ForcePlatformInfo differs among trials')
+                disp(['Data Inconsistency: ForcePlatformInfo differs among trials (FP ' num2str(i) ')'])
             end
         end
 
@@ -39,10 +39,10 @@ switch tag
             if (strcmp(info,newInfo))
                 return
             else
-                disp(['Data Inconsistency: ' tag ' differs from the previous trial'])
+                disp(['Data Inconsistency: ' tag ' differs from the already saved as common session info'])
             end
             
         else
-            disp(['Warning: Number of ' tag ' is different from previous trial'])
+            disp(['Warning: Number of ' tag ' is different from the already saved as common session info'])
         end
 end

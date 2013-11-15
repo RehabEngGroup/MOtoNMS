@@ -51,7 +51,7 @@ foldersPath.trialOutput= mkOutputDir(foldersPath.elaboration,trialsList);
 %must be the same for Markers and Analog Data and depends on the tracking
 %process
 [MarkersRawData, Frames]=loadMatData(foldersPath.sessionData, trialsList, 'Markers');
-AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'Forces');
+FPRawData=loadMatData(foldersPath.sessionData, trialsList, 'FPdata');
 
 %Loading FrameRates
 load([foldersPath.sessionData 'Rates.mat']) 
@@ -67,7 +67,7 @@ nFP=length(ForcePlatformInfo);
 load([foldersPath.sessionData 'trialsName.mat'])
 
 %Loading All Markers Labels (Raw)
-load([foldersPath.sessionData 'MLabels.mat'])
+load([foldersPath.sessionData 'dMLabels.mat'])
 
 disp('Data have been loaded from mat files')         
 
@@ -78,7 +78,7 @@ disp('Data have been loaded from mat files')
 %-------------------------Markers Selection--------------------------------
 %markers to be written in the trc file: only those are processed
 for k=1:length(trialsList)
-    markerstrc{k} = selectingMarkers(trcMarkersList,MLabels,MarkersRawData{k});
+    markerstrc{k} = selectingMarkers(trcMarkersList,dMLabels,MarkersRawData{k});
 end
 %-----------Check for markers data missing and Interpolation--------------
 
@@ -98,7 +98,7 @@ writeInterpolationNote(note,foldersPath.trialOutput);
 %Separation of information for different filtering taking into account
 %differences in force platform type
 
-[Forces,Moments,COP]= AnalogDataSplit(AnalogRawData,ForcePlatformInfo);
+[Forces,Moments,COP]= AnalogDataSplit(FPRawData,ForcePlatformInfo);
 
 waitbar(1/7);    
 
@@ -160,7 +160,7 @@ end
 
 disp('Data have been filtered')
 %For next steps, only filtered data are kept                                                  
-%clear MarkersRawData ForcesRawData EMGRawData
+%clear MarkersRawData ForcesRawData AnalogRawData
 waitbar(2/7);   
 %% ------------------------------------------------------------------------
 %                      START/STOP COMPUTATION
@@ -205,14 +205,14 @@ waitbar(3/7);
 %                           WRITE TRC
 %--------------------------------------------------------------------------
 
-load([foldersPath.sessionData 'MLabels.mat'])
+%load([foldersPath.sessionData 'dMLabels.mat'])
   
 for k=1:length(trialsList)
 
     FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.trc'];
     %markers selection anticipates at the beginning to avoid processing 
     %useless data and problems with interpolation
-    %markerstrc = selectingMarkers(trcMarkersList,MLabels,MarkersFiltered{k});
+    %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
     %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
     createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
 end
@@ -263,7 +263,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('             EMG PROCESSING                    ')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 %Data needed:
-%foldersPath,trialsName,trialsList,EMGRawData,AnalogFrameRate,EMGLabels, 
+%foldersPath,trialsName,trialsList,AnalogRawData,AnalogFrameRate,EMGLabels, 
 %AnalysisWindow,EMGOffset,MaxEmgTrialsList,EMGsSelected_C3DLabels,
 %EMGsSelected_OutputLabels
 
@@ -279,30 +279,30 @@ if isfield(parameters,'MaxEmgTrialsList')
     MaxEmgTrialsList=parameters.MaxEmgTrialsList;
 end
 
-%Loading EMG Raw
-EMGRawData=loadMatData(foldersPath.sessionData, trialsList, 'EMG');
+%Loading Analog Raw Data from the choosen trials
+AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
 
-%Loading EMG for Max Computation
+%Loading Analog Raw Data for EMG Max Computation from the trials list
 if isequal(parameters.MaxEmgTrialsList,parameters.trialsList)
-    EMGRawForMax=EMGRawData;
+    AnalogRawForMax=AnalogRawData;
 else 
-    EMGRawForMax=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'EMG');
+    AnalogRawForMax=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'AnalogData');
 end
 
-%Loading EMGLabels
-load([foldersPath.sessionData 'EMGLabels.mat'])
+%Loading Analog Data Labels
+load([foldersPath.sessionData 'AnalogDataLabels.mat'])
   
 %If there are EMGs --> processing
-if (isempty(EMGRawData)==0 && isempty(EMGLabels)==0)
+if (isempty(AnalogRawData)==0 && isempty(AnalogDataLabels)==0)
 %% ------------------------------------------------------------------------
-%                           MUSCLES SELECTION
-%                  and EMGs Arrangement for the Output file
+%                   EMGs EXTRACTION and MUSCLES SELECTION
+%                   EMGs Arrangement for the Output file
 %--------------------------------------------------------------------------
-    EMGselectionIndexes=findIndexes(EMGLabels,EMGsSelected_C3DLabels);
+    EMGselectionIndexes=findIndexes(AnalogDataLabels,EMGsSelected_C3DLabels);
     
     for k=1:length(trialsList)
         
-        EMGsSelected{k}=EMGRawData{k}(:,EMGselectionIndexes);
+        EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes);
     end
     
     %EMGsSelectedForMax are the same because max is needed for normalization of
@@ -310,7 +310,7 @@ if (isempty(EMGRawData)==0 && isempty(EMGLabels)==0)
     
     for k=1:length(MaxEmgTrialsList)
         
-        EMGsSelectedForMax{k}=EMGRawForMax{k}(:,EMGselectionIndexes);
+        EMGsSelectedForMax{k}=AnalogRawForMax{k}(:,EMGselectionIndexes);
     end
 
 %% ------------------------------------------------------------------------

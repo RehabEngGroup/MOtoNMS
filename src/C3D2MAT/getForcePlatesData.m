@@ -1,6 +1,6 @@
-function Forces = getForcePlatesData(itf)
+function FPdata = getForcePlatesData(itf)
 %getForcePlatesData
-%Extraction of Forces and Moments from Analog Data
+%Extraction of FPdata and Moments from Analog Data
 
  numberForcePlatform =  itf.GetParameterValue( itf.GetParameterIndex('FORCE_PLATFORM', 'USED'),0);
  
@@ -17,7 +17,7 @@ function Forces = getForcePlatesData(itf)
  
  unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
 
- if nFchannels > 0  %if Forces are present
+ if nFchannels > 0  %if FPdata are present
      
      for i = 1 : nFchannels,
          %retrieve analog channel corresponding to force plate output channel
@@ -44,16 +44,16 @@ function Forces = getForcePlatesData(itf)
      nStartFrame = itf.GetVideoFrameHeader(0);
      nEndFrame = itf.GetVideoFrameHeader(1);
      
-     Forces.Rate = itf.GetParameterValue(rateIndex, 0);
-     Forces.Units=units;
-     Forces.RawData=Values;
-     Forces.Labels=Labels;
+     FPdata.Rate = itf.GetParameterValue(rateIndex, 0);
+     FPdata.Units=units;
+     FPdata.RawData=Values;
+     FPdata.Labels=Labels;
      
-     Forces.FirstFrame=nStartFrame;
-     Forces.LastFrame=nEndFrame;
+     FPdata.FirstFrame=nStartFrame;
+     FPdata.LastFrame=nEndFrame;
      
  else  %Biodex trials for example
-     Forces=[];
+     FPdata=[];
      disp('Force Platform Channels empty')
  end
 

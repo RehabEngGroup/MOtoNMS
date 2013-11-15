@@ -1,7 +1,7 @@
-function [] = checkAndSaveSessionInfo(ForcePlatformInfo, Rates, MLabels, EMGLabels, sessionFolder)
+function [] = checkAndSaveSessionInfo(ForcePlatformInfo, Rates, dMLabels, AnalogDataLabels, sessionFolder)
 
-infoSet={ForcePlatformInfo, Rates, MLabels, EMGLabels};
-infoLabels={'ForcePlatformInfo', 'Rates', 'MLabels', 'EMGLabels'};
+infoSet={ForcePlatformInfo, Rates, dMLabels, AnalogDataLabels};
+infoLabels={'ForcePlatformInfo', 'Rates', 'dMLabels', 'AnalogDataLabels'};
 
 for i=1: length(infoSet)
     

@@ -1,12 +1,12 @@
-function [Markers, EMG, Forces, Events, ForcePlatformInfo,Rates] = getInfoFromC3D(c3dFilePathAndName)
+function [Markers, AnalogData, FPdata, Events, ForcePlatformInfo,Rates] = getInfoFromC3D(c3dFilePathAndName)
 % Function to load the data from a c3d file into the structured array data.
 %
 % INPUT -   file - the file path that you wish to load 
 %
 % OUTPUT -  all structured arrays containing the following data
 %           Markers -  marker trajectories  
-%           EMG - EMG data
-%           Forces - force plate data 
+%           AnalogData - AnalogData data
+%           FPdata - force plate data 
 %           Events - events saved in the c3d
 %           ForcePlatformInfo - structure with information about where the
 %           corners of the force plates are relative to the global coordinate
@@ -42,36 +42,36 @@ catch me
 end
 
 %--------------------------------------------------------------------------
-%                                  EMG 
+%                                  AnalogData 
 %--------------------------------------------------------------------------
 if nargout > 1
     try
-        EMG = getEMG(itf);
+        AnalogData = getAnalogData(itf);
     catch me
-        EMG = [];
-        %EMG.Labels=[];
+        AnalogData = [];
+        %AnalogData.Labels=[];
     end
 end
 
 %--------------------------------------------------------------------------
-%                                FORCES 
+%                                FPdata 
 %--------------------------------------------------------------------------
 if nargout > 2
     try
         
-        Forces = getForcePlatesData(itf);
+        FPdata = getForcePlatesData(itf);
         
         %alternatively could be useful for future operations to have a 
-        %STRUCTURE with forces idenfified by the labels ---> use:
+        %STRUCTURE with FPdata idenfified by the labels ---> use:
         
-        %Forces = getForceChannels(itf);
+        %FPdata = getForceChannels(itf);
         
         %getForceChannels is taken from getAnalogChannels, a useful
-        %function able to return ALL analog data (EMG+Forces+Biodex 
+        %function able to return ALL analog data (AnalogData+FPdata+Biodex 
         %measures) in a unique structure, with data identified by labels
     
     catch me
-        Forces = [];
+        FPdata = [];
     end
 end
 

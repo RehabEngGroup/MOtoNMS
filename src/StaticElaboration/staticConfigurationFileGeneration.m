@@ -26,7 +26,7 @@ if strcmp(fcMarkersChoice,'Yes')==1
         def_fcut=oldParameters.Fcut;      
     else       
         switch acquisitionInfo.Laboratory.Name
-            case 'DEI-UNIPD'
+            case 'UNIPD'
                 def_fcut={'6'};
                 
             case 'UWA'

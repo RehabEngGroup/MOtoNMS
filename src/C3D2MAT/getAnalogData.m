@@ -1,6 +1,6 @@
-function [EMG] = getEMG(itf)   
-%getEMG
-%Extraction of EMG from Analog Data
+function [AnalogData] = getAnalogData(itf)   
+%getAnalogData
+%Extraction of Analog Data
 
 %WARNING!!!
 %An ASSUMPTION is made, that SHOULD BE CONSIDERED:
@@ -11,7 +11,7 @@ function [EMG] = getEMG(itf)
 %which come after.
 %the already available function getForcesIndex may be used in the future 
 %(when common labels for the c3d files will be defined)to compute correct 
-%indexes of EMG data
+%indexes of AnalogData data
 
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
 unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
@@ -26,29 +26,29 @@ lastFchannel=itf.GetParameterValue(fchannelIndex, nFchannels-1);
 
 %check if force data are present
 if numberForcePlatform == 0
-    disp('Warning: No Force Plate Data: check EMG data!(Biodex trials not implemented yet!)')
-    offsetEMGLabels=0;
+    disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
+    offsetAnalogDataLabels=0;
 else
-    %offsetEMGLabels = numberForcePlatform*6;%6: this number is related to the number of data for each platform (Fx Fy Fz Mx My Mz)
-    offsetEMGLabels=lastFchannel;
+    %offsetAnalogDataLabels = numberForcePlatform*6;%6: this number is related to the number of data for each platform (Fx Fy Fz Mx My Mz)
+    offsetAnalogDataLabels=lastFchannel;
 end
 
 % if forces are not present, all analog data will be extracted: this MUST
 % be corrected in the future!
-nEMGChannels = itf.GetParameterDimension(indexLabels,1)- offsetEMGLabels;
+nAnalogDataChannels = itf.GetParameterDimension(indexLabels,1)- offsetAnalogDataLabels;
 
-for i=1:(nEMGChannels)
-    EMGLabels{i} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'),(i+offsetEMGLabels-1));
+for i=1:(nAnalogDataChannels)
+    AnalogDataLabels{i} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'),(i+offsetAnalogDataLabels-1));
     
-    %EMG LABELS: MUST BE STANDARDIZED
+    %AnalogData LABELS: MUST BE STANDARDIZED
     %for the moment,it may be necessary to eliminate spaces from the Labels 
-    %EMGLabelsStruct{i} = regexprep(EMGLabels{i}, ' ', ''); 
+    %AnalogDataLabelsStruct{i} = regexprep(AnalogDataLabels{i}, ' ', ''); 
     
-    units{i} = itf.GetParameterValue(unitIndex, i+offsetEMGLabels-1);
+    units{i} = itf.GetParameterValue(unitIndex, i+offsetAnalogDataLabels-1);
 end
 
-for i=1:length(EMGLabels)
-    EMGRawData(:,i) = getanalogchannel(itf, EMGLabels{i});    
+for i=1:length(AnalogDataLabels)
+    AnalogRawData(:,i) = getanalogchannel(itf, AnalogDataLabels{i});    
 end
 
 rateIndex = itf.GetParameterIndex('ANALOG', 'RATE');
@@ -56,10 +56,10 @@ rateIndex = itf.GetParameterIndex('ANALOG', 'RATE');
 nStartFrame = itf.GetVideoFrameHeader(0);
 nEndFrame = itf.GetVideoFrameHeader(1);
 
-%EMG struct
-EMG.Rate = double(itf.GetParameterValue(rateIndex, 0));
-EMG.Units=units;
-EMG.RawData=EMGRawData;
-EMG.Labels = EMGLabels;
-EMG.FirstFrame=nStartFrame;
-EMG.LastFrame=nEndFrame;
+%AnalogData struct
+AnalogData.Rate = double(itf.GetParameterValue(rateIndex, 0));
+AnalogData.Units=units;
+AnalogData.RawData=AnalogRawData;
+AnalogData.Labels = AnalogDataLabels;
+AnalogData.FirstFrame=nStartFrame;
+AnalogData.LastFrame=nEndFrame;

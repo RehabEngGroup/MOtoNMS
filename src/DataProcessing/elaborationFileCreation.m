@@ -8,7 +8,7 @@ function [] = elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,old
 MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSetDynamicTrials, '%s','delimiter', ' ');
 MarkersSet=MarkersSet{1};
 
-load([foldersPath.sessionData 'EMGLabels.mat']);
+load([foldersPath.sessionData 'AnalogDataLabels.mat']);
 
 %Definition of Lists Initial Values
 if nargin>3
@@ -79,7 +79,7 @@ else
             case 'WALKING'
                 
                 switch lab
-                    case 'DEI-UNIPD'
+                    case 'UNIPD'
                         def_m{i}='7';
                         def_f{i}='7';
                         def_cop{i}='7'; %corresponding to wn=0.0146 and sampling rate=1000
@@ -350,7 +350,7 @@ MarkersList=MarkersSet(markersIndex);
 
 %% --------------------------EMGs Selection---------------------------------
 %if EMG signals have been acquired
-if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(EMGLabels)==0) 
+if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(AnalogDataLabels)==0) 
     originalPath=pwd;
     cd('..')
     cd('..')
@@ -374,7 +374,7 @@ if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(EMGLabels)==0)
     j=1;
     for i=1:length(EMGSet.EMG)
         save_to_base(1)
-        EMGLabelsIndex(i)=find(strcmp(EMGSet.EMG(i).C3DLabel,EMGLabels));
+        EMGLabelsIndex(i)=find(strcmp(EMGSet.EMG(i).C3DLabel,AnalogDataLabels));
         if isempty(EMGLabelsIndex(i))==0
             
             EMGsSelectionList{j}=EMGSet.EMG(i).OutputLabel;
