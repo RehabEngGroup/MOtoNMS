@@ -2,17 +2,13 @@ function parameters = parametersGeneration(elaboration,acquisitionInfo,foldersPa
 % Function to convert settings from elaboration.xml into a parameters.mat    
 % struct needed for processing
 % Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
-%--------------------------------------------------------------------------
+
+%%  --------------------------------------------------------------------------
 
 %trialsList
 Trials=elaboration.Trials;    
 trialsList=textscan(Trials, '%s');
 trialsList=trialsList{1}';   
-
-%EMGMaxTrialsList   
-EMGMaxTrials=elaboration.EMGMaxTrials;    
-MaxEmgTrialsList=textscan(EMGMaxTrials, '%s');
-MaxEmgTrialsList=MaxEmgTrialsList{1}';    
 
 %trcMarkersList
 Markers=elaboration.Markers;    
@@ -35,7 +31,6 @@ if isfield(elaboration,'Filtering')
     end
 end
 
-
 %WindowSelectionProcedure
 method=fieldnames(elaboration.WindowSelectionProcedure);
 
@@ -49,16 +44,8 @@ if (strcmp(method,'Manual')==1 )
     
 end
 
-%EMGSet
 
-for i=1:length(elaboration.EMGsSelection.EMGs.EMG)
-    
-    EMGOutputLabels{i}=elaboration.EMGsSelection.EMGs.EMG(i).OutputLabel;
-    EMGC3DLabels{i}=elaboration.EMGsSelection.EMGs.EMG(i).C3DLabel;
-end
-    
-
-%------------------Parameters struct Definition----------------------------
+%% ------------------Parameters struct Definition----------------------------
 % data needed for oldParameters
 parameters.trialsList=trialsList; 
 
@@ -89,13 +76,28 @@ end
 
 parameters.trcMarkersList=trcMarkersList;
 
-parameters.EMGsSelected.OutputLabels=EMGOutputLabels;
-parameters.EMGsSelected.C3DLabels=EMGC3DLabels;
+%% If there are EMGs data
+if isfield(elaboration,'EMGsSelection')
+    
+    EMGMaxTrials=elaboration.EMGMaxTrials;
+    MaxEmgTrialsList=textscan(EMGMaxTrials, '%s');
+    MaxEmgTrialsList=MaxEmgTrialsList{1}';
+    
+    for i=1:length(elaboration.EMGsSelection.EMGs.EMG)
+        
+        EMGOutputLabels{i}=elaboration.EMGsSelection.EMGs.EMG(i).OutputLabel;
+        EMGC3DLabels{i}=elaboration.EMGsSelection.EMGs.EMG(i).C3DLabel;
+    end
+    
+    %------------------Parameters struct Definition------------------------
+    parameters.EMGsSelected.OutputLabels=EMGOutputLabels;
+    parameters.EMGsSelected.C3DLabels=EMGC3DLabels;
+    
+    parameters.MaxEmgTrialsList=MaxEmgTrialsList;
+    parameters.EMGOffset=elaboration.EMGOffset;
+end
 
-parameters.MaxEmgTrialsList=MaxEmgTrialsList;
-parameters.EMGOffset=elaboration.EMGOffset;
-
-%-------------------------------------------------------------------------- 
+%% -------------------------------------------------------------------------- 
 %adding parameters from acquisition and c3d files
 %leg is connected to InstrumentedLeg in acquisition.xml file and is not
 %needed for oldParameters definition
@@ -119,7 +121,7 @@ if nargin>1
         parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.ComputeStancePhase.Offset;      
     end
       
-    %---------Parameters definition throught Acquisition.xml file--------------
+    %---------Parameters definition throught acquisition.xml file--------------
     %StancesOnFP
     for k=1:length(acquisitionInfo.Trials.Trial)
         for i=1:length(acquisitionInfo.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP)

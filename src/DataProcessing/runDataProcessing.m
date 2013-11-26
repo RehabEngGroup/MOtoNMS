@@ -255,151 +255,158 @@ end
 waitbar(5/7);
 
 %save_to_base(1)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                           EMG PROGESSING
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-disp(' ')
-disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('             EMG PROCESSING                    ')
-disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-%Data needed:
-%foldersPath,trialsName,trialsList,AnalogRawData,AnalogFrameRate,EMGLabels, 
-%AnalysisWindow,EMGOffset,MaxEmgTrialsList,EMGsSelected_C3DLabels,
-%EMGsSelected_OutputLabels
-
-%Ri-nomination from parameters
-
 if isfield(parameters,'EMGsSelected')
+    
+    disp(' ')
+    disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    disp('             EMG PROCESSING                    ')
+    disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    %Data needed:
+    %foldersPath,trialsName,trialsList,AnalogRawData,AnalogFrameRate,EMGLabels,
+    %AnalysisWindow,EMGOffset,MaxEmgTrialsList,EMGsSelected_C3DLabels,
+    %EMGsSelected_OutputLabels
+    
+    %Ri-nomination from parameters
+     
     EMGsSelected_OutputLabels= parameters.EMGsSelected.OutputLabels;
     EMGsSelected_C3DLabels= parameters.EMGsSelected.C3DLabels;
     EMGOffset=parameters.EMGOffset;
-end
-
-if isfield(parameters,'MaxEmgTrialsList')
     MaxEmgTrialsList=parameters.MaxEmgTrialsList;
-end
 
-%Loading Analog Raw Data from the choosen trials
-AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
-
-%Loading Analog Raw Data for EMG Max Computation from the trials list
-if isequal(parameters.MaxEmgTrialsList,parameters.trialsList)
-    AnalogRawForMax=AnalogRawData;
-else 
-    AnalogRawForMax=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'AnalogData');
-end
-
-%Loading Analog Data Labels
-load([foldersPath.sessionData 'AnalogDataLabels.mat'])
-  
-%If there are EMGs --> processing
-if (isempty(AnalogRawData)==0 && isempty(AnalogDataLabels)==0)
-%% ------------------------------------------------------------------------
-%                   EMGs EXTRACTION and MUSCLES SELECTION
-%                   EMGs Arrangement for the Output file
-%--------------------------------------------------------------------------
-    EMGselectionIndexes=findIndexes(AnalogDataLabels,EMGsSelected_C3DLabels);
     
-    for k=1:length(trialsList)
-        
-        EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes);
-    end
+    %Loading Analog Raw Data from the choosen trials
+    AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
     
-    %EMGsSelectedForMax are the same because max is needed for normalization of
-    %the selected emgs, what change are the trials we consider for computation
-    
-    for k=1:length(MaxEmgTrialsList)
-        
-        EMGsSelectedForMax{k}=AnalogRawForMax{k}(:,EMGselectionIndexes);
-    end
-
-%% ------------------------------------------------------------------------
-%                       EMG FILTERING: ENVELOPE
-%--------------------------------------------------------------------------
-    %fcut for EMG assumed fixed (6Hz)
-    EMGsEnvelope=EMGFiltering(EMGsSelected,AnalogFrameRate);
-    
-    EMGsEnvelopeForMax=EMGFiltering(EMGsSelectedForMax,AnalogFrameRate);
-
-%% ------------------------------------------------------------------------
-%                      EMG ANALYSIS WINDOW SELECTION
-%--------------------------------------------------------------------------
-  
-    [EMGsFiltered,EMGtime]=selectionData(EMGsEnvelope,AnalysisWindow,AnalogFrameRate,EMGOffset);
-    
-    %if trials for max computation are the same of those for elaboration, max
-    %values are computed within the same analysis window, else all signals are
-    %considered
-    if isequal(MaxEmgTrialsList,trialsList)
-        
-        EMGsForMax=selectionData(EMGsEnvelopeForMax,AnalysisWindow,AnalogFrameRate,EMGOffset);
+    %Loading Analog Raw Data for EMG Max Computation from the trials list
+    if isequal(parameters.MaxEmgTrialsList,parameters.trialsList)
+        AnalogRawForMax=AnalogRawData;
     else
-        EMGsForMax=EMGsEnvelopeForMax;
+        AnalogRawForMax=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'AnalogData');
     end
     
-    %SAVING and PLOTTING
-       
-    if isfield(WindowsSelection,'Offset') 
-        %if there's an offset, the Analysis Window is a Stance Phase
-        EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset,WindowsSelection.Offset)
+    %Loading Analog Data Labels
+    load([foldersPath.sessionData 'AnalogDataLabels.mat'])
+    
+    %If there are EMGs --> processing
+    if (isempty(AnalogRawData)==0 && isempty(AnalogDataLabels)==0)
+    %% --------------------------------------------------------------------
+    %                   EMGs EXTRACTION and MUSCLES SELECTION
+    %                   EMGs Arrangement for the Output file
+    %----------------------------------------------------------------------
+        EMGselectionIndexes=findIndexes(AnalogDataLabels,EMGsSelected_C3DLabels);
+        
+        for k=1:length(trialsList)
+            
+            EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes);
+        end
+        
+        %EMGsSelectedForMax are the same because max is needed for normalization of
+        %the selected emgs, what change are the trials we consider for computation
+        
+        for k=1:length(MaxEmgTrialsList)
+            
+            EMGsSelectedForMax{k}=AnalogRawForMax{k}(:,EMGselectionIndexes);
+        end
+        
+        %% ------------------------------------------------------------------------
+        %                       EMG FILTERING: ENVELOPE
+        %--------------------------------------------------------------------------
+        %fcut for EMG assumed fixed (6Hz)
+        EMGsEnvelope=EMGFiltering(EMGsSelected,AnalogFrameRate);
+        
+        EMGsEnvelopeForMax=EMGFiltering(EMGsSelectedForMax,AnalogFrameRate);
+        
+        %% ------------------------------------------------------------------------
+        %                      EMG ANALYSIS WINDOW SELECTION
+        %--------------------------------------------------------------------------
+        
+        [EMGsFiltered,EMGtime]=selectionData(EMGsEnvelope,AnalysisWindow,AnalogFrameRate,EMGOffset);
+        
+        %if trials for max computation are the same of those for elaboration, max
+        %values are computed within the same analysis window, else all signals are
+        %considered
+        if isequal(MaxEmgTrialsList,trialsList)
+            
+            EMGsForMax=selectionData(EMGsEnvelopeForMax,AnalysisWindow,AnalogFrameRate,EMGOffset);
+        else
+            EMGsForMax=EMGsEnvelopeForMax;
+        end
+        
+        %SAVING and PLOTTING
+        
+        if isfield(WindowsSelection,'Offset')
+            %if there's an offset, the Analysis Window is a Stance Phase
+            EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset,WindowsSelection.Offset)
+        else
+            EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
+        end
+        waitbar(6/7);
+        %% ------------------------------------------------------------------------
+        %                        COMPUTE MAX EMG VALUES
+        %--------------------------------------------------------------------------
+        MaxEMGvalues=computeMaxEMGvalues(EMGsForMax);
+        disp('Max values for selected emg signals have been computed')
+        
+        %print maxemg.txt
+        printMaxEMGvalues(foldersPath.elaboration, EMGsSelected_C3DLabels, MaxEMGvalues);
+        
+        disp('Printed maxemg.txt')
+        
+        %% ------------------------------------------------------------------------
+        %                            NORMALIZE EMG
+        %--------------------------------------------------------------------------
+        NormEMG=normalizeEMG(EMGsFiltered,MaxEMGvalues);
+        
+        %% ------------------------------------------------------------------------
+        %                            PRINT emg.txt
+        %--------------------------------------------------------------------------
+        
+        for k=1:length(trialsList)
+            
+            printEMGtxt(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
+        end
+        
+        disp('Printed emg.txt' )
+        
+        waitbar(7/7);
+        close(h)
+        
+        save_to_base(1)
+        % save_to_base() copies all variables in the calling function to the base
+        % workspace. This makes it possible to examine this function internal
+        % variables from the Matlab command prompt after the calling function
+        % terminates. Uncomment the following command if you want to activate it
+        %% ------------------------------------------------------------------------
+        %                           PLOTTING EMG
+        %--------------------------------------------------------------------------
+        plotEMGChoice = questdlg('Do you want to plot EMGs Raw', ...
+            'Plotting EMGs', ...
+            'Yes','No','Yes');
+        
+        if strcmp(plotEMGChoice,'Yes')
+            
+            EMGsPlotting(EMGsSelected,EMGsEnvelope,AnalysisWindow,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate)
+            disp('Plotted EMGs')
+        end
+        
     else
-        EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
+        waitbar(6/7);
+        disp('Check your data and/or your configuration files: No EMG raw data to be processed')
+        waitbar(7/7);
+        close(h)
     end
-    waitbar(6/7);
-%% ------------------------------------------------------------------------
-%                        COMPUTE MAX EMG VALUES
-%--------------------------------------------------------------------------
-    MaxEMGvalues=computeMaxEMGvalues(EMGsForMax);
-    disp('Max values for selected emg signals have been computed')
-    
-    %print maxemg.txt
-    printMaxEMGvalues(foldersPath.elaboration, EMGsSelected_C3DLabels, MaxEMGvalues);
-    
-    disp('Printed maxemg.txt')
-
-%% ------------------------------------------------------------------------
-%                            NORMALIZE EMG
-%--------------------------------------------------------------------------
-    NormEMG=normalizeEMG(EMGsFiltered,MaxEMGvalues);
-
-%% ------------------------------------------------------------------------
-%                            PRINT emg.txt
-%--------------------------------------------------------------------------
-    
-    for k=1:length(trialsList)
-        
-        printEMGtxt(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
-    end
-    
-    disp('Printed emg.txt' )
-    
-    waitbar(7/7);
-    close(h)
-    
-    save_to_base(1)
-    % save_to_base() copies all variables in the calling function to the base
-    % workspace. This makes it possible to examine this function internal
-    % variables from the Matlab command prompt after the calling function
-    % terminates. Uncomment the following command if you want to activate it
-%% ------------------------------------------------------------------------
-%                           PLOTTING EMG
-%--------------------------------------------------------------------------
-    plotEMGChoice = questdlg('Do you want to plot EMGs Raw', ...
-        'Plotting EMGs', ...
-        'Yes','No','Yes');
-    
-    if strcmp(plotEMGChoice,'Yes')
-        
-        EMGsPlotting(EMGsSelected,EMGsEnvelope,AnalysisWindow,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate)
-        disp('Plotted EMGs')
-    end
-
 else
-    waitbar(6/7);   
-    disp('No emg raw data to be processed')
-    waitbar(7/7);   
+        waitbar(6/7);
+        disp(' ')
+        disp('EMGs not collected')
+        waitbar(7/7);
+        close(h)
 end
-%-------------------------------------------------------------------------
+%% -------------------------------------------------------------------------
 
 h = msgbox('Data Processing terminated successfully','Done!');
 uiwait(h)

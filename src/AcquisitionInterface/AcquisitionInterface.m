@@ -22,7 +22,12 @@ if nargin>0
     def_AcqDate=setAcqDateFromFile(oldAcquisition);
     %VideoFrameRate
     def_VRate=setVideoFrameRateFromFile(oldAcquisition);
-    def_NumEmgSystems{1}=num2str(length(oldAcquisition.EMGSystems.EMGSystem));
+    %def_NumEmgSystems{1}=num2str(oldAcquisition.EMGSystems.Number);
+    if isfield(oldAcquisition,'EMGs')==1
+        def_NumEmgSystems{1}=num2str(length(oldAcquisition.EMGs.Systems.System));
+    else
+        def_NumEmgSystems{1}='0';
+    end
     %StancesOnFP
     %def_String=setTrialsStancesFromFile(nTrails,oldAcquisition);
 else
@@ -172,114 +177,116 @@ if isempty(nEMGSystem)
     nEMGSystem=str2num(answer{1});
 end
 
-if nargin>0
+if nEMGSystem>0 
+    if nargin>0
         %EMGSystem
-    def_EMGSystems=setEMGSystemFromFile(nEMGSystem,oldAcquisition);
-else
-    def_EMGSystems=setEMGSystemFromFile(nEMGSystem);
-end
-
-clear prompt 
-TotNumberOfChannels=0;
-
-for k=1:nEMGSystem
+        def_EMGSystems=setEMGSystemFromFile(nEMGSystem,oldAcquisition);
+    else
+        def_EMGSystems=setEMGSystemFromFile(nEMGSystem);
+    end
     
-    prompt{1}='Name';
-    prompt{2}='Rate';
-    prompt{3}='Number Of Used Channels';
-    
-    def_EMGSystem{1}=def_EMGSystems{k,1};
-    def_EMGSystem{2}=def_EMGSystems{k,2};
-    def_EMGSystem{3}=def_EMGSystems{k,3};
-    
-    answer = inputdlg(prompt,'EMGs System',num_lines,def_EMGSystem,options);
-
-    EMGSystem(k).Name=answer{1};
-    EMGSystem(k).Rate=str2num(answer{2});
-    EMGSystem(k).NumberOfChannels=str2num(answer{3});
-    
-    TotNumberOfChannels=TotNumberOfChannels+EMGSystem(k).NumberOfChannels;    
-end
-
-if isempty(TotNumberOfChannels)
-    m=msgbox('Number Of EMG Channels MUST be inserted!Try again!','EMG Channels','warn');
-    uiwait(m)
-    clear prompt 
-    prompt{1}='Number Of Used Channels';
+    clear prompt
     TotNumberOfChannels=0;
+    
     for k=1:nEMGSystem
-        answer = inputdlg(prompt,'EMGs System',num_lines,{' '},options);
-        EMGSystem(k).NumberOfChannels=str2num(answer{1});
+        
+        prompt{1}='Name';
+        prompt{2}='Rate';
+        prompt{3}='Number Of Used Channels';
+        
+        def_EMGSystem{1}=def_EMGSystems{k,1};
+        def_EMGSystem{2}=def_EMGSystems{k,2};
+        def_EMGSystem{3}=def_EMGSystems{k,3};
+        
+        answer = inputdlg(prompt,'EMGs System',num_lines,def_EMGSystem,options);
+        
+        EMGSystem(k).Name=answer{1};
+        EMGSystem(k).Rate=str2num(answer{2});
+        EMGSystem(k).NumberOfChannels=str2num(answer{3});
+        
         TotNumberOfChannels=TotNumberOfChannels+EMGSystem(k).NumberOfChannels;
     end
-end
-%% -----------------------------------------------------------------------%
-%                           EMGs PROTOCOL                                 %
-%-------------------------------------------------------------------------%
-
-originalPath=pwd;
-cd('..')
-cd('..')
-
-EMGsProtocolPath=[pwd '\ConfigurationFiles\AcquisitionInterface\EMGsProtocols\'];   
-
-cd(EMGsProtocolPath)
-if nargin>0
-    [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol',[oldAcquisition.EMGsProtocol.Name '.xml']);    
-else
-    [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol');
-end
-cd (originalPath)
-
-Pref.ReadAttr=false;
-EMGsProtocol=xml_read([EMGsProtocolPath EMGsProtocolName],Pref);
-
-%% -----------------------------------------------------------------------%
-%                              CHANNELS                                   %
-%-------------------------------------------------------------------------%
-clear prompt 
-
-prompt{1}='Channel ID (Required)';
-prompt{2}='Muscle';
-prompt{3}='Footswitch ID';
-prompt{4}='FootSwitch Position';
-
-%muscleList=EMGsProtocol.MuscleList;
-% MuscleList=textscan(muscleList, '%s');
-% MuscleList=MuscleList{1}';
-for j=1:length(EMGsProtocol.MuscleList.Muscle)
-    MuscleList{j}=EMGsProtocol.MuscleList.Muscle{j};
-end
-        
-for i=1:TotNumberOfChannels
     
-    if nargin>0     
-        def_channel=setChannelFromFile(i,MuscleList,oldAcquisition);
-    else      
-        def_channel=setChannelFromFile(i,MuscleList);
-    end
-
-    answer = inputdlg(prompt,['Channel ' num2str(i)],num_lines,def_channel,options);
-       
-    if isempty(answer{1})==0
-        Channel(i).ID=answer{1};
-        
-        if isempty(answer{2})==0
-            Channel(i).Muscle=answer{2};
-        end
-        if isempty(answer{3})==0
-            Channel(i).FootSwitch.ID=answer{3};
-            Channel(i).FootSwitch.Position=answer{4};
-        end
-    else
-        m=msgbox('Channel ID Required!','EMG Channels','warn');
-        answer = inputdlg(prompt,['Channel ' num2str(i)],num_lines,def_channel,options);
+    if isempty(TotNumberOfChannels)
+        m=msgbox('Number Of EMG Channels MUST be inserted!Try again!','EMG Channels','warn');
         uiwait(m)
+        clear prompt
+        prompt{1}='Number Of Used Channels';
+        TotNumberOfChannels=0;
+        for k=1:nEMGSystem
+            answer = inputdlg(prompt,'EMGs System',num_lines,{' '},options);
+            EMGSystem(k).NumberOfChannels=str2num(answer{1});
+            TotNumberOfChannels=TotNumberOfChannels+EMGSystem(k).NumberOfChannels;
+        end
     end
-    clear def_channel
+    %% -----------------------------------------------------------------------%
+    %                           EMGs PROTOCOL                                 %
+    %-------------------------------------------------------------------------%
+    
+    originalPath=pwd;
+    cd('..')
+    cd('..')
+    
+    EMGsProtocolPath=[pwd '\ConfigurationFiles\AcquisitionInterface\EMGsProtocols\'];
+    
+    cd(EMGsProtocolPath)
+    if nargin>0
+        [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol',[oldAcquisition.EMGs.Protocol.Name '.xml']);
+    else
+        [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol');
+    end
+    cd (originalPath)
+    
+    Pref.ReadAttr=false;
+    EMGsProtocol=xml_read([EMGsProtocolPath EMGsProtocolName],Pref);
+    
+    %% -----------------------------------------------------------------------%
+    %                              CHANNELS                                   %
+    %-------------------------------------------------------------------------%
+    clear prompt
+    
+    prompt{1}='Channel ID (Required)';
+    prompt{2}='Muscle';
+    prompt{3}='Footswitch ID';
+    prompt{4}='FootSwitch Position';
+    
+    %muscleList=EMGsProtocol.MuscleList;
+    % MuscleList=textscan(muscleList, '%s');
+    % MuscleList=MuscleList{1}';
+    for j=1:length(EMGsProtocol.MuscleList.Muscle)
+        MuscleList{j}=EMGsProtocol.MuscleList.Muscle{j};
+    end
+    
+    for i=1:TotNumberOfChannels
+        
+        if nargin>0
+            def_channel=setChannelFromFile(i,MuscleList,oldAcquisition);
+        else
+            def_channel=setChannelFromFile(i,MuscleList);
+        end
+        
+        answer = inputdlg(prompt,['Channel ' num2str(i)],num_lines,def_channel,options);
+        
+        if isempty(answer{1})==0
+            Channel(i).ID=answer{1};
+            
+            if isempty(answer{2})==0
+                Channel(i).Muscle=answer{2};
+            end
+            if isempty(answer{3})==0
+                Channel(i).FootSwitch.ID=answer{3};
+                Channel(i).FootSwitch.Position=answer{4};
+            end
+        else
+            m=msgbox('Channel ID Required!','EMG Channels','warn');
+            answer = inputdlg(prompt,['Channel ' num2str(i)],num_lines,def_channel,options);
+            uiwait(m)
+        end
+        clear def_channel
+    end
+    
+    Channels.Channel=Channel';
 end
-
-Channels.Channel=Channel';
 %% -----------------------------------------------------------------------%
 %                              TRIALS                                     %
 %-------------------------------------------------------------------------%
@@ -403,9 +410,12 @@ acquisition.Subject=Subject;
 acquisition.AcquisitionDate=AcquisitionDate;
 acquisition.VideoFrameRate=VideoFrameRate;
 acquisition.MarkersProtocol=MarkersProtocol;
-acquisition.EMGSystems.EMGSystem=EMGSystem;
-acquisition.EMGsProtocol=EMGsProtocol;
-acquisition.Channels=Channels;
+%acquisition.EMGSystems.Number=nEMGSystem;
+if nEMGSystem>0
+    acquisition.EMGs.Systems.System=EMGSystem;
+    acquisition.EMGs.Protocol=EMGsProtocol;
+    acquisition.EMGs.Channels=Channels;
+end
 acquisition.Trials=Trials;
 acquisition.ATTRIBUTE=ATTRIBUTE;
 

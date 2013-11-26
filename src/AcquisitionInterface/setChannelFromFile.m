@@ -1,22 +1,22 @@
 function def_channel=setChannelFromFile(n,muscleList,oldAcquisition)
 
-if nargin>2 && length(oldAcquisition.Channels.Channel)>=n
+if nargin>2 && length(oldAcquisition.EMGs.Channels.Channel)>=n
     
-    if ischar(oldAcquisition.Channels.Channel(n).ID)
-        def_channel{1}=oldAcquisition.Channels.Channel(n).ID;
+    if ischar(oldAcquisition.EMGs.Channels.Channel(n).ID)
+        def_channel{1}=oldAcquisition.EMGs.Channels.Channel(n).ID;
     else
-        def_channel{1}=num2str(oldAcquisition.Channels.Channel(n).ID);
+        def_channel{1}=num2str(oldAcquisition.EMGs.Channels.Channel(n).ID);
     end
     
-    if (isfield(oldAcquisition.Channels.Channel(n),'Muscle') && isempty(oldAcquisition.Channels.Channel(n).Muscle)==0)
-        def_channel{2}=oldAcquisition.Channels.Channel(n).Muscle;
+    if (isfield(oldAcquisition.EMGs.Channels.Channel(n),'Muscle') && isempty(oldAcquisition.EMGs.Channels.Channel(n).Muscle)==0)
+        def_channel{2}=oldAcquisition.EMGs.Channels.Channel(n).Muscle;
         def_channel{3}='';
         def_channel{4}='';
     else
         def_channel{2}='';
-        if isfield(oldAcquisition.Channels.Channel(n),'FootSwitch')
-            def_channel{3}=num2str(oldAcquisition.Channels.Channel(n).FootSwitch.ID);
-            def_channel{4}=oldAcquisition.Channels.Channel(n).FootSwitch.Position;
+        if isfield(oldAcquisition.EMGs.Channels.Channel(n),'FootSwitch')
+            def_channel{3}=num2str(oldAcquisition.EMGs.Channels.Channel(n).FootSwitch.ID);
+            def_channel{4}=oldAcquisition.EMGs.Channels.Channel(n).FootSwitch.Position;
         else
             def_channel{3}='';
             def_channel{4}='';

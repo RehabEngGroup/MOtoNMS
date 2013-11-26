@@ -1,7 +1,10 @@
 function [] = elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,oldElaboration,varargin)
 % Function to generate elaboration.xml file
 % Implemented by Alice Mantoan, February 2012, <alice.mantoan@dei.unipd.it>
+% Last updated November 2013
 
+
+%% -------------------------Initial Settings-------------------------------
 %create a cell from char values read from acquisition.xml for the selection
 %of Markers to be written in the trc file
 %needed for trcMarkersIndexes computation within case nargin>3
@@ -12,27 +15,48 @@ load([foldersPath.sessionData 'AnalogDataLabels.mat']);
 
 %Definition of Lists Initial Values
 if nargin>3
-  
-    oldParameters=parametersGeneration(oldElaboration);
     
+    oldParameters=parametersGeneration(oldElaboration);
     %find indexes for the listdlg command
     trialsIndexes=findIndexes(trialsName,oldParameters.trialsList);    
     trcMarkersIndexes=findIndexes(MarkersSet,oldParameters.trcMarkersList);
-    emgMaxTrialsIndexes=findIndexes(trialsName,oldParameters.MaxEmgTrialsList);
     
     InitialValue.Trials=trialsIndexes;
     InitialValue.WindowsSelection.Method=oldParameters.WindowsSelection.Method; 
     InitialValue.MarkersList=trcMarkersIndexes;
-    InitialValue.emgMaxTrials=emgMaxTrialsIndexes;
     
 else
     InitialValue.Trials=[];
-    InitialValue.emgMaxTrials=[];
+
     InitialValue.MarkersList=[];
     InitialValue.WindowsSelection.Method='.';
 end
 
+%% ---------Looking for EMGs and EMGs depending initial settings-----------
+if isfield(acquisitionInfo,'EMGs') %there are EMGs --> they will be processed
+  
+    %Definition of EMGs Lists Initial Values
+    if nargin>3
+            
+        emgMaxTrialsIndexes=findIndexes(trialsName,oldParameters.MaxEmgTrialsList);
+        InitialValue.emgMaxTrials=emgMaxTrialsIndexes;
+    else
+        InitialValue.emgMaxTrials=[];
+    end
+    
+    %Leg Definition (required for Analysis Window Definition Method)
+    InstrumentedLeg=acquisitionInfo.EMGs.Protocol.InstrumentedLeg;
+    
+    %EMG found
+    EMGfound=1;
+    
+else
+    EMGfound=0;
+    InstrumentedLeg='None';
 
+end
+
+%--------------------------------------------------------------------------
 %% --------------------------Trials Selection-------------------------------
  
 [trialsIndex,v] = listdlg('PromptString','Select trials to elaborate:',...
@@ -88,6 +112,9 @@ else
                         def_m{i}='8';
                         def_f{i}='8';
                         %def_cop{i}='0'; not necessary cop filtering
+                    otherwise
+                        def_m{i}='8';
+                        def_f{i}='8';
                 end
                 
             case 'RUNNING'
@@ -197,8 +224,6 @@ oldMethodIndex=find(strcmp(InitialValue.WindowsSelection.Method,AWmethodOptions)
 
 method=AWmethodOptions{methodIndex};
 
-%Leg Definition
-InstrumentedLeg=acquisitionInfo.EMGsProtocol.InstrumentedLeg;
 
 if (strcmp(InstrumentedLeg,'Both') || strcmp(InstrumentedLeg,'None'))
     
@@ -348,9 +373,59 @@ end
             
 MarkersList=MarkersSet(markersIndex);
 
-%% --------------------------EMGs Selection---------------------------------
+%--------------------------------------------------------------------------
+%% ---------------Elaboration structure definition ------------------------
+
+%FolderName
+%necessary to have "InputData" in the path
+ind=strfind(foldersPath.inputData, 'InputData');
+elaboration.FolderName=['.\' foldersPath.inputData(ind:end)];
+
+%Trials List
+Trials=[];
+for i=1:length(trialsList)
+    Trials=[Trials trialsList{i} ' '];
+end
+
+elaboration.Trials=Trials;
+
+%Filtering Parameters
+
+if (exist('m_fcut','var') || exist('f_fcut','var'))
+
+    for i=1:length(trialsList)
+        
+        elaboration.Filtering.Trial(i).Name=trialsList{i};
+        
+        if strcmp(fcMarkersChoice,'Yes')==1
+            elaboration.Filtering.Trial(i).Fcut.Markers=m_fcut(i);
+        end
+        if strcmp(fcForcesChoice,'Yes')==1
+            elaboration.Filtering.Trial(i).Fcut.Forces=f_fcut(i);
+        end
+        if exist('cop_fcut','var')
+            elaboration.Filtering.Trial(i).Fcut.CenterOfPressure=cop_fcut(i);
+        end
+    end
+end
+
+%WindowSelectionProcedure
+elaboration = setfield(elaboration, 'WindowSelectionProcedure', WindowSelectionProcedure);
+
+%Markers
+Markers=[];
+for i=1:length(MarkersList)
+    Markers=[Markers MarkersList{i} ' '];
+end
+
+elaboration.Markers=Markers;
+
+%--------------------------------------------------------------------------
+%% -------------------------- EMGs Selection ------------------------------
 %if EMG signals have been acquired
-if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(AnalogDataLabels)==0) 
+%if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(AnalogDataLabels)==0) 
+if true(EMGfound)
+    
     originalPath=pwd;
     cd('..')
     cd('..')
@@ -407,61 +482,15 @@ if (isfield(acquisitionInfo, 'EMGsProtocol') && isempty(AnalogDataLabels)==0)
         'InitialValue',InitialValue.emgMaxTrials);
     
     MaxEmgTrialsList=trialsName(MaxEmgTrialsIndex);
-end
 
-%% Elaboration structure definition
-%FolderName
-%necessary to have "InputData" in the path
-ind=strfind(foldersPath.inputData, 'InputData');
-elaboration.FolderName=['.\' foldersPath.inputData(ind:end)];
 
-%Trials List
-Trials=[];
-for i=1:length(trialsList)
-    Trials=[Trials trialsList{i} ' '];
-end
-
-elaboration.Trials=Trials;
-
-%Filtering Parameters
-
-if (exist('m_fcut','var') || exist('f_fcut','var'))
-
-    for i=1:length(trialsList)
-        
-        elaboration.Filtering.Trial(i).Name=trialsList{i};
-        
-        if strcmp(fcMarkersChoice,'Yes')==1
-            elaboration.Filtering.Trial(i).Fcut.Markers=m_fcut(i);
-        end
-        if strcmp(fcForcesChoice,'Yes')==1
-            elaboration.Filtering.Trial(i).Fcut.Forces=f_fcut(i);
-        end
-        if exist('cop_fcut','var')
-            elaboration.Filtering.Trial(i).Fcut.CenterOfPressure=cop_fcut(i);
-        end
+    %% ------------------Elaboration structure definition------------------
+    %EMGMaxTrials
+    EMGMaxTrials=[];
+    for i=1:length(MaxEmgTrialsList)
+        EMGMaxTrials=[EMGMaxTrials MaxEmgTrialsList{i} ' '];
     end
-end
-
-
-%WindowSelectionProcedure
-elaboration = setfield(elaboration, 'WindowSelectionProcedure', WindowSelectionProcedure);
-
-%Markers
-Markers=[];
-for i=1:length(MarkersList)
-    Markers=[Markers MarkersList{i} ' '];
-end
-
-elaboration.Markers=Markers;
-
-%EMGMaxTrials
-EMGMaxTrials=[];
-for i=1:length(MaxEmgTrialsList)
-    EMGMaxTrials=[EMGMaxTrials MaxEmgTrialsList{i} ' '];
-end
-
-if isfield(acquisitionInfo, 'EMGsProtocol')
+    
     elaboration.EMGMaxTrials=EMGMaxTrials;
     
     %EMG Selection
@@ -471,11 +500,12 @@ if isfield(acquisitionInfo, 'EMGsProtocol')
         elaboration.EMGsSelection.EMGs.EMG(i).C3DLabel=selectedC3DLabels(i);
     end
     %EMG Offset: EMGs are considered an offset before the Analysis Window
-    %start frame to allow further applications to account for the 
+    %start frame to allow further applications to account for the
     %electromechanical delay
     %not asked to the user for the moment but saved in the xml file
     elaboration.EMGOffset=0.2;  %set to 200ms
 end
+
 %---------------------Elaboration.xml writting-----------------------------
 Pref.StructItem=false;  %to not have arrays of structs with 'item' notation
 Pref.ItemName='TrialWindow';
