@@ -53,6 +53,12 @@ switch WindowsSelectionInfo.Method
     case 'WindowFromC3D'
         %To choose events outside force platform 
         AnalysisWindow=WindowFromC3D(WindowsSelectionInfo, LabeledDataOffset, Rates);
+        
+        WindowOffset=WindowsSelectionInfo.Offset;
+        
+        if WindowOffset ~= 0
+            AnalysisWindow=WindowShift(AnalysisWindow,WindowOffset);
+        end
               
         
     case 'Manual'

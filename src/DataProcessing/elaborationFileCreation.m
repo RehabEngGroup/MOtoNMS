@@ -1,4 +1,4 @@
-function [] = elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,oldElaboration,varargin)
+ function [] = elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,oldElaboration,varargin)
 % Function to generate elaboration.xml file
 % Implemented by Alice Mantoan, February 2012, <alice.mantoan@dei.unipd.it>
 % Last updated November 2013
@@ -258,8 +258,9 @@ switch method
             
         answer = inputdlg(prompt,'Analysis Window Offset from Stance',num_lines,defoffset,options);
         
-        eval(['WindowSelectionProcedure.' method '.Offset=answer{1};'])  
         eval(['WindowSelectionProcedure.' method '.Leg=leg;'])
+        eval(['WindowSelectionProcedure.' method '.Offset=answer{1};'])  
+
         
 
     case 'StanceOnFPfromC3D'
@@ -303,25 +304,35 @@ switch method
         clear prompt
         
         dlg_title='WindowFromC3D Method';
-        prompt{1} = 'Insert Label for Start Event';
-        prompt{2}= 'Insert Label for Stop Event';
+        prompt{1} = 'Insert Full Label for Start Event (Context - Right/Left/General - + Label)';
+        prompt{2}= 'Insert Label for Stop Event (Context - Right/Left/General - + Label)';
         
         num_lines =1;
     
         if (nargin > 3 && strcmp(InitialValue.WindowsSelection.Method,'WindowFromC3D')==1) %if  previous Elaboration.xml has been load
             defanswer{1}=oldParameters.WindowsSelection.Labels.Start;
             defanswer{2}=oldParameters.WindowsSelection.Labels.Stop;
+            defoffset{1}=num2str(oldParameters.WindowsSelection.Offset);
         else
             defanswer={' ';' '};
+            defoffset={'0'};
         end
         
         answer = inputdlg(prompt,dlg_title,num_lines,defanswer, options);
         LabelForStartEvent=answer{1};
         LabelForStopEvent=answer{2};
         
-        eval(['WindowSelectionProcedure.' method '.Leg=leg;'])
-        eval(['WindowSelectionProcedure.' method '.LabelForStartEvent=LabelForStartEvent;'])
-        eval(['WindowSelectionProcedure.' method '.LabelForStopEvent=LabelForStopEvent;'])
+        prompt='Insert Frame Offset before choosen Events';
+        num_lines = 1;
+        options.Resize='on';
+        options.WindowStyle='modal';
+        
+        answer = inputdlg(prompt,'Analysis Window Offset from choosen Events',num_lines,defoffset,options);
+        
+       % eval(['WindowSelectionProcedure.' method '.Leg=leg;'])
+        eval(['WindowSelectionProcedure.' method '.FullLabelForStartEvent=LabelForStartEvent;'])
+        eval(['WindowSelectionProcedure.' method '.FullLabelForStopEvent=LabelForStopEvent;'])
+        eval(['WindowSelectionProcedure.' method '.Offset=answer{1};'])
         
     case 'Manual'
         

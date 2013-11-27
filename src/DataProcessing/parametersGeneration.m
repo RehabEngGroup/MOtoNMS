@@ -66,8 +66,9 @@ if (strcmp(method,'StanceOnFPfromC3D')==1 )
 end
 
 if (strcmp(method,'WindowFromC3D')==1 )
-    parameters.WindowsSelection.Labels.Start=elaboration.WindowSelectionProcedure.WindowFromC3D.LabelForStartEvent;
-    parameters.WindowsSelection.Labels.Stop=elaboration.WindowSelectionProcedure.WindowFromC3D.LabelForStopEvent;
+    parameters.WindowsSelection.Labels.Start=elaboration.WindowSelectionProcedure.WindowFromC3D.FullLabelForStartEvent;
+    parameters.WindowsSelection.Labels.Stop=elaboration.WindowSelectionProcedure.WindowFromC3D.FullLabelForStopEvent;
+    parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.WindowFromC3D.Offset;
 end
 
 if (strcmp(method,'ComputeStancePhase')==1 )
@@ -112,7 +113,7 @@ if nargin>1
         
         parameters.WindowsSelection.Events=events;
       
-        parameters.WindowsSelection.Leg=eval(['elaboration.WindowSelectionProcedure.' method{1} '.Leg;']); 
+%        parameters.WindowsSelection.Leg=eval(['elaboration.WindowSelectionProcedure.' method{1} '.Leg;']); 
     end
        
     if strcmp(method,'ComputeStancePhase')==1

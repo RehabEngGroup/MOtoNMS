@@ -29,8 +29,8 @@
   </xs:complexType>
   <xs:complexType name="ComputeStancePhaseType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Offset" type="xs:double"/>
       <xs:element name="Leg" type="xs:string"/>
+      <xs:element minOccurs="0" name="Offset" type="xs:double"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ManualType">
@@ -48,9 +48,9 @@
   </xs:complexType>
   <xs:complexType name="WindowFromC3DType">
     <xs:sequence>
-      <xs:element name="Leg" type="xs:string"/>
-      <xs:element name="LabelForStartEvent" type="xs:string"/>
-      <xs:element name="LabelForStopEvent" type="xs:string"/>
+      <xs:element name="FullLabelForStartEvent" type="xs:string"/>
+      <xs:element name="FullLabelForStopEvent" type="xs:string"/>
+      <xs:element minOccurs="0" name="Offset"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="EMGsType">

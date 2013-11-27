@@ -1,5 +1,6 @@
 function WindowC3D = WindowFromC3D(WindowsSelectionInfo, DataOffset, Rates)
 
+
 for k=1:length(WindowsSelectionInfo.Events)
        
     eventFrames=[];
@@ -7,16 +8,17 @@ for k=1:length(WindowsSelectionInfo.Events)
     for j=1: size(WindowsSelectionInfo.Events{k},2) %n di trials
         
         %consider only events which correspond to the choosen leg
-        if (strcmp(WindowsSelectionInfo.Leg, WindowsSelectionInfo.Events{k}(j).context))
-            
+        %if (strcmp(WindowsSelectionInfo.Leg, WindowsSelectionInfo.Events{k}(j).context))
+            %Full label=context(right/left/general)+label
+            eventFullLabel=[WindowsSelectionInfo.Events{k}(j).context,' ',WindowsSelectionInfo.Events{k}(j).label];
             %check labels
-            if (strcmp(WindowsSelectionInfo.Events{k}(j).label,WindowsSelectionInfo.Labels.Start) || strcmp(WindowsSelectionInfo.Events{k}(j).label, WindowsSelectionInfo.Labels.Stop))
+            if (strcmp(upper(eventFullLabel),upper(WindowsSelectionInfo.Labels.Start)) || strcmp(upper(eventFullLabel),upper(WindowsSelectionInfo.Labels.Stop)))
                 
                 eventFrames=[eventFrames WindowsSelectionInfo.Events{k}(j).frame];
             end       
-        end
+     %   end
     end
-    
+
     if isempty(eventFrames)
         error('Events in the c3d file do not correspond to the assigned labels.')
         
