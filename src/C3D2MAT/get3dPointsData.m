@@ -1,18 +1,25 @@
  function Markers = get3dPointsData(itf, index1, index2)
 % get3dPointsData - returns structure with markers data
-% 
-%   USAGE:  Markers = get3dPointsData(itf, residual*, index1*, index2*) 
-%           * = not a necessary input
-%   INPUTS:
-%   itf        = variable name used for COM object
-%   residual   = Return matrix with point residual in column 4.  
-%                0 or no 3rd argument = false (returns nx3 with XYZ data only)
-%                1 = true (returns nx4 with XYZ and residuals) 
-%   index1     = start frame index, all frames if not used as an argument
-%   index2     = end frame index, all frames if not used as an argument
-%   OUTPUTS:
-%   Markers     = structure with markers data 
-   
+%
+%   C3D directory contains C3DServer activation and wrapper Matlab functions.
+%   This function written by:
+%   Matthew R. Walker, MSc. <matthewwalker_1@hotmail.com>
+%   Michael J. Rainbow, BS. <Michael_Rainbow@brown.edu>
+%   Motion Analysis Lab, Shriners Hospitals for Children, Erie, PA, USA
+%   Questions and/or comments are most welcome.  
+%   Last Updated: April 21, 2006
+%   Created in: MATLAB Version 7.0.1.24704 (R14) Service Pack 1
+%               O/S: MS Windows XP Version 5.1 (Build 2600: Service Pack 2)
+%   
+%   Please retain the author names, and give acknowledgement where necessary.  
+%   DISCLAIMER: The use of these functions is at your own risk.  
+%   The authors do not assume any responsibility related to the use 
+%   of this code, and do not guarantee its correctness. 
+
+% Modified by Alice Mantoan, Michele Vivian
+% Last Updated: December 5, 2013
+
+%%
 
 if nargin == 1, 
     index1 = itf.GetVideoFrameHeader(0); % frame start

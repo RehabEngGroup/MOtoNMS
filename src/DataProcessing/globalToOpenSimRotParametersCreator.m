@@ -1,14 +1,35 @@
-%Convention for global reference system:
-%1st axis: direction of motion
-%2nd axis: vertical axis
-%3rd axis: right hand rule
-%Assumption:1st axis assumed to be in the same versus of OpenSim 1st axis,
-%that should be the positive direction of motion
-
 function globalToOpenSimRotations = globalToOpenSimRotParametersCreator(GlobalReferenceSystem)
-%%globalToOpenSimRotParametersCreator
+%globalToOpenSimRotParametersCreator
 %compute global to OpenSim Rotations Parameters
+%
+% Convention for global reference system:
+% 1st axis: direction of motion
+% 2nd axis: vertical axis
+% 3rd axis: right hand rule
+% Assumption:1st axis assumed to be in the same versus of OpenSim 1st axis,
+% that should be the positive direction of motion
 
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 switch GlobalReferenceSystem
     
     case 'XYZ'       %OpenSim
@@ -27,7 +48,7 @@ switch GlobalReferenceSystem
         Rot1 = 90;
         Rot2 = 0;
                
-    case 'ZYX'      %DEI-Unipd 
+    case 'ZYX'      %UNIPD
         
         RotX = 0;
         RotY = 1;

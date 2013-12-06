@@ -3,15 +3,34 @@ function StancePhase = ComputeStancePhase(filtForces,platesList,FzThreshold,Rate
 % It selects stance phase within gait cycle:
 % start == heel strike
 % end == toe off
-% if you need more than a stance another method should be used.
-
+%
 % VideoFrameRate is needed to select a startFrame which correspond to a
 % time instant sample in the lowest frame rate, otherwise  markers and
 % forces may not be perfectly synchronized:with force frame rate there might
 % be time samples which do not have an exact correspondence in video frame
 % rate
-% Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
-%--------------------------------------------------------------------------
+
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 
 VideoFrameRate=Rates.VideoFrameRate;
 AnalogFrameRate=Rates.AnalogFrameRate;

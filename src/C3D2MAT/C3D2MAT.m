@@ -1,18 +1,36 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               MOtoNMS                                   %
+%                MATLAB MOTION DATA ELABORATION TOOLBOX                   %
+%                 FOR NEUROMUSCULOSKELETAL APPLICATIONS                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Read a c3d file and store main information in mat files
 %
-%USAGE: Input files folder path MUST included a folder named 'InputData'
+% USAGE: Input files folder path MUST included a folder named 'InputData'
 %       Output folders may be managed in mkOutputPath.m
 %       Cancel the created sessionData folder if you modify the code before
 %       rerunning it: data already saved are not overwritten!
+
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
 %
-%Before running the file is possible to choose if we want the data in a
-%struct or in matrix according to following computations: to do this see
-%getInfoFromC3D
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
 %
-%Implemented by Alice Mantoan, July 2012, <alice.mantoan@dei.unipd.it>
-%Last version April 2013
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 
 %Selection of input data 
 pathName = uigetdir(' ','Select your input data folder');

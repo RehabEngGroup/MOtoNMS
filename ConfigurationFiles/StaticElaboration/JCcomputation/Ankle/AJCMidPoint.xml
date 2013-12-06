@@ -48,7 +48,16 @@
               <Marker>LMM</Marker>
               <Marker>RMM</Marker>
           </MarkerNames>			
-        </Protocol>		
+        </Protocol>
+		<Protocol>		
+          <Name>gait2392_MarkerSet</Name>  
+	      <MarkerNames>
+       	      <Marker>L.Ankle.Lat</Marker>
+              <Marker>R.Ankle.Lat</Marker>
+              <Marker>L.Ankle.Med</Marker>
+              <Marker>R.Ankle.Med</Marker>
+          </MarkerNames>			
+        </Protocol>			
     </MarkersDefinition>  
 </Method>  
 

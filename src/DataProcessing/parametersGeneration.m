@@ -1,9 +1,28 @@
 function parameters = parametersGeneration(elaboration,acquisitionInfo,foldersPath,varargin)
 % Function to convert settings from elaboration.xml into a parameters.mat    
 % struct needed for processing
-% Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
 
-%%  --------------------------------------------------------------------------
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%  
 
 %trialsList
 Trials=elaboration.Trials;    
@@ -113,7 +132,7 @@ if nargin>1
         
         parameters.WindowsSelection.Events=events;
       
-%        parameters.WindowsSelection.Leg=eval(['elaboration.WindowSelectionProcedure.' method{1} '.Leg;']); 
+        %parameters.WindowsSelection.Leg=eval(['elaboration.WindowSelectionProcedure.' method{1} '.Leg;']); 
     end
        
     if strcmp(method,'ComputeStancePhase')==1

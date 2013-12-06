@@ -27,7 +27,11 @@ function ACHANNEL = getanalogchannel(itf, signalname, index1, index2)
 %   DISCLAIMER: The use of these functions is at your own risk.  
 %   The authors do not assume any responsibility related to the use 
 %   of this code, and do not guarantee its correctness. 
-     
+
+% Modified by Alice Mantoan
+% Last Updated: December 5, 2013
+
+%%
 
 if nargin == 2, 
     index1 = itf.GetVideoFrame(0); % frame start

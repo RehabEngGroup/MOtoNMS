@@ -4,6 +4,28 @@ function markerstrc = selectingMarkers(MarkersList,MLabels,markers)
 %markers: struct of markers trajectories [nFrames x nMarkers*(XYZ)], where
 %nMarkers corrisponds to the initial MLabels
 
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
+
 for i=1:length(MarkersList)
     j=MarkersList(i);
     z=strmatch(j,MLabels,'exact');
@@ -23,13 +45,4 @@ for i=1: length(newMarkerLabels)
     markerstrc=[markerstrc markers(:,newindex:newindex+2)];
 end
 
-
-%Other way 
-% for i=1:length(MList)
-%     for k=1:length(MLabels)
-%         v(k)=strcmp(MList{i},MLabels{k})==1
-%         
-%     end
-%     a(i)=find(v==1)
-% end
 

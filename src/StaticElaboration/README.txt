@@ -1,7 +1,8 @@
-Set Matlab path to this folder
+Instructions
 
+1) Set Matlab path to this folder
 
-Run mainStaticElaboration.m: main program with interface for user inputting data
+2) Run mainStaticElaboration.m: main program with interface for user inputting data
 
 
 If you already have the configuration file for a specific elaboration (static.xml), you can directly run it through the command:
@@ -11,7 +12,8 @@ runStaticElaboration(ConfigFilePath)
 where ConfigFilePath is 'C\...\' the path of your xml file
 
 
-
 Note
 
-C3D2MAT code MUST be run before for the static trial
+c3d files must be converted in .mat with C3D2MAT.m - C3D2MAT - before running Static Elaboration step
+acquisition.xml file is required and can be generated with mainAquisitionInterface.m - AcquisitionInterface -
+Refer to MOtoNMS User Manual

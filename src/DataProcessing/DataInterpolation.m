@@ -3,8 +3,29 @@ function [interpData,note] = DataInterpolation(data,index)
 %index for piecewise interpolation
 %If markers are not visible from the beginning, 0 value is set and
 %interpolation is done from first and last frame contained in index array
-%if index is empty the whole trajectory is interpolated
-%Implemented by Alice Mantoan, February 2013, <alice.mantoan@dei.unipd.it>
+%If index is empty the whole trajectory is interpolated
+
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 
 for k=1: length(data)
     
@@ -16,7 +37,6 @@ for k=1: length(data)
     
     for j=1:c  %markers(3Columns each)
         
- %       if isempty(index{k})==1
         if index{k}(:,j)==0
             if (length(find(isnan(data{k}(:,j))==1))>=1)
                 %There weren't 0 values at the beginning -> whole interpolation

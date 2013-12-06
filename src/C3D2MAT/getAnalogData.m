@@ -4,7 +4,27 @@ function [AnalogData] = getAnalogData(itf)
 %This function reads all data stored in analog channels after forces (EMG,
 %Biodex data, Position and Torque,etc.)
 
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
+%%
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
 unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
 
@@ -31,8 +51,7 @@ nAnalogDataChannels = itf.GetParameterDimension(indexLabels,1)- offsetAnalogData
 for i=1:(nAnalogDataChannels)
     AnalogDataLabels{i} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'),(i+offsetAnalogDataLabels-1));
     
-    %AnalogData LABELS: MUST BE STANDARDIZED
-    %for the moment,it may be necessary to eliminate spaces from the Labels 
+    %it may be necessary to eliminate spaces from the Labels 
     %AnalogDataLabelsStruct{i} = regexprep(AnalogDataLabels{i}, ' ', ''); 
     
     units{i} = itf.GetParameterValue(unitIndex, i+offsetAnalogDataLabels-1);

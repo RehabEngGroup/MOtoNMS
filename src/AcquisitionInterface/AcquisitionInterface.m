@@ -1,11 +1,32 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                    MATLAB DATA PROCESSING TOOLBOX                       %
-%                     for Applications in OPENSIM                         %
+%                               MOtoNMS                                   %
+%                MATLAB MOTION DATA ELABORATION TOOLBOX                   %
+%                 FOR NEUROMUSCULOSKELETAL APPLICATIONS                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % AcquisitionInterface.m
+% GUI for acquisition.xml file generation.
+
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
 %
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
 %
-% Implemented by Alice Mantoan, Febrary 2013, <alice.mantoan@dei.unipd.it>
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 
 function [] = AcquisitionInterface(oldAcquisition)
 
@@ -219,9 +240,9 @@ if nEMGSystem>0
             TotNumberOfChannels=TotNumberOfChannels+EMGSystem(k).NumberOfChannels;
         end
     end
-    %% -----------------------------------------------------------------------%
-    %                           EMGs PROTOCOL                                 %
-    %-------------------------------------------------------------------------%
+    %% -------------------------------------------------------------------%
+    %                           EMGs PROTOCOL                             %
+    %---------------------------------------------------------------------%
     
     originalPath=pwd;
     cd('..')
@@ -240,9 +261,9 @@ if nEMGSystem>0
     Pref.ReadAttr=false;
     EMGsProtocol=xml_read([EMGsProtocolPath EMGsProtocolName],Pref);
     
-    %% -----------------------------------------------------------------------%
-    %                              CHANNELS                                   %
-    %-------------------------------------------------------------------------%
+    %% -------------------------------------------------------------------%
+    %                              CHANNELS                               %
+    %---------------------------------------------------------------------%
     clear prompt
     
     prompt{1}='Channel ID (Required)';
@@ -420,7 +441,7 @@ acquisition.Trials=Trials;
 acquisition.ATTRIBUTE=ATTRIBUTE;
 
 %% -----------------------------------------------------------------------%
-%                       Acquisition.xml WRITING                           %
+%                     acquisition.xml WRITING                             %
 %-------------------------------------------------------------------------%
 Pref.StructItem=false;  %to not have arrays of structs with 'item' notation
 Pref.ItemName='Muscle';

@@ -1,6 +1,8 @@
 function [Markers, AnalogData, FPdata, Events, ForcePlatformInfo,Rates] = getInfoFromC3D(c3dFilePathAndName)
-% Function to load the data from a c3d file into the structured array data.
-%
+% getInfoFromC3D - Function to load the data from a c3d file into the 
+% structured array data.
+% 
+% DESCRIPTION
 % INPUT -   file - the file path that you wish to load 
 %
 % OUTPUT -  all structured arrays containing the following data
@@ -15,10 +17,27 @@ function [Markers, AnalogData, FPdata, Events, ForcePlatformInfo,Rates] = getInf
 %           unique data structure. If other rates are present they are not
 %           considered
 
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
 %
-%Implemented by Alice Mantoan, July 2012, <alice.mantoan@dei.unipd.it>
-%Last updating January 2013
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along  
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%% 
 
 itf=c3dserver();
 C3Dopen(itf,c3dFilePathAndName);
@@ -27,18 +46,10 @@ C3Dopen(itf,c3dFilePathAndName);
 %                                MARKERS 
 %--------------------------------------------------------------------------
 try
-    Markers = get3dPointsData(itf);
-    %Markers Labels can also be computed separately and added to the
-    %Markers struct
-    %Markers.MLabels=getMarkersLabels(itf); 
-   
-    %alternatively to have a structure with markers idenfified by the
-    %label:
-    %Markers = getMarkersStruct(itf); 
+    Markers = get3dPointsData(itf);    
     
 catch me
     Markers=[];
-    %Markers.Labels=[];
 end
 
 %--------------------------------------------------------------------------
@@ -49,7 +60,6 @@ if nargout > 1
         AnalogData = getAnalogData(itf);
     catch me
         AnalogData = [];
-        %AnalogData.Labels=[];
     end
 end
 
@@ -61,15 +71,6 @@ if nargout > 2
         
         FPdata = getForcePlatesData(itf);
         
-        %alternatively could be useful for future operations to have a 
-        %STRUCTURE with FPdata idenfified by the labels ---> use:
-        
-        %FPdata = getForceChannels(itf);
-        
-        %getForceChannels is taken from getAnalogChannels, a useful
-        %function able to return ALL analog data (AnalogData+FPdata+Biodex 
-        %measures) in a unique structure, with data identified by labels
-    
     catch me
         FPdata = [];
     end
@@ -84,11 +85,6 @@ if nargout > 3
        ForcePlatformInfo=getFPInfo(itf);
        %This returns info in a structure useful for GRF computation in
        %writing .MOT file part
-       %alternatively:
-       %ForcePlatformInfo = getForcePlateInfo(itf);
-       %format of this structure is different from the previous
-       %it can be choosen according to its use in trc and mot
-       
     catch me
        ForcePlatformInfo = [];
     end

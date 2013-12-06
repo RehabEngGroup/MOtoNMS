@@ -1,12 +1,30 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                   MATLAB DATA PREPROCESSING TOOLBOX                     %
-%                     for Applications in OPENSIM                         %
+%                               MOtoNMS                                   %
+%                MATLAB MOTION DATA ELABORATION TOOLBOX                   %
+%                 FOR NEUROMUSCULOSKELETAL APPLICATIONS                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ElaborationInterface.m
+
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
 %
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
 %
-% Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
-% Last version April 2013
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
 
 %% ----------------------------STARTING------------------------------------
 clear all
@@ -24,16 +42,16 @@ while newElaboration==1
     %Trials Name
     c3dFiles = dir ([foldersPath.inputData '\*.c3d']);
     
-    %Name correction/check: after standadization it will not be necessary
+    %Name correction/check
     for k=1:length(c3dFiles)
         trialsName{k} = regexprep(regexprep((regexprep(c3dFiles(k).name, ' ' , '')), '-',''), '.c3d', '');
     end
     
-    %Acquisition Info: load Acquisition.xml
+    %Acquisition Info: load acquisition.xml
     acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
     
     %Choosing what to do
-    choice=elaborationIterfaceOptions();
+    choice=elaborationInterfaceOptions();
     
     switch choice
         case 'New elaboration'

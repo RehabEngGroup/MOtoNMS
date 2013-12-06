@@ -1,3 +1,4 @@
+function [RHJC, LHJC]=HJCHarrington(markers)
 %Hip joint center computation according to Harrington et al J.Biomech 2006
 %
 %PW: width of pelvis (distance among ASIS)
@@ -25,9 +26,9 @@
 %Output
 %[RHJC, LHJC]= Hip Joint Center global position for each time istant
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Developed by Zimi Sawacha <zimi.sawacha@dei.unipd.it>
 
-function [RHJC, LHJC]=HJCHarrington(markers)
+%%
 
 %Renamd for convenience 
 LASIS=markers{1}';   %after transposition: [3xtime]

@@ -1,5 +1,4 @@
 function [thrForces, thrMoments] = FzThresholding(filtForces,filtMoments)
-
 % for COP computation
 % find when vertical forces drop below threshold, and then make
 % all of the force and COP values 0.0 at these points
@@ -11,9 +10,28 @@ function [thrForces, thrMoments] = FzThresholding(filtForces,filtMoments)
 % not well set up. For this reason,one needs to set the threshold for Fz.
 % If Fz is smaller than the threshold, the program does not generate the
 % CP coordinates.
-% Implemented by Alice Mantoan, August 2012, <alice.mantoan@dei.unipd.it>
-%--------------------------------------------------------------------------
 
+% The file is part of matlab MOtion data elaboration TOolbox for
+% NeuroMusculoSkeletal applications (MOtoNMS). 
+% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+%
+% MOtoNMS is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free 
+% Software Foundation, either version 3 of the License, or (at your option)
+% any later version.
+%
+% Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications
+% is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+% without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along 
+% with MOtoNMS.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Alice Mantoan, Monica Reggiani
+% <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
+
+%%
 % values are still in FP action based reference system
 FPlateThreshold=-40;     %N: compromise between 20, 40 and 60 (all tested)
 %the same threshold is used for ComputeStancePhase method

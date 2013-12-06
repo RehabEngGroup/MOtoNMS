@@ -1,6 +1,0 @@
-function choice=elaborationIterfaceOptions()
-
-
-choice=questdlg('Elaboration Inferface Options', ...
-                'Matlab Data Processing for OpenSim',...
-                'New elaboration', 'Load and Modify elaboration.xml', 'Run elaboration', ' ');
