@@ -39,8 +39,7 @@ if nargin>0
         end
     catch
         disp('At least an Operators should be indicated in acquisition.xml. Missing in the loaded file!')
-        def_staff{2}='';
-        oldAcquisition.Staff.Operators.Name{1}='';       
+        def_staff{2}='';      
     end
 
     if (length(oldAcquisition.Staff.Operators.Name)==2) %|| isempty(oldAcquisition.Staff.Operators.Name{2}))

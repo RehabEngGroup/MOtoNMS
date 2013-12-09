@@ -31,6 +31,7 @@
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
+runTerminalNote()
 
 %Selection of input data 
 pathName = uigetdir(' ','Select your input data folder');

@@ -1,4 +1,4 @@
-function []=runAcquisitionSplashScreen()
+function []=runSplashScreen()
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -25,11 +25,12 @@ originalPath=pwd;
 cd('..')
 cd('..')
 %if the spashScreen image will be in a different path, necessary to change
-figurePath=[pwd '\ToolboxInfo\'];   
+%figurePath=[pwd '\ToolboxInfo\'];   
+figurePath=pwd;   
 cd (originalPath)
 
 try
-    s = SplashScreen( 'Splashscreen', [figurePath 'Acquisition.png'], ...
+    s = SplashScreen( 'Splashscreen', [figurePath '\splashScreen.png'], ... %loading image
         'ProgressBar', 'on', ...
         'ProgressPosition', 5, ...
         'ProgressRatio', 0.4 );
@@ -37,19 +38,15 @@ try
     disp(['An error has occured in runSplashScreen.m: verify the splashScreen path. It must be: ' figurePath] )
 end
 
-    s.addText(30, 130, 'Main Developers', 'FontSize', 18, 'Color', 'white', 'FontAngle', 'italic' )
-    s.addText(30, 170, 'Alice Mantoan', 'FontSize', 18, 'Color', 'white' )
-    s.addText(30, 200, 'Monica Reggiani', 'FontSize', 18, 'Color','white' )
+    s.addText(330, 50, 'MOtoNMS', 'FontSize', 35,'FontName', 'Century Gothic', 'Color', 'white',  'FontWeight', 'bold')
+    s.addText(150, 110, 'Matlab MOtion data elaboration TOolbox ', 'FontSize', 26,'FontName', 'Century Gothic', 'Color', 'white',  'FontWeight', 'bold')
+    s.addText(170, 150, 'for NeuroMusculoSkeletal applications', 'FontSize', 26,'FontName', 'Century Gothic', 'Color', 'white',  'FontWeight', 'bold')
+    s.addText(370, 230, 'Loading...', 'FontSize', 20, 'Color', 'white','FontName', 'Century Gothic' )
     
-    s.addText(30, 250, 'Contributors', 'FontSize', 16, 'Color','white','FontAngle', 'italic' )
-    s.addText(30, 280, 'Massimo Sartori', 'FontSize', 16, 'Color','white' )
-    s.addText(30, 300, 'Claudio Pizzolato', 'FontSize', 16, 'Color','white' )
-    s.addText(30, 320, 'Michele Vivian', 'FontSize', 16, 'Color','white' )
-    
-    s.addText( 300, 30, 'Matlab Data Processing Toolbox', 'FontSize', 25, 'Color', 'white')
-   % s.addText( 300, 100, 'for Applications in OpenSim', 'FontSize', 20, 'Color', 'white')
-    s.addText( 370, 70, 'Acquisition Interface', 'FontSize', 22, 'Color', 'white' )
-    s.addText( 380, 200, 'Loading...', 'FontSize', 20, 'Color', 'white' )
-    
-    pause(5)
-    delete( s )
+   % s.addText(240, 410, 'Alice Mantoan, Monica Reggiani', 'FontSize', 22, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
+
+    s.addText(20, 490, 'Copyright (C) 2013 Alice Mantoan, Monica Reggiani ', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
+    s.addText(530, 490, 'GNU General Public License, Version 3', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
+
+    pause(3)
+    delete(s)

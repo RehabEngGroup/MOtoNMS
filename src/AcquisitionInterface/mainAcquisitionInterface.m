@@ -31,7 +31,8 @@
 %%
 clear all
 %Comment the following line to disable the splashscreen 
-%runAcquisitionSplashScreen()
+runSplashScreen()
+runTerminalNote()
 
 %Options
 choice=questdlg('What would you like to do?', ...

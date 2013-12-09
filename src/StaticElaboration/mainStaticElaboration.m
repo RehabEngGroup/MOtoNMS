@@ -29,7 +29,9 @@
 
 %% ----------------------------STARTING------------------------------------
 clear all
-%runStaticSplashScreen
+%Comment the following line to disable the splashscreen 
+%runSplashScreen
+runTerminalNote()
 %--------------------------------------------------------------------------
 
 newElaboration=1;
