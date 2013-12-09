@@ -22,38 +22,25 @@ function [] = writeMot(grfOpenSim,time,fname)
 
 %%
 
- % Generate column labels for forces, COPs, and vertical torques.
-% Order:  rGRF(xyz), rCOP(xyz), lGRF(xyz), lCOP(xyz), rT(xyz), lT(xyz)
-label{1} = 'ground_force1_vx';
-label{2} = 'ground_force1_vy';
-label{3} = 'ground_force1_vz';
-label{4} = 'ground_force1_px';
-label{5} = 'ground_force1_py';
-label{6} = 'ground_force1_pz';
-label{7} = 'ground_force2_vx';
-label{8} = 'ground_force2_vy';
-label{9} = 'ground_force2_vz';
-label{10} = 'ground_force2_px';
-label{11} = 'ground_force2_py';
-label{12} = 'ground_force2_pz';
-label{13} = 'ground_torque1_x';
-label{14} = 'ground_torque1_y';
-label{15} = 'ground_torque1_z';
-label{16} = 'ground_torque2_x';
-label{17} = 'ground_torque2_y';
-label{18} = 'ground_torque2_z';
-forceIndex = length(label);
-
-    
 % Initialize 'motion file data matrix' for writing data of interest.
 nRows = length(grfOpenSim);
-nCols = length(label)+1;   % plus time
+nCols=size(grfOpenSim,2)+1;
+
 motData = zeros(nRows, nCols);
 
 % Write time array to data matrix.
 motData(:, 1) = time;
 
 motData(:, 2:end) = grfOpenSim;          
+
+% Generate column labels for forces, COPs, and vertical torques taking into
+% account that the number of force platforms may change
+nFP=round(nCols/9);
+
+% Order: GRF_1(xyz),COP_1(xyz),GRF_2(xyz),COP_2(xyz),T_1(xyz),T_2(xyz)...
+
+label=generateMotLabels(nFP); %depends on the number of FP
+
 
 % Open file for writing.
 fid = fopen(fname, 'wt');

@@ -269,7 +269,7 @@ for k=1:length(trialsList)
     
     %Write MOT
     FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.mot'];
-        
+   
     writeMot(MOTdataOpenSim{k},Ftime{k},FullFileName)
 end
 
