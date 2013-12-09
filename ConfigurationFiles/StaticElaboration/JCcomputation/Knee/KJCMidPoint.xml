@@ -23,7 +23,7 @@
 		  </MarkerNames>
 	    </Protocol>
         <Protocol>
-          <Name>UNIPD-Fullbody</Name>  
+          <Name>UNIPD-ALclusters</Name>  
 	      <MarkerNames>
        	      <Marker>LLE</Marker>
               <Marker>RLE</Marker>
@@ -39,9 +39,9 @@
 			 <Marker>LMFC</Marker>
 			 <Marker>RMFC</Marker>
 		  </MarkerNames>
-	    </Protocol>
+	    </Protocol>	
         <Protocol>
-          <Name>UNIPD-OpenSimFullbody</Name>  
+          <Name>UMG-OpenSim</Name>  
 	      <MarkerNames>
        	      <Marker>LLE</Marker>
               <Marker>RLE</Marker>

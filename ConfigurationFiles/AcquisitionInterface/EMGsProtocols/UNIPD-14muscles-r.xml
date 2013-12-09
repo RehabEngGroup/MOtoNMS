@@ -1,0 +1,20 @@
+<EMGsProtocol xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <Name>UNIPD-14muscles-r</Name>
+   <MuscleList>
+      <Muscle>Right Tibialis anterior</Muscle>
+      <Muscle>Right Soleus</Muscle>
+      <Muscle>Right Peroneus longus</Muscle>
+      <Muscle>Right Gastrocnemius lateralis</Muscle>
+      <Muscle>Right Gastrocnemius medialis</Muscle>
+      <Muscle>Right Vastus medialis</Muscle>	  
+      <Muscle>Right Vastus lateralis</Muscle>
+      <Muscle>Right Rectus femoris</Muscle>
+      <Muscle>Right Sartorius</Muscle>
+      <Muscle>Right Gluteus medius</Muscle>
+      <Muscle>Right Gluteus maximus</Muscle>	  
+      <Muscle>Right Biceps femoris caput longus</Muscle> 
+      <Muscle>Right Semitendinosus</Muscle>
+      <Muscle>Right Tensor fasciae latae</Muscle>
+   </MuscleList>
+   <InstrumentedLeg>Right</InstrumentedLeg>
+</EMGsProtocol>

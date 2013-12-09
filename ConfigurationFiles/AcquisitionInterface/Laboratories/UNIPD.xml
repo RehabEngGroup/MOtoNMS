@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Laboratory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>UNIPD</Name>
+  <MotionCaptureSystem>BTS</MotionCaptureSystem>
+  <CoordinateSystemOrientation>ZYX</CoordinateSystemOrientation>
+  <NumberOfForcePlatforms>2</NumberOfForcePlatforms>
+  <ForcePlatformsList>
+    <ForcePlatform>
+      <ID>1</ID>
+      <Brand>Bertec</Brand>
+      <Type>1</Type>
+      <FrameRate>960</FrameRate>
+      <FPtoGlobalRotations>
+        <Rot>
+          <Axis>X</Axis>
+          <Degrees>-90</Degrees>
+        </Rot>
+      </FPtoGlobalRotations>
+    </ForcePlatform>
+    <ForcePlatform>
+      <ID>2</ID>
+      <Brand>Bertec</Brand>
+      <Type>1</Type>
+      <FrameRate>960</FrameRate>
+      <FPtoGlobalRotations>
+        <Rot>
+          <Axis>X</Axis>
+          <Degrees>-90</Degrees>
+        </Rot>
+        <Rot>
+          <Axis>Y</Axis>
+          <Degrees>180</Degrees>
+        </Rot>
+      </FPtoGlobalRotations>
+    </ForcePlatform>
+  </ForcePlatformsList>
+</Laboratory>

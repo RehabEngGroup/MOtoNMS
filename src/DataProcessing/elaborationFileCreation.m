@@ -242,20 +242,6 @@ oldMethodIndex=find(strcmp(InitialValue.WindowsSelection.Method,AWmethodOptions)
 
 method=AWmethodOptions{methodIndex};
 
-
-if (strcmp(InstrumentedLeg,'Both') || strcmp(InstrumentedLeg,'None'))
-    
-    legList={'.','Left', 'Right'};
-    [legIndex,v] = listdlg('PromptString','Choose Leg to Analyse',...
-        'SelectionMode','single',...
-        'ListString',legList,...
-        'ListSize',[250 100]);
-    leg=legList(legIndex);
-    
-else
-    leg=InstrumentedLeg;
-end
-
 %Windows Selection Procedure Struct Definition
 
 WindowSelectionProcedure=struct;
@@ -263,7 +249,9 @@ WindowSelectionProcedure=struct;
 switch method
     
     case 'ComputeStancePhase'
-               
+        
+        leg=setAnalysisLeg(InstrumentedLeg);
+
         prompt='Insert Frame Offset before Foot Strike and after Foot Off';
         num_lines = 1;
         options.Resize='on';
@@ -283,7 +271,9 @@ switch method
 
     case 'StanceOnFPfromC3D'
         
-        clear prompt
+        clear prompt        
+        
+        leg=setAnalysisLeg(InstrumentedLeg);
         
         dlg_title='StanceOnFPfromC3D Method';
         prompt{1} = 'Insert Label for Heel Strike';

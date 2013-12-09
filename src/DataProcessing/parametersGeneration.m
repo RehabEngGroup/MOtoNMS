@@ -81,6 +81,7 @@ end
 if (strcmp(method,'StanceOnFPfromC3D')==1 )
     parameters.WindowsSelection.Labels.HS=elaboration.WindowSelectionProcedure.StanceOnFPfromC3D.LabelForHeelStrike;
     parameters.WindowsSelection.Labels.FO=elaboration.WindowSelectionProcedure.StanceOnFPfromC3D.LabelForToeOff;
+    parameters.WindowsSelection.Leg=elaboration.WindowSelectionProcedure.StanceOnFPfromC3D.Leg;
     parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.StanceOnFPfromC3D.Offset;
 end
 
@@ -91,6 +92,7 @@ if (strcmp(method,'WindowFromC3D')==1 )
 end
 
 if (strcmp(method,'ComputeStancePhase')==1 )
+    parameters.WindowsSelection.Leg=elaboration.WindowSelectionProcedure.ComputeStancePhase.Leg;
     parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.ComputeStancePhase.Offset;
 end
 
@@ -135,11 +137,11 @@ if nargin>1
         %parameters.WindowsSelection.Leg=eval(['elaboration.WindowSelectionProcedure.' method{1} '.Leg;']); 
     end
        
-    if strcmp(method,'ComputeStancePhase')==1
-
-        parameters.WindowsSelection.Leg=elaboration.WindowSelectionProcedure.ComputeStancePhase.Leg;
-        parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.ComputeStancePhase.Offset;      
-    end
+%     if strcmp(method,'ComputeStancePhase')==1
+% 
+%         parameters.WindowsSelection.Leg=elaboration.WindowSelectionProcedure.ComputeStancePhase.Leg;
+%         parameters.WindowsSelection.Offset=elaboration.WindowSelectionProcedure.ComputeStancePhase.Offset;      
+%     end
       
     %---------Parameters definition throught acquisition.xml file--------------
     %StancesOnFP
