@@ -20,10 +20,23 @@ function [] = saveMat(Markers, AnalogData, FPdata, Events, trialMatFolder)
 % Alice Mantoan, Monica Reggiani
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
-%%
-save([trialMatFolder 'Markers.mat'], 'Markers')
-save([trialMatFolder 'AnalogData.mat'], 'AnalogData')
-save([trialMatFolder 'FPdata.mat'], 'FPdata')
+%% save data only if they are present in the c3d file
+
+if isempty(Markers)==0
+    save([trialMatFolder 'Markers.mat'], 'Markers')
+end
+
+if isempty(AnalogData)==0
+    save([trialMatFolder 'AnalogData.mat'], 'AnalogData')
+end
+
+if isempty(FPdata)==0
+    save([trialMatFolder 'FPdata.mat'], 'FPdata')
+end
+
+% save([trialMatFolder 'Markers.mat'], 'Markers')
+% save([trialMatFolder 'AnalogData.mat'], 'AnalogData')
+% save([trialMatFolder 'FPdata.mat'], 'FPdata')
 
 %save events only if they are present in the c3d file
 if isempty(Events)==0

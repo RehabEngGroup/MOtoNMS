@@ -28,14 +28,17 @@ function [AnalogData] = getAnalogData(itf)
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
 unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
 
-numberForcePlatform = itf.GetParameterValue(itf.GetParameterIndex('FORCE_PLATFORM','USED'),0);
-fchannelIndex = itf.GetParameterIndex('FORCE_PLATFORM','CHANNEL');
-% number of Force channels --> related to the force plate type (6 for type 1 and 2 but 8 for type 3)
-nFchannels = itf.GetParameterLength(fchannelIndex);    %instead of numItems = numberForcePlatform*6;
-
-lastFchannel=itf.GetParameterValue(fchannelIndex, nFchannels-1);
-%fchannel contains the analog channel that corresponds to the last force plate output channel
-
+try % to extract data even if force platform data are not stored in the c3d
+    numberForcePlatform = itf.GetParameterValue(itf.GetParameterIndex('FORCE_PLATFORM','USED'),0);
+    fchannelIndex = itf.GetParameterIndex('FORCE_PLATFORM','CHANNEL');
+    % number of Force channels --> related to the force plate type (6 for type 1 and 2 but 8 for type 3)
+    nFchannels = itf.GetParameterLength(fchannelIndex);    %instead of numItems = numberForcePlatform*6;
+    
+    lastFchannel=itf.GetParameterValue(fchannelIndex, nFchannels-1);
+    %fchannel contains the analog channel that corresponds to the last force plate output channel
+catch
+    numberForcePlatform=0;
+end
 %check if force data are present
 if numberForcePlatform == 0
     disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
