@@ -29,8 +29,6 @@
 MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSetDynamicTrials, '%s','delimiter', ' ');
 MarkersSet=MarkersSet{1};
 
-load([foldersPath.sessionData 'AnalogDataLabels.mat']);
-
 %Definition of Lists Initial Values
 if nargin>3
     
@@ -465,9 +463,11 @@ if true(EMGfound)
     Pref.ReadAttr=false;
     EMGSet=xml_read([EMGApplicationLabelsPath EMGApplicationLabelsFile],Pref);
 
+    load([foldersPath.sessionData 'AnalogDataLabels.mat']);
+    
     j=1;
     for i=1:length(EMGSet.EMG)
-        save_to_base(1)
+
         EMGLabelsIndex(i)=find(strcmp(EMGSet.EMG(i).C3DLabel,AnalogDataLabels));
         if isempty(EMGLabelsIndex(i))==0
             
