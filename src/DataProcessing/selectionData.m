@@ -58,7 +58,11 @@ for k=1:length(filtData)
         end
     catch
         
-        error('Data selection not working: Analysis Window out of available data. Try to change method or frames of the analysis window')
+        %error('Data selection not working: Analysis Window out of available data. Try to change method or frames of the analysis window')
+        
+        error('ErrorTests:convertTest', ...
+            ['----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nAnalysis Window out of available data for trial ' num2str(k) '. \nPLEASE CHANGE method or frames of the analysis window for that trial in your configuration file and TRY again. \n----------------------------------------------------------------'])
+        
     end
 end
 

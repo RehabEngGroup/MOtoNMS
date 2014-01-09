@@ -44,7 +44,8 @@ for k=1:length(Forces)
                 else if (strmatch(WindowsSelectionInfo.Events{k}(j).label, WindowsSelectionInfo.Labels.FO))
                         foFrame=WindowsSelectionInfo.Events{k}(j).frame;
                     else
-                        error('Events do not correspond to the given labels for heel strike and foot off')
+                        error('ErrorTests:convertTest', ...
+                              '----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nEvents do not correspond to the given labels for heel strike and foot off. \nPLEASE check events labels in your c3d files and in the configuration file, and TRY again. \n----------------------------------------------------------------')
                     end
                 end
                     
@@ -53,10 +54,14 @@ for k=1:length(Forces)
     end
 
     if exist('frame','var')==0
-        error('Events in .c3d files do not correspond to the choosen leg: change analysis window method ')
+
+        error('ErrorTests:convertTest', ...
+            '----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nEvents in .c3d files do not correspond to the choosen/instrumented leg. \nPLEASE check events definition in the configuration file and in your input files (modifications to c3d files require to re-run C3D2MAT.m!) or change analysis window method in your configuration file, and TRY again. \n----------------------------------------------------------------')
         
     else if (exist('eventsFrame','var') && length(eventsFrame)<2)
-            error('Events in the c3d file do not correspond to force data: Unable to compute stance on force plates. Check events (modifications to c3d files require to rerun C3D2MAT!)or change analysis window method.')
+               
+        error('ErrorTests:convertTest', ...
+            '----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nEvents in the c3d file do not correspond to force data: Unable to compute stance on force plates. \nPLEASE check events definition in the configuration file and in your input files (modifications to c3d files require to re-run C3D2MAT!) or change analysis window method in your configuration file, and TRY again. \n----------------------------------------------------------------')
             
         else
             StanceFPc3d{k}.startFrame=hsFrame-DataOffset{k};
@@ -66,4 +71,5 @@ for k=1:length(Forces)
         end
     end
 end
+
           
