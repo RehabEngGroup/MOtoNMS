@@ -1,4 +1,4 @@
-function [data, frames] = loadMatData (sessionDataFolder, trialsList, dataType)
+function [data, labels, frames] = loadMatData (sessionDataFolder, trialsList, dataType)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -29,6 +29,8 @@ for k=1: length(trialsList)
     load([trialMatFolder dataType '.mat']);
     
     eval(['data{k}=double(' dataType '.RawData);']);
+    
+    eval(['labels{k}=' dataType '.Labels;']);
     
     eval(['frames{k}.First=' dataType '.FirstFrame;']);
     eval(['frames{k}.Last=' dataType '.LastFrame;']);

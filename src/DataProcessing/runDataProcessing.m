@@ -71,7 +71,10 @@ foldersPath.trialOutput= mkOutputDir(foldersPath.elaboration,trialsList);
 %Frames contains indication of first and last frame of labeled data, that
 %must be the same for Markers and Analog Data and depends on the tracking
 %process
-[MarkersRawData, Frames]=loadMatData(foldersPath.sessionData, trialsList, 'Markers');
+%MarkersLabels MUST be the same for all dynamic trials BUT the order change
+%according to the tracking process. Therefore, it's necessary to load them 
+%for each trial to corretly select markers   
+[MarkersRawData, MarkersLabels, Frames]=loadMatData(foldersPath.sessionData, trialsList, 'Markers');
 FPRawData=loadMatData(foldersPath.sessionData, trialsList, 'FPdata');
 
 %Loading FrameRates
@@ -88,7 +91,10 @@ nFP=length(ForcePlatformInfo);
 load([foldersPath.sessionData 'trialsName.mat'])
 
 %Loading All Markers Labels (Raw)
-load([foldersPath.sessionData 'dMLabels.mat'])
+%NOTE: the order change according to the tracking process, so it might be
+%useful to know the markers used in the acquisition session but it can't be 
+%used to select markers for each trial
+%load([foldersPath.sessionData 'dMLabels.mat'])
 
 disp('Data have been loaded from mat files')         
 
@@ -99,7 +105,7 @@ disp('Data have been loaded from mat files')
 %-------------------------Markers Selection--------------------------------
 %markers to be written in the trc file: only those are processed
 for k=1:length(trialsList)
-    markerstrc{k} = selectingMarkers(trcMarkersList,dMLabels,MarkersRawData{k});
+    markerstrc{k} = selectingMarkers(trcMarkersList,MarkersLabels{k},MarkersRawData{k});
 end
 %-----------Check for markers data missing and Interpolation--------------
 
@@ -275,8 +281,11 @@ end
 
 waitbar(5/7);
 
-%save_to_base(1)
-
+save_to_base(1)
+% save_to_base() copies all variables in the calling function to the base
+% workspace. This makes it possible to examine this function internal
+% variables from the Matlab command prompt after the calling function
+% terminates. Uncomment the following command if you want to activate it
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                           EMG PROGESSING
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -395,12 +404,7 @@ if isfield(parameters,'EMGsSelected')
         
         waitbar(7/7);
         close(h)
-        
-        save_to_base(1)
-        % save_to_base() copies all variables in the calling function to the base
-        % workspace. This makes it possible to examine this function internal
-        % variables from the Matlab command prompt after the calling function
-        % terminates. Uncomment the following command if you want to activate it
+
         %% ------------------------------------------------------------------------
         %                           PLOTTING EMG
         %--------------------------------------------------------------------------
@@ -432,5 +436,6 @@ end
 h = msgbox('Data Processing terminated successfully','Done!');
 uiwait(h)
 
+%save_to_base(1)
 
 
