@@ -91,4 +91,10 @@ switch WindowsSelectionInfo.Method
             
 end
 
+%Necessary to store the LabeledDataOffset for each trial to compute the 
+%time vector in selectionData.m
+for k=1:length(Forces)
+    AnalysisWindow{k}.LabeledDataOffset=LabeledDataOffset{k};
+end
+
 

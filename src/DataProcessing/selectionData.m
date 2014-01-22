@@ -37,11 +37,22 @@ for k=1:length(filtData)
     %included in the values of lower frequency time vector because it has
     %been calculated in computeStancePhase converting in VideoFrameRate
     %(that is the lowest)
-    DataAnalysisWindow{k}.startFrame=round(((AnalysisWindow{k}.startFrame/(AnalysisWindow{k}.rate))-offset)*Rate);
+    DataAnalysisWindow{k}.startFrame=round((AnalysisWindow{k}.startFrame/AnalysisWindow{k}.rate-offset)*Rate);
     %conversion of endFrame into Rate
     DataAnalysisWindow{k}.endFrame=round((AnalysisWindow{k}.endFrame/AnalysisWindow{k}.rate)*Rate);
     
-    time{k}=[DataAnalysisWindow{k}.startFrame/Rate: 1/Rate: DataAnalysisWindow{k}.endFrame/Rate]';
+    %Time vector computation:
+    %In the case of Manual method, DataAnalysisWindow accounts for the 
+    %LabeledDataOffset as it was subtract in AnalysisWindowSelection.m
+    %For the other methods, frames are refered to vectors length
+    %Thus, in order to write the corresponding original time and frames
+    %in .trc and .mot files, LabeledDataOffset must be added and for
+    %all the Analysis Window Definition Methods
+
+    timeStartFrame=round(((AnalysisWindow{k}.startFrame+AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate-offset)*Rate);
+    timeEndFrame=round(((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate)*Rate);
+    
+    time{k}=[timeStartFrame/Rate: 1/Rate: timeEndFrame/Rate]';
     
     try
         
