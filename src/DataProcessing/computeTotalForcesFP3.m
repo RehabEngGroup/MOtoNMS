@@ -5,7 +5,7 @@ function [Forces]=computeTotalForcesFP3(ForcesFP3)
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
-% Copyright (C) 2013 Alice Mantoan, Monica Reggiani
+% Copyright (C) 2014 Alice Mantoan, Monica Reggiani
 %
 % MOtoNMS is free software: you can redistribute it and/or modify it under 
 % the terms of the GNU General Public License as published by the Free 
