@@ -26,7 +26,7 @@ fprintf('\n---------------------------------------------------------------------
 fprintf('\n                                MOtoNMS                                      ');
 fprintf('\n Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications');
 fprintf('\n-----------------------------------------------------------------------------');
-fprintf('\n Copyright (C) 2013 Alice Mantoan, Monica Reggiani ');
+fprintf('\n Copyright (C) 2014 Alice Mantoan, Monica Reggiani ');
 fprintf('\n GNU General Public License, Version 3 \n');
 
 fprintf('\n This is free software,and you can redistribute it and/or modify it under the'); 

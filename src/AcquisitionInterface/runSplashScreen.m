@@ -45,7 +45,7 @@ end
     
    % s.addText(240, 410, 'Alice Mantoan, Monica Reggiani', 'FontSize', 22, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
 
-    s.addText(20, 490, 'Copyright (C) 2013 Alice Mantoan, Monica Reggiani ', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
+    s.addText(20, 490, 'Copyright (C) 2014 Alice Mantoan, Monica Reggiani ', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
     s.addText(530, 490, 'GNU General Public License, Version 3', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
 
     pause(3)
