@@ -78,7 +78,7 @@ originalPath=pwd;
 cd('..')
 cd('..')
 
-laboratoryPath=[pwd '\ConfigurationFiles\AcquisitionInterface\Laboratories\'];   
+laboratoryPath=[pwd '\SetupFiles\AcquisitionInterface\Laboratories\'];   
 cd (originalPath)
 
 if nargin>0
@@ -165,7 +165,7 @@ originalPath=pwd;
 cd('..')
 cd('..')
 
-markersProtocolPath=[pwd '\ConfigurationFiles\AcquisitionInterface\MarkersProtocols\'];   
+markersProtocolPath=[pwd '\SetupFiles\AcquisitionInterface\MarkersProtocols\'];   
 
 cd(markersProtocolPath)
 if nargin>0
@@ -248,7 +248,7 @@ if nEMGSystem>0
     cd('..')
     cd('..')
     
-    EMGsProtocolPath=[pwd '\ConfigurationFiles\AcquisitionInterface\EMGsProtocols\'];
+    EMGsProtocolPath=[pwd '\SetupFiles\AcquisitionInterface\EMGsProtocols\'];
     
     cd(EMGsProtocolPath)
     if nargin>0

@@ -447,7 +447,7 @@ if true(EMGfound)
     cd('..')
     cd('..')
     
-    EMGApplicationLabelsPath=[pwd '\ConfigurationFiles\DataProcessing\EMGsLabels\'];
+    EMGApplicationLabelsPath=[pwd '\SetupFiles\DataProcessing\EMGsLabels\'];
     
     cd(EMGApplicationLabelsPath)
     

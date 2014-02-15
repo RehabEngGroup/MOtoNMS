@@ -31,24 +31,28 @@ if nargin>0
         def_staff{1}='';
     end
     
-    try
-        if length(oldAcquisition.Staff.Operators.Name)==1
-            def_staff{2}=oldAcquisition.Staff.Operators.Name;
-        else
-            def_staff{2}=oldAcquisition.Staff.Operators.Name{1};
-        end
-    catch
-        disp('At least an Operators should be indicated in acquisition.xml. Missing in the loaded file!')
-        def_staff{2}='';      
-    end
-
-    if (length(oldAcquisition.Staff.Operators.Name)==2) %|| isempty(oldAcquisition.Staff.Operators.Name{2}))
+    if isfield(oldAcquisition.Staff,'Operators')==1
+        %if isfield, there is at least one operator
         
-        def_staff{3}=oldAcquisition.Staff.Operators.Name{2};       
+        if iscell(oldAcquisition.Staff.Operators.Name)==1
+            def_staff{2}=oldAcquisition.Staff.Operators.Name{1};
+        else
+            def_staff{2}=oldAcquisition.Staff.Operators.Name;
+        end
+        
+        if (length(oldAcquisition.Staff.Operators)==1 && length(oldAcquisition.Staff.Operators.Name)==2)  %|| isempty(oldAcquisition.Staff.Operators.Name{2}))
+            
+            def_staff{3}=oldAcquisition.Staff.Operators.Name{2};
+        else
+            def_staff{3}='';
+        end
+        
     else
+        disp('At least an Operators should be indicated in acquisition.xml. Missing in the loaded file!')
+        def_staff{2}='';
         def_staff{3}='';
     end
-    
+ 
     if isfield(oldAcquisition.Staff,'Physiotherapists')==1
         def_staff{4}=oldAcquisition.Staff.Physiotherapists.Name;
     else

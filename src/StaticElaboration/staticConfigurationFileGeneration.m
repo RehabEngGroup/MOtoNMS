@@ -92,7 +92,7 @@ end
 originalPath=pwd;
 cd('..')
 cd('..')
-JCcomputationFolderPath=[pwd '\ConfigurationFiles\StaticElaboration\JCcomputation\']; 
+JCcomputationFolderPath=[pwd '\SetupFiles\StaticElaboration\JCcomputation\']; 
 dirList=ls(JCcomputationFolderPath);
 cd (originalPath)
                              
