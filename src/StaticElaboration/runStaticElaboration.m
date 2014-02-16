@@ -144,7 +144,7 @@ ylabel('Asse y [mm]')
 zlabel('Asse z [mm]')
 figName='JointCenters_globalPosition.fig';
 saveas(gcf,[foldersPaths.elaboration '\' figName]) 
-disp([figName ' has been saved'])
+disp([figName ' (based on frame 1 data) has been saved'])
 
 %% -----------------------------------------------------------------------%
 %                        Write static.trc with jc

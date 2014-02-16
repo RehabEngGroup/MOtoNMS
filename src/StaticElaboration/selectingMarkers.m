@@ -28,15 +28,25 @@ function markerstrc = selectingMarkers(MarkersList,MLabels,markers)
 
 for i=1:length(MarkersList)
     j=MarkersList(i);
+    
     z=strmatch(j,MLabels,'exact');
-    if i==1
-        indexMarkerLabels=[z];
+    
+    if isempty(z)
+        disp('Unfound marker: ')
+        disp(j)
+        error(['Marker to be written in the .trc file not found in the data. Check labeled data or your selection of markers for the trc file saved in the elaboration.xml'])
+        
     else
-        indexMarkerLabels=[indexMarkerLabels;z];
+        if i==1
+            indexMarkerLabels=[z];
+        else
+            indexMarkerLabels=[indexMarkerLabels;z];
+        end
     end
 end
 
 newMarkerLabels=[MLabels(indexMarkerLabels)];
+   
 markerstrc=[];
 
 for i=1: length(newMarkerLabels)
@@ -44,5 +54,7 @@ for i=1: length(newMarkerLabels)
     newindex=(indexMarkerLabels(i)-1)*3+1;
     markerstrc=[markerstrc markers(:,newindex:newindex+2)];
 end
+
+
 
 
