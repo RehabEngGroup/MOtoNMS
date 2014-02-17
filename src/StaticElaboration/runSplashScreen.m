@@ -2,7 +2,7 @@ function []=runSplashScreen()
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
-% Copyright (C) 2014 Alice Mantoan, Monica Reggiani
+% Copyright (C) 2012-2014 Alice Mantoan, Monica Reggiani
 %
 % MOtoNMS is free software: you can redistribute it and/or modify it under 
 % the terms of the GNU General Public License as published by the Free 
@@ -45,7 +45,7 @@ end
     
    % s.addText(240, 410, 'Alice Mantoan, Monica Reggiani', 'FontSize', 22, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
 
-    s.addText(20, 490, 'Copyright (C) 2014 Alice Mantoan, Monica Reggiani ', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
+    s.addText(20, 490, 'Copyright (C) 2012-2014 Alice Mantoan, Monica Reggiani ', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
     s.addText(530, 490, 'GNU General Public License, Version 3', 'FontSize', 16, 'Color', 'white','FontName', 'Century Gothic','FontWeight', 'bold' )
 
     pause(3)

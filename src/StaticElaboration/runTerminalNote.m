@@ -2,7 +2,7 @@ function []=runTerminalNote()
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
-% Copyright (C) 2014 Alice Mantoan, Monica Reggiani
+% Copyright (C) 2012-2014 Alice Mantoan, Monica Reggiani
 %
 % MOtoNMS is free software: you can redistribute it and/or modify it under 
 % the terms of the GNU General Public License as published by the Free 
@@ -25,7 +25,7 @@ fprintf('\n---------------------------------------------------------------------
 fprintf('\n                                MOtoNMS                                      ');
 fprintf('\n Matlab MOtion data elaboration TOolbox for NeuroMusculoSkeletal applications');
 fprintf('\n-----------------------------------------------------------------------------');
-fprintf('\n Copyright (C) 2014 Alice Mantoan, Monica Reggiani ');
+fprintf('\n Copyright (C) 2012-2014 Alice Mantoan, Monica Reggiani ');
 fprintf('\n GNU General Public License, Version 3 \n');
 
 fprintf('\n This is free software,and you can redistribute it and/or modify it under the'); 
