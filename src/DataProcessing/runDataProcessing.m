@@ -308,18 +308,23 @@ if isfield(parameters,'EMGsSelected')
     MaxEmgTrialsList=parameters.MaxEmgTrialsList;
 
     
-    %Loading Analog Raw Data from the choosen trials
-    AnalogRawData=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
+    %Loading Analog Raw Data from the choosen trials with the corresponding
+    %labels
+    [AnalogRawData, AnalogDataLabels]=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
     
     %Loading Analog Raw Data for EMG Max Computation from the trials list
     if isequal(parameters.MaxEmgTrialsList,parameters.trialsList)
         AnalogRawForMax=AnalogRawData;
+        AnalogLabelsForMax=AnalogDataLabels;
     else
-        AnalogRawForMax=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'AnalogData');
+        [AnalogRawForMax, AnalogLabelsForMax]=loadMatData(foldersPath.sessionData, MaxEmgTrialsList, 'AnalogData');
     end
     
     %Loading Analog Data Labels
-    load([foldersPath.sessionData 'AnalogDataLabels.mat'])
+    %load([foldersPath.sessionData 'AnalogDataLabels.mat'])
+    %NOTE: analog channels configuration may change according to the
+    %acquisition procedure (e.g. with Vicon), thus analog labels for each 
+    %trial are loaded and used (as for markers)
     
     %If there are EMGs --> processing
     if (isempty(AnalogRawData)==0 && isempty(AnalogDataLabels)==0)
@@ -327,19 +332,21 @@ if isfield(parameters,'EMGsSelected')
     %                   EMGs EXTRACTION and MUSCLES SELECTION
     %                   EMGs Arrangement for the Output file
     %----------------------------------------------------------------------
-        EMGselectionIndexes=findIndexes(AnalogDataLabels,EMGsSelected_C3DLabels);
-        
+             
         for k=1:length(trialsList)
             
-            EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes);
+            EMGselectionIndexes{k}=findIndexes(AnalogDataLabels{k},EMGsSelected_C3DLabels);
+            EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes{k});
         end
         
-        %EMGsSelectedForMax are the same because max is needed for normalization of
-        %the selected emgs, what change are the trials we consider for computation
+        %The arrangement of EMG signals in the analog channels may change 
+        %among trials, thus EMGselectionIndexes may differ according to the
+        %trials used for max computation
         
         for k=1:length(MaxEmgTrialsList)
             
-            EMGsSelectedForMax{k}=AnalogRawForMax{k}(:,EMGselectionIndexes);
+            EMGselectionIndexesForMax{k}=findIndexes(AnalogLabelsForMax{k},EMGsSelected_C3DLabels);
+            EMGsSelectedForMax{k}=AnalogRawForMax{k}(:,EMGselectionIndexesForMax{k});
         end
         
         %% ------------------------------------------------------------------------
@@ -436,6 +443,9 @@ end
 h = msgbox('Data Processing terminated successfully','Done!');
 uiwait(h)
 
-%save_to_base(1)
-
+save_to_base(1)
+% save_to_base() copies all variables in the calling function to the base
+% workspace. This makes it possible to examine this function internal
+% variables from the Matlab command prompt after the calling function
+% terminates. Uncomment the following command if you want to activate it
 
