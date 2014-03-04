@@ -129,7 +129,43 @@ for k=1:length(Joints)
             save([foldersPaths.elaboration  '\LAJC.mat'] ,'LAJC')           
 
             
-        %case ...
+        case 'Shoulder'
+            
+            [LSJC,RSJC,markers_sjc,markerNames_sjc]=SJCcomputation(method,input,protocolMLabels,filtMarkers);
+
+            drawPoints(f,LSJC,RSJC, markers_sjc,markerNames_sjc,frame,'*y','SJC')
+            
+            [markerstrc,MarkersListjc]=updatingMarkersList(LSJC,RSJC,markerstrc,'LSJC','RSJC',MarkersListjc);
+            
+            save([foldersPaths.elaboration  '\RSJC.mat'] ,'RSJC')
+            save([foldersPaths.elaboration  '\LSJC.mat'] ,'LSJC')        
+        
+            
+        case 'Elbow'
+            
+            [LEJC,REJC,markers_ejc,markerNames_ejc]=EJCcomputation(method,input,protocolMLabels,filtMarkers);
+
+            drawPoints(f,LEJC,REJC, markers_ejc,markerNames_ejc,frame,'*m','EJC')
+            
+            [markerstrc,MarkersListjc]=updatingMarkersList(LEJC,REJC,markerstrc,'LEJC','REJC',MarkersListjc);
+            
+            save([foldersPaths.elaboration  '\REJC.mat'] ,'REJC')
+            save([foldersPaths.elaboration  '\LEJC.mat'] ,'LEJC') 
+            
+            
+        case 'Wrist'
+            
+            [LWJC,RWJC,markers_wjc,markerNames_wjc]=WJCcomputation(method,input,protocolMLabels,filtMarkers);
+
+            drawPoints(f,LWJC,RWJC, markers_wjc,markerNames_wjc,frame,'*c','WJC')
+            
+            [markerstrc,MarkersListjc]=updatingMarkersList(LWJC,RWJC,markerstrc,'LWJC','RWJC',MarkersListjc);
+            
+            save([foldersPaths.elaboration  '\RWJC.mat'] ,'RWJC')
+            save([foldersPaths.elaboration  '\LWJC.mat'] ,'LWJC')  
+        
+            
+            %case ...
         %ADD HERE MORE JOINTS
         %...
             
@@ -142,6 +178,7 @@ grid on
 xlabel('Asse x [mm]')
 ylabel('Asse y [mm]')
 zlabel('Asse z [mm]')
+axis equal
 figName='JointCenters_globalPosition.fig';
 saveas(gcf,[foldersPaths.elaboration '\' figName]) 
 disp([figName ' (based on frame 1 data) has been saved'])
