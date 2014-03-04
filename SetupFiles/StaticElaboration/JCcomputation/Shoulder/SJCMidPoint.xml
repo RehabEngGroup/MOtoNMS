@@ -1,0 +1,28 @@
+<!--   AJC Computation: Mid Point
+       Configuration file to indicate the Required Markers Name according to each Markers Protocol
+	   Specify MarkerNames in the same order of MarkerFullNames    
+--> 
+<Method>
+    <Name>SJCMidPoint</Name>
+    <Input>
+		<MarkerFullNames>
+			<Marker>Left First Point</Marker>
+            <Marker>Right First Point</Marker>
+            <Marker>Left Second Point</Marker>
+            <Marker>Right Second Point</Marker>
+		</MarkerFullNames>
+	</Input>
+    <MarkersDefinition>
+		<Protocol>
+          <Name>GU-10pointsCluster</Name>  
+	      <MarkerNames>
+			 <Marker>LASH</Marker>
+			 <Marker>RASH</Marker>
+			 <Marker>LPSH</Marker>
+			 <Marker>RPSH</Marker>
+          </MarkerNames>			
+        </Protocol>	
+    </MarkersDefinition>  
+</Method>  
+
+ 
