@@ -60,7 +60,7 @@ if nargin>2
 else
         
     %ask for an identificator for this specific elaboration
-    IDstaticElaboration = cell2mat(inputdlg('Insert New Elaboration Identificator'));
+    IDstaticElaboration = cell2mat(inputdlg('Insert New Elaboration Identifier'));
     
     elaborationPath=[staticElaborationsPath trialName '\' IDstaticElaboration '\'];
     

@@ -49,7 +49,7 @@ if nargin>1
 else
         
     %ask for an identificator for this specific elaboration
-    IDelaboration = cell2mat(inputdlg('Insert New Elaboration Identificator'));
+    IDelaboration = cell2mat(inputdlg('Insert New Elaboration Identifier'));
     
     %elaborationFolderPath=[outputsFolderPath '\elaboration_' IDelaboration '\'];
     elaborationFolderPath=[outputsFolderPath '\' IDelaboration '\'];

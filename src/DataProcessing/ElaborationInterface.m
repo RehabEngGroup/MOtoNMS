@@ -38,22 +38,29 @@ e=1;
 
 while newElaboration==1 
     %%
-    %Folders Definitions
-    foldersPath=foldersDefinition ();
-    elaborationPaths{e}=foldersPath.elaboration;
-    %Trials Name
-    c3dFiles = dir ([foldersPath.inputData '\*.c3d']);
-    
-    %Name correction/check
-    for k=1:length(c3dFiles)
-        trialsName{k} = regexprep(regexprep((regexprep(c3dFiles(k).name, ' ' , '')), '-',''), '.c3d', '');
-    end
-    
-    %Acquisition Info: load acquisition.xml
-    acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
     
     %Choosing what to do
     choice=elaborationInterfaceOptions();
+    
+    if strcmp(choice,'Run elaboration')==0
+        %Following information are not required if the choice is equal to 
+        %just run an already defined elaboration
+        
+        %Folders Definitions
+        foldersPath=foldersDefinition ();
+        
+        elaborationPaths{e}=foldersPath.elaboration;
+        %Trials Name
+        c3dFiles = dir ([foldersPath.inputData '\*.c3d']);
+        
+        %Name correction/check
+        for k=1:length(c3dFiles)
+            trialsName{k} = regexprep(regexprep((regexprep(c3dFiles(k).name, ' ' , '')), '-',''), '.c3d', '');
+        end
+        
+        %Acquisition Info: load acquisition.xml
+        acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
+    end
     
     switch choice
         case 'New elaboration'
@@ -70,7 +77,7 @@ while newElaboration==1
             
         case 'Run elaboration'
             
-            [elaborationFileName,elaborationFilePath] = uigetfile([foldersPath.outputData '/*.xml'],'Select elaboration.xml file');
+            [elaborationFileName,elaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file');
             runDataProcessing(elaborationFilePath);
             elaborationFile=0;
     end
