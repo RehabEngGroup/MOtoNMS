@@ -65,7 +65,7 @@ for i = 1 : nItems,
         newstring = [newstring(1:slashind-1) newstring(slashind+1:end)];
     end
 
-   if strcmpi(newstring(1), '*'), newstring = ['U_' newstring(2:end)]; end
+   if strcmpi(newstring(1), '*'), newstring = ['C_' newstring(2:end)]; end
    if strcmpi(newstring(1), '$'), newstring = ['P_' newstring(2:end)]; end
    
    Labels{i}=newstring;

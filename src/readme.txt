@@ -1,5 +1,5 @@
-This folder contains MOtoNMS source code divided in four sub-folders, 
-each one for a different processing step.
+This folder contains MOtoNMS source code divided in different sub-folders, 
+according to the different processing steps.
 
 In the following you will find a brief description of the process pipeline. 
 Nevertheless, this README file does not provide enough information to 
@@ -15,10 +15,26 @@ This processing step generate an acquisition.xml file that includes all
 the required information for a new dataset to be processed with MOtoNMS. 
 See chapter "Acquisition Interface: describing your data" of the User Manual
  
-2) C3D2MAT
+2) C3D2MAT_btk
 C3D2MAT converts data from c3d in .mat format and save them in a 
-sessionData folder. See chapter "C3DtoMAT: from C3D to MATLAB format" of 
-the User Manual.
+sessionData folder. Two alternatives are provided to accomplish this task.
+This part exploits BTK (Biomechanical Toolkit) to access C3D files.
+
+You need to download the BTK version for your system from the BTK project site: 
+
+https://code.google.com/p/b-tk/wiki/MatlabBinaries
+
+You will also need to add the correct BTK folder to the path of Matlab.
+Please acknowledge the BTK contribution in any scientific publications.
+See chapter "C3DtoMAT: from C3D to MATLAB format" of the User Manual.
+
+
+3) C3D2MAT_c3dserver
+
+C3D2MAT_c3dserver converts data from C3D files in .mat format as C3D2MAT_btk, but it is based on c3dserver.
+It requires Matlab 32 bit and Windows environment.
+You can use alternatively C3D2MAT_btk or C3D2MAT_c3dserver.
+See chapter "C3DtoMAT: from C3D to MATLAB format" of the User Manual.
 
 3) StaticElaboration
 Static Elaboration processes markers trajectories and computes 
