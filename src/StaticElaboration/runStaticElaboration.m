@@ -33,6 +33,7 @@ if nargin==0
     error('static.xml file path missing: it must be given as a function input')
 end
 
+addSharedPath()
 %% -------------------STATIC ELABORATION SETTING-------------------------%%
 %           Folders paths definition and parameters generation            %
 %-------------------------------------------------------------------------%

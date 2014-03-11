@@ -1,27 +1,13 @@
 Instructions
 
-
-
-
 1) Set Matlab path to this folder
 
-
-
-
 2) Run C3D2MAT.m
-
-
-
 
 Output: All .c3d files in your InputData folder will be converted and saved in .mat format
 
 
-
-
--- 
-Note --
- 
-
+-- Note --
 
 - You need to download the BTK version for your system from the BTK project site: 
 
@@ -31,12 +17,8 @@ You will also need to add the correct BTK folder to the path of Matlab - for ins
 
 http://b-tk.googlecode.com/svn/doc/Matlab/0.1/index.html
 
-Please acknowledge the BTK contribution in any scientific publications.
-
-
 - Input files folder path MUST include a folder named 'InputData'
 - It's necessary to convert .c3d files to be able to run Data Processing step and Static Elaboration
-
 
 
 Refer to MOtoNMS User Manual included with this release, chapter "C3DtoMAT: from C3D to MATLAB format".

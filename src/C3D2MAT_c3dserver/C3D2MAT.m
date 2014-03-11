@@ -31,6 +31,7 @@
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
+addSharedPath()
 runTerminalNote()
 
 %Selection of input data 

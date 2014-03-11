@@ -30,7 +30,7 @@ Note --
 
 
 
-- c3d files must be converted in .mat with C3D2MAT.m - C3D2MAT - before running Static Elaboration step
+- c3d files must be converted in .mat with C3D2MAT.m - C3D2MAT_btk or C3D2MAT_c3dserver - before running Static Elaboration step
 
 - acquisition.xml file is required and can be generated with mainAquisitionInterface.m - AcquisitionInterface -
 

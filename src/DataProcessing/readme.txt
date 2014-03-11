@@ -33,7 +33,7 @@ where ElaborationFilePath is the path (without the name) of the XML file you wan
 
 - 
 
-C3D files must be converted in .mat with C3D2MAT.m - C3D2MAT - before running Data Processing step
+C3D files must be converted in .mat with C3D2MAT.m - C3D2MAT_btk or C3D2MAT_c3dserver - before running Data Processing step
 - 
 acquisition.xml file is required and can be generated with mainAquisitionInterface.m - AcquisitionInterface -
 

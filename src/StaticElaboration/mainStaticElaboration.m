@@ -29,6 +29,7 @@
 
 %% ----------------------------STARTING------------------------------------
 clear all
+addSharedPath()
 %Comment the following line to disable the splashscreen 
 %runSplashScreen
 runTerminalNote()

@@ -33,6 +33,8 @@ if nargin==0
     error('elaboration.xml file path missing: it must be given as a function input')
 end
 
+addSharedPath()
+
 h = waitbar(0,'Elaborating data...Please wait!');
 
 %% -----------------------PROCESSING SETTING-------------------------------

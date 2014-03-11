@@ -28,6 +28,7 @@
 
 %% ----------------------------STARTING------------------------------------
 clear all
+addSharedPath()
 %Comment the following line to disable the splashscreen 
 %runSplashScreen
 runTerminalNote()
@@ -57,7 +58,7 @@ while newElaboration==1
         for k=1:length(c3dFiles)
             trialsName{k} = regexprep(regexprep((regexprep(c3dFiles(k).name, ' ' , '')), '-',''), '.c3d', '');
         end
-        
+        save_to_base(1)
         %Acquisition Info: load acquisition.xml
         acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
     end

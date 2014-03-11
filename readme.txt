@@ -65,3 +65,7 @@ MOtoNMS; see the file license.  If not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+-- Acknowledgment --
+We would like to acknowledge Motion Lab Systems, Inc. (http://www.motion-labs.com/index.html)
+for the C3Dserver SDK (software development kit), and Arnaud Barre and Stephane Armand for
+BTK (Biomechanical Toolkit, https://code.google.com/p/b-tk/) contribution.
