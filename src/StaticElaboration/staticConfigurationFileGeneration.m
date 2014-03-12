@@ -221,6 +221,6 @@ Pref.CellItem=false;
 
 xml_write([foldersPaths.elaboration 'static.xml'],staticSettings,'static',Pref);
 
-save_to_base(1)
+%save_to_base(1)
 
 

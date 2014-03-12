@@ -65,6 +65,4 @@ if nargin>1  %Parameters not needed for oldParameters
     save ([foldersPaths.elaboration '\staticParameters.mat'], 'staticParameters')
 end
 
-save_to_base(1)
-
 

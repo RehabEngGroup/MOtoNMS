@@ -48,7 +48,7 @@ switch choice
         
     case 'Load'
         
-        [oldAcquisitionFileName,oldAcquisitionFilePath] = uigetfile([ '/*.xml'],'Select acquisition.xml file to load');
+        [oldAcquisitionFileName,oldAcquisitionFilePath] = uigetfile([ '/*.xml'],'Select acquisition.xml file to load', 'C:\Windows\Temp\');
         oldAcquisition=xml_read([oldAcquisitionFilePath '\' oldAcquisitionFileName]);
         AcquisitionInterface(oldAcquisition);
 end

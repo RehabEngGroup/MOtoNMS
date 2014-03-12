@@ -26,18 +26,18 @@ if nargin>0
         def_subject{1}=char(oldAcquisition.Subject.FirstName);
     catch
         def_subject{1}='';
-        m=msgbox('Subject First Name missing in the loaded file. It shouldnt!!','acquisition.xml file loaded','warn');
-        uiwait(m)
-        %disp('Subject First Name missing in the loaded file. It shouldnt!!!')
+        %m=msgbox('Subject First Name missing in the loaded file. It shouldnt!!','acquisition.xml file loaded','warn');
+        %uiwait(m)
+        disp('Subject First Name missing in the loaded file.')
     end
     
     try
         def_subject{2}=char(oldAcquisition.Subject.LastName);
     catch
         def_subject{2}='';
-        m=msgbox('Subject Last Name missing in the loaded file. It shouldnt!!','acquisition.xml file loaded','warn');
-        uiwait(m); 
-        %disp('Subject Last Name missing in the loaded file. It shouldnt!!')
+        %m=msgbox('Subject Last Name missing in the loaded file. It shouldnt!!','acquisition.xml file loaded','warn');
+        %uiwait(m); 
+        disp('Subject Last Name missing in the loaded file.')
     end
     try
         def_subject{3}=char(oldAcquisition.Subject.Code);

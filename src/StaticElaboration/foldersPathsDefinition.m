@@ -28,7 +28,7 @@ if nargin>0
        
 else
 
-    [fileName,inputFilePath] = uigetfile([ '/*.c3d'],'Select .c3d input file for static elaboration');
+    [fileName,inputFilePath] = uigetfile([ '/*.c3d'],'Select .c3d input file for static elaboration', 'C:\Windows\Temp\');
     
     trialName = regexprep(regexprep((regexprep(fileName, ' ' , '')), '-',''), '.c3d', '');
     

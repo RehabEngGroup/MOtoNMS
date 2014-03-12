@@ -58,7 +58,7 @@ while newElaboration==1
         for k=1:length(c3dFiles)
             trialsName{k} = regexprep(regexprep((regexprep(c3dFiles(k).name, ' ' , '')), '-',''), '.c3d', '');
         end
-        save_to_base(1)
+
         %Acquisition Info: load acquisition.xml
         acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
     end
@@ -71,14 +71,14 @@ while newElaboration==1
             
         case 'Load and Modify elaboration.xml'
             
-            [oldElaborationFileName,oldElaborationFilePath] = uigetfile([foldersPath.outputData '/*.xml'],'Select elaboration.xml file');
+            [oldElaborationFileName,oldElaborationFilePath] = uigetfile([foldersPath.outputData '/*.xml'],'Select elaboration.xml file','C:\Windows\Temp\');
             oldElaboration=xml_read([oldElaborationFilePath '\' oldElaborationFileName]);
             elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,oldElaboration);
             elaborationFile=1;       
             
         case 'Run elaboration'
             
-            [elaborationFileName,elaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file');
+            [elaborationFileName,elaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file', 'C:\Windows\Temp\');
             runDataProcessing(elaborationFilePath);
             elaborationFile=0;
     end

@@ -65,14 +65,14 @@ while newElaboration==1
             
         case 'Load and Modify static.xml'
             
-            [oldStaticSettingsName,oldStaticSettingsPath] = uigetfile([foldersPaths.staticElaborations '/*.xml'],'Select static.xml file');
+            [oldStaticSettingsName,oldStaticSettingsPath] = uigetfile([foldersPaths.staticElaborations '/*.xml'],'Select static.xml file', 'C:\Windows\Temp\');
             oldStaticSettings=xml_read([oldStaticSettingsPath '\' oldStaticSettingsName]);
             staticConfigurationFileGeneration(foldersPaths,acquisitionInfo,oldStaticSettings);
             staticElaborationFile=1;
     
         case 'Run Static Elaboration'
             
-            [staticElaborationFileName,staticElaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file');
+            [staticElaborationFileName,staticElaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file', 'C:\Windows\Temp\');
             runStaticElaboration(staticElaborationFilePath);
             staticElaborationFile=0;
     end
