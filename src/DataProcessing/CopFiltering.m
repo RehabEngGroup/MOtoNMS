@@ -1,6 +1,7 @@
 function filteredCOP=CopFiltering(COP,Rate,fc)
 % Function for COP filtering
 % It filters COP only in non-zero values
+% Output: <1xnTrials> cell, each cell [nFrames x nCoordinates x nFP]
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -32,25 +33,28 @@ for k=1:nTrials %n trials
     nc=size(COP{k},2);    
     nFP=size(COP{k},3);
     
-    filteredCOP{k}=zeros(nr,nc,nFP);
+    filteredCOP{k}=zeros(nr,nc,nFP);  
     
     for j=1:nFP  %n fp
         
         firstValueInd{k}(j)=find(COP{k}(:,1,j),1,'first');
         lastValueInd{k}(j)=find(COP{k}(:,1,j),1,'last');
         
-        isolatedCOP{k}(1:(lastValueInd{k}(j)-firstValueInd{k}(j))+1,:,j)=COP{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j);
- 
+        %selection of COP's non-zero values [Nframes x 3]
+        isolatedCOP=COP{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j); 
+        
+        %filtering of COP's non-zero values [Nframes x 3]
+        isolatedCOPfilt=DataFiltering(isolatedCOP,Rate,fc{k});  
+        
+        %paste of COP's filtered values in the k-trial cell, with COP
+        %original size [nFrames x nCoordinates x nFP]
+        %the only non-zero values are the filtered ones
+        filteredCOP{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j)= isolatedCOPfilt;
+            
+        clear isolatedCOP isolatedCOPfilt
     end
 end
 
-filtCOP=DataFiltering(isolatedCOP,Rate,fc);
-
-for k=1:nTrials
-    for j=1:nFP
-        filteredCOP{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j)= filtCOP{k}(1:(lastValueInd{k}(j)-firstValueInd{k}(j))+1,:,j);
-    end
-end
 
 
 
