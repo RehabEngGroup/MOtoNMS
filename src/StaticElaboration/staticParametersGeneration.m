@@ -34,7 +34,7 @@ function staticParameters = staticParametersGeneration(staticSettings,acquisitio
 
 %Fcut
 if isfield(staticSettings,'Fcut')
-    staticParameters.Fcut{1}=num2str(staticSettings.Fcut);
+    staticParameters.Fcut{1}=staticSettings.Fcut;
 end
 
 try

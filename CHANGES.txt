@@ -13,12 +13,12 @@ Added Features
 - Implemented C3D2MAT processing step using BTK to avoid C3Dserver platform 
   constrain (Matlab 32 bit on Windows) 
 
+Restructuring
+- Added src/shared folder to store functions common to several steps
+
 Other Changes
 - Added memory of last path when selecting files from graphical user interfaces (GUIs)
 - Removed warning messages caused by the lack of subject's first and last names when loading a predefined acquisition.xml 
-
-Restructuring
-- Added src/shared folder to store functions common to several steps
 
 Bug Fixes
 - When running a predefined elaboration.xml, the GUIs asked for a new elaboration identifier that won't be used.
