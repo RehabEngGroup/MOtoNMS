@@ -44,7 +44,7 @@ if strcmp(fcMarkersChoice,'Yes')==1
     %Definition of Default Values
     if (nargin>2 && isfield(oldParameters,'Fcut'))
         
-        def_fcut=oldParameters.Fcut;      
+        def_fcut{1}=num2str(oldParameters.Fcut{1});      
     else       
         switch acquisitionInfo.Laboratory.Name
             case 'UNIPD'
@@ -62,6 +62,7 @@ if strcmp(fcMarkersChoice,'Yes')==1
     num_lines = 1;
     options.Resize='on';
     options.WindowStyle='modal';
+    save_to_base(1)
     answer = inputdlg(prompt,dlg_title,num_lines,def_fcut,options);
     
     fcut=answer'; 
