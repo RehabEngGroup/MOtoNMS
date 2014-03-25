@@ -21,7 +21,10 @@ Other Changes
 - Removed warning messages caused by the lack of subject's first and last names when loading a predefined acquisition.xml 
 
 Bug Fixes
-- When running a predefined elaboration.xml, the GUIs asked for a new elaboration identifier that won't be used.
+- Modified filtering of data from force platform of type1: it filters only non zero values to avoid smoothing due to the outer zero values
+ (data from force platform of type 1 are stored in C3D files after thresholding)
+- Modified transformation of COP coordinates from local to global reference system: translation added only for COP non zero values.
+- When running a predefined elaboration.xml, the GUIs asked for a new elaboration identifier that won't be used
 Modified pop-up order in Elaboration and Static Interface: now user is asked to choose what to do 
 (set a new elaboration, load and modify an old one or run one previously defined), and only after to insert 
-the new elaboration identifier if it is the case. 
+the new elaboration identifier if it is the case 

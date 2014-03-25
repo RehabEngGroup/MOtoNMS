@@ -150,42 +150,63 @@ else
 end
  
 %----------------------------Analog Data-----------------------------------
+checkFPsType(ForcePlatformInfo)
 
-if (exist('fcut','var') && isfield(fcut,'f'))
-    filtForces=DataFiltering(Forces,AnalogFrameRate,fcut.f);
-    filtMoments=DataFiltering(Moments,AnalogFrameRate,fcut.f);
-else
-    filtForces=Forces;
-    filtMoments=Moments;
-end
-        
-if (ForcePlatformInfo{1}.type==2 || ForcePlatformInfo{1}.type==3 || ForcePlatformInfo{1}.type==4) %FP return Moments (type 2: UWA case) 
+switch ForcePlatformInfo{1}.type   %assumption: FPs are of the same type
     
-    %In this case, COP have to be computed
-    %Necessary Thresholding for COP computation
-    [ForcesThr,MomentsThr]=FzThresholding(filtForces,filtMoments);
-
-    for k=1:length(filtMoments)
-        for i=1:nFP
-            COP{k}(:,:,i)=computeCOP(ForcesThr{k}(:,:,i),MomentsThr{k}(:,:,i), ForcePlatformInfo{i});          
+    case {2,3,4}
+        
+        if (exist('fcut','var') && isfield(fcut,'f'))
+            filtForces=DataFiltering(Forces,AnalogFrameRate,fcut.f);
+            filtMoments=DataFiltering(Moments,AnalogFrameRate,fcut.f);
+        else
+            filtForces=Forces;
+            filtMoments=Moments;
         end
-    end
-    
-    filtCOP=COP; %not necessary to filter the computed cop
-    
-else if (ForcePlatformInfo{1}.type==1)  %Padova type: it returns Px & Py
         
-    if (exist('fcut','var') && isfield(fcut,'cop'))
+        %In this case, COP have to be computed
+        %Necessary Thresholding for COP computation
+        [ForcesThr,MomentsThr]=FzThresholding(filtForces,filtMoments);
         
-        filtCOP=CopFiltering(COP,AnalogFrameRate,fcut.cop);       
-    else 
-        filtCOP=COP;
-    end
+        for k=1:length(filtMoments)
+            for i=1:nFP
+                COP{k}(:,:,i)=computeCOP(ForcesThr{k}(:,:,i),MomentsThr{k}(:,:,i), ForcePlatformInfo{i});
+            end
+        end
+        
+        filtCOP=COP; %not necessary to filter the computed cop
+        
 
-    %Threasholding also here for uniformity among the two cases
-    [ForcesThr,MomentsThr]=FzThresholding(filtForces,filtMoments);
-    end
+    case 1   %Padova type: it returns Px & Py
+        
+        if (exist('fcut','var'))
+            
+            if isfield(fcut,'f')
+                
+                filtForces=filteringDataFPtype1(Forces,AnalogFrameRate,fcut.f,'Forces');
+                filtMoments=filteringDataFPtype1(Moments,AnalogFrameRate,fcut.f,'Moments');
+                
+            else
+                filtForces=Forces;
+                filtMoments=Moments;
+            end
+            
+            if isfield(fcut,'cop')
+                
+                filtCOP=filteringDataFPtype1(COP,AnalogFrameRate,fcut.cop,'COP');
+            else
+                filtCOP=COP;
+            end
+            
+        else
+            filtForces=Forces;
+            filtMoments=Moments;
+            filtCOP=COP;
+        end
+        %Threasholding also here for uniformity among the two cases
+        [ForcesThr,MomentsThr]=FzThresholding(filtForces,filtMoments);
 end
+
 
 disp('Data have been filtered')
 %For next steps, only filtered data are kept                                                  

@@ -39,11 +39,19 @@ Xo_Offset=FPcenter_lab(1);
 Yo_Offset=FPcenter_lab(2);
 Zo_Offset=FPcenter_lab(3);
 
-%COP translation + conversion in m
 
-globalCOP(:,1)=(globalCOP(:,1)+Xo_Offset)/1000;
+%COP translation (only for non zero values) + conversion in m
+%non zero values of COP coordinates
+COPxValues=find(globalCOP(:,1));
+COPyValues=find(globalCOP(:,2));
+COPzValues=find(globalCOP(:,3));
 
-%COPy1
-globalCOP(:,2)=(globalCOP(:,2)+Yo_Offset)/1000;
-globalCOP(:,3)=(globalCOP(:,3)+Zo_Offset)/1000;
+globalCOP(COPxValues,1)=(globalCOP(COPxValues,1)+Xo_Offset)/1000;
+globalCOP(COPyValues,2)=(globalCOP(COPyValues,2)+Yo_Offset)/1000;
+globalCOP(COPzValues,3)=(globalCOP(COPzValues,3)+Zo_Offset)/1000;
+
+% Initially the offset was added for the whole COP
+% globalCOP(:,1)=(globalCOP(:,1)+Xo_Offset)/1000;
+% globalCOP(:,2)=(globalCOP(:,2)+Yo_Offset)/1000;
+% globalCOP(:,3)=(globalCOP(:,3)+Zo_Offset)/1000;
 
