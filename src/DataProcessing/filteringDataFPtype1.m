@@ -40,27 +40,41 @@ for k=1:nTrials %n trials
         switch dataType
             %find returns an error if we look for the first non zero
             %element in a null vector --> necessary to separate the cases
+            %and manage the case a force platform has all 0 values
             case {'Forces', 'COP'} %COPz is null
-                firstValueInd{k}(j)=find(dataFPt1{k}(:,1,j),1,'first');
-                lastValueInd{k}(j)=find(dataFPt1{k}(:,1,j),1,'last');
+                try
+                    firstValueInd{k}(j)=find(dataFPt1{k}(:,1,j),1,'first');
+                    lastValueInd{k}(j)=find(dataFPt1{k}(:,1,j),1,'last');
+                    findValues=1;
+                    
+                catch
+                    findValues=0; %FP data are all null(a FP not struck or not working)
+                end
                 
             case 'Moments' %only Mz has non zero values
-                firstValueInd{k}(j)=find(dataFPt1{k}(:,3,j),1,'first');
-                lastValueInd{k}(j)=find(dataFPt1{k}(:,3,j),1,'last');
+                try
+                    firstValueInd{k}(j)=find(dataFPt1{k}(:,3,j),1,'first');
+                    lastValueInd{k}(j)=find(dataFPt1{k}(:,3,j),1,'last');
+                    findValues=1;
+                catch
+                    findValues=0;                   
+                end
         end
         
-        %selection of COP's non-zero values [Nframes x 3]
-        isolatedValues=dataFPt1{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j); 
-        
-        %filtering of COP's non-zero values [Nframes x 3]
-        isolatedFiltValues=DataFiltering(isolatedValues,Rate,fc{k});  
-        
-        %paste of COP's filtered values in the k-trial cell, with COP
-        %original size [nFrames x nCoordinates x nFP]
-        %the only non-zero values are the filtered ones
-        filtDataFPt1{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j)= isolatedFiltValues;
+        if findValues
+            %selection of COP's non-zero values [Nframes x 3]
+            isolatedValues=dataFPt1{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j);
             
-        clear isolatedValues isolatedFiltValues
+            %filtering of COP's non-zero values [Nframes x 3]
+            isolatedFiltValues=DataFiltering(isolatedValues,Rate,fc{k});
+            
+            %paste of COP's filtered values in the k-trial cell, with COP
+            %original size [nFrames x nCoordinates x nFP]
+            %the only non-zero values are the filtered ones
+            filtDataFPt1{k}(firstValueInd{k}(j):lastValueInd{k}(j),:,j)= isolatedFiltValues;
+            
+            clear isolatedValues isolatedFiltValues
+        end %else dataFPt1{k}(:,:,j) is null and filtDataFPt1 was already set to 0
     end
 end
 
