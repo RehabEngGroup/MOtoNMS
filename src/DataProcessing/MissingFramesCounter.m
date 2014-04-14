@@ -1,4 +1,4 @@
-function [missingFrames,maxMissing]=MissingFramesCounter(data)
+ function [missingFrames,maxMissing]=MissingFramesCounter(data)
 % data should be a vector
 
 % The file is part of matlab MOtion data elaboration TOolbox for
@@ -32,7 +32,7 @@ for i=1:r	%frames
     
     if isnan(data(i,1))
         counter=counter+1;
-        missingFrames=[missingFrames i];
+        missingFrames=[missingFrames i];       
     else
         %reset to 0: increase only if they are consecutive frames
         counter=0;
@@ -45,4 +45,3 @@ for i=1:r	%frames
 end
 
 
-                

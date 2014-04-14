@@ -111,7 +111,7 @@ for k=1:length(trialsList)
 end
 %-----------Check for markers data missing and Interpolation--------------
 
-[MarkersNan,index]=replaceWithNans(markerstrc);
+[MarkersNan,index]=replaceMissingWithNaNs(markerstrc); 
  
 %if there are no missing markers, it doesn't interpolate
 [interpData,note] = DataInterpolation(MarkersNan, index);
@@ -123,7 +123,7 @@ writeInterpolationNote(note,foldersPath.trialOutput);
 %ForcePlatform type 1: [Fx1 Fy1 Fz1 Px1 Py1 Mz1 Fx2 Fy2 Fz2 Px2 Py2 Mz2...]
 %ForcePlatform type 2: [Fx1 Fy1 Fz1 Mx1 My1 Mz1 Fx2 Fy2 Fz2 Mx2 My2 Mz2...]
 %ForcePlatform type 3: [F1x12 F1y23 F1y14 F1y23 F1z1 F1z2 F1z3 F1z4 ...]
-
+%ForcePlatform type 4: [Fx1 Fy1 Fz1 Mx1 My1 Mz1 Fx2 Fy2 Fz2 Mx2 My2 Mz2..]
 %Separation of information for different filtering taking into account
 %differences in force platform type
 
@@ -255,6 +255,7 @@ waitbar(3/7);
 %                           WRITE TRC
 %--------------------------------------------------------------------------
 
+MarkersFilteredNaN=replaceMissingWithNaNs(MarkersFiltered);
 %load([foldersPath.sessionData 'dMLabels.mat'])
   
 for k=1:length(trialsList)
@@ -264,7 +265,7 @@ for k=1:length(trialsList)
     %useless data and problems with interpolation
     %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
     %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
-    createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
+    createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
 end
 
 waitbar(4/7);   

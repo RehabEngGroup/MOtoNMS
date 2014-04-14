@@ -1,7 +1,8 @@
-function [newData,index] = replaceWithNans(data)
+function [newData,index] = replaceMissingWithNaNs(data)
 %This function replaces missing markers value (=0) in data with NaN
-%If markers trajectories start with 0, index of first and last frame in
-%which markers appear are saved
+%If markers trajectories are not visible from the beginning and/or till the 
+%end, index of first and last frames in which markers appear are saved,
+%otherwise index are set to 1 and the last frame for each marker
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -34,19 +35,29 @@ for k=1:length(data)
     [m, n] = size(markers);
         
     for j = 1:n
-
-        if markers(1,j)==0  %if markers are not visible from the beginning
+        %looking for the first and last frame in which each marker is
+        %visible
+        
+        if markers(1,j)==0 && nargout==2
+        %if markers are not visible from the beginning & if index is required in output
+        %find returns an error if the vector has all 0 values
+        %It may happen when index is not required, that is in the second
+        %call of this function within runDataProcessing
             index{k}(1,j)=find(markers(:,j), 1, 'first');
-            index{k}(2,j)=find(markers(:,j), 1, 'last');
-            %looking for the first and last frame in which each marker is
-            %visible
+     
         else
-%           index{k}(1,j)=1;
-%           index{k}(2,j)=m;
-            index{k}(1,j)=0;
-            index{k}(2,j)=0;            
+            index{k}(1,j)=1;
         end
         
+        if markers(end,j)==0 && nargout==2 
+        %if markers are not visible till the end & if index is required in output
+            index{k}(2,j)=find(markers(:,j), 1, 'last');
+            
+        else
+            index{k}(2,j)=m; %the last frame
+        end
+        
+               
         for i = 1:m
             %replace each 0 with NaN
             if markers(i,j)== 0
@@ -59,45 +70,4 @@ for k=1:length(data)
     
     clear markers newmarkers
 end
-
-
-
-
-% function [newData,index] = replaceWithNans(data)
-% %This function replaces missing markers value (=0) in data with NaN
-% %If markers trajectories start with 0, index of first and last frame in
-% %which markers appear are saved
-% 
-% for k=1:length(data)
-%     
-%     markers=data{k};
-%     
-%     newMarkers = markers;
-%     
-%     [m, n] = size(markers);
-%         
-%     for j = 1:n
-%         
-%         if markers(1,j)==0  %if markers are not visible from the beginning
-%             index{j}(1,1)=find(markers(:,j), 1, 'first');
-%             index{j}(1,2)=find(markers(:,j), 1, 'last');
-%             %looking for the first and last frame in which each marker is
-%             %visible
-%         else
-%             index{j}=[];
-%         end
-%         
-%         for i = 1:m
-%             %replace each 0 with NaN
-%             if markers(i,j)== 0
-%                 newMarkers(i,j) = NaN;
-%             end
-%         end
-%     end
-% 
-%     newData{k}=newMarkers;
-%     
-%     clear markers newmarkers
-%     
-% end
 
