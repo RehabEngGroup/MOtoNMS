@@ -1,4 +1,4 @@
-function filtData = DataFiltering(data,dataRate,fcut)
+function filtData = DataFiltering(data,dataRate,fcut,index)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -29,16 +29,25 @@ dt=1/dataRate;
 for k=1: length(data)
     
     if iscell(data)==0 %without cell struct
-         filtData = matfiltfilt2(dt, (fcut), order, FilterType, data);
+        if nargin>3  %if data are markers, filtering only within index interval
+            filtData = ZeroLagButtFiltfilt(dt, (fcut), order, FilterType, data, index);
+        else
+            filtData = ZeroLagButtFiltfilt(dt, (fcut), order, FilterType, data);
+        end
+        
     else
         
-        if length(size(data{k}))>2
-            for i=1:size(data{k},3)
-                filtData{k}(:,:,i) = matfiltfilt2(dt, (fcut{k}), order, FilterType, data{k}(:,:,i));
+        if length(size(data{k}))>2  %data are from FP
+            for i=1:size(data{k},3) %i stands for the considered FP
+                filtData{k}(:,:,i) = ZeroLagButtFiltfilt(dt, (fcut{k}), order, FilterType, data{k}(:,:,i));
             end
         else
-            %matfiltfilt filters data along columns
-            filtData{k} = matfiltfilt2(dt, (fcut{k}), order, FilterType, data{k});
+            if nargin>3   %if dara are markers
+                %matfiltfilt filters data along columns
+                filtData{k} = ZeroLagButtFiltfilt(dt, (fcut{k}), order, FilterType, data{k},index{k});
+            else
+                filtData{k} = ZeroLagButtFiltfilt(dt, (fcut{k}), order, FilterType, data{k});
+            end
             %what changes among trials is fcut
         end
         %To save forces in a struct with labels:

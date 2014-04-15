@@ -45,10 +45,12 @@ for k=1: length(data)
     
     for j=1:c  %markers(3Columns each)
 
-            %If there are Nan at the beggining or the end, they are re-set to 0
-            interpData{k}(1:index{k}(1,j)-1,j)=0;  
-            interpData{k}(index{k}(2,j)+1:end,j)=0;
-
+            %If there was Nan at the beggining or the end, they were re-set 
+            %to 0. It was necessary when filtering the whole marker trj.
+            %Now DataFiltering is changed: we filter only in the interval
+            %in which the marker is visible
+%           interpData{k}(1:index{k}(1,j)-1,j)=0;  
+%           interpData{k}(index{k}(2,j)+1:end,j)=0;
 
             if (length(find(isnan(data{k}(index{k}(1,j):index{k}(2,j),j))==1))>=1)
                             

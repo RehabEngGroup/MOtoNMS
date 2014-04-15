@@ -140,11 +140,12 @@ waitbar(1/7);
 %----------------------------Markers---------------------------------------
 if (exist('fcut','var') && isfield(fcut,'m'))
    %filtMarkers=DataFiltering(MarkersRawData,VideoFrameRate,fcut.m);
-   filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m);
-   filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
+   filtMarkers=DataFiltering(interpData,VideoFrameRate,fcut.m,index);
+   %filtMarkersCorrected=correctBordersAfterFiltering(filtMarkers,interpData,index);
    %filtMarkersCorrected=filtMarkers;
 else
-    filtMarkersCorrected=interpData;
+    filtMarkers=interpData;
+    %filtMarkersCorrected=interpData;
     %filtMarkersCorrected=MarkersRawData;
     %filtMarkersCorrected=markerstrc;
 end
@@ -225,7 +226,8 @@ saveAnalysisWindow(foldersPath.trialOutput,AnalysisWindow)
 %% ------------------------------------------------------------------------
 %                        DATA WINDOW SELECTION
 %--------------------------------------------------------------------------
-[MarkersFiltered,Mtime]=selectionData(filtMarkersCorrected,AnalysisWindow,VideoFrameRate);
+%[MarkersFiltered,Mtime]=selectionData(filtMarkersCorrected,AnalysisWindow,VideoFrameRate);
+[MarkersFiltered,Mtime]=selectionData(filtMarkers,AnalysisWindow,VideoFrameRate);
 [ForcesFiltered,Ftime]=selectionData(ForcesThr,AnalysisWindow,AnalogFrameRate);
 [MomentsFiltered,Ftime]=selectionData(MomentsThr,AnalysisWindow,AnalogFrameRate);
 [COPFiltered,Ftime]=selectionData(filtCOP,AnalysisWindow,AnalogFrameRate);
@@ -255,7 +257,7 @@ waitbar(3/7);
 %                           WRITE TRC
 %--------------------------------------------------------------------------
 
-MarkersFilteredNaN=replaceMissingWithNaNs(MarkersFiltered);
+%MarkersFilteredNaN=replaceMissingWithNaNs(MarkersFiltered);
 %load([foldersPath.sessionData 'dMLabels.mat'])
   
 for k=1:length(trialsList)
@@ -265,7 +267,8 @@ for k=1:length(trialsList)
     %useless data and problems with interpolation
     %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
     %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
-    createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
+    %createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
+    createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
 end
 
 waitbar(4/7);   
