@@ -114,7 +114,7 @@ end
 [MarkersNan,index]=replaceMissingWithNaNs(markerstrc); 
  
 %if there are no missing markers, it doesn't interpolate
-[interpData,note] = DataInterpolation(MarkersNan, index);
+[interpData,note] = DataInterpolation(MarkersNan, index, VideoFrameRate);
  
 writeInterpolationNote(note,foldersPath.trialOutput);
 %interpData=markerstrc;

@@ -30,9 +30,9 @@ for col = 1:nEMGChannels
 end
 
 %Raw EMG: filter, rectify, and then filter again to obtain EMG linear envelope.
-BPFiltEMGPointsAll = matfiltfilt2((1/EMGRate), [30,300], 2, 'bp', EMGDataRawZeroMean);
+BPFiltEMGPointsAll = ZeroLagButtFiltfilt((1/EMGRate), [30,300], 2, 'bp', EMGDataRawZeroMean);
 RectBPFiltEMGPointsAll = abs(BPFiltEMGPointsAll);
-LinEnvEMGAll = matfiltfilt2((1/EMGRate), 6, 2, 'lp', RectBPFiltEMGPointsAll);
+LinEnvEMGAll = ZeroLagButtFiltfilt((1/EMGRate), 6, 2, 'lp', RectBPFiltEMGPointsAll);
 for col = 1:size(LinEnvEMGAll,2)
     for row = 1:size(LinEnvEMGAll,1)
         if LinEnvEMGAll(row,col) < 0;

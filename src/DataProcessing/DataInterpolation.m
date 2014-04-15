@@ -1,4 +1,4 @@
-function [interpData,note] = DataInterpolation(data,index)
+function [interpData,note] = DataInterpolation(data,index,fr)
 %Data interpolation
 %index for piecewise interpolation
 %Interpolation only if there are NaN in the trajectories and only between
@@ -28,12 +28,13 @@ function [interpData,note] = DataInterpolation(data,index)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-%can be manually changed: we interpolate for a maximum of 20 frames,
-%otherwise NaN values are kept
-missingCounter_max=20;
+%can be manually changed: we interpolate for a maximum of 15 frames
+%(assuming a frame rate of 60 Hz), otherwise NaN values are kept
+missingCounter_max=(15/60)*fr;
 %Here it is possibile to decide the length of the interpolation: we can
 %interpolate and dont care for how many frames a marker is missing, or we 
 %can check and interpolate only if it is missing for few fixed frames
+%(depending on the video frame rate)
 
 for k=1: length(data)
     
