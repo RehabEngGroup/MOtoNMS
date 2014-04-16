@@ -34,5 +34,6 @@ Bug Fixes
 Modified pop-up order in Elaboration and Static Interface: now user is asked to choose what to do 
 (set a new elaboration, load and modify an old one or run one previously defined), and only after to insert 
 the new elaboration identifier if it is the case 
-- Corrected definition of interval where markers are visible in replaceMissingWithNaNs.m (modified computation of var 'index')
+- Changed the definition of the interval where markers are visible in replaceMissingWithNaNs.m (the definition of var 'index')
+- Corrected the computation of the hip joint center (HJC) with the Harrington method (HJCHarrington.m)
 

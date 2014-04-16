@@ -27,6 +27,7 @@ function [RHJC, LHJC]=HJCHarrington(markers)
 %[RHJC, LHJC]= Hip Joint Center global position for each time istant
 %
 %Developed by Zimi Sawacha <zimi.sawacha@dei.unipd.it>
+%Modified by Claudio Pizzolato <claudio.pizzolato@griffithuni.edu.au>
 
 %%
 
@@ -71,8 +72,10 @@ for t=1:length(RASIS)
     diff_ml(t)=0.33*PW(t)+7.3;
     
     %vector that must be subtract to OP to obtain hjc in pelvis CS
-    vett_diff_pelvis_sx(:,t)=[-diff_ml(t);diff_v(t);diff_ap(t);1];
-    vett_diff_pelvis_dx(:,t)=[diff_ml(t);diff_v(t);diff_ap(t);1];
+    %vett_diff_pelvis_sx(:,t)=[-diff_ml(t);diff_v(t);diff_ap(t);1];
+    %vett_diff_pelvis_dx(:,t)=[diff_ml(t);diff_v(t);diff_ap(t);1];
+    vett_diff_pelvis_sx(:,t)=[-diff_ml(t);diff_ap(t);diff_v(t);1];
+    vett_diff_pelvis_dx(:,t)=[diff_ml(t);diff_ap(t);diff_v(t);1];    
     
     %hjc in pelvis CS (4x4)
     rhjc_pelvis(:,t)=OPB(:,t)+vett_diff_pelvis_dx(:,t);  

@@ -43,7 +43,7 @@ for k=1: length(data)
             end
         else
             if nargin>3   %if dara are markers
-                %matfiltfilt filters data along columns
+                %ZeroLagButtFiltfilt filters data along columns
                 filtData{k} = ZeroLagButtFiltfilt(dt, (fcut{k}), order, FilterType, data{k},index{k});
             else
                 filtData{k} = ZeroLagButtFiltfilt(dt, (fcut{k}), order, FilterType, data{k});
