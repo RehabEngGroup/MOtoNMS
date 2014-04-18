@@ -72,10 +72,10 @@ fdata=data;
 %Filter data
 [nRows, nCols] = size(data);
 for i = 1:nCols
-    
+
     if nargin>5 %if we are filtering markers
         %before filtering check for NaN values (if no interpolation before)
-        if isempty(find(isnan(data(idx(1,i):idx(2,i),i))))
+        if isempty(find(isnan(data(idx(1,i):idx(2,i),i)))) && size(data(idx(1,i):idx(2,i),i),1)>order*3
             %filtering only in the interval defined by idx, that is when
             %each marker is visible
             fdata(idx(1,i):idx(2,i),i) = filtfilt(b, a, double(data(idx(1,i):idx(2,i),i)));
