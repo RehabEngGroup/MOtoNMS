@@ -5,7 +5,7 @@ v. 1.0 (February 17, 2014)
 Initial Release
 
 
-v. 1.1 (May 9, 2014)
+v. 2.0 (May 9, 2014)
 
 NEW FEATURES:
 - Support to Matlab 64 bit and multiplatform (C3D2MAT based on BTK)  
