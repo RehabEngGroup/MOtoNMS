@@ -1,8 +1,8 @@
 function [AnalogData] = getAnalogData(itf)   
 %getAnalogData
 %Extraction of Analog Data
-%This function reads all data stored in analog channels after forces (EMG,
-%Biodex data, Position and Torque,etc.)
+%This function reads all data stored in analog channels that are not forces
+%(EMG, Biodex data, Position and Torque,etc.)
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -25,39 +25,44 @@ function [AnalogData] = getAnalogData(itf)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
+
+try % to extract data even if force platform data are not stored in the c3d
+    fchannelIndex = itf.GetParameterIndex('FORCE_PLATFORM','CHANNEL');
+    
+    % number of Force channels --> related to the force plate type (6 for type 1 and 2 but 8 for type 3)
+    nFchannels = itf.GetParameterLength(fchannelIndex);    
+    
+catch
+    nFchannels=0; %No force platform
+end
+
+if nFchannels > 0  %check if force data are present
+    
+    for i = 1 : nFchannels,
+
+        Fchannels(i)=itf.GetParameterValue(fchannelIndex, i-1);
+        %Fchannels contains the analog channels with force data      
+    end
+else
+    disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
+end
+
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
 unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
 
-try % to extract data even if force platform data are not stored in the c3d
-    numberForcePlatform = itf.GetParameterValue(itf.GetParameterIndex('FORCE_PLATFORM','USED'),0);
-    fchannelIndex = itf.GetParameterIndex('FORCE_PLATFORM','CHANNEL');
-    % number of Force channels --> related to the force plate type (6 for type 1 and 2 but 8 for type 3)
-    nFchannels = itf.GetParameterLength(fchannelIndex);    %instead of numItems = numberForcePlatform*6;
-    
-    lastFchannel=itf.GetParameterValue(fchannelIndex, nFchannels-1);
-    %fchannel contains the analog channel that corresponds to the last force plate output channel
-catch
-    numberForcePlatform=0;
-end
-%check if force data are present
-if numberForcePlatform == 0
-    disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
-    offsetAnalogDataLabels=0;
-else
-    %offsetAnalogDataLabels = numberForcePlatform*6;%6: this number is related to the number of data for each platform (Fx Fy Fz Mx My Mz)
-    offsetAnalogDataLabels=lastFchannel;
-end
-
 % if forces are not present, all analog data will be extracted:
-nAnalogDataChannels = itf.GetParameterDimension(indexLabels,1)- offsetAnalogDataLabels;
+nAnalogDataChannels = itf.GetParameterDimension(indexLabels,1);
 
+j=1;
 for i=1:(nAnalogDataChannels)
-    AnalogDataLabels{i} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'),(i+offsetAnalogDataLabels-1));
     
-    %it may be necessary to eliminate spaces from the Labels 
-    %AnalogDataLabelsStruct{i} = regexprep(AnalogDataLabels{i}, ' ', ''); 
-    
-    units{i} = itf.GetParameterValue(unitIndex, i+offsetAnalogDataLabels-1);
+    if isempty(find(Fchannels==i)) %if the i-th channel is not a force channel
+        
+        AnalogDataLabels{j} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'),(i-1));
+        
+        units{j} = itf.GetParameterValue(unitIndex, i-1);
+        j=j+1;
+    end
 end
 
 for i=1:length(AnalogDataLabels)

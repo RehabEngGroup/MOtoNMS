@@ -1,6 +1,6 @@
 function FPdata = getForcePlatesData(itf)
 %getForcePlatesData
-%Extraction of FPdata and Moments from Analog Data
+%Extraction of FPdata from Analog Data
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 

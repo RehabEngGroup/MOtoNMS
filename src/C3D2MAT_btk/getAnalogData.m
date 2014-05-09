@@ -1,8 +1,8 @@
 function [AnalogData] = getAnalogData(h)   
 %getAnalogData
 %Extraction of Analog Data
-%This function reads all data stored in analog channels after forces (EMG,
-%Biodex data, Position and Torque,etc.)
+%This function reads all data stored in analog channels that are not forces 
+%(EMG, Biodex data, Position and Torque,etc.)
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -32,43 +32,35 @@ try % to extract data even if force platform data are not stored in the c3d
     numberForcePlatform=nFP.info.values;
     
     fchannel=btkGetMetaData(h, 'FORCE_PLATFORM','CHANNEL');
-    
-    % number of Force channels --> related to the force plate type (6 for type 1 and 2 but 8 for type 3)
-    nFchannel= size(fchannel.info.values,1)*size(fchannel.info.values,2);
-    
-    lastFchannel=fchannel.info.values(end,end);
-    %lastFchannel contains the analog channel that corresponds to the last force plate output channel
+
 catch
-    numberForcePlatform=0;
-end
-
-%check if force data are present
-if numberForcePlatform == 0
+    numberForcePlatform=0;  %no force data
     disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
-    offsetAnalogDataLabels=0;
-else
-    %offsetAnalogDataLabels = numberForcePlatform*6;%6: this number is related to the number of data for each platform (Fx Fy Fz Mx My Mz)
-    offsetAnalogDataLabels=lastFchannel;
 end
-
+ 
 % if forces are not present, all analog data will be extracted:
 analogUsed=btkGetMetaData(h, 'ANALOG','USED');
-nAnalogDataChannels=analogUsed.info.values-offsetAnalogDataLabels;
+
+nAnalogDataChannels=analogUsed.info.values;
 
 UNITS=btkGetMetaData(h,'ANALOG','UNITS');
 AnalogLabels = btkGetMetaData(h,'ANALOG','LABELS');
 
+j=1;
 for i=1:(nAnalogDataChannels)
     
-    AnalogDataLabels{i}=AnalogLabels.info.values{i+offsetAnalogDataLabels};
- 
-    units{i}=UNITS.info.values{i+offsetAnalogDataLabels};
+    if  isempty(find(fchannel.info.values==i)) %if the analog channel is 
+        %not a force channel
+        AnalogDataLabels{j}=AnalogLabels.info.values{i};
+        
+        units{j}=UNITS.info.values{i};
+        j=j+1;
+    end
 end
 
 for i=1:length(AnalogDataLabels)
     AnalogRawData(:,i) = getanalogchannel(h, AnalogDataLabels{i});    
 end
-
 
 rate=btkGetMetaData(h,'ANALOG','RATE');
 

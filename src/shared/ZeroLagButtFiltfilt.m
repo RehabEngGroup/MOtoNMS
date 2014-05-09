@@ -77,7 +77,8 @@ for i = 1:nCols
         %before filtering check for NaN values (if no interpolation before)
         if isempty(find(isnan(data(idx(1,i):idx(2,i),i)))) && size(data(idx(1,i):idx(2,i),i),1)>order*3
             %filtering only in the interval defined by idx, that is when
-            %each marker is visible
+            %each marker is visible. This interval must have a length more
+            %than 3 times the filter order for the filtfilt function
             fdata(idx(1,i):idx(2,i),i) = filtfilt(b, a, double(data(idx(1,i):idx(2,i),i)));
         end
     else  % filtering other data type (grf and emg)

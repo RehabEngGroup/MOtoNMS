@@ -5,7 +5,7 @@ v. 1.0 (February 17, 2014)
 Initial Release
 
 
-v. 1.1 (April 15, 2014)
+v. 1.1 (May 9, 2014)
 
 NEW FEATURES:
 - Support to Matlab 64 bit and multiplatform (C3D2MAT based on BTK)  
@@ -20,6 +20,8 @@ CODE CHANGES:
  (data from force platform of type 1 are stored in C3D files after thresholding)
 - Modified data interpolation: markers trajectories are interpolated only if gaps of consecutive frames are shorter than a fixed number 
   defined according to the video frame rate (DataInterpolation.m)
+- Modified retrieval of Analog Data in C3D2MAT: removed assumption of analog data stored only in analog channels subsequent to those dedicated to force data. 
+Now they can be stored in any analog channel indipendently from force data.
 - Renamed replaceWithNans.m as replaceMissingWithNaNs.m
 - Renamed matfiltfilt2.m as ZeroLagButtFiltfilt.m 
 - Removed warning messages caused by the lack of subject's first and last names when loading a predefined acquisition.xml 
