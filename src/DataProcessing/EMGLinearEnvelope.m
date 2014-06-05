@@ -41,11 +41,5 @@ for col = 1:size(LinEnvEMGAll,2)
     end
 end
 
-for col = 1:nEMGChannels
-    LinEnvEMGAll(:,col) = LinEnvEMGAll(:,col) + mean(EMGDataRaw(:,col));
-end
-
 EMGDataLinEnv = LinEnvEMGAll;
-
-
 
