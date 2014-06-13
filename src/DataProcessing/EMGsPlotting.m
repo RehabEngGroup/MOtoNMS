@@ -1,4 +1,4 @@
-function [] = EMGsPlotting(data,envelope,window,labels,path,emgRate)
+function [] = EMGsPlotting(data,envelope,window,labels,units,path,emgRate)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -31,6 +31,7 @@ for k=1:length(data)
     %conversion in microV during plot to have 'copy-on-write' and reduce
     %time
     trialData=data{k};
+    u=units{k};
     
     for i=1:size(trialData,2)
         
@@ -39,7 +40,8 @@ for k=1:length(data)
         %Raw
         xt=[1/emgRate:1/emgRate:length(data{k}(:,i))/emgRate];
         %xt=[1:length(data{k}(:,i))]/emgRate;
-        plot(xt,trialData(:,i)*1000000)
+        %no unit conversion: plot are in the raw data unit
+        plot(xt,trialData(:,i)) 
         %plot(trialData(:,i)*1000000)
         %xlabel('Frames')
         xlabel('Time [s]')
@@ -47,7 +49,8 @@ for k=1:length(data)
           
         %Envelope
         hold on
-        plot(xt,envelope{k}(:,i)*1000000,'g','LineWidth',2)
+        plot(xt,envelope{k}(:,i),'g','LineWidth',2)
+        %plot(xt,envelope{k}(:,i)*1000000,'g','LineWidth',2)
         %legend(['emg Raw','envelope'])
         
         %Window
@@ -64,7 +67,7 @@ for k=1:length(data)
         line([endTime endTime],[a(3) a(4)],'Color','r' )
         
         legend('emg Raw','envelope','window') 
-        ylabel('microV')
+        ylabel(u{i})
         title(labels{i})
         
         %disp(['Plotted ' path{k}  'EMGs\' tag '\' labels{i} '.fig'])

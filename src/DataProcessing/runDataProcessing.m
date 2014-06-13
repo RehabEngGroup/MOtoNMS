@@ -337,7 +337,7 @@ if isfield(parameters,'EMGsSelected')
     
     %Loading Analog Raw Data from the choosen trials with the corresponding
     %labels
-    [AnalogRawData, AnalogDataLabels]=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
+    [AnalogRawData, AnalogDataLabels, aFrames, aUnits]=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
     
     %Loading Analog Raw Data for EMG Max Computation from the trials list
     if isequal(parameters.MaxEmgTrialsList,parameters.trialsList)
@@ -364,6 +364,7 @@ if isfield(parameters,'EMGsSelected')
             
             EMGselectionIndexes{k}=findIndexes(AnalogDataLabels{k},EMGsSelected_C3DLabels);
             EMGsSelected{k}=AnalogRawData{k}(:,EMGselectionIndexes{k});
+            EMGsUnits{k}=aUnits{k}(EMGselectionIndexes{k});
         end
         
         %The arrangement of EMG signals in the analog channels may change 
@@ -398,17 +399,8 @@ if isfield(parameters,'EMGsSelected')
             EMGsForMax=selectionData(EMGsEnvelopeForMax,AnalysisWindow,AnalogFrameRate,EMGOffset);
         else
             EMGsForMax=EMGsEnvelopeForMax;
-        end
+        end       
         
-        %SAVING and PLOTTING
-        
-        if isfield(WindowsSelection,'Offset')
-            %if there's an offset, the Analysis Window is a Stance Phase
-            EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset,WindowsSelection.Offset)
-        else
-            EnvelopePlotting(EMGsFiltered,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
-        end
-        waitbar(6/7);
         %% ------------------------------------------------------------------------
         %                        COMPUTE MAX EMG VALUES
         %--------------------------------------------------------------------------
@@ -420,12 +412,25 @@ if isfield(parameters,'EMGsSelected')
         
         disp('Printed maxemg.txt')
         
+        waitbar(6/7);
+        
         %% ------------------------------------------------------------------------
         %                            NORMALIZE EMG
         %--------------------------------------------------------------------------
         NormEMG=normalizeEMG(EMGsFiltered,MaxEMGvalues);
         
         %% ------------------------------------------------------------------------
+        %                          SAVING and PLOTTING
+        %--------------------------------------------------------------------------
+                       
+        if isfield(WindowsSelection,'Offset')
+            %if there's an offset, the Analysis Window is a Stance Phase
+            EnvelopePlotting(EMGsFiltered,MaxEMGvalues,EMGsSelected_C3DLabels, EMGsUnits, foldersPath.trialOutput, AnalogFrameRate,EMGOffset,WindowsSelection.Offset)
+        else
+            EnvelopePlotting(EMGsFiltered,MaxEMGvalues,EMGsSelected_C3DLabels, EMGsUnits, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
+        end
+        
+        % ------------------------------------------------------------------------
         %                            PRINT emg.txt
         %--------------------------------------------------------------------------
         
@@ -439,7 +444,7 @@ if isfield(parameters,'EMGsSelected')
         waitbar(7/7);
         close(h)
 
-        %% ------------------------------------------------------------------------
+        % ------------------------------------------------------------------------
         %                           PLOTTING EMG
         %--------------------------------------------------------------------------
         plotEMGChoice = questdlg('Do you want to plot EMGs Raw', ...
@@ -448,7 +453,7 @@ if isfield(parameters,'EMGsSelected')
         
         if strcmp(plotEMGChoice,'Yes')
             
-            EMGsPlotting(EMGsSelected,EMGsEnvelope,AnalysisWindow,EMGsSelected_C3DLabels, foldersPath.trialOutput, AnalogFrameRate)
+            EMGsPlotting(EMGsSelected,EMGsEnvelope,AnalysisWindow,EMGsSelected_C3DLabels,EMGsUnits,foldersPath.trialOutput,AnalogFrameRate)
             disp('Plotted EMGs')
         end
         
