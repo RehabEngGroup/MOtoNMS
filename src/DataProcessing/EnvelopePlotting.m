@@ -23,6 +23,9 @@ function [] = EnvelopePlotting(envelope, maxemg, labels, units, path,emgRate,emg
 %%
 if nargin<7
     windowOffset=0;
+    xstring='% Analysis Window';
+else
+    xstring='% Stance';
 end
 
 for k=1:length(envelope)
@@ -39,18 +42,14 @@ for k=1:length(envelope)
         
         x=[1:size(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)]/size(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)*100;
         
-        h = figure('Visible','off');
-       
+        h=figure;
+        set(h, 'Visible', 'off')
         %plot(x,trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i)*1000000);
-        [haxes,H1,H2]=plotyy(x, normenv(emgOffset*emgRate+windowOffset:end-windowOffset,i)*100,x,(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i)));
+        [haxes,H1,H2]=plotyy(x, normenv(emgOffset*emgRate+windowOffset:end-windowOffset,i)*100,x,(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i)),'plot');
         
         set(H2,'LineStyle',':')
                      
-        if nargin<7
-            xlabel('% Analysis Window')
-        else
-            xlabel('% Stance')
-        end
+        xlabel(xstring)
         
         % y1 axis limits
         ylimits(1) = min(normenv(:,i))*100;
@@ -83,6 +82,35 @@ for k=1:length(envelope)
        
     save([path{k} 'EMGs\Envelope\EMGsSelectedEnvelope.mat'], 'trialData')
     save([path{k} 'EMGs\Envelope\emg.mat'], 'normenv')
+    
+    %Plot all normalized envelope togheter
+    lineStyle={'-', '--', ':', '-.', '+', 'o', '*', '.', 'x', 's', 'd', 'v', '^', '>','<','p','h'};
+    color={'b', 'r','g', 'c', 'm','y','k'};
+    icolor=1;
+    iline=1;
+    w=figure;
+    hold on
+    for i=1:size(normenv,2)
+
+        plot(x, normenv(emgOffset*emgRate+windowOffset:end-windowOffset,i)*100, strcat(lineStyle{iline},color{icolor}))
+        
+        xlabel(xstring)
+        ylabel('Normalized Envelope (% max)')
+        ylim([0 100])
+        warning off
+        legend(labels) 
+        
+        if icolor==size(color,2)
+            icolor=1;
+            iline=iline+1;
+        else
+            icolor=icolor+1;
+        end
+    end 
+    
+    hold off
+    saveas(w,[path{k}  'EMGs\Envelope\AllNormalizedEnvelopes.fig'])
+    close(w)
     clear trialData normenv
 end
 
