@@ -423,10 +423,10 @@ if isfield(parameters,'EMGsSelected')
         %                          SAVING and PLOTTING
         %--------------------------------------------------------------------------
        
-        if isfield(WindowsSelection,'Offset')
-            %if there's an offset, the Analysis Window is a Stance Phase
+        if isfield(WindowsSelection,'Offset')            
             EnvelopePlotting(EMGsFiltered,MaxEMGvalues,EMGsSelected_C3DLabels, EMGsUnits, foldersPath.trialOutput, AnalogFrameRate,EMGOffset,WindowsSelection.Offset)
         else
+            %Manual method for the Windows Selection has no window offset
             EnvelopePlotting(EMGsFiltered,MaxEMGvalues,EMGsSelected_C3DLabels, EMGsUnits, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
         end
         

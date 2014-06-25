@@ -21,12 +21,11 @@ function [] = EnvelopePlotting(envelope, maxemg, labels, units, path,emgRate,emg
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-if nargin<7
-    windowOffset=0;
-    xstring='% Analysis Window';
-else
-    xstring='% Stance';
+if nargin<8 %Manual method for window selection case
+    windowOffset=0;   
 end
+
+xstring='% Analysis Window';
 
 for k=1:length(envelope)
     
