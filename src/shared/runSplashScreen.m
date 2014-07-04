@@ -30,7 +30,7 @@ figurePath=pwd;
 cd (originalPath)
 
 try
-    s = SplashScreen( 'Splashscreen', [figurePath '\splashScreen.png'], ... %loading image
+    s = SplashScreen( 'Splashscreen', [figurePath filesep 'splashScreen.png'], ... %loading image
         'ProgressBar', 'on', ...
         'ProgressPosition', 5, ...
         'ProgressRatio', 0.4 );

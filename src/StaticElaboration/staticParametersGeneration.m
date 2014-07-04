@@ -62,7 +62,7 @@ if nargin>1  %Parameters not needed for oldParameters
 
     staticParameters.globalToOpenSimRotations=globalToOpenSimRotations;
    
-    save ([foldersPaths.elaboration '\staticParameters.mat'], 'staticParameters')
+    save ([foldersPaths.elaboration filesep 'staticParameters.mat'], 'staticParameters')
 end
 
 

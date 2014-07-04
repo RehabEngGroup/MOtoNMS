@@ -29,7 +29,7 @@ xstring='% Analysis Window';
 
 for k=1:length(envelope)
     
-    mkdir([path{k} 'EMGs\Envelope']);
+    mkdir([path{k} fullfile('EMGs','Envelope')]);
     
     trialData=envelope{k};   
     u=units{k};
@@ -74,13 +74,13 @@ for k=1:length(envelope)
        
         title(labels{i})
         
-        saveas(h,[path{k}  'EMGs\Envelope\' labels{i} '.fig'])
+        saveas(h,[path{k}  fullfile('EMGs','Envelope') filesep labels{i} '.fig'])
         % saveas(h,[path{k}  'EMGs\' tag '\' labels{i} '.png'])
         close(h)        
     end
        
-    save([path{k} 'EMGs\Envelope\EMGsSelectedEnvelope.mat'], 'trialData')
-    save([path{k} 'EMGs\Envelope\emg.mat'], 'normenv')
+    save([path{k} fullfile('EMGs','Envelope','EMGsSelectedEnvelope.mat')], 'trialData')
+    save([path{k} fullfile('EMGs','Envelope','emg.mat')], 'normenv')
     
     %Plot all normalized envelope togheter
     lineStyle={'-', '--', ':', '-.', '+', 'o', '*', '.', 'x', 's', 'd', 'v', '^', '>','<','p','h'};
@@ -108,7 +108,7 @@ for k=1:length(envelope)
     end 
     
     hold off
-    saveas(w,[path{k}  'EMGs\Envelope\AllNormalizedEnvelopes.fig'])
+    saveas(w,[path{k} fullfile('EMGs','Envelope','AllNormalizedEnvelopes.fig')])
     close(w)
     clear trialData normenv
 end

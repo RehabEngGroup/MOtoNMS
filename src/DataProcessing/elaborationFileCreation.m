@@ -398,7 +398,7 @@ MarkersList=MarkersSet(markersIndex);
 %FolderName
 %necessary to have "InputData" in the path
 ind=strfind(foldersPath.inputData, 'InputData');
-elaboration.FolderName=['.\' foldersPath.inputData(ind:end)];
+elaboration.FolderName=['.' filesep foldersPath.inputData(ind:end)];
 
 %Trials List
 Trials=[];
@@ -449,15 +449,15 @@ if true(EMGfound)
     cd('..')
     cd('..')
     
-    EMGApplicationLabelsPath=[pwd '\SetupFiles\DataProcessing\EMGsLabels\'];
+    EMGApplicationLabelsPath=[pwd filesep fullfile('SetupFiles','DataProcessing','EMGsLabels') filesep];
     
     cd(EMGApplicationLabelsPath)
     
     if nargin>3
         oldFileName=[oldElaboration.EMGsSelection.EMGSet];
-        [EMGApplicationLabelsFile] = uigetfile([EMGApplicationLabelsPath '/*.xml'],'Select the .xml file for the EMG Output Labeling',[oldFileName '.xml']);
+        [EMGApplicationLabelsFile] = uigetfile([EMGApplicationLabelsPath filesep '*.xml'],'Select the .xml file for the EMG Output Labeling',[oldFileName '.xml']);
     else
-        [EMGApplicationLabelsFile] = uigetfile([EMGApplicationLabelsPath '/*.xml'],'Select the .xml file for the EMG Output Labeling');
+        [EMGApplicationLabelsFile] = uigetfile([EMGApplicationLabelsPath filesep '*.xml'],'Select the .xml file for the EMG Output Labeling');
     end
     
     cd (originalPath)

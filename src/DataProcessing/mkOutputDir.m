@@ -25,7 +25,7 @@ warning off
 
 for k=1:length(trialsList)
     
-    trialOutputFolders{k}=[elaborationFolderPath '\'  trialsList{k} '\'];
+    trialOutputFolders{k}=[elaborationFolderPath filesep  trialsList{k} filesep];
     
     mkdir(trialOutputFolders{k})
     

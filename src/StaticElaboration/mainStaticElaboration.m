@@ -51,7 +51,7 @@ while newElaboration==1
         foldersPaths=foldersPathsDefinition();
         
         %Acquisition Info: load acquisition.xml
-        acquisitionInfo=xml_read([foldersPaths.inputFile '\acquisition.xml']);
+        acquisitionInfo=xml_read([foldersPaths.inputFile filesep 'acquisition.xml']);
         
         elaborationPaths{e}=foldersPaths.elaboration;
         
@@ -65,14 +65,14 @@ while newElaboration==1
             
         case 'Load and Modify static.xml'
             
-            [oldStaticSettingsName,oldStaticSettingsPath] = uigetfile([foldersPaths.staticElaborations '/*.xml'],'Select static.xml file', 'C:\Windows\Temp\');
-            oldStaticSettings=xml_read([oldStaticSettingsPath '\' oldStaticSettingsName]);
+            [oldStaticSettingsName,oldStaticSettingsPath] = uigetfile([foldersPaths.staticElaborations filesep '*.xml'],'Select static.xml file', pwd);
+            oldStaticSettings=xml_read([oldStaticSettingsPath filesep oldStaticSettingsName]);
             staticConfigurationFileGeneration(foldersPaths,acquisitionInfo,oldStaticSettings);
             staticElaborationFile=1;
     
         case 'Run Static Elaboration'
             
-            [staticElaborationFileName,staticElaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file', 'C:\Windows\Temp\');
+            [staticElaborationFileName,staticElaborationFilePath] = uigetfile([ filesep '*.xml'],'Select elaboration.xml file', pwd);
             runStaticElaboration(staticElaborationFilePath);
             staticElaborationFile=0;
     end

@@ -31,7 +31,7 @@ EMGtxt =[time EMGsData];
 nRows = length(EMGtxt);
 nCols = length(EMGsLabels)+1;   % plus time
 
-fid = fopen([folder,'\emg.txt'], 'w');
+fid = fopen([folder, filesep 'emg.txt'], 'w');
 
 fprintf(fid,'datacolumns %g\n',nCols); 
 fprintf(fid,'datarows %g\n', nRows);

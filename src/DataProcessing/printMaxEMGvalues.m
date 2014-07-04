@@ -26,7 +26,7 @@ function [] = printMaxEMGvalues(dirPath, EMGLabels, MaxEMGvalues)
 
 nEMGChannels=length(EMGLabels);
 
-fid = fopen([dirPath, '\maxemg.txt'], 'w');
+fid = fopen([dirPath, filesep 'maxemg.txt'], 'w');
 
 for i=1:nEMGChannels
     MaxEMGLabel = [char(EMGLabels{i}),'_max '];
@@ -35,4 +35,4 @@ end
 
 fclose(fid);
 
-save([dirPath '\maxemg.mat'],'MaxEMGvalues')
+save([dirPath filesep 'maxemg.mat'],'MaxEMGvalues')

@@ -36,7 +36,7 @@ runTerminalNote()
 
 %Selection of input data 
 pathName = uigetdir(' ','Select your input data folder');
-c3dFiles = dir ([pathName '\*.c3d']);
+c3dFiles = dir ([pathName filesep '*.c3d']);
 
 h = waitbar(0,'Elaborating data...Please wait!');
 
@@ -50,7 +50,7 @@ for k=1:length(c3dFiles)
         
     trialMatFolder=mkOutputPath(pathName,trialsName{k});
     
-    sessionFolder=regexprep(trialMatFolder, [trialsName{k} '\'], '');
+    sessionFolder=regexprep(trialMatFolder, [trialsName{k} filesep], '');
     
     %Data Reading    
     [Markers, AnalogData, FPdata, Events, ForcePlatformInfo, Rates] = getInfoFromC3D(c3dFilePathAndName);

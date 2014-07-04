@@ -54,7 +54,7 @@ globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 %               Load markers data from static mat folder                  %
 %--------------------------------------------------------------------------
 
-load ([foldersPaths.matData '\Markers.mat']);
+load ([foldersPaths.matData filesep 'Markers.mat']);
 protocolMLabels=Markers.Labels;
 
 %% -----------------------------------------------------------------------%
@@ -102,8 +102,8 @@ for k=1:length(Joints)
             [markerstrc,MarkersListjc]=updatingMarkersList(LHJC,RHJC,markerstrc,'LHJC','RHJC',MarkersListjc);
 
             %Saving Points
-            save([foldersPaths.elaboration '\RHJC.mat'] ,'RHJC')
-            save([foldersPaths.elaboration  '\LHJC.mat'] ,'LHJC')            
+            save([foldersPaths.elaboration filesep 'RHJC.mat'] ,'RHJC')
+            save([foldersPaths.elaboration  filesep 'LHJC.mat'] ,'LHJC')            
 
             
         case 'Knee'
@@ -114,8 +114,8 @@ for k=1:length(Joints)
                     
             [markerstrc,MarkersListjc]=updatingMarkersList(LKJC,RKJC,markerstrc,'LKJC','RKJC',MarkersListjc);
 
-            save([foldersPaths.elaboration  '\RKJC.mat'] ,'RKJC')
-            save([foldersPaths.elaboration  '\LKJC.mat'] ,'LKJC')
+            save([foldersPaths.elaboration  filesep 'RKJC.mat'] ,'RKJC')
+            save([foldersPaths.elaboration  filesep 'LKJC.mat'] ,'LKJC')
  
             
         case 'Ankle'
@@ -126,8 +126,8 @@ for k=1:length(Joints)
             
             [markerstrc,MarkersListjc]=updatingMarkersList(LAJC,RAJC,markerstrc,'LAJC','RAJC',MarkersListjc);
             
-            save([foldersPaths.elaboration  '\RAJC.mat'] ,'RAJC')
-            save([foldersPaths.elaboration  '\LAJC.mat'] ,'LAJC')           
+            save([foldersPaths.elaboration  filesep 'RAJC.mat'] ,'RAJC')
+            save([foldersPaths.elaboration  filesep 'LAJC.mat'] ,'LAJC')           
 
             
         case 'Shoulder'
@@ -138,8 +138,8 @@ for k=1:length(Joints)
             
             [markerstrc,MarkersListjc]=updatingMarkersList(LSJC,RSJC,markerstrc,'LSJC','RSJC',MarkersListjc);
             
-            save([foldersPaths.elaboration  '\RSJC.mat'] ,'RSJC')
-            save([foldersPaths.elaboration  '\LSJC.mat'] ,'LSJC')        
+            save([foldersPaths.elaboration  filesep 'RSJC.mat'] ,'RSJC')
+            save([foldersPaths.elaboration  filesep 'LSJC.mat'] ,'LSJC')        
         
             
         case 'Elbow'
@@ -150,8 +150,8 @@ for k=1:length(Joints)
             
             [markerstrc,MarkersListjc]=updatingMarkersList(LEJC,REJC,markerstrc,'LEJC','REJC',MarkersListjc);
             
-            save([foldersPaths.elaboration  '\REJC.mat'] ,'REJC')
-            save([foldersPaths.elaboration  '\LEJC.mat'] ,'LEJC') 
+            save([foldersPaths.elaboration  filesep 'REJC.mat'] ,'REJC')
+            save([foldersPaths.elaboration  filesep 'LEJC.mat'] ,'LEJC') 
             
             
         case 'Wrist'
@@ -162,8 +162,8 @@ for k=1:length(Joints)
             
             [markerstrc,MarkersListjc]=updatingMarkersList(LWJC,RWJC,markerstrc,'LWJC','RWJC',MarkersListjc);
             
-            save([foldersPaths.elaboration  '\RWJC.mat'] ,'RWJC')
-            save([foldersPaths.elaboration  '\LWJC.mat'] ,'LWJC')  
+            save([foldersPaths.elaboration  filesep 'RWJC.mat'] ,'RWJC')
+            save([foldersPaths.elaboration  filesep 'LWJC.mat'] ,'LWJC')  
         
             
             %case ...
@@ -181,15 +181,15 @@ ylabel('Asse y [mm]')
 zlabel('Asse z [mm]')
 axis equal
 figName='JointCenters_globalPosition.fig';
-saveas(gcf,[foldersPaths.elaboration '\' figName]) 
+saveas(gcf,[foldersPaths.elaboration filesep figName]) 
 disp([figName ' (based on frame 1 data) has been saved'])
 
 %% -----------------------------------------------------------------------%
 %                        Write static.trc with jc
 %-------------------------------------------------------------------------%
-ind=strfind(foldersPaths.matData,'\');
+ind=strfind(foldersPaths.matData,filesep);
 trcFileName=[foldersPaths.matData(ind(end)+1:end) '.trc'];
-FullFileName=[foldersPaths.elaboration '\' trcFileName];
+FullFileName=[foldersPaths.elaboration filesep trcFileName];
 
 
 %Mtime and MarkerListjc must be cell to be able to use createtrc

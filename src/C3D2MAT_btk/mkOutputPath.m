@@ -32,13 +32,13 @@ end
 
 %create sessionData folder if it does not exit
 if exist([sessionDataFolderPath 'sessionData'],'dir') ~= 7
-    mkdir ([sessionDataFolderPath '\sessionData']);
+    mkdir ([sessionDataFolderPath filesep 'sessionData']);
 end
 
 %create trial folder if it does not exit
-if exist([sessionDataFolderPath 'sessionData\' trialName],'dir') ~= 7
-    mkdir ([sessionDataFolderPath '\sessionData\' trialName]);
+if exist([sessionDataFolderPath 'sessionData' filesep trialName],'dir') ~= 7
+    mkdir ([sessionDataFolderPath filesep 'sessionData' filesep trialName]);
 end
 
-trialMatFolder=[sessionDataFolderPath '\sessionData\' trialName '\'];
+trialMatFolder=[sessionDataFolderPath filesep 'sessionData' filesep trialName filesep];
 %folder where mat files will be stored

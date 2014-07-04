@@ -26,7 +26,7 @@ w = waitbar(0,'Plotting emg...Please wait!');
 
 for k=1:length(data)
     
-    mkdir([path{k} 'EMGs\Raw' ]);
+    mkdir([path{k} fullfile('EMGs','Raw')]);
     
     %conversion in microV during plot to have 'copy-on-write' and reduce
     %time
@@ -72,14 +72,14 @@ for k=1:length(data)
         
         %disp(['Plotted ' path{k}  'EMGs\' tag '\' labels{i} '.fig'])
         %print(h,'-dps',[path{k}  'EMGs\' tag '\' labels{i} '.ps'] )
-        saveas(h,[path{k}  'EMGs\Raw\' labels{i} '.fig'])
+        saveas(h,[path{k}  fullfile('EMGs','Raw') filesep labels{i} '.fig'])
         %saveas(h,[path{k}  'EMGs\' tag '\' labels{i} '.png'])
         close (h)
     end
      
     waitbar(k/length(data));
      
-    save([path{k} 'EMGs\Raw\EMGsSelectedRaw.mat'], 'trialData')
+    save([path{k}  fullfile('EMGs','Raw','EMGsSelectedRaw.mat')], 'trialData')
 end
 
 close(w)

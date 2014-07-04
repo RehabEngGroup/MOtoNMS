@@ -24,7 +24,7 @@ function []=saveAnalysisWindow(path, window)
 
 for k=1:length(window)
     
-    FolderPath=[path{k} 'FilteredData\'];
+    FolderPath=[path{k} 'FilteredData' filesep];
    
     if exist(FolderPath,'dir') ~= 7
         mkdir(FolderPath);

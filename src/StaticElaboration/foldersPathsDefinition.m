@@ -28,7 +28,7 @@ if nargin>0
        
 else
 
-    [fileName,inputFilePath] = uigetfile([ '/*.c3d'],'Select .c3d input file for static elaboration', 'C:\Windows\Temp\');
+    [fileName,inputFilePath] = uigetfile([ filesep '*.c3d'],'Select .c3d input file for static elaboration', pwd);
     
     trialName = regexprep(regexprep((regexprep(fileName, ' ' , '')), '-',''), '.c3d', '');
     
@@ -42,12 +42,12 @@ if exist(ElaboratedDataPath,'dir') ~= 7
 end
 
 %Session Data folder
-sessionDataFolder=[ElaboratedDataPath 'sessionData\'];
+sessionDataFolder=[ElaboratedDataPath 'sessionData' filesep];
 
 matDataPath=[sessionDataFolder trialName ];
 
 
-staticElaborationsPath=[ElaboratedDataPath 'staticElaborations\'];
+staticElaborationsPath=[ElaboratedDataPath 'staticElaborations' filesep];
 
 if exist(staticElaborationsPath,'dir') ~= 7
     mkdir (staticElaborationsPath);
@@ -62,7 +62,7 @@ else
     %ask for an identificator for this specific elaboration
     IDstaticElaboration = cell2mat(inputdlg('Insert New Elaboration Identifier'));
     
-    elaborationPath=[staticElaborationsPath trialName '\' IDstaticElaboration '\'];
+    elaborationPath=[staticElaborationsPath trialName filesep IDstaticElaboration filesep];
     
     if exist(elaborationPath,'dir') ~= 7
         mkdir (elaborationPath);
