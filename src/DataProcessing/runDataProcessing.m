@@ -333,6 +333,7 @@ if isfield(parameters,'EMGsSelected')
     EMGsSelected_C3DLabels= parameters.EMGsSelected.C3DLabels;
     EMGOffset=parameters.EMGOffset;
     MaxEmgTrialsList=parameters.MaxEmgTrialsList;
+    EMGFileFormat=parameters.EMGFileFormat;
 
     
     %Loading Analog Raw Data from the choosen trials with the corresponding
@@ -433,18 +434,38 @@ if isfield(parameters,'EMGsSelected')
         % ------------------------------------------------------------------------
         %                            PRINT emg.txt
         %--------------------------------------------------------------------------
+        availableFileFormats=['.txt', ' .sto'];
         
-        for k=1:length(trialsList)
+        switch EMGFileFormat
             
-            printEMGtxt(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
+            case '.txt'
+                
+                for k=1:length(trialsList)
+                    
+                    printEMGtxt(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
+                end
+                        
+            case '.sto'
+                
+                for k=1:length(trialsList)
+                    
+                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
+                end
+
+            %case ...
+            %you can add here other file formats
+            
+            otherwise
+                error('ErrorTests:convertTest', ...
+                    ['----------------------------------------------------------------\nWARNING: EMG Output File Format not Available!\nChoose among: [' availableFileFormats ']. Please, check it in your elaboration.xml file'])
         end
         
-        disp('Printed emg.txt' )
+        disp(['Printed emg' EMGFileFormat])
         
         waitbar(7/7);
         close(h)
 
-        % ------------------------------------------------------------------------
+        % -------------------------------------------------------------------------
         %                           PLOTTING EMG
         %--------------------------------------------------------------------------
         plotEMGChoice = questdlg('Do you want to plot EMGs Raw', ...

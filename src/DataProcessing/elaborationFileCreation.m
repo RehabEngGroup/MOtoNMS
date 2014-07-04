@@ -40,12 +40,14 @@ if nargin>3
     InitialValue.Trials=trialsIndexes;
     InitialValue.WindowsSelection.Method=oldParameters.WindowsSelection.Method; 
     InitialValue.MarkersList=trcMarkersIndexes;
+    InitialValue.EMGFileFormat=oldParameters.EMGFileFormat;
     
 else
     InitialValue.Trials=[];
-
     InitialValue.MarkersList=[];
     InitialValue.WindowsSelection.Method='.';
+    
+    InitialValue.EMGFileFormat='.sto'; %default file format
 end
 
 %% ---------Looking for EMGs and EMGs depending initial settings-----------
@@ -523,6 +525,8 @@ if true(EMGfound)
     %electromechanical delay
     %not asked to the user for the moment but saved in the xml file
     elaboration.EMGOffset=0.2;  %set to 200ms
+    elaboration.EMGFileFormat=InitialValue.EMGFileFormat;
+
 end
 
 %---------------------Elaboration.xml writting-----------------------------

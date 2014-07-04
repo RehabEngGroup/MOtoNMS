@@ -96,6 +96,7 @@
       <xs:element name="EMGMaxTrials" type="EMGMaxTrialsType"/>
       <xs:element name="EMGsSelection" type="EMGsSelectionType"/>
       <xs:element name="EMGOffset" type="xs:double"/>
+      <xs:element name="EMGFileFormat" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="elaboration" type="ElaborationType"/>

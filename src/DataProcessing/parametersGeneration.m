@@ -117,6 +117,7 @@ if isfield(elaboration,'EMGsSelection')
     
     parameters.MaxEmgTrialsList=MaxEmgTrialsList;
     parameters.EMGOffset=elaboration.EMGOffset;
+    parameters.EMGFileFormat=elaboration.EMGFileFormat;
 end
 
 %% -------------------------------------------------------------------------- 
