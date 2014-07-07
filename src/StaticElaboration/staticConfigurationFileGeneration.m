@@ -94,12 +94,12 @@ originalPath=pwd;
 cd('..')
 cd('..')
 JCcomputationFolderPath=[pwd filesep fullfile('SetupFiles','StaticElaboration', 'JCcomputation') filesep]; 
-dirList=ls(JCcomputationFolderPath);
+dirList=dir(JCcomputationFolderPath);
 cd (originalPath)
                              
 for j=3:size(dirList,1)                         %dirList(1,:) always = '.' 
                                                 %dirList(2,:) always = '..'
-    jointList{j-2}=regexprep(dirList(j,:), ' ' , '');
+    jointList{j-2}=regexprep(dirList(j).name, ' ' , '');
 end
 
 if nargin>2
