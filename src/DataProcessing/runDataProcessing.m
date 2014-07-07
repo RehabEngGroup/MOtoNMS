@@ -434,7 +434,7 @@ if isfield(parameters,'EMGsSelected')
         % ------------------------------------------------------------------------
         %                            PRINT emg.txt
         %--------------------------------------------------------------------------
-        availableFileFormats=['.txt', ' .sto'];
+        availableFileFormats=['.txt', ' .sto', '.mot'];
         
         switch EMGFileFormat
             
@@ -445,11 +445,11 @@ if isfield(parameters,'EMGsSelected')
                     printEMGtxt(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
                 end
                         
-            case '.sto'
+            case {'.sto','.mot'}
                 
                 for k=1:length(trialsList)
                     
-                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels);
+                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels, EMGFileFormat);
                 end
 
             %case ...

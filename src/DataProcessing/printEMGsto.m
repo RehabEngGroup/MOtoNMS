@@ -1,5 +1,5 @@
-function [] = printEMGsto(folder,time,EMGsData,EMGsLabels)
-% Print normalized EMG linear envelopes in a .sto file
+function [] = printEMGsto(folder,time,EMGsData,EMGsLabels, tag)
+% Print normalized EMG linear envelopes in a .sto or mot file
 
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -28,13 +28,13 @@ EMGsto =[time EMGsData];
 nRows = length(EMGsto);
 nCols = length(EMGsLabels)+1;   % plus time
 
-fid = fopen([folder,'\emg.sto'], 'w');
+fid = fopen([folder,'\emg' tag], 'w');
 
 fprintf(fid,'Normalized EMG Linear Envelopes\n');
 
-fprintf(fid,'datacolumns %g\n',nCols); 
-fprintf(fid,'datarows %g\n', nRows);
-
+fprintf(fid,'nRows=%g\n', nRows);
+fprintf(fid,'nColumns=%g\n',nCols); 
+fprintf(fid, '\n');
 fprintf(fid,'endheader\n');
 
 % Write column labels.
