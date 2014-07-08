@@ -52,7 +52,7 @@ while newElaboration==1
         
         elaborationPaths{e}=foldersPath.elaboration;
         %Trials Name
-        c3dFiles = dir ([foldersPath.inputData '\*.c3d']);
+        c3dFiles = dir ([foldersPath.inputData filesep '*.c3d']);
         
         %Name correction/check
         for k=1:length(c3dFiles)
@@ -60,7 +60,7 @@ while newElaboration==1
         end
 
         %Acquisition Info: load acquisition.xml
-        acquisitionInfo=xml_read([foldersPath.inputData '\acquisition.xml']);
+        acquisitionInfo=xml_read([foldersPath.inputData filesep 'acquisition.xml']);
     end
     
     switch choice
@@ -71,14 +71,14 @@ while newElaboration==1
             
         case 'Load and Modify elaboration.xml'
             
-            [oldElaborationFileName,oldElaborationFilePath] = uigetfile([foldersPath.outputData '/*.xml'],'Select elaboration.xml file','C:\Windows\Temp\');
-            oldElaboration=xml_read([oldElaborationFilePath '\' oldElaborationFileName]);
+            [oldElaborationFileName,oldElaborationFilePath] = uigetfile([foldersPath.outputData filesep '*.xml'],'Select elaboration.xml file',pwd);
+            oldElaboration=xml_read([oldElaborationFilePath filesep oldElaborationFileName]);
             elaborationFileCreation(foldersPath,trialsName,acquisitionInfo,oldElaboration);
             elaborationFile=1;       
             
         case 'Run elaboration'
             
-            [elaborationFileName,elaborationFilePath] = uigetfile([ '/*.xml'],'Select elaboration.xml file', 'C:\Windows\Temp\');
+            [elaborationFileName,elaborationFilePath] = uigetfile([ filesep '*.xml'],'Select elaboration.xml file', pwd);
             runDataProcessing(elaborationFilePath);
             elaborationFile=0;
     end

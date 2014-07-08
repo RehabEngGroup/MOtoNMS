@@ -27,7 +27,7 @@ for k=1:length(note)
     
     %check for FilterData folder: should already exist as created in
     %saveFilteredData.m
-    FilteredDataFolderPath=[path{k} 'FilteredData\'];
+    FilteredDataFolderPath=[path{k} 'FilteredData' filesep];
     
     if exist(FilteredDataFolderPath,'dir') ~= 7
         mkdir(FilteredDataFolderPath);

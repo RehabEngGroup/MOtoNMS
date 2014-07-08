@@ -39,7 +39,7 @@ if exist(outputsFolderPath,'dir') ~= 7
 end
 
 %Session Data folder
-sessionDataFolder=[outputsFolderPath '\sessionData\'];
+sessionDataFolder=[outputsFolderPath filesep 'sessionData' filesep];
 
 
 %Elaboration folder
@@ -52,7 +52,7 @@ else
     IDelaboration = cell2mat(inputdlg('Insert New Elaboration Identifier'));
     
     %elaborationFolderPath=[outputsFolderPath '\elaboration_' IDelaboration '\'];
-    elaborationFolderPath=[outputsFolderPath '\' IDelaboration '\'];
+    elaborationFolderPath=[outputsFolderPath filesep IDelaboration filesep];
     
     if exist(elaborationFolderPath,'dir') ~= 7
         mkdir (elaborationFolderPath);

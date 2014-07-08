@@ -24,7 +24,7 @@ function [data, labels, frames, units] = loadMatData (sessionDataFolder, trialsL
 
 for k=1: length(trialsList)
     
-    trialMatFolder=cell2mat([sessionDataFolder  trialsList(k) '\']);
+    trialMatFolder=cell2mat([sessionDataFolder  trialsList(k) filesep]);
     
     load([trialMatFolder dataType '.mat']);
     

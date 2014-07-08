@@ -24,7 +24,7 @@ function [] = ResultsVisualComparison(data,filteredData,path,tag)
 
 for k=1:length(data)
     
-    mkdir([path{k} 'FilteredData\Figures\']);
+    mkdir([path{k} fullfile('FilteredData','Figures') filesep]);
       
     if length(size(data{k}))>2
         
@@ -36,7 +36,7 @@ for k=1:length(data)
             plot(filteredData{k}(:,:,i),'-.')
             legend('data-x', 'data-y', 'data-z','filtered data-x','filtered data-y','filtered data-z')
             title(tag)
-            saveas(h,[path{k} 'FilteredData\Figures\FP' num2str(i) '_' tag '.fig'])
+            saveas(h,[path{k} fullfile('FilteredData','Figures','FP') num2str(i) '_' tag '.fig'])
             close (h)
         end
 
@@ -47,7 +47,7 @@ for k=1:length(data)
             hold on
             plot(filteredData{k}(:,i),'r')
             legend('data','filtered data')
-            saveas(h,[path{k} 'FilteredData\Figures\Trial_' num2str(k) '.png'])
+            saveas(h,[path{k} fullfile('FilteredData','Figures','Trial_') num2str(k) '.png'])
             close (h)
         end
     end

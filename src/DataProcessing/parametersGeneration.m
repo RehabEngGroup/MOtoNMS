@@ -199,6 +199,6 @@ if nargin>1
     end 
   
     %--------------------------------------------------------------------------        
-    save ([foldersPath.elaboration '\parameters.mat'], 'parameters')
+    save ([foldersPath.elaboration filesep 'parameters.mat'], 'parameters')
 end
 

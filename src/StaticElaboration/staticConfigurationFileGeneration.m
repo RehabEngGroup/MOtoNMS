@@ -74,11 +74,11 @@ end
 %FolderName
 %necessary to have "InputData" in the path
 ind=strfind(foldersPaths.inputFile, 'InputData');
-staticSettings.FolderName=['.\' foldersPaths.inputFile(ind:end)];
+staticSettings.FolderName=['.' filesep foldersPaths.inputFile(ind:end)];
 
 %TrialName
 
-i=strfind(foldersPaths.matData,'\sessionData');
+i=strfind(foldersPaths.matData,[filesep 'sessionData']);
 trialName=foldersPaths.matData(i+13:end);
 staticSettings.TrialName=trialName;
  
@@ -93,13 +93,13 @@ end
 originalPath=pwd;
 cd('..')
 cd('..')
-JCcomputationFolderPath=[pwd '\SetupFiles\StaticElaboration\JCcomputation\']; 
-dirList=ls(JCcomputationFolderPath);
+JCcomputationFolderPath=[pwd filesep fullfile('SetupFiles','StaticElaboration', 'JCcomputation') filesep]; 
+dirList=dir(JCcomputationFolderPath);
 cd (originalPath)
                              
 for j=3:size(dirList,1)                         %dirList(1,:) always = '.' 
                                                 %dirList(2,:) always = '..'
-    jointList{j-2}=regexprep(dirList(j,:), ' ' , '');
+    jointList{j-2}=regexprep(dirList(j).name, ' ' , '');
 end
 
 if nargin>2
@@ -136,17 +136,17 @@ for k=1:size(jointCenters,2)
     joint=jointCenters{k};
     
     JCmethodFilePath=[JCcomputationFolderPath joint];
-    JCfiles = dir ([JCmethodFilePath '\*.xml']);
+    JCfiles = dir ([JCmethodFilePath filesep '*.xml']);
 
     if length(JCfiles)>1    %ask for the file only if more than one file 
                             %in the folder
         if nargin>2
 
             oldFileName=[oldParameters.JCcomputation.Joint(oldMethodIndex(k)).Method ];
-            [JCmethodFileName] = uigetfile([JCmethodFilePath '\*.xml'],'Select .xml file corresponding to the JC Computation Method',[JCmethodFilePath '\' oldFileName '.xml']);
+            [JCmethodFileName] = uigetfile([JCmethodFilePath filesep '*.xml'],'Select .xml file corresponding to the JC Computation Method',[JCmethodFilePath filesep oldFileName '.xml']);
         else
             cd(JCmethodFilePath)
-            [JCmethodFileName] = uigetfile([JCmethodFilePath '\*.xml'],'Select .xml file corresponding to the JC Computation Method');
+            [JCmethodFileName] = uigetfile([JCmethodFilePath filesep '*.xml'],'Select .xml file corresponding to the JC Computation Method');
             cd (originalPath)
          end
     else
@@ -154,8 +154,8 @@ for k=1:size(jointCenters,2)
     end
     
     Pref.ReadAttr=false;
-    JCmethod=xml_read([JCmethodFilePath '\' JCmethodFileName],Pref);
-    disp(['File ' JCmethodFilePath '\' JCmethodFileName 'has been loaded'])
+    JCmethod=xml_read([JCmethodFilePath filesep JCmethodFileName],Pref);
+    disp(['File ' JCmethodFilePath filesep JCmethodFileName 'has been loaded'])
     
     %Creating Joint Structure
     

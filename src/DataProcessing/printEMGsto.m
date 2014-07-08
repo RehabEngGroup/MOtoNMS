@@ -28,7 +28,7 @@ EMGsto =[time EMGsData];
 nRows = length(EMGsto);
 nCols = length(EMGsLabels)+1;   % plus time
 
-fid = fopen([folder,'\emg' tag], 'w');
+fid = fopen([folder, filesep 'emg' tag], 'w');
 
 fprintf(fid,'Normalized EMG Linear Envelopes\n');
 

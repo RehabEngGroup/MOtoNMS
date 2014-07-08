@@ -22,8 +22,8 @@ function [foldersPath,parameters]= DataProcessingSettings(ElaborationFilePath)
 
 %%
 try
-    elaboration=xml_read([ElaborationFilePath '\elaboration.xml']);
-    disp(['Running ' ElaborationFilePath '\elaboration.xml'])
+    elaboration=xml_read([ElaborationFilePath filesep 'elaboration.xml']);
+    disp(['Running ' ElaborationFilePath filesep 'elaboration.xml'])
 catch
     disp('elaboration.xml file not fuond in the specified path')
 end
@@ -34,7 +34,7 @@ i=strfind(ElaborationFilePath,'ElaboratedData');
 acquisitionPath=[ElaborationFilePath(1:(i-1)) elaboration.FolderName(3:end)];
 
 %Acquisition Info: load acquisition.xml
-acquisitionInfo=xml_read([acquisitionPath '\acquisition.xml']);
+acquisitionInfo=xml_read([acquisitionPath filesep 'acquisition.xml']);
 
 %Folders Definition
 foldersPath=foldersDefinition(acquisitionPath,ElaborationFilePath);

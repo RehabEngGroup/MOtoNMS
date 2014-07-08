@@ -23,8 +23,8 @@ function [foldersPath,parameters]= StaticElaborationSettings(ConfigFilePath)
 %%
 
 try
-    staticSettings=xml_read([ConfigFilePath '\static.xml']);
-    disp(['Running ' ConfigFilePath '\static.xml'])
+    staticSettings=xml_read([ConfigFilePath filesep 'static.xml']);
+    disp(['Running ' ConfigFilePath filesep 'static.xml'])
 catch
     disp('static.xml file not fuond in the specified path')
 end
@@ -35,7 +35,7 @@ i=strfind(ConfigFilePath,'ElaboratedData');
 acquisitionPath=[ConfigFilePath(1:(i-1)) staticSettings.FolderName(3:end)];
 
 %Acquisition Info: load acquisition.xml
-acquisitionInfo=xml_read([acquisitionPath '\acquisition.xml']);
+acquisitionInfo=xml_read([acquisitionPath filesep 'acquisition.xml']);
 
 trialName=staticSettings.TrialName;
 

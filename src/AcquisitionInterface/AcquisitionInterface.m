@@ -78,13 +78,13 @@ originalPath=pwd;
 cd('..')
 cd('..')
 
-laboratoryPath=[pwd '\SetupFiles\AcquisitionInterface\Laboratories\'];   
+laboratoryPath=[pwd filesep fullfile('SetupFiles', 'AcquisitionInterface', 'Laboratories') filesep];   
 cd (originalPath)
 
 if nargin>0
-    [laboratoryName] = uigetfile([ '/*.xml'],'Select the .xml file corresponding to the lab',[laboratoryPath oldAcquisition.Laboratory.Name '.xml']);
+    [laboratoryName] = uigetfile([ filesep '*.xml'],'Select the .xml file corresponding to the lab',[laboratoryPath oldAcquisition.Laboratory.Name '.xml']);
 else
-    [laboratoryName] = uigetfile([laboratoryPath '/*.xml'],'Select the .xml file corresponding to the lab');
+    [laboratoryName] = uigetfile([laboratoryPath filesep '*.xml'],'Select the .xml file corresponding to the lab');
 end
 
 Pref.ReadAttr=false;
@@ -165,13 +165,13 @@ originalPath=pwd;
 cd('..')
 cd('..')
 
-markersProtocolPath=[pwd '\SetupFiles\AcquisitionInterface\MarkersProtocols\'];   
+markersProtocolPath=[pwd filesep fullfile('SetupFiles','AcquisitionInterface','MarkersProtocols') filesep];   
 
 cd(markersProtocolPath)
 if nargin>0
-    [markersProtocolName] = uigetfile([markersProtocolPath '/*.xml'],'Select the .xml file corresponding to the Markers Protocol',[oldAcquisition.MarkersProtocol.Name '.xml']);
+    [markersProtocolName] = uigetfile([markersProtocolPath filesep '*.xml'],'Select the .xml file corresponding to the Markers Protocol',[oldAcquisition.MarkersProtocol.Name '.xml']);
 else
-    [markersProtocolName] = uigetfile([markersProtocolPath '/*.xml'],'Select the .xml file corresponding to the Markers Protocol');
+    [markersProtocolName] = uigetfile([markersProtocolPath filesep '*.xml'],'Select the .xml file corresponding to the Markers Protocol');
 end
 cd (originalPath)
 
@@ -248,13 +248,13 @@ if nEMGSystem>0
     cd('..')
     cd('..')
     
-    EMGsProtocolPath=[pwd '\SetupFiles\AcquisitionInterface\EMGsProtocols\'];
+    EMGsProtocolPath=[pwd filesep fullfile('SetupFiles','AcquisitionInterface','EMGsProtocols') filesep];
     
     cd(EMGsProtocolPath)
     if nargin>0
-        [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol',[oldAcquisition.EMGs.Protocol.Name '.xml']);
+        [EMGsProtocolName] = uigetfile([EMGsProtocolPath filesep '*.xml'],'Select the .xml file corresponding to the EMGs Protocol',[oldAcquisition.EMGs.Protocol.Name '.xml']);
     else
-        [EMGsProtocolName] = uigetfile([EMGsProtocolPath '/*.xml'],'Select the .xml file corresponding to the EMGs Protocol');
+        [EMGsProtocolName] = uigetfile([EMGsProtocolPath filesep '*.xml'],'Select the .xml file corresponding to the EMGs Protocol');
     end
     cd (originalPath)
     
@@ -312,7 +312,7 @@ end
 %                              TRIALS                                     %
 %-------------------------------------------------------------------------%
 %Trials Name
-c3dFiles = dir ([DataSetPath '\*.c3d']);
+c3dFiles = dir ([DataSetPath filesep '*.c3d']);
 
 nTrials=length(c3dFiles);
 
@@ -447,7 +447,7 @@ Pref.StructItem=false;  %to not have arrays of structs with 'item' notation
 Pref.ItemName='Muscle';
 Pref.CellItem=false;
 
-xml_write([DataSetPath '\acquisition.xml'],acquisition,'acquisition',Pref);
+xml_write([DataSetPath filesep 'acquisition.xml'],acquisition,'acquisition',Pref);
 
 disp('Any missing information will prevent .xml validation with its .xsd');
 

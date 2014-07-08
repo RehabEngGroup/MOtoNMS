@@ -24,7 +24,7 @@ function []=saveFilteredData(path, time, data, dataType)
 
 for k=1:length(data)
  
-    FilteredDataFolderPath=[path{k} 'FilteredData\'];
+    FilteredDataFolderPath=[path{k} 'FilteredData' filesep];
   
     if exist(FilteredDataFolderPath,'dir') ~= 7
         mkdir(FilteredDataFolderPath);

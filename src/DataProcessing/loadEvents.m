@@ -24,7 +24,7 @@ function events = loadEvents (path,trialsList)
 
 for k=1: length(trialsList)
     
-    trialMatFolder=cell2mat([path  trialsList(k) '\']);
+    trialMatFolder=cell2mat([path  trialsList(k) filesep]);
     
     load([trialMatFolder 'Events.mat']);
     
