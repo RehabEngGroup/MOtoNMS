@@ -62,6 +62,14 @@ trcMarkersList=parameters.trcMarkersList;
 globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 FPtoGlobalRotations=parameters.FPtoGlobalRotations;
 
+if isfield(parameters,'OutputFileFormats')
+    MarkerOFileFormat=parameters.OutputFileFormats.MarkerTrajectories;
+    GRFOFileFormat=parameters.OutputFileFormats.GRF;
+else
+    MarkerOFileFormat='.trc'; %set default output format
+    GRFOFileFormat='.mot';
+end
+    
 %Create Trails Output Dir
 foldersPath.trialOutput= mkOutputDir(foldersPath.elaboration,trialsList);
 
@@ -259,16 +267,21 @@ waitbar(3/7);
 
 %MarkersFilteredNaN=replaceMissingWithNaNs(MarkersFiltered);
 %load([foldersPath.sessionData 'dMLabels.mat'])
-  
-for k=1:length(trialsList)
-
-    FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.trc'];
-    %markers selection anticipates at the beginning to avoid processing 
-    %useless data and problems with interpolation
-    %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
-    %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
-    %createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)    
-    createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+if strcmp(MarkerOFileFormat, '.trc')
+    for k=1:length(trialsList)
+        
+        FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.trc'];
+        %markers selection anticipates at the beginning to avoid processing
+        %useless data and problems with interpolation
+        %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
+        %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+        %createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+        createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+    end
+else
+    disp(' ')
+    error('ErrorTests:convertTest', ...
+        ['----------------------------------------------------------------\nWARNING: WRONG Marker Trajectories Output File Format!\nOnly .trc is available in the current version. Please, check it in your elaboration.xml file'])
 end
 
 waitbar(4/7);   
@@ -300,10 +313,18 @@ for k=1:length(trialsList)
     
     MOTdataOpenSim{k}=RotateCS (globalMOTdata{k},globalToOpenSimRotations);
     
-    %Write MOT
-    FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.mot'];
-   
-    writeMot(MOTdataOpenSim{k},Ftime{k},FullFileName)
+    if strcmp(GRFOFileFormat, '.mot')
+        
+        %Write MOT
+        FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.mot'];
+        
+        writeMot(MOTdataOpenSim{k},Ftime{k},FullFileName)
+        
+    else
+        error('ErrorTests:convertTest', ...
+            ['----------------------------------------------------------------\nWARNING: WRONG GRF Output File Format!\nOnly .mot is available in the current version. Please, check it in your elaboration.xml file'])
+    end
+        
 end
 
 waitbar(5/7);
@@ -333,8 +354,12 @@ if isfield(parameters,'EMGsSelected')
     EMGsSelected_C3DLabels= parameters.EMGsSelected.C3DLabels;
     EMGOffset=parameters.EMGOffset;
     MaxEmgTrialsList=parameters.MaxEmgTrialsList;
-    EMGFileFormat=parameters.EMGFileFormat;
-
+    
+    if isfield(parameters,'OutputFileFormats')
+        EMGOFileFormat=parameters.OutputFileFormats.EMG;
+    else
+        EMGOFileFormat='.sto';  %default EMG output file format
+    end
     
     %Loading Analog Raw Data from the choosen trials with the corresponding
     %labels
@@ -434,9 +459,9 @@ if isfield(parameters,'EMGsSelected')
         % ------------------------------------------------------------------------
         %                            PRINT emg.txt
         %--------------------------------------------------------------------------
-        availableFileFormats=['.txt', ' .sto', '.mot'];
+        availableFileFormats=['.txt', ' .sto', ' .mot'];
         
-        switch EMGFileFormat
+        switch EMGOFileFormat
             
             case '.txt'
                 
@@ -449,7 +474,7 @@ if isfield(parameters,'EMGsSelected')
                 
                 for k=1:length(trialsList)
                     
-                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels, EMGFileFormat);
+                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels, EMGOFileFormat);
                 end
 
             %case ...
@@ -460,7 +485,7 @@ if isfield(parameters,'EMGsSelected')
                     ['----------------------------------------------------------------\nWARNING: EMG Output File Format not Available!\nChoose among: [' availableFileFormats ']. Please, check it in your elaboration.xml file'])
         end
         
-        disp(['Printed emg' EMGFileFormat])
+        disp(['Printed emg' EMGOFileFormat])
         
         waitbar(7/7);
         close(h)

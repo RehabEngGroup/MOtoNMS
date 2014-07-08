@@ -40,14 +40,40 @@ if nargin>3
     InitialValue.Trials=trialsIndexes;
     InitialValue.WindowsSelection.Method=oldParameters.WindowsSelection.Method; 
     InitialValue.MarkersList=trcMarkersIndexes;
-    InitialValue.EMGFileFormat=oldParameters.EMGFileFormat;
+    
+    if isfield(oldParameters,'OutputFileFormats')
+        if isfield(oldParameters.OutputFileFormats,'MarkerTrajectories')
+            InitialValue.OutputFileFormats.MarkerTrajectories=oldParameters.OutputFileFormats.MarkerTrajectories;
+        else
+            InitialValue.OutputFileFormats.MarkerTrajectories='.trc';
+        end
+        
+        if isfield(oldParameters.OutputFileFormats,'GRF')
+            InitialValue.OutputFileFormats.GRF=oldParameters.OutputFileFormats.GRF;
+        else
+            InitialValue.OutputFileFormats.MarkerTrajectories='.mot';
+        end
+        
+        if isfield(oldParameters.OutputFileFormats,'EMG')
+            InitialValue.OutputFileFormats.EMG=oldParameters.OutputFileFormats.EMG;
+        else
+            InitialValue.OutputFileFormats.MarkerTrajectories='.sto';
+        end       
+    else
+        %Default file formats
+        InitialValue.OutputFileFormats.MarkerTrajectories='.trc';
+        InitialValue.OutputFileFormats.GRF='.mot';
+        InitialValue.OutputFileFormats.EMG='.sto';
+    end
     
 else
     InitialValue.Trials=[];
     InitialValue.MarkersList=[];
     InitialValue.WindowsSelection.Method='.';
-    
-    InitialValue.EMGFileFormat='.sto'; %default file format
+    %Output file formats: default file formats
+    InitialValue.OutputFileFormats.MarkerTrajectories='.trc';
+    InitialValue.OutputFileFormats.GRF='.mot';
+    InitialValue.OutputFileFormats.EMG='.sto'; 
 end
 
 %% ---------Looking for EMGs and EMGs depending initial settings-----------
@@ -525,9 +551,10 @@ if true(EMGfound)
     %electromechanical delay
     %not asked to the user for the moment but saved in the xml file
     elaboration.EMGOffset=0.2;  %set to 200ms
-    elaboration.EMGFileFormat=InitialValue.EMGFileFormat;
 
 end
+
+elaboration.OutputFileFormats=InitialValue.OutputFileFormats;
 
 %---------------------Elaboration.xml writting-----------------------------
 Pref.StructItem=false;  %to not have arrays of structs with 'item' notation

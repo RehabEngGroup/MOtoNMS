@@ -98,6 +98,23 @@ end
 
 parameters.trcMarkersList=trcMarkersList;
 
+if isfield(elaboration,'OutputFileFormats')
+    
+    if isfield(elaboration.OutputFileFormats,'MarkerTrajectories')
+        OutputFileFormats.MarkerTrajectories=elaboration.OutputFileFormats.MarkerTrajectories;
+    end
+    
+    if isfield(elaboration.OutputFileFormats,'GRF')
+        OutputFileFormats.GRF=elaboration.OutputFileFormats.GRF;
+    end
+        
+    if isfield(elaboration.OutputFileFormats,'EMG')
+        OutputFileFormats.EMG=elaboration.OutputFileFormats.EMG;
+    end                         
+    
+    parameters.OutputFileFormats=OutputFileFormats;
+end
+
 %% If there are EMGs data
 if isfield(elaboration,'EMGsSelection')
     
@@ -117,8 +134,9 @@ if isfield(elaboration,'EMGsSelection')
     
     parameters.MaxEmgTrialsList=MaxEmgTrialsList;
     parameters.EMGOffset=elaboration.EMGOffset;
-    parameters.EMGFileFormat=elaboration.EMGFileFormat;
+
 end
+
 
 %% -------------------------------------------------------------------------- 
 %adding parameters from acquisition and c3d files

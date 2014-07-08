@@ -86,6 +86,13 @@
       <xs:element name="EMGs" type="EMGsType"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="OutputFileFormatsType">
+    <xs:sequence maxOccurs="1" minOccurs="0">
+      <xs:element minOccurs="0" name="MarkerTrajectories" type="xs:string"/>
+      <xs:element minOccurs="0" name="GRF" type="xs:string"/>
+      <xs:element minOccurs="0" name="EMG" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ElaborationType">
     <xs:sequence>
       <xs:element name="FolderName" type="xs:string"/>
@@ -96,7 +103,7 @@
       <xs:element name="EMGMaxTrials" type="EMGMaxTrialsType"/>
       <xs:element name="EMGsSelection" type="EMGsSelectionType"/>
       <xs:element name="EMGOffset" type="xs:double"/>
-      <xs:element name="EMGFileFormat" type="xs:string"/>
+      <xs:element minOccurs="0" name="OutputFileFormats" type="OutputFileFormatsType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="elaboration" type="ElaborationType"/>
