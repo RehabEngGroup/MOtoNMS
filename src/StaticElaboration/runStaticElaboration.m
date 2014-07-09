@@ -34,6 +34,7 @@ if nargin==0
 end
 
 addSharedPath()
+
 %% -------------------STATIC ELABORATION SETTING-------------------------%%
 %           Folders paths definition and parameters generation            %
 %-------------------------------------------------------------------------%

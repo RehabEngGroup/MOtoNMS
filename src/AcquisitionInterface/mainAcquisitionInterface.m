@@ -30,7 +30,11 @@
 
 %%
 clear all
-addSharedPath()
+%Adding shared folder path
+originalPath=pwd;
+cd('../shared')
+addpath(pwd)
+cd (originalPath)
 
 %Comment the following line to disable the splashscreen 
 runSplashScreen()

@@ -26,15 +26,18 @@
 % Alice Mantoan, Monica Reggiani
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
+%%
 
-%% ----------------------------STARTING------------------------------------
+function []=StaticInterface()
+
 clear all
 addSharedPath()
+
 %Comment the following line to disable the splashscreen 
 %runSplashScreen
 runTerminalNote()
-%--------------------------------------------------------------------------
 
+%%
 newElaboration=1;
 e=1;
 

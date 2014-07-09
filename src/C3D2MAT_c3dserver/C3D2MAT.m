@@ -31,10 +31,13 @@
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
+
+function []=C3D2MAT()
+
 addSharedPath()
 runTerminalNote()
 
-%Selection of input data 
+%% Selection of input data 
 pathName = uigetdir(' ','Select your input data folder');
 c3dFiles = dir ([pathName filesep '*.c3d']);
 
@@ -83,5 +86,12 @@ close(h)
 
 %Saving trialsName list of read c3d file at the end
 save([sessionFolder 'trialsName.mat'],'trialsName')
+
+%save_to_base(1)
+% save_to_base() copies all variables in the calling function to the base
+% workspace. This makes it possible to examine this function internal
+% variables from the Matlab command prompt after the calling function
+% terminates. Uncomment the following command if you want to activate it
+
 
      

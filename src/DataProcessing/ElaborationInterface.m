@@ -25,21 +25,23 @@
 % Alice Mantoan, Monica Reggiani
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
+%%
 
-%% ----------------------------STARTING------------------------------------
+function []=ElaborationInterface()
+
 clear all
 addSharedPath()
+
 %Comment the following line to disable the splashscreen 
 %runSplashScreen
 runTerminalNote()
-%--------------------------------------------------------------------------
 
+%% 
 newElaboration=1;
 e=1;
 
 while newElaboration==1 
-    %%
-    
+       
     %Choosing what to do
     choice=elaborationInterfaceOptions();
     
