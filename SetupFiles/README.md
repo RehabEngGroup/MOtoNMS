@@ -1,3 +1,5 @@
+# MOtoNMS: Setup Files #
+
 This folder includes three subdirectories, one for each toolbox step 
 that require setup files.
 
@@ -8,8 +10,8 @@ application (Data Processing), and information for joint center
 computation methods (Static Elaboration).
 
 The meaning of these files and how to create and validate them are described
-in the Setup Files sections of each chapter of the User Manual.
+in the *Setup Files* sections of each chapter of the User Manual.
 
-"xsd" folder includes XML Schema required for the validation procedure described in Appendix B of the User Manual.
+*xsd* folder includes XML Schema required for the validation procedure described in Appendix B of the User Manual.
 
 
