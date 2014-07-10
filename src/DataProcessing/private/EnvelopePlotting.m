@@ -55,13 +55,16 @@ for k=1:length(envelope)
         ylimits(2) = max(normenv(:,i))*100;
         set(haxes(1), 'YLim', ylimits);
         % y1 ticks
-        ytick  = round(linspace(ylimits(1),ylimits(2),5));
+        ytick  = round(linspace(ylimits(1),ylimits(2),4));
         set(haxes(1),'YTick',ytick);
         
         % y2 axis limits
         ylimits2(1) = min(trialData(:,i));
         ylimits2(2) = max(trialData(:,i));
         set(haxes(2), 'YLim', ylimits2);
+        % y2 ticks        
+        ytick2  = linspace(ylimits2(1),ylimits2(2),4);
+        set(haxes(2),'YTick',ytick2);
         
         axes(haxes(2))
         set(haxes(1),'box','off')
