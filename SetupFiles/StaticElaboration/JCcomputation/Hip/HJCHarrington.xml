@@ -23,7 +23,7 @@
 		  </MarkerNames>
 	    </Protocol>
         <Protocol>
-          <Name>UNIPD-ALclusters</Name>  
+          <Name>UNIPD_CASTforOpenSim</Name>  
 	      <MarkerNames>
        	      <Marker>LASIS</Marker>
               <Marker>RASIS</Marker>

@@ -1,0 +1,62 @@
+<EMGSet>
+    <EMG>
+        <OutputLabel>add_mag_l</OutputLabel>
+        <C3DLabel>Right Adductor Longus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>bifemlh_l</OutputLabel>
+        <C3DLabel>Biceps femoris caput longus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>lat_gas_l</OutputLabel>
+        <C3DLabel>Gastrocnemius lateralis</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>med_gas_l</OutputLabel>
+        <C3DLabel>Gastrocnemius medialis</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>glut_max_l</OutputLabel>
+        <C3DLabel>Gluteus maximus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>glut_med_l</OutputLabel>
+        <C3DLabel>Gluteus medius</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>per_long_l</OutputLabel>
+        <C3DLabel>Peroneus longus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>rect_fem_l</OutputLabel>
+        <C3DLabel>Rectus femoris</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>sar_l</OutputLabel>
+        <C3DLabel>Sartorius</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>semiten_l</OutputLabel>
+        <C3DLabel>Semitendinosus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>soleus_l</OutputLabel>
+        <C3DLabel>Soleus</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>tfl_l</OutputLabel>
+        <C3DLabel>Tensor fasciae latae</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>tib_ant_l</OutputLabel>
+        <C3DLabel>Tibialis anterior</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>vas_lat_l</OutputLabel>
+        <C3DLabel>Vastus lateralis</C3DLabel>
+    </EMG>
+    <EMG>
+        <OutputLabel>vas_med_l</OutputLabel>
+        <C3DLabel>Vastus medialis</C3DLabel>
+    </EMG>
+ </EMGSet>

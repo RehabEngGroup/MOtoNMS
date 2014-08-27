@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EMGsProtocol>
+   <Name>UNIPD-15noside-left</Name>
+   <MuscleList>
+      <Muscle>Gluteus maximus</Muscle>
+      <Muscle>Gluteus medius</Muscle>
+      <Muscle>Tensor fasciae latae</Muscle>
+      <Muscle>Sartorius</Muscle>
+      <Muscle>Right Adductor Longus</Muscle>
+      <Muscle>Rectus femoris</Muscle>
+      <Muscle>Biceps femoris caput longus</Muscle>
+      <Muscle>Semitendinosus</Muscle>
+      <Muscle>Vastus lateralis</Muscle>
+      <Muscle>Vastus medialis</Muscle>
+      <Muscle>Tibialis anterior</Muscle>
+      <Muscle>Peroneus longus</Muscle>
+      <Muscle>Gastrocnemius lateralis</Muscle>
+      <Muscle>Gastrocnemius medialis</Muscle>
+      <Muscle>Soleus</Muscle>
+   </MuscleList>
+   <InstrumentedLeg>Left</InstrumentedLeg>
+</EMGsProtocol>
