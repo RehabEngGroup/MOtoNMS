@@ -1,4 +1,4 @@
-function [] = printEMGsto(folder,time,EMGsData,EMGsLabels, tag)
+function [] = printEMGmot(folder,time,EMGsData,EMGsLabels, tag)
 % Print normalized EMG linear envelopes in a .sto or mot file
 
 % The file is part of matlab MOtion data elaboration TOolbox for
@@ -23,9 +23,9 @@ function [] = printEMGsto(folder,time,EMGsData,EMGsLabels, tag)
 
 %%
 
-EMGsto =[time EMGsData];
+EMGmot =[time EMGsData];
 
-nRows = length(EMGsto);
+nRows = length(EMGmot);
 nCols = length(EMGsLabels)+1;   % plus time
 
 fid = fopen([folder, filesep 'emg' tag], 'w');
@@ -50,9 +50,9 @@ for i = 1:nRows
     fprintf(fid, '\n');
     for j=1:nCols
         if j == 1
-            fprintf(fid,'%g\t',EMGsto(i));
+            fprintf(fid,'%g\t',EMGmot(i));
         else
-            fprintf(fid,'%10f\t',EMGsto(i,j));
+            fprintf(fid,'%10f\t',EMGmot(i,j));
         end
     end
 end

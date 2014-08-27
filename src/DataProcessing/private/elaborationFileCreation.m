@@ -51,19 +51,19 @@ if nargin>3
         if isfield(oldParameters.OutputFileFormats,'GRF')
             InitialValue.OutputFileFormats.GRF=oldParameters.OutputFileFormats.GRF;
         else
-            InitialValue.OutputFileFormats.MarkerTrajectories='.mot';
+            InitialValue.OutputFileFormats.GRF='.mot';
         end
         
         if isfield(oldParameters.OutputFileFormats,'EMG')
             InitialValue.OutputFileFormats.EMG=oldParameters.OutputFileFormats.EMG;
         else
-            InitialValue.OutputFileFormats.MarkerTrajectories='.sto';
+            InitialValue.OutputFileFormats.EMG='.mot';
         end       
     else
         %Default file formats
         InitialValue.OutputFileFormats.MarkerTrajectories='.trc';
         InitialValue.OutputFileFormats.GRF='.mot';
-        InitialValue.OutputFileFormats.EMG='.sto';
+        InitialValue.OutputFileFormats.EMG='.mot';
     end
     
 else
@@ -73,7 +73,7 @@ else
     %Output file formats: default file formats
     InitialValue.OutputFileFormats.MarkerTrajectories='.trc';
     InitialValue.OutputFileFormats.GRF='.mot';
-    InitialValue.OutputFileFormats.EMG='.sto'; 
+    InitialValue.OutputFileFormats.EMG='.mot'; 
 end
 
 %% ---------Looking for EMGs and EMGs depending initial settings-----------

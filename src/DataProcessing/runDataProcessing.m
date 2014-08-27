@@ -358,7 +358,7 @@ if isfield(parameters,'EMGsSelected')
     if isfield(parameters,'OutputFileFormats')
         EMGOFileFormat=parameters.OutputFileFormats.EMG;
     else
-        EMGOFileFormat='.sto';  %default EMG output file format
+        EMGOFileFormat='.mot';  %default EMG output file format
     end
     
     %Loading Analog Raw Data from the choosen trials with the corresponding
@@ -474,7 +474,7 @@ if isfield(parameters,'EMGsSelected')
                 
                 for k=1:length(trialsList)
                     
-                    printEMGsto(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels, EMGOFileFormat);
+                    printEMGmot(foldersPath.trialOutput{k},EMGtime{k},NormEMG{k},EMGsSelected_OutputLabels, EMGOFileFormat);
                 end
 
             %case ...
