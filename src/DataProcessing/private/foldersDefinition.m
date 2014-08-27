@@ -52,7 +52,7 @@ else
     IDelaboration = cell2mat(inputdlg('Insert New Elaboration Identifier'));
     
     %elaborationFolderPath=[outputsFolderPath '\elaboration_' IDelaboration '\'];
-    elaborationFolderPath=[outputsFolderPath filesep IDelaboration filesep];
+    elaborationFolderPath=[outputsFolderPath filesep 'dynamicElaborations' filesep IDelaboration filesep];
     
     if exist(elaborationFolderPath,'dir') ~= 7
         mkdir (elaborationFolderPath);
