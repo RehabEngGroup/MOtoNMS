@@ -25,15 +25,17 @@ documentation can be found at <https://simtk.org/home/motonms> and
 the latest version of the manual is always available at <http://goo.gl/Ukrw5B>
 
 ## Installation ##
-Just unzip the distribution and start working with Matlab.
-This release include four directories:
+Just unzip the distribution and start working with MATLAB.
+This release includes four directories:
 
 - src:        MOtoNMS source code
-- TestData:   Example datasets from four different laboratories 
-- Licenses:   Licenses for the tools used in MOtoNMS that are developed 
-              by other authors
 - SetupFiles: Setup files describing laboratories configuration, 
               EMG and marker protocols, etc.
+- Licenses:   Licenses for the tools used in MOtoNMS that are developed 
+              by other authors
+- TestData:   Example datasets from four different laboratories 
+
+The TestData package is also available at <https://simtk.org/home/motonms>.
 
 
 ## Execution ##
@@ -50,7 +52,7 @@ how to use MOtoNMS
 
 
 ## Licensing ##
-Please see the file called license.
+Please see the file called License.
 
 Copyright (C) 2012-2014 Alice Mantoan, Monica Reggiani
 
