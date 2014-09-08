@@ -8,7 +8,7 @@ Initial Release
 v. 2.0 (May 9, 2014)
 
 NEW FEATURES:
-- Support to Matlab 64 bit and multiplatform (C3D2MAT based on BTK)  
+- Support to MATLAB 64 bit and multiplatform (C3D2MAT based on BTK)  
 - EMG selection using Analog Labels from each C3D input file
 - Shoulder, elbow, and wrist JC computation for static trials, and examples of setup files for Griffith University markerset
 - Missing values for markers trajectories identified by NaN instead of 0 in .trc output files
@@ -32,3 +32,31 @@ BUG FIXES:
 - User is not required to set a new identifier each time he/she load an already available elaboration.xml file as in version 1.0.  
 - Changed the definition of the interval where markers are visible in replaceMissingWithNaNs.m (the definition of var 'index')
 - Fixed the computation of the hip joint center (HJC) with the Harrington method (HJCHarrington.m)
+
+
+v. 2.1 (September 8, 2014)
+
+NEW FEATURES:
+
+- Compatibility with MacOS X operating systems 
+- Envelope plots with normalization scale (% max)
+- Plot of normalized EMG linear envelopes for all the muscles
+- .sto (OpenSim storage) file format for EMG output 
+- .mot (SIMM and OpenSim motion) file format for EMG output (new default)
+
+CODE CHANGES:
+
+- Changed elaboration.xsd to add support of different output file formats, preserving compatibility with previous versions.
+- Renamed mainStaticElaboration.m as StaticInterface.m
+- Moved main programs (C3D2MAT.m,ElaborationInterface.m, StaticInterface.m) to functions
+- Moved internal functions in  private folders
+- Renamed all readme.txt to README.md
+- Modified y axis scale setting of envelope plots
+- Modified data storage structure: added dynamicElaborations folder to group all the multiple executions of DataProcessing
+
+BUG FIXES:
+
+- Removed addition of mean values after EMG filtering
+- Fixed units in EMGs plotting
+- Fixed x label of envelope plots
+- Fixed trial type identification for filtering cutoff definition
