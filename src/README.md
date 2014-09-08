@@ -13,20 +13,20 @@ distributed with this release. If you do not have a copy please visit
 
 ## Processing pipeline ##
 
-### 1) AcquisitionInterface ###
+### 1) Acquisition Interface ###
 This processing step generate an acquisition.xml file that includes all 
 the required information for a new dataset to be processed with MOtoNMS. 
 See chapter *Acquisition Interface: describing your data* of the User Manual
  
 ### 2a) C3D2MAT_btk  ###
-C3D2MAT converts data from c3d in .mat format and save them in a 
+C3D2MAT converts data from C3D in .mat format and save them in a 
 sessionData folder. Two alternatives are provided to accomplish this task.
 This part exploits BTK (Biomechanical Toolkit) to access C3D files.
 You need to download the BTK version for your system from the BTK project site: 
 
 <https://code.google.com/p/b-tk/wiki/MatlabBinaries>
 
-You will also need to add the correct BTK folder to the path of Matlab.
+You will also need to add the correct BTK folder to the path of MATLAB.
 See chapter *C3DtoMAT: from C3D to MATLAB format* of the User Manual.
 
 
@@ -37,7 +37,7 @@ it is based on c3dserver. It requires Matlab 32 bit and Windows environment.
 You can use alternatively C3D2MAT_btk or C3D2MAT_c3dserver.
 See chapter *C3DtoMAT: from C3D to MATLAB format* of the User Manual.
 
-### 3) StaticElaboration ###
+### 3) Static Elaboration ###
 Static Elaboration processes markers trajectories and computes 
 subject-specific joint centers from data recorded during static standing 
 trials, storing them in .trc files. 
