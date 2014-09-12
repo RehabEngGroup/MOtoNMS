@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Appendix C: Revision History &mdash; MOtoNMS 2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.1 documentation" href="../index.html" />
+    <link rel="prev" title="Appendix B: Validation of Setup and Configuration Files" href="appendixB.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="appendixB.html" title="Appendix B: Validation of Setup and Configuration Files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="appendix-c-revision-history">
+<span id="appendixc"></span><h1>Appendix C: Revision History<a class="headerlink" href="#appendix-c-revision-history" title="Permalink to this headline">¶</a></h1>
+<p><strong>v. 1.0 (February 17, 2014)</strong></p>
+<p>INITIAL RELEASE</p>
+<p><strong>v. 2.0 (May 9, 2014)</strong></p>
+<p>NEW FEATURES:</p>
+<ul class="simple">
+<li>Support to MATLAB 64 bit and multiplatform (<tt class="docutils literal"><span class="pre">C3D2MAT</span></tt> based on BTK)</li>
+<li>EMG selection using Analog Labels from each C3D input file</li>
+<li>Shoulder, elbow, and wrist JC computation for static trials, and examples of setup files for Griffith University markerset</li>
+<li>Missing values for markers trajectories identified by NaN instead of 0 in <tt class="docutils literal"><span class="pre">.trc</span></tt> output files</li>
+</ul>
+<p>CODE CHANGES:</p>
+<ul class="simple">
+<li>Added <tt class="docutils literal"><span class="pre">src/shared</span></tt> folder to store functions common to several steps</li>
+<li>Modified filtering of markers trajectories: they are filtered only when visible and only if they have no gaps (<tt class="docutils literal"><span class="pre">DataFiltering.m</span></tt>, <tt class="docutils literal"><span class="pre">ZeroLagButtFiltfilt.m</span></tt>)</li>
+<li>Modified filtering of GRF data from type 1 force platform: filtering is applied only to non zero values to avoid smoothing due to zero values  (data from force platform of type 1 are stored in C3D files after thresholding)</li>
+<li>Modified data interpolation: markers trajectories are interpolated only if gaps of consecutive frames are shorter than a fixed number defined according to the video frame rate (<tt class="docutils literal"><span class="pre">DataInterpolation.m</span></tt>)</li>
+<li>Modified retrieval of <tt class="docutils literal"><span class="pre">AnalogData</span></tt> in <tt class="docutils literal"><span class="pre">C3D2MAT</span></tt>: removed assumption of analog data stored only in analog channels subsequent to those dedicated to force data. Now they can be stored in any analog channel independently from force data.</li>
+<li>Renamed <tt class="docutils literal"><span class="pre">replaceWithNans.m</span></tt> as <tt class="docutils literal"><span class="pre">replaceMissingWithNaNs.m</span></tt></li>
+<li>Renamed <tt class="docutils literal"><span class="pre">matfiltfilt2.m</span></tt> as <tt class="docutils literal"><span class="pre">ZeroLagButtFiltfilt.m</span></tt></li>
+<li>Removed warning messages caused by the lack of subject&#8217;s first and last names when loading a predefined <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt></li>
+<li>Added last selected folder in text fields of graphical user interfaces (GUIs)</li>
+</ul>
+<p>BUG FIXES:</p>
+<ul class="simple">
+<li>Modified transformation of COP coordinates from local to global reference system: translation added only for non zero values.</li>
+<li>User is not required to set a new identifier each time he/she load an already available <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file as in version 1.0.</li>
+<li>Changed the definition of the interval where markers are visible in <tt class="docutils literal"><span class="pre">replaceMissingWithNaNs.m</span></tt> (the definition of var &#8216;index&#8217;)</li>
+<li>Fixed the computation of the hip joint center (HJC) with the Harrington method (<tt class="docutils literal"><span class="pre">HJCHarrington.m</span></tt>)</li>
+</ul>
+<p><strong>v. 2.1 (September ..., 2014)</strong></p>
+<p>NEW FEATURES:</p>
+<ul class="simple">
+<li>Compatibility with MacOS X operating systems</li>
+<li>Envelope plots with normalization scale (% max)</li>
+<li>Plot of normalized EMG linear envelopes for all the muscles</li>
+<li><tt class="docutils literal"><span class="pre">.sto</span></tt> (OpenSim storage) file format for EMG output</li>
+<li><tt class="docutils literal"><span class="pre">.mot</span></tt> (SIMM and OpenSim motion) file format for EMG output (new default)</li>
+</ul>
+<p>CODE CHANGES:</p>
+<ul class="simple">
+<li>Changed <tt class="docutils literal"><span class="pre">elaboration.xsd</span></tt> to add support of different output file formats, preserving compatibility with previous versions.</li>
+<li>Renamed <tt class="docutils literal"><span class="pre">mainStaticElaboration.m</span></tt> as <tt class="docutils literal"><span class="pre">StaticInterface.m</span></tt></li>
+<li>Moved main programs (<tt class="docutils literal"><span class="pre">C3D2MAT.m</span></tt>, <tt class="docutils literal"><span class="pre">ElaborationInterface.m</span></tt>, <tt class="docutils literal"><span class="pre">StaticInterface.m</span></tt>) to functions</li>
+<li>Moved internal functions in  private folders</li>
+<li>Renamed all <tt class="docutils literal"><span class="pre">readme.txt</span></tt> to <tt class="docutils literal"><span class="pre">README.md</span></tt></li>
+<li>Modified y axis scale setting of envelope plots</li>
+<li>Modified data storage structure: added <tt class="docutils literal"><span class="pre">dynamicElaborations</span></tt> folder to group all the multiple executions of <tt class="docutils literal"><span class="pre">DataProcessing</span></tt></li>
+</ul>
+<p>BUG FIXES:</p>
+<ul class="simple">
+<li>Removed addition of mean values after EMG filtering</li>
+<li>Fixed units in EMGs plotting</li>
+<li>Fixed x label of envelope plots</li>
+<li>Fixed trial type identification for filtering cutoff definition</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="appendixB.html"
+                        title="previous chapter">Appendix B: Validation of Setup and Configuration Files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/manual/appendixC.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="appendixB.html" title="Appendix B: Validation of Setup and Configuration Files"
+             >previous</a> |</li>
+        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
