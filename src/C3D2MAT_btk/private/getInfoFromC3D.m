@@ -37,8 +37,11 @@ function [Markers, AnalogData, FPdata, Events, ForcePlatformInfo,Rates] = getInf
 % Alice Mantoan, Monica Reggiani
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
-%% 
-
+%%
+%to disable warnings from BTK tool uncomment the following line:
+%warning('OFF', 'btk:ReadAcquisition'); 
+%See: http://b-tk.googlecode.com/svn/doc/Matlab/0.1/_warnings_i_d.html for
+%more information
 h=btkReadAcquisition(c3dFilePathAndName);
 disp([c3dFilePathAndName ' has been loaded.']); 
 
