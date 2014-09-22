@@ -1,4 +1,4 @@
-function [] = EMGsPlotting(data,envelope,window,labels,units,path,emgRate)
+function [] = EMGsPlotting(data,envelope,window,emglabels,units,path,emgRate)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -30,10 +30,10 @@ for k=1:length(data)
     
     %conversion in microV during plot to have 'copy-on-write' and reduce
     %time
-    trialData=data{k};
+    emgraw=data{k};
     u=units{k};
     
-    for i=1:size(trialData,2)
+    for i=1:size(emgraw,2)
         
         h=figure;
         
@@ -41,8 +41,8 @@ for k=1:length(data)
         xt=[1/emgRate:1/emgRate:length(data{k}(:,i))/emgRate];
         %xt=[1:length(data{k}(:,i))]/emgRate;
         %no unit conversion: plot are in the raw data unit
-        plot(xt,trialData(:,i)) 
-        %plot(trialData(:,i)*1000000)
+        plot(xt,emgraw(:,i)) 
+        %plot(emgraw(:,i)*1000000)
         %xlabel('Frames')
         xlabel('Time [s]')
         xlim([0 xt(end)])
@@ -68,18 +68,18 @@ for k=1:length(data)
         
         legend('emg Raw','envelope','window') 
         ylabel(u{i})
-        title(labels{i})
+        title(emglabels{i})
         
-        %disp(['Plotted ' path{k}  'EMGs\' tag '\' labels{i} '.fig'])
-        %print(h,'-dps',[path{k}  'EMGs\' tag '\' labels{i} '.ps'] )
-        saveas(h,[path{k}  fullfile('EMGs','Raw') filesep labels{i} '.fig'])
-        %saveas(h,[path{k}  'EMGs\' tag '\' labels{i} '.png'])
+        %disp(['Plotted ' path{k}  'EMGs\' tag '\' emglabels{i} '.fig'])
+        %print(h,'-dps',[path{k}  'EMGs\' tag '\' emglabels{i} '.ps'] )
+        saveas(h,[path{k}  fullfile('EMGs','Raw') filesep emglabels{i} '.fig'])
+        %saveas(h,[path{k}  'EMGs\' tag '\' emglabels{i} '.png'])
         close (h)
     end
      
     waitbar(k/length(data));
      
-    save([path{k}  fullfile('EMGs','Raw','EMGsSelectedRaw.mat')], 'trialData')
+    save([path{k}  fullfile('EMGs','Raw','EMGsSelectedRaw.mat')], 'emgraw', 'emglabels')
 end
 
 close(w)

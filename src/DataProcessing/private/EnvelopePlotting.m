@@ -1,4 +1,4 @@
-function [] = EnvelopePlotting(envelope, maxemg, labels, units, path,emgRate,emgOffset,windowOffset)
+function [] = EnvelopePlotting(envelope, maxemg, emglabels, units, path,emgRate,emgOffset,windowOffset)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -31,20 +31,20 @@ for k=1:length(envelope)
     
     mkdir([path{k} fullfile('EMGs','Envelope')]);
     
-    trialData=envelope{k};   
+    env=envelope{k};   
     u=units{k};
     
     %Plot each envelope singularly
-    for i=1:size(trialData,2) 
+    for i=1:size(env,2) 
 
-        normenv(:,i) = (trialData(:,i))./maxemg(i);
+        normenv(:,i) = (env(:,i))./maxemg(i);
         
-        x=[1:size(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)]/size(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)*100;
+        x=[1:size(env(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)]/size(env(emgOffset*emgRate+windowOffset:end-windowOffset,i),1)*100;
         
         h=figure;
         set(h, 'Visible', 'off')
-        %plot(x,trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i)*1000000);
-        [haxes,H1,H2]=plotyy(x, normenv(emgOffset*emgRate+windowOffset:end-windowOffset,i)*100,x,(trialData(emgOffset*emgRate+windowOffset:end-windowOffset,i)),'plot');
+        %plot(x,env(emgOffset*emgRate+windowOffset:end-windowOffset,i)*1000000);
+        [haxes,H1,H2]=plotyy(x, normenv(emgOffset*emgRate+windowOffset:end-windowOffset,i)*100,x,(env(emgOffset*emgRate+windowOffset:end-windowOffset,i)),'plot');
         
         set(H2,'LineStyle',':')
                      
@@ -61,12 +61,12 @@ for k=1:length(envelope)
             set(haxes(1),'YTick',ytick); 
         catch
             %do nothing: automatic setting of YTick
-            disp(['Envelope plot (muscle ' labels{i} ', trial ' num2str(k) ': left Y-axis scale automatically set'])
+            disp(['Envelope plot (muscle ' emglabels{i} ', trial ' num2str(k) ': left Y-axis scale automatically set'])
         end
         
         % y2 axis limits
-        ylimits2(1) = min(trialData(:,i));
-        ylimits2(2) = max(trialData(:,i));
+        ylimits2(1) = min(env(:,i));
+        ylimits2(2) = max(env(:,i));
         set(haxes(2), 'YLim', ylimits2);
         
         try
@@ -75,7 +75,7 @@ for k=1:length(envelope)
             set(haxes(2),'YTick',ytick2);
         catch
             %do nothing: automatic setting of YTick
-            disp(['Envelope plot (muscle ' labels{i} ', trial ' num2str(k) ': right Y-axis scale automatically set'])
+            disp(['Envelope plot (muscle ' emglabels{i} ', trial ' num2str(k) ': right Y-axis scale automatically set'])
         end
                     
         axes(haxes(2))
@@ -87,15 +87,15 @@ for k=1:length(envelope)
         set(haxes(1),'hittest','on')          %on the axis on the right
         ylabel('Normalized Envelope (% max)')
        
-        title(labels{i})
+        title(emglabels{i})
         
-        saveas(h,[path{k}  fullfile('EMGs','Envelope') filesep labels{i} '.fig'])
-        % saveas(h,[path{k}  'EMGs\' tag '\' labels{i} '.png'])
+        saveas(h,[path{k}  fullfile('EMGs','Envelope') filesep emglabels{i} '.fig'])
+        % saveas(h,[path{k}  'EMGs\' tag '\' emglabels{i} '.png'])
         close(h)        
     end
        
-    save([path{k} fullfile('EMGs','Envelope','EMGsSelectedEnvelope.mat')], 'trialData')
-    save([path{k} fullfile('EMGs','Envelope','emg.mat')], 'normenv')
+    save([path{k} fullfile('EMGs','Envelope','EMGsSelectedEnvelope.mat')], 'env', 'emglabels')
+    save([path{k} fullfile('EMGs','Envelope','emg.mat')], 'normenv', 'emglabels')
     
     %Plot all normalized envelope togheter
     lineStyle={'-', '--', ':', '-.', '+', 'o', '*', '.', 'x', 's', 'd', 'v', '^', '>','<','p','h'};
@@ -112,7 +112,7 @@ for k=1:length(envelope)
         ylabel('Normalized Envelope (% max)')
         ylim([0 100])
         warning off
-        legend(labels) 
+        legend(emglabels) 
         
         if icolor==size(color,2)
             icolor=1;
@@ -125,6 +125,6 @@ for k=1:length(envelope)
     hold off
     saveas(w,[path{k} fullfile('EMGs','Envelope','AllNormalizedEnvelopes.fig')])
     close(w)
-    clear trialData normenv
+    clear env normenv
 end
 
