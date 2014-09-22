@@ -54,18 +54,30 @@ for k=1:length(envelope)
         ylimits(1) = min(normenv(:,i))*100;
         ylimits(2) = max(normenv(:,i))*100;
         set(haxes(1), 'YLim', ylimits);
-        % y1 ticks
-        ytick  = round(linspace(ylimits(1),ylimits(2),4));
-        set(haxes(1),'YTick',ytick);
+        
+        try
+            %y1 ticks
+            ytick  = round(linspace(ylimits(1),ylimits(2),4));
+            set(haxes(1),'YTick',ytick); 
+        catch
+            %do nothing: automatic setting of YTick
+            disp(['Envelope plot (muscle ' labels{i} ', trial ' num2str(k) ': left Y-axis scale automatically set'])
+        end
         
         % y2 axis limits
         ylimits2(1) = min(trialData(:,i));
         ylimits2(2) = max(trialData(:,i));
         set(haxes(2), 'YLim', ylimits2);
-        % y2 ticks        
-        ytick2  = linspace(ylimits2(1),ylimits2(2),4);
-        set(haxes(2),'YTick',ytick2);
         
+        try
+            %y2 ticks
+            ytick2  = linspace(ylimits2(1),ylimits2(2),4);
+            set(haxes(2),'YTick',ytick2);
+        catch
+            %do nothing: automatic setting of YTick
+            disp(['Envelope plot (muscle ' labels{i} ', trial ' num2str(k) ': right Y-axis scale automatically set'])
+        end
+                    
         axes(haxes(2))
         set(haxes(1),'box','off')
         ylabel(['Envelope (' u{i} ')'])
