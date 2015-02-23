@@ -18,7 +18,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="JCcomputationType">
-    <xs:sequence maxOccurs="unbounded">
+    <xs:sequence maxOccurs="unbounded" minOccurs="1">
       <xs:element name="Joint" type="JointType"/>
     </xs:sequence>
   </xs:complexType>
@@ -30,7 +30,7 @@
       <xs:element name="FolderName" type="xs:string"/>
       <xs:element name="TrialName" type="xs:string"/>
       <xs:element minOccurs="0" name="Fcut" type="xs:double"/>
-      <xs:element name="JCcomputation" type="JCcomputationType"/>
+      <xs:element minOccurs="0" name="JCcomputation" type="JCcomputationType"/>
       <xs:element name="trcMarkers" type="trcMarkersType"/>
     </xs:sequence>
   </xs:complexType>

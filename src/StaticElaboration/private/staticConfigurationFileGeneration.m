@@ -90,6 +90,12 @@ end
 
 %% --------------------Joint Center Computation Methods--------------------
 
+JCchoice = questdlg('Do you want to compute joint centers?', ...
+	'Joint Center Computation', ...
+	'Yes','No','Yes');
+
+if strcmp(JCchoice,'Yes')==1
+
 originalPath=pwd;
 cd('..')
 cd('..')
@@ -184,7 +190,7 @@ end
 staticSettings=setfield(staticSettings,'JCcomputation',[]);
 staticSettings.JCcomputation.Joint=Joint;
 
-
+end
 %% ------------Markers Selection to be written in the trc file-------------
 %needed for trcMarkersIndexes computation in the case nargin>3
 MarkersSet=textscan(acquisitionInfo.MarkersProtocol.MarkersSetStaticTrials, '%s','delimiter', ' ');

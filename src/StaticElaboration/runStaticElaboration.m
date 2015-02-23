@@ -46,7 +46,9 @@ if isfield(parameters,'Fcut')
     fcut=parameters.Fcut;
 end
 
-Joints=parameters.JCcomputation.Joint;
+if isfield(parameters,'JCcomputation')
+    Joints=parameters.JCcomputation.Joint;
+end
 trcMarkersList=parameters.trcMarkersList;
 globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 
@@ -71,18 +73,23 @@ end
 
 disp('Markers have been loaded and filtered')
 
-%% -----------------------------------------------------------------------%
-%                       JOINT CENTERS Computation                         %
-%                       and markers list updating                         %
-%-------------------------------------------------------------------------%
-f=figure;
-hold on
-frame=1;
 
 %Markers selection from the list
 markerstrc = selectingMarkers(trcMarkersList,Markers.Labels,filtMarkers{1}(:,1:length(Markers.Labels)*3));
 %new markers labels list (for addition of computed jc)
 MarkersListjc={trcMarkersList};
+
+
+%% -----------------------------------------------------------------------%
+%                       JOINT CENTERS Computation                         %
+%                       and markers list updating                         %
+%-------------------------------------------------------------------------%
+if (exist('Joints','var'))
+f=figure;
+hold on
+frame=1;
+
+
 
 for k=1:length(Joints)
     
@@ -184,6 +191,8 @@ axis equal
 figName='JointCenters_globalPosition.fig';
 saveas(gcf,[foldersPaths.elaboration filesep figName]) 
 disp([figName ' (based on frame 1 data) has been saved'])
+
+end
 
 %% -----------------------------------------------------------------------%
 %                        Write static.trc with jc

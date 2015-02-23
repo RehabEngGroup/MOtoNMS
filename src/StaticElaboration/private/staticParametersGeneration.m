@@ -38,8 +38,11 @@ if isfield(staticSettings,'Fcut')
 end
 
 try
-    %JC Computation: no changes from static.xml file
-    staticParameters.JCcomputation=staticSettings.JCcomputation;
+    %Add optionality
+    if isfield(staticSettings,'JCcomputation')
+        %JC Computation: no changes from static.xml file
+        staticParameters.JCcomputation=staticSettings.JCcomputation;
+    end
     
     %trcMarkersList
     Markers=staticSettings.trcMarkers;
