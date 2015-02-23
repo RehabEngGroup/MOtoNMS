@@ -35,6 +35,7 @@ try % to extract data even if force platform data are not stored in the c3d
 
 catch
     numberForcePlatform=0;  %no force data
+    fchannel.info.values=0;
     disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
 end
  
