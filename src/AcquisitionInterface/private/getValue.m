@@ -1,4 +1,4 @@
-function setLegFP1(hObj,event,def_String)
+function value=getValue(n_FP)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -21,13 +21,6 @@ function setLegFP1(hObj,event,def_String)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-global LegFP1
+eval(['global LegFP' num2str(n_FP)])
 
-val = get(hObj,'Value');
-
-stringChoices=textscan(def_String,'%s', 'Delimiter','|');
-
-LegFP1=stringChoices{1}(val);
-
-
-
+eval(['value=LegFP' num2str(n_FP) ';']);

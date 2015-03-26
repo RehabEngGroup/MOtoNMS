@@ -315,12 +315,13 @@ end
 c3dFiles = dir ([DataSetPath filesep '*.c3d']);
 
 nTrials=length(c3dFiles);
+nFP=size(Laboratory.ForcePlatformsList.ForcePlatform,2);
 
 %Def values
 if nargin>0
-    def_String=setTrialsStancesFromFile(nTrials,oldAcquisition);
+    def_String=setTrialsStancesFromFile(nTrials,nFP, oldAcquisition);
 else
-    def_String=setTrialsStancesFromFile(nTrials);
+    def_String=setTrialsStancesFromFile(nTrials, nFP);
 end
 
 nRep{1}='1';
@@ -356,60 +357,54 @@ for k=1:length(c3dFiles)
         Trial(k).RepetitionNumber='';
     end
 
+
     %StancesOnForcePlatforms Definition
-    global LegFP1 LegFP2  
 
-    h=figure('Name', 'Trials','Position',[scrsz(4)/2 scrsz(4)/4 scrsz(3)/3 scrsz(4)/3]);
+    if nFP>2
+        h=figure('Name', 'Trials','Position',[1 scrsz(4)/4 scrsz(3) scrsz(4)/3]);
+    else
+        h=figure('Name', 'Trials','Position',[scrsz(4)/2 scrsz(4)/4 scrsz(3)/3 scrsz(4)/3]);
+    end
     
-    uicontrol('Style','text','Position',[160 190 140 30], 'String',['Type: ' trialsName{k}],'FontSize',9)
-    uicontrol('Style','text','Position',[160 140 140 20], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
+    uicontrol('Style','text','Position',[160 190 150 40], 'String',['Type: ' trialsName{k}],'FontSize',9)
+    uicontrol('Style','text','Position',[160 140 150 40], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
     
-    uicontrol('Style','text','Position',[10 100 150 20], 'String','Leg on ForcePlatform 1','FontSize',9)
-
-    uicontrol('Style','popupmenu','Position',[10 70 150 20],...
-        'String',def_String{k,1},...
-        'Callback',{@setLegFP1,def_String{k,1}});
+    for i=1:nFP
     
-    uicontrol('Style','text','Position',[300 100 150 20], 'String','Leg on ForcePlatform 2','FontSize',9)
-    uicontrol('Style','popupmenu',...
-        'Position',[300 70 120 20],...
-        'String',def_String{k,2},...
-        'Callback',{@setLegFP2,def_String{k,2}});
-    
+        eval(['global LegFP' num2str(i)])
+        
+        uicontrol('Style','text','Position',[10*30*(i-1) 100 170 20], 'String',['Leg on ForcePlatform ' num2str(i)],'FontSize',9)
+        
+        uicontrol('Style','popupmenu','Position',[10*30*(i-1) 70 170 20],...
+            'String',def_String{k,i},...
+            'Callback',{@setLegFP, i, def_String{k,i}});   
+    end
+       
     uicontrol('Style','pushbutton',...
         'Position',[160 20 140 20],...
         'String','Next',...
         'Callback',{@pushbutton1_Callback});
     
     uiwait(h)
-     
-    LegFP1=getValue1();
-    LegFP2=getValue2();
+   
+    for i=1:nFP
         
-    if isempty(LegFP1) 
-        StanceOnFP(1).Forceplatform=1;
-        stringChoices1=textscan(def_String{k,1},'%s', 'Delimiter','|');
-        StanceOnFP(1).Leg=stringChoices1{1}(1);      
+        eval(['LegFP' num2str(i) '=getValue(i);'])
+
+        stringChoices=textscan(def_String{k,i},'%s', 'Delimiter','|');
         
-    else if strcmp(LegFP1,'-')==0
-            StanceOnFP(1).Forceplatform=1;
-            StanceOnFP(1).Leg=LegFP1;
-        else
-            disp(['Trial ' trialsName{k} ': Stance on FP1 data missing'])
+        if eval(['isempty(LegFP' num2str(i) ')'])
+            StanceOnFP(i).Forceplatform=i;
+            StanceOnFP(i).Leg=stringChoices{1}(1);
+            
+        else if eval(['strcmp(LegFP' num2str(i) ',stringChoices{1}(1))==0'])
+                StanceOnFP(i).Forceplatform=i;
+                eval(['StanceOnFP(i).Leg=LegFP' num2str(i) ';']);
+            else
+                disp(['Trial ' trialsName{k} ': Stance on FP' num2str(i) ' data missing'])
+            end
         end
-    end
-    
-    if isempty(LegFP2) 
-        StanceOnFP(2).Forceplatform=2;
-        stringChoices2=textscan(def_String{k,2},'%s', 'Delimiter','|');
-        StanceOnFP(2).Leg=stringChoices2{1}(1);
         
-    else if strcmp(LegFP2,'-')==0           
-            StanceOnFP(2).Forceplatform=2;
-            StanceOnFP(2).Leg=LegFP2;         
-        else
-            disp(['Trial ' trialsName{k} ': Stance on FP1 data missing'])
-        end
     end
     
     Trial(k).StancesOnForcePlatforms.StanceOnFP=StanceOnFP;

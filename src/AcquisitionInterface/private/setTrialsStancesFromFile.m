@@ -1,4 +1,4 @@
-function def_String=setTrialsStancesFromFile(nTrials,oldAcquisition)
+function def_String=setTrialsStancesFromFile(nTrials,n_FP, oldAcquisition)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -21,23 +21,25 @@ function def_String=setTrialsStancesFromFile(nTrials,oldAcquisition)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-if nargin>1
+if nargin>2
     
     for k=1:length(oldAcquisition.Trials.Trial)
         
         %creating th acquisition.xml file with the interface, these can not
         %be empty
         if isempty(oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms)==0
-            
-            if length(oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP)>1
-                old_TopString{k,1}=oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP(1).Leg;
-                old_TopString{k,2}=oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP(2).Leg;
-            else
-                old_TopString{k,1}=oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP.Leg;
-                old_TopString{k,2}='-'; %not defined
+                                    
+            for i=1:n_FP
+               
+                if length(oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP)>1
+                    
+                    old_TopString{k,i}=oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP(i).Leg;
+                else
+                    old_TopString{k,1}=oldAcquisition.Trials.Trial(k).StancesOnForcePlatforms.StanceOnFP.Leg;
+                end
             end
             
-            for i=1:2
+            for i=1:n_FP
                 switch old_TopString{k,i}
                     case 'Right'
                         def_String{k,i}='Right|Left|Both|None|-';
@@ -52,7 +54,7 @@ if nargin>1
                 end
             end
         else
-             for i=1:2
+             for i=1:n_FP
                  def_String{k,i}='-|Right|Left|Both|None';
              end
         end
@@ -60,7 +62,7 @@ if nargin>1
     
 else
     for k=1:nTrials
-        for i=1:2
+        for i=1:n_FP
             def_String{k,i}='-|Right|Left|Both|None';
         end
     end
