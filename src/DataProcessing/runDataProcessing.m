@@ -160,6 +160,12 @@ end
  
 %----------------------------Analog Data-----------------------------------
 checkFPsType(ForcePlatformInfo)
+%assumptions: 
+% -FPs can be of different types ONLY if type 1 is not included (i.e. there 
+%can be FPs of type 2,3,4 together OR all of type 1).
+%Data from FP of type 1 require a different elaboration, but at this point
+%data from all the FPs are grouped togheter so that it is not possible to
+%process them differently without changing the main structure of the code.
 
 switch ForcePlatformInfo{1}.type   %assumption: FPs are of the same type
     

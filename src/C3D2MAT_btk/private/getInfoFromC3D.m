@@ -53,6 +53,7 @@ try
     
 catch me
     Markers=[];
+    disp(['WARNING! ' c3dFilePathAndName ': no markers have been stored in mat format. Please, check if this is correct!']);
 end
 
 %--------------------------------------------------------------------------
@@ -63,6 +64,7 @@ if nargout > 1
         AnalogData = getAnalogData(h);
     catch me
         AnalogData = [];
+        disp(['WARNING! ' c3dFilePathAndName ': no analog data have been stored in mat format. Please, check if this is correct!']);
     end
 end
 
@@ -76,6 +78,7 @@ if nargout > 2
         
     catch me
         FPdata = [];
+        disp(['WARNING! ' c3dFilePathAndName ': no data from force platforms have been stored in mat format. Please, check if this is correct!']); 
     end
 end
 
@@ -90,6 +93,7 @@ if nargout > 3
        %writing .MOT file part
     catch me
        ForcePlatformInfo = [];
+       disp(['WARNING! ' c3dFilePathAndName ': no info from force platforms have been stored in mat format. Please, check if this is correct!']); 
     end
 end
 
@@ -103,6 +107,7 @@ if nargout > 4
     catch me
         VideoFrameRate= [];
         AnalogFrameRate= [];
+        disp(['WARNING!Rates.mat is empty. Please, check it!']); 
         
     end
     %store rates in a unique data structure

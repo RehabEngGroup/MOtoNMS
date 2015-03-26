@@ -24,16 +24,18 @@ function []=checkFPsType(FPinfo)
 
 nFP=length(FPinfo);
 
-    for i=1:nFP
-        
-        FPtype(i)=FPinfo{i}.type;
-        
-        if i>1
-            if  FPtype(i) == FPtype(i-1)
+for i=1:nFP
+    
+    FPtype(i)=FPinfo{i}.type;
+    
+    if i>1
+        if  FPtype(i) == 1
+            if FPtype(i-1) == FPtype(i)
                 return
             else
                 error('ErrorTests:convertTest', ...
-            '--------------------------------------------------------------------------\nWARNING: Force Platforms in your laboratory are of different types. MOtoNMS can not process data gather with different force platforms during the same acquisition. Please contact project leads for further information (Alice Mantoan <alice.mantoan@gmail.com>, Monica Reggiani <monica.reggiani@gmail.com>) \n--------------------------------------------------------------------------')
+                    '--------------------------------------------------------------------------\nWARNING: Force Platforms in your laboratory are of different types. MOtoNMS can not process data gathered with different force platforms during the same acquisition, if one of them is of type 1. Please contact project leads for further information (Alice Mantoan <alice.mantoan@gmail.com>, Monica Reggiani <monica.reggiani@gmail.com>) \n--------------------------------------------------------------------------')
             end
         end
     end
+end

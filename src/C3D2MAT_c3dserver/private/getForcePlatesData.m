@@ -37,9 +37,10 @@ function FPdata = getForcePlatesData(itf)
  nFchannels = itf.GetParameterLength(fchannelIndex);    %instead of numItems = numberForcePlatform*6;
  
  unitIndex = itf.GetParameterIndex('ANALOG', 'UNITS');
+ n=0;  
 
  if nFchannels > 0  %if FPdata are present
-     
+  
      for i = 1 : nFchannels,
          %retrieve analog channel corresponding to force plate output channel
          %this allow taking into account more than 6 force channels (like for fp of type 3)
@@ -47,15 +48,16 @@ function FPdata = getForcePlatesData(itf)
          %channels (e.g 7th analog channel empty instead having Fx2)
          fchannel=itf.GetParameterValue(fchannelIndex, i-1);
          %fchannel contains the analog channel that corresponds to the i-1 force plate output channel
-         
-         %Labels{i} =
-         %itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'), i-1); this was for a sequential order (1: numberForcePlatform*6)
-         Labels{i} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'), fchannel-1);  %here the order does not matter
-         
-         %units{i}= itf.GetParameterValue(unitIndex, i-1);
-         units{i}= itf.GetParameterValue(unitIndex, fchannel-1);
-         
-         Values(:,i) = getanalogchannel(itf, Labels{i});
+
+         if fchannel~=0
+             n=n+1; %number of channels used
+             Labels{n} = itf.GetParameterValue(itf.GetParameterIndex('ANALOG','LABELS'), fchannel-1);  %here the order does not matter
+             
+             %units{i}= itf.GetParameterValue(unitIndex, i-1);
+             units{n}= itf.GetParameterValue(unitIndex, fchannel-1);
+             
+             Values(:,n) = getanalogchannel(itf, Labels{n});
+         end
          
      end
      
@@ -76,4 +78,4 @@ function FPdata = getForcePlatesData(itf)
      FPdata=[];
      disp('Force Platform Channels empty')
  end
-
+ 

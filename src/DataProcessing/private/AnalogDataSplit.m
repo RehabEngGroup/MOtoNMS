@@ -28,44 +28,48 @@ function [Forces,Moments, COP]= AnalogDataSplit(AnalogData,ForcePlatformInfo)
 
 %%
 nFP=length(ForcePlatformInfo);
+newAnalogData=AnalogData;
 
 for k=1: length(AnalogData)
     
     for i=1:nFP
         
         switch ForcePlatformInfo{i}.type
-            
+                 
             case 1
                 
-                Forces{k}(:,:,i)=AnalogData{k}(:,(i+5*(i-1)):(i+5*(i-1)+2)); %it's the same for type 1,2,4 of FP
+                Forces{k}(:,:,i)=newAnalogData{k}(:,1:3); %it's the same for type 1,2,4 of FP
                 
-                COPz = zeros(length(AnalogData{k}(:,(i+3+5*(i-1)):(i+3+5*(i-1)+1))),1);
-                COP{k}(:,:,i)=[AnalogData{k}(:,(i+3+5*(i-1)):(i+3+5*(i-1)+1)) COPz];    %COPx, COPy
+                COPz = zeros(size(newAnalogData{k}, 1),1);
+                COP{k}(:,:,i)=[newAnalogData{k}(:,4:5) COPz];    %COPx, COPy
                 
-                Moments{k}(:,:,i)=[COPz COPz AnalogData{k}(:,6*i)];
-                
+                Moments{k}(:,:,i)=[COPz COPz newAnalogData{k}(:,6)];
+                       
+                newAnalogData{k}=newAnalogData{k}(:,7:end);
+            
             case {2,4}
                 
-                Forces{k}(:,:,i)=AnalogData{k}(:,(i+5*(i-1)):(i+5*(i-1)+2)); 
+                Forces{k}(:,:,i)=newAnalogData{k}(:,1:3);
                 
-                Moments{k}(:,:,i)=AnalogData{k}(:,(i+3+5*(i-1)):(i+3+5*(i-1)+2));
+                Moments{k}(:,:,i)=newAnalogData{k}(:,4:6);
                 %COP compute later..set to 0 here
-                COP{k}(:,:,i) = zeros(length(AnalogData{k}(:,(i+3+5*(i-1)):(i+3+5*(i-1)+1))),3);
-           
-
-            case 3   
+                COP{k}(:,:,i) = zeros(size(newAnalogData{k},1),3);
                 
-                ForcesFP3{k}(:,:,i)=AnalogData{k}(:,(i+7*(i-1)):(i+7*(i-1)+7));
+                newAnalogData{k}=newAnalogData{k}(:,7:end);
+                
+            case 3
+                
+                ForcesFP3{k}(:,:,i)=newAnalogData{k}(:,1:8);
                 
                 Forces{k}(:,:,i)=computeTotalForcesFP3(ForcesFP3{k}(:,:,i));
                 
                 Moments{k}(:,:,i)=computeMomentsFP3(ForcesFP3{k}(:,:,i),ForcePlatformInfo{i});
                 
                 %COP compute later..set to 0 here
-                COP{k}(:,:,i) = zeros(length(AnalogData{k}(:,(i+3+5*(i-1)):(i+3+5*(i-1)+1))),3);
-                
-        end
+                COP{k}(:,:,i) = zeros(size(newAnalogData{k},1),3);
+
+                newAnalogData{k}=newAnalogData{k}(:,9:end);
+         end
     end
-end
-                
+end                               
 
