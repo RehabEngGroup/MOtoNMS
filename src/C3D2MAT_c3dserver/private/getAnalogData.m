@@ -34,6 +34,7 @@ try % to extract data even if force platform data are not stored in the c3d
     
 catch
     nFchannels=0; %No force platform
+    fchannelIndex=-1;
 end
 
 if nFchannels > 0  %check if force data are present
@@ -44,7 +45,7 @@ if nFchannels > 0  %check if force data are present
         %Fchannels contains the analog channels with force data      
     end
 else
-    disp('Warning: No Force Plate Data: check AnalogData data!(Biodex trials not implemented yet!)')
+    Fchannels=[];
 end
 
 indexLabels = itf.GetParameterIndex('ANALOG','LABELS');
