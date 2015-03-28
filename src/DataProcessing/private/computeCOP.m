@@ -1,13 +1,16 @@
-function COP =  computeCOP(forces, moments,fpInfo)
+function COP =  computeCOP(forces, moments,fpInfo, pad)
 % INPUT: forces=[Fx Fy Fz]
 %        moments=[Mx My Mz] in mm 
+%        pad=plate pad thickness in mm
 %
 % OUTPUT: COP=[COPx COPy COPz] in m
 %
-% refere to http://www.kwon3d.com/theory/grf/cop.html
+% refer to http://www.kwon3d.com/theory/grf/cop.html
 % COPx = (-1*(My + co*Fx)./Fz) + ao;
 % COPy =((Mx - (co*Fy))./Fz) + bo;
 % COPz = zeros(length(COPx),1);
+%
+% refer to http://www.kwon3d.com/theory/grf/pad.html for pad addition
 %
 % adapted for FP type3 from 
 % http://www.health.uottawa.ca/biomech/courses/apa6903/kistler.pdf
@@ -49,8 +52,8 @@ if fpInfo.type==3
     
     az0=fpInfo.origin(3);
     
-    COPx = (-1*(My + az0*Fx)./Fz);
-    COPy =((Mx - (az0*Fy))./Fz);
+    COPx = (-1*(My + (az0+pad)*Fx)./Fz);
+    COPy =((Mx - ((az0+pad)*Fy))./Fz);
     COPz = zeros(length(COPx),1);
         
 else
@@ -58,8 +61,8 @@ else
     bo=fpInfo.origin(2); %y
     co=fpInfo.origin(3); %z
     
-    COPx = (-1*(My + co*Fx)./Fz) + ao;
-    COPy =((Mx - (co*Fy))./Fz) + bo;
+    COPx = (-1*(My + (co-pad)*Fx)./Fz) + ao;
+    COPy =((Mx - ((co-pad)*Fy))./Fz) + bo;
     COPz = zeros(length(COPx),1);
     
 end

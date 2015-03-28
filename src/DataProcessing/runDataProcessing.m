@@ -62,6 +62,8 @@ trcMarkersList=parameters.trcMarkersList;
 globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 FPtoGlobalRotations=parameters.FPtoGlobalRotations;
 
+
+
 if isfield(parameters,'OutputFileFormats')
     MarkerOFileFormat=parameters.OutputFileFormats.MarkerTrajectories;
     GRFOFileFormat=parameters.OutputFileFormats.GRF;
@@ -96,6 +98,12 @@ AnalogFrameRate=Rates.AnalogFrameRate;
 %Loading ForcePlatformInfo
 load([foldersPath.sessionData 'ForcePlatformInfo.mat'])
 nFP=length(ForcePlatformInfo);
+
+if isfield(parameters,'platesPad')
+    padsThickness=parameters.platesPad;
+else
+    padsThickness=zeros(1,nFP);
+end
 
 %Loading AllTrialsName
 load([foldersPath.sessionData 'trialsName.mat'])
@@ -185,7 +193,7 @@ switch ForcePlatformInfo{1}.type   %assumption: FPs are of the same type
         
         for k=1:length(filtMoments)
             for i=1:nFP
-                COP{k}(:,:,i)=computeCOP(ForcesThr{k}(:,:,i),MomentsThr{k}(:,:,i), ForcePlatformInfo{i});
+                COP{k}(:,:,i)=computeCOP(ForcesThr{k}(:,:,i),MomentsThr{k}(:,:,i), ForcePlatformInfo{i}, padsThickness(i));
             end
         end
         

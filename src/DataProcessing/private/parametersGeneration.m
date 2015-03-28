@@ -196,6 +196,14 @@ if nargin>1
         FPtoGlobalRotationsParameters(j) = FPtoGlobalRotParameterStructCreator(FProtations{j});
         
         parameters.FPtoGlobalRotations(j)=FPtoGlobalRotationsParameters(j);
+        
+        if isfield(acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform,'PadThickness')
+            if isempty(acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform(j).PadThickness)
+                parameters.platesPad(j)=0;
+            else
+                parameters.platesPad(j)=acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform(j).PadThickness;
+            end
+        end
     end 
   
     %--------------------------------------------------------------------------        

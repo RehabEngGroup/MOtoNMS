@@ -32,6 +32,7 @@
       <xs:element name="Brand" type="xs:string"/>
       <xs:element name="Type" type="xs:integer"/>
       <xs:element name="FrameRate" type="xs:double"/>
+      <xs:element minOccurs="0" name="PadThickness" type="xs:double"/>
       <xs:element name="FPtoGlobalRotations" type="ForcePlateToGlobalRotationsType"/>
     </xs:sequence>
   </xs:complexType>
