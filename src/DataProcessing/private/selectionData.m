@@ -49,8 +49,8 @@ for k=1:length(filtData)
     %in .trc and .mot files, LabeledDataOffset must be added and for
     %all the Analysis Window Definition Methods
 
-    timeStartFrame=round(((AnalysisWindow{k}.startFrame+AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate-offset)*Rate);
-    timeEndFrame=round(((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate)*Rate);
+    timeStartFrame=round(((AnalysisWindow{k}.startFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate-offset)*Rate);
+    timeEndFrame=round(((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate)*Rate);
     
     time{k}=[timeStartFrame/Rate: 1/Rate: timeEndFrame/Rate]';
     
