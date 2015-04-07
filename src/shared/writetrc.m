@@ -28,7 +28,7 @@ time=markers(:,1);
 DataStartFrame=time(1)*VideoFrameRate+1;
 
 %add frame column
-frameArray=[(time(1)*VideoFrameRate):round(time(end)*VideoFrameRate+1)]';
+frameArray=[(time(1)*VideoFrameRate+1):round(time(end)*VideoFrameRate+1)]';
 
 markers=[frameArray markers];
 
