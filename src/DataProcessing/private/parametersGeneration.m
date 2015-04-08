@@ -186,7 +186,27 @@ if nargin>1
     
     parameters.globalReferenceSystem=globalReferenceSystem;
     parameters.globalToOpenSimRotations=globalToOpenSimRotations;
-       
+    
+    %motion direction
+    for k=1:length(acquisitionInfo.Trials.Trial)
+
+        if isfield(acquisitionInfo.Trials.Trial(k), 'MotionDirection')
+            allTMotionDirection{k}=acquisitionInfo.Trials.Trial(k).MotionDirection;
+        else
+            %if not specified in the acquisition file (previous versions):
+            %default is positive direction
+            allTMotionDirection{k}='forward'; 
+        end
+    end
+    
+    motionDirection=allTMotionDirection(StancesIndexes); %same index
+    
+    %add check on motion direction values
+    checkMotionDirectionParameter(motionDirection)
+    
+    parameters.motionDirection=motionDirection;
+  
+    %FPtoGlobalRotations
     for j=1:acquisitionInfo.Laboratory.NumberOfForcePlatforms
         
         for i=1: length(acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform(j).FPtoGlobalRotations.Rot)
@@ -197,6 +217,7 @@ if nargin>1
         
         parameters.FPtoGlobalRotations(j)=FPtoGlobalRotationsParameters(j);
         
+        %Plate Pad
         if isfield(acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform,'PadThickness')
             if isempty(acquisitionInfo.Laboratory.ForcePlatformsList.ForcePlatform(j).PadThickness)
                 parameters.platesPad(j)=0;

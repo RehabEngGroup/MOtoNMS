@@ -1,4 +1,5 @@
-function []= createtrc(MarkersFiltered,Mtime,MarkersLabels,extParameters,VideoFrameRate,FullFileName) 
+function motionDirectionRotations=defineMotionDirectionRotParamOpenSim(direction)
+%
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -20,13 +21,40 @@ function []= createtrc(MarkersFiltered,Mtime,MarkersLabels,extParameters,VideoFr
 % Alice Mantoan, Monica Reggiani
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
-%%
-% Rotate the marker data to a coordinate system that is consistent with
-% OpenSIM, with y being the vertical axis, x-anterior, and z-to the
-% right
-rotatedMarkers=RotateCS(MarkersFiltered,extParameters);
+%% 
 
-%add time
-CompleteMarkersData=[Mtime rotatedMarkers];
+switch lower(direction)
+    
+    case 'backward'
+        
+        RotX = 0;
+        RotY = 1;
+        RotZ = 0;
+        Rot1 = 180;
+        Rot2 = 0;
+        
+        
+    case '90right'
+        
+        RotX = 0;
+        RotY = 1;
+        RotZ = 0;
+        Rot1 = -90;
+        Rot2 = 0;
+        
+    case '90left'
+        
+        RotX = 0;
+        RotY = 1;
+        RotZ = 0;
+        Rot1 = 90;
+        Rot2 = 0;
+        
+        
+end
 
-writetrc(CompleteMarkersData,MarkersLabels,VideoFrameRate,FullFileName)   
+motionDirectionRotations.RotX = RotX;
+motionDirectionRotations.RotY = RotY;
+motionDirectionRotations.RotZ = RotZ;
+motionDirectionRotations.Rot1deg = Rot1;
+motionDirectionRotations.Rot2deg = Rot2;

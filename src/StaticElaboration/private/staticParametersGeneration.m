@@ -64,8 +64,33 @@ if nargin>1  %Parameters not needed for oldParameters
     globalToOpenSimRotations=globalToOpenSimRotParametersCreator(globalReferenceSystem);
 
     staticParameters.globalToOpenSimRotations=globalToOpenSimRotations;
-   
+    
+    %motion direction   
+    staticTrialName=staticSettings.TrialName;
+    list{1}=staticTrialName; %only one static trial 
+    
+    for k=1:length(acquisitionInfo.Trials.Trial)
+        TrialType{k}=acquisitionInfo.Trials.Trial(k).Type;
+        RepetitionNumber{k}=num2str(acquisitionInfo.Trials.Trial(k).RepetitionNumber);
+        InitialTrialsList{k}=strcat(TrialType{k},RepetitionNumber{k});
+    end
+    
+    staticTrialIndex=findIndexes(InitialTrialsList,list);
+
+    if isfield(acquisitionInfo.Trials.Trial, 'MotionDirection')
+        
+        trialDirection{1}=acquisitionInfo.Trials.Trial(staticTrialIndex).MotionDirection; 
+        checkMotionDirectionParameter(trialDirection)
+        staticParameters.motionDirection=trialDirection;
+    else
+        %if not specified in the acquisition file (previous versions):
+        %default is positive direction
+        staticParameters.motionDirection='forward';
+    end
+       
     save ([foldersPaths.elaboration filesep 'staticParameters.mat'], 'staticParameters')
 end
+
+save_to_base(1)
 
 

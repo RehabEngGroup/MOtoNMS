@@ -52,6 +52,9 @@ end
 trcMarkersList=parameters.trcMarkersList;
 globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 
+motionDirection=parameters.motionDirection;
+
+
 %% ------------------------------------------------------------------------
 %                            DATA LOADING                                 % 
 %               Load markers data from static mat folder                  %
@@ -201,11 +204,17 @@ ind=strfind(foldersPaths.matData,filesep);
 trcFileName=[foldersPaths.matData(ind(end)+1:end) '.trc'];
 FullFileName=[foldersPaths.elaboration filesep trcFileName];
 
-
 %Mtime and MarkerListjc must be cell to be able to use createtrc
 Mtime={[1/Markers.Rate: 1/Markers.Rate:  size(markerstrc,1)/Markers.Rate]'};
 
-createtrc(markerstrc,Mtime{1},MarkersListjc{1}',globalToOpenSimRotations,Markers.Rate,FullFileName);
+rotatedMarkers=RotateCS(markerstrc,globalToOpenSimRotations);
+
+%accounting for the possibility of different directions of motion
+markersMotionDirRotOpenSim=rotatingMotionDirection(motionDirection,rotatedMarkers);
+
+CompleteMarkersData=[Mtime{1} markersMotionDirRotOpenSim];
+
+writetrc(CompleteMarkersData,MarkersListjc{1}',Markers.Rate,FullFileName)
 
 disp(' ')
 disp([trcFileName ' has been created'])

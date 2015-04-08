@@ -101,6 +101,7 @@
     <xs:sequence>
       <xs:element name="Type" type="xs:string"/>
       <xs:element name="RepetitionNumber" type="xs:integer"/>
+      <xs:element minOccurs="0" name="MotionDirection" type="xs:string"/>
       <xs:element name="StancesOnForcePlatforms" type="StancesOnForcePlatformsType"/>
     </xs:sequence>
   </xs:complexType>

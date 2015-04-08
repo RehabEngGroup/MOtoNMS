@@ -62,7 +62,7 @@ trcMarkersList=parameters.trcMarkersList;
 globalToOpenSimRotations=parameters.globalToOpenSimRotations;
 FPtoGlobalRotations=parameters.FPtoGlobalRotations;
 
-
+motionDirections=parameters.motionDirection;
 
 if isfield(parameters,'OutputFileFormats')
     MarkerOFileFormat=parameters.OutputFileFormats.MarkerTrajectories;
@@ -290,7 +290,17 @@ if strcmp(MarkerOFileFormat, '.trc')
         %markerstrc = selectingMarkers(trcMarkersList,dMLabels,MarkersFiltered{k});
         %createtrc(markerstrc,Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
         %createtrc(MarkersFilteredNaN{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
-        createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+        
+        rotatedMarkers{k}=RotateCS(MarkersFiltered{k},globalToOpenSimRotations);
+
+        %accounting for the possibility of different directions of motion
+        markersMotionDirRotOpenSim{k}=rotatingMotionDirection(motionDirections{k},rotatedMarkers{k});
+        
+        %createtrc(MarkersFiltered{k},Mtime{k},trcMarkersList,globalToOpenSimRotations,VideoFrameRate,FullFileName)
+        CompleteMarkersData=[Mtime{k} markersMotionDirRotOpenSim{k}];
+
+        writetrc(CompleteMarkersData,trcMarkersList,VideoFrameRate,FullFileName)
+        
     end
 else
     disp(' ')
@@ -323,16 +333,18 @@ for k=1:length(trialsList)
         globalMOTdata{k}=[globalMOTdata{k} globalTorques{k}(:,:,i) ];      
     end
       
-    %Rotation for OpenSim
-    
+    %Rotation for OpenSim    
     MOTdataOpenSim{k}=RotateCS (globalMOTdata{k},globalToOpenSimRotations);
+    
+    %accounting for the possibility of different directions of motion
+    MOTrotDataOpenSim{k}=rotatingMotionDirection(motionDirections{k},MOTdataOpenSim{k});
     
     if strcmp(GRFOFileFormat, '.mot')
         
         %Write MOT
         FullFileName=[foldersPath.trialOutput{k} trialsList{k} '.mot'];
         
-        writeMot(MOTdataOpenSim{k},Ftime{k},FullFileName)
+        writeMot(MOTrotDataOpenSim{k},Ftime{k},FullFileName)
         
     else
         error('ErrorTests:convertTest', ...

@@ -320,8 +320,14 @@ nFP=size(Laboratory.ForcePlatformsList.ForcePlatform,2);
 %Def values
 if nargin>0
     def_String=setTrialsStancesFromFile(nTrials,nFP, oldAcquisition);
+    if isfield(oldAcquisition.Trials.Trial,'MotionDirection')==1
+        def_motionDirection=setMotionDirectionFromFile(nTrials,oldAcquisition);
+    else
+        def_motionDirection=setMotionDirectionFromFile(nTrials);
+    end
 else
     def_String=setTrialsStancesFromFile(nTrials, nFP);
+    def_motionDirection=setMotionDirectionFromFile(nTrials);
 end
 
 nRep{1}='1';
@@ -366,8 +372,14 @@ for k=1:length(c3dFiles)
         h=figure('Name', 'Trials','Position',[scrsz(4)/2 scrsz(4)/4 scrsz(3)/3 scrsz(4)/3]);
     end
     
-    uicontrol('Style','text','Position',[160 190 150 40], 'String',['Type: ' trialsName{k}],'FontSize',9)
-    uicontrol('Style','text','Position',[160 140 150 40], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
+    uicontrol('Style','text','Position',[160 270 150 80], 'String',['Type: ' trialsName{k}],'FontSize',9)
+    uicontrol('Style','text','Position',[160 230 150 30], 'String',['Repetition: ' Trial(k).RepetitionNumber],'FontSize',9)
+    
+    uicontrol('Style','text','Position',[160 190 150 20], 'String',['Motion Direction'],'FontSize',9)
+    
+    uicontrol('Style','popupmenu','Position',[160 150 150 30],...
+        'String',def_motionDirection{k},...
+        'Callback',{@setMotionDirection, def_motionDirection{k}});
     
     for i=1:nFP
     
@@ -387,6 +399,28 @@ for k=1:length(c3dFiles)
     
     uiwait(h)
    
+    %motion direction    
+    motionDirection{k}=getMotionDirection();
+    
+    motionDirChoices=textscan(def_motionDirection{k},'%s', 'Delimiter','|');
+    
+    if isempty(motionDirection{k})   
+        
+        if strcmp(motionDirChoices{1}(1), '-')
+            Trial(k).MotionDirection='unconventional';
+        else
+            Trial(k).MotionDirection=motionDirChoices{1}(1);
+        end
+        
+    else
+        if strcmp(motionDirection{k}, '-')
+            Trial(k).MotionDirection='unconventional';
+        else
+            Trial(k).MotionDirection=motionDirection{k};
+        end
+    end
+    
+    
     for i=1:nFP
         
         eval(['LegFP' num2str(i) '=getValue(i);'])
