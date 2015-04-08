@@ -38,7 +38,7 @@ LPSIS=markers{3}';
 RPSIS=markers{4}';
 
 
-for t=1:length(RASIS)
+for t=1:size(RASIS,2)
 
     %Right-handed Pelvis reference system definition 
     SACRUM(:,t)=(RPSIS(:,t)+LPSIS(:,t))/2;      
