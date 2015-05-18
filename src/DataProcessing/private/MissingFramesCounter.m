@@ -1,4 +1,4 @@
- function [missingFrames,maxMissing]=MissingFramesCounter(data)
+ function [missingFrames]=MissingFramesCounter(data)
 % data should be a vector
 
 % The file is part of matlab MOtion data elaboration TOolbox for
@@ -24,23 +24,27 @@
 %%
 
 [r,c]=size(data);
-maxMissing=zeros(1,c);
-counter=zeros(1,c);
-missingFrames=[];
+
+if c>1
+    error('Data are not in the correct format! Please check markers trajectories data')
+end
+
+counter=0; %# missing frames consecutives
+ngapcounter=0;
 
 for i=1:r	%frames
     
     if isnan(data(i,1))
+ 
+        if counter==0
+            ngapcounter=ngapcounter+1;
+            missingFrames{ngapcounter}=[];
+        end
         counter=counter+1;
-        missingFrames=[missingFrames i];       
+        missingFrames{ngapcounter}=[missingFrames{ngapcounter} i];       
     else
         %reset to 0: increase only if they are consecutive frames
         counter=0;
-    end
-    
-    %keep the max interval of consecutive missing frames
-    if (counter>maxMissing)
-        maxMissing=counter;
     end
 end
 

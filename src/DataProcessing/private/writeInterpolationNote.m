@@ -39,10 +39,21 @@ for k=1:length(note)
     fprintf(fid,'%g', k);
     fprintf(fid,'\n\n');
     trialNote=note{k};
-    save_to_base(1)
-    for j=1:length(trialNote)
-        fprintf(fid,trialNote{j});
-        fprintf(fid,'\n');
+
+    for j=1:size(trialNote,2)
+        
+        if iscell(trialNote{j})
+            nNoteXmarkers=size(trialNote{j},2);
+            
+            for i=1:nNoteXmarkers
+                fprintf(fid,trialNote{j}{i});
+                fprintf(fid,'\n');
+            end
+        else
+            fprintf(fid,trialNote{j});
+            fprintf(fid,'\n');
+            
+        end
     end
     fprintf(fid,'\n');
     
