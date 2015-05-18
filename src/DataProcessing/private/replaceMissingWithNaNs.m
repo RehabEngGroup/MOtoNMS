@@ -38,26 +38,28 @@ for k=1:length(data)
         %looking for the first and last frame in which each marker is
         %visible
         
-        if markers(1,j)==0 && nargout==2
-        %if markers are not visible from the beginning & if index is required in output
+        if ((markers(1,j)==0 || isnan(markers(1,j))) && nargout==2)
+        %if markers are not visible from the beginning (being 0 or NaN, 
+        %according to the acquisition system) & if index is required in output
+        
         %find returns an error if the vector has all 0 values
         %It may happen when index is not required, that is in the second
         %call of this function within runDataProcessing
-            index{k}(1,j)=find(markers(:,j), 1, 'first');
+            tmp=find(isnan(markers(:,j))==0 & markers(:,j)~=0);
+            index{k}(1,j)=tmp(1); %keep the first element
      
         else
             index{k}(1,j)=1;
         end
         
-        if markers(end,j)==0 && nargout==2 
+        if ((markers(end,j)==0 || isnan(markers(end,j))) && nargout==2)
         %if markers are not visible till the end & if index is required in output
-            index{k}(2,j)=find(markers(:,j), 1, 'last');
-            
+            tmp=find(isnan(markers(:,j))==0 & markers(:,j)~=0);
+            index{k}(2,j)=tmp(end); %keep the last element
         else
             index{k}(2,j)=m; %the last frame
         end
-        
-               
+                      
         for i = 1:m
             %replace each 0 with NaN
             if markers(i,j)== 0
