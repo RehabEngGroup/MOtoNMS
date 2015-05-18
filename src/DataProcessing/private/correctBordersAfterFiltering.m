@@ -21,6 +21,7 @@ function [newData] = correctBordersAfterFiltering(data,oldData,index)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
+borderSize=3;
 
 for k=1:length(data)
     
@@ -36,10 +37,10 @@ for k=1:length(data)
       if index{k}(:,j)~= 0
          newMarkers(1:index{k}(1,j)-1,j)=0;
          
-         newMarkers(index{k}(1,j):index{k}(1,j)+7,j)=oldmarkers(index{k}(1,j):index{k}(1,j)+7,j); %values near borders are set to the original 
+         newMarkers(index{k}(1,j):index{k}(1,j)+borderSize,j)=oldmarkers(index{k}(1,j):index{k}(1,j)+borderSize,j); %values near borders are set to the original 
          
          newMarkers(index{k}(2,j)+1:end,j)=0;
-         newMarkers(index{k}(2,j)-7:index{k}(2,j),j)=oldmarkers(index{k}(2,j)-7:index{k}(2,j),j);
+         newMarkers(index{k}(2,j)-borderSize:index{k}(2,j),j)=oldmarkers(index{k}(2,j)-borderSize:index{k}(2,j),j);
       end
     end
 
