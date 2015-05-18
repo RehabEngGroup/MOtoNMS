@@ -1,4 +1,4 @@
-function [interpData,note] = DataInterpolation(data,index,fr)
+function [interpData,note] = DataInterpolation(data,index, maxGapSize)
 %Data interpolation
 %index for piecewise interpolation
 %Interpolation only if there are NaN in the trajectories and only between
@@ -28,12 +28,6 @@ function [interpData,note] = DataInterpolation(data,index,fr)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-
-max_missing=15;
-%Here it is possibile to decide the length of the interpolation: we can
-%interpolate and dont care for how many frames a marker is missing, or we 
-%can check and interpolate only if it is missing for few fixed frames
-%(depending on the video frame rate)
 
 fprintf('Checking missing values in marker trajectories\n');
 
@@ -74,9 +68,9 @@ for k=1: length(data)
                         
                         sizeCurrentGap=size(allMissingFrames{k,j}{i},2);
                         
-                        if sizeCurrentGap < max_missing 
+                        if sizeCurrentGap < maxGapSize 
                         %current gap is interpolated only if its size is
-                        %smaller than max_missing
+                        %smaller than maxGapSize
                             
                             switch i
                                 
@@ -109,10 +103,10 @@ for k=1: length(data)
                             
                         else
                             
-                            markerNote{j}{i}=['Column ' num2str(j) ', gap ' num2str(i) ' has more than ' num2str(max_missing) ' consecutive missing frames between first and last frame in which it appear: no interpolation!If you want to interpolate even this gap, please change the maxGapSizeAllowed in the elaboration.xml file'];
+                            markerNote{j}{i}=['Column ' num2str(j) ', gap ' num2str(i) ' has more than ' num2str(maxGapSize) ' consecutive missing frames between first and last frame in which it appear: no interpolation!If you want to interpolate even this gap, please change the maxGapSizeAllowed in the elaboration.xml file'];
                             fprintf(['WARNING!Trial ' num2str(k) ', Column ' num2str(j) ': no interpolation\n' ])
-                            fprintf(['There is a gap with more than ' num2str(max_missing) ' consecutive missing frames between first and last frame in which it appear \n'])
-                            fprintf(['If you want to interpolate this gap, please change the maxGapSizeAllowed value in the elaboration.xml file\n']);
+                            fprintf(['There is a gap with more than ' num2str(maxGapSize) ' consecutive missing frames between first and last frame in which it appear \n'])
+                            fprintf(['If you want to interpolate this gap, please change the MaxGapSize value in the elaboration.xml file\n']);
                         end
                         
                     end

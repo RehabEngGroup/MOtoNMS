@@ -108,8 +108,17 @@ end
                 'ListString',trialsName,...
                 'InitialValue',InitialValue.Trials);
             
-trialsList=trialsName(trialsIndex);         
+trialsList=trialsName(trialsIndex);        
 
+%% ------------ MaxGapSize for Markers Interpolation Definition -----------
+%Fix by default: the value can be changed manuallly in the elaboration.xml
+if (nargin>3 && isfield(oldParameters,'MarkersInterpolation'))
+    MaxGapSize_default=oldParameters.interpolationMaxGapSize;
+else    
+    referenceValue=15; %fix considering a VideoFrameRate of 60 Hz
+    MaxGapSize_default=referenceValue/60*acquisitionInfo.VideoFrameRate;
+end
+        
 %% ------------------------FCUTs Definition--------------------------------
 
 trialsTypeList=trialsTypeIdentification(trialsList); 
@@ -433,6 +442,9 @@ for i=1:length(trialsList)
 end
 
 elaboration.Trials=Trials;
+
+%Markers Interpolation
+elaboration.MarkersInterpolation.MaxGapSize=MaxGapSize_default;
 
 %Filtering Parameters
 

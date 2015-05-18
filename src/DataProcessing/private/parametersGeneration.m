@@ -145,6 +145,15 @@ end
 
 if nargin>1
     
+    %MaxGapSize for Markers Interpolation
+    if isfield(elaboration,'MarkersInterpolation')
+        parameters.interpolationMaxGapSize=elaboration.MarkersInterpolation.MaxGapSize;
+    else
+        %if not found, fix by default as in elaborationFileCreation.m
+        referenceValue=15; %fix considering a VideoFrameRate of 60 Hz
+        parameters.interpolationMaxGapSize=referenceValue/60*acquisitionInfo.VideoFrameRate;
+    end
+
     %More about WindowSelectionProcedure
     
     if (strcmp(method,'StanceOnFPfromC3D')==1 || strcmp(method,'WindowFromC3D')==1)  %same for both here

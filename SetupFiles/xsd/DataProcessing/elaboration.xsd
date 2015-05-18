@@ -61,6 +61,11 @@
   <xs:simpleType name="TrialsType">
     <xs:list itemType="xs:string"/>
   </xs:simpleType>
+  <xs:complexType name="MarkersInterpolationType">
+    <xs:sequence maxOccurs="1" minOccurs="1">
+      <xs:element minOccurs="1" name="MaxGapSize" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>  
   <xs:complexType name="FilteringType">
     <xs:sequence minOccurs="1">
       <xs:element maxOccurs="unbounded" name="Trial" type="TrialType"/>
@@ -97,6 +102,7 @@
     <xs:sequence>
       <xs:element name="FolderName" type="xs:string"/>
       <xs:element name="Trials" type="TrialsType"/>
+      <xs:element minOccurs="0" name="MarkersInterpolation" type="MarkersInterpolationType"/>	  
       <xs:element minOccurs="0" name="Filtering" type="FilteringType"/>
       <xs:element name="WindowSelectionProcedure" type="WindowSelectionProcedureType"/>
       <xs:element name="Markers" type="MarkersType"/>

@@ -48,7 +48,8 @@ h = waitbar(0,'Elaborating data...Please wait!');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Parameters List: Ri-nomination 
-trialsList=parameters.trialsList;   
+trialsList=parameters.trialsList; 
+maxGapSize=parameters.interpolationMaxGapSize;
 
 if isfield(parameters,'fcut')
     fcut=parameters.fcut;
@@ -130,10 +131,11 @@ end
 [MarkersNan,index]=replaceMissingWithNaNs(markerstrc); 
  
 %if there are no missing markers, it doesn't interpolate
-[interpData,note] = DataInterpolation(MarkersNan, index, VideoFrameRate);
+[interpData,note] = DataInterpolation(MarkersNan, index, maxGapSize);
  
 writeInterpolationNote(note,foldersPath.trialOutput);
 %interpData=markerstrc;
+
 %------------------------Analog Data Split---------------------------------
 %Analog data are organized like this:
 %ForcePlatform type 1: [Fx1 Fy1 Fz1 Px1 Py1 Mz1 Fx2 Fy2 Fz2 Px2 Py2 Mz2...]
