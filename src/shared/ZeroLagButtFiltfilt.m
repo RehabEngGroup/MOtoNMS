@@ -69,6 +69,7 @@ switch type
 end
 
 fdata=data;
+counter=0;
 %Filter data
 [nRows, nCols] = size(data);
 for i = 1:nCols
@@ -80,7 +81,16 @@ for i = 1:nCols
             %each marker is visible. This interval must have a length more
             %than 3 times the filter order for the filtfilt function
             fdata(idx(1,i):idx(2,i),i) = filtfilt(b, a, double(data(idx(1,i):idx(2,i),i)));
+            
+        else %otherwise: piecewise filtering
+             %filtering only within the intervals with no NaN values
+             counter=counter+1;
+             if counter==1 %printing only once for each trial
+                 fprintf(['Piecewise filtering for markers trajectories still having NaN values (not interpolated)\n'])
+             end
+             fdata(idx(1,i):idx(2,i),i) = piecewiseFiltering(b, a, order, data(idx(1,i):idx(2,i),i));           
         end
+            
     else  % filtering other data type (grf and emg)
         fdata(:,i) = filtfilt(b, a, double(data(:,i)));
     end
