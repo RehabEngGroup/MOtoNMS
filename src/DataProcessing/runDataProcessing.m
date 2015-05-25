@@ -447,22 +447,27 @@ if isfield(parameters,'EMGsSelected')
         
         %if trials for max computation are the same of those for elaboration, max
         %values are computed within the same analysis window, else all signals are
-        %considered
-        if isequal(MaxEmgTrialsList,trialsList)
-            
-            EMGsForMax=selectionData(EMGsEnvelopeForMax,AnalysisWindow,AnalogFrameRate,EMGOffset);
-        else
-            EMGsForMax=EMGsEnvelopeForMax;
-        end       
-        
+        %considered --> this is not the way!
+        %if isequal(MaxEmgTrialsList,trialsList)            
+        %    EMGsForMax=selectionData(EMGsEnvelopeForMax,AnalysisWindow,AnalogFrameRate,EMGOffset);
+        %else
+        %TO DO: implement a way to select a different AnalysisWindow for
+        %max EMG computation
+        %The analysis window for max identification is the whole trial now:
+        EMGsForMax=EMGsEnvelopeForMax; 
+        %end
+
         %% ------------------------------------------------------------------------
         %                        COMPUTE MAX EMG VALUES
         %--------------------------------------------------------------------------
-        MaxEMGvalues=computeMaxEMGvalues(EMGsForMax);
-        disp('Max values for selected emg signals have been computed')
+        [MaxEMG_aframes, numMaxEMG_trials,MaxEMGvalues]=computeMaxEMGvalues(EMGsForMax);
         
+        disp('Max values for selected emg signals have been computed')        
+        sMaxEMG_trials=MaxEmgTrialsList(numMaxEMG_trials);        
+        MaxEMG_time=MaxEMG_aframes/AnalogFrameRate;
+
         %print maxemg.txt
-        printMaxEMGvalues(foldersPath.elaboration, EMGsSelected_C3DLabels, MaxEMGvalues);
+        printMaxEMGvalues(foldersPath.elaboration, EMGsSelected_C3DLabels, MaxEMGvalues, sMaxEMG_trials, MaxEMG_time);
         
         disp('Printed maxemg.txt')
         

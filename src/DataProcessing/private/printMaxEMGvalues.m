@@ -1,4 +1,4 @@
-function [] = printMaxEMGvalues(dirPath, EMGLabels, MaxEMGvalues)
+function [] = printMaxEMGvalues(dirPath, EMGLabels, MaxEMGvalues, MaxEMG_trials, MaxEMG_time)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -28,11 +28,13 @@ nEMGChannels=length(EMGLabels);
 
 fid = fopen([dirPath, filesep 'maxemg.txt'], 'w');
 
+fprintf(fid,'Muscle\tMaxEMGvalue\tTrial\tTime(s)\n');
+
 for i=1:nEMGChannels
-    MaxEMGLabel = [char(EMGLabels{i}),'_max '];
-    fprintf(fid,'%s%6.6f\n', char(MaxEMGLabel), MaxEMGvalues(i));
+    MaxEMGLabel = [char(EMGLabels{i})];
+    fprintf(fid,'%s\t%6.4e\t%s\t%6.4f\n', char(MaxEMGLabel), MaxEMGvalues(i), MaxEMG_trials{i}, MaxEMG_time(i));
 end
 
 fclose(fid);
 
-save([dirPath filesep 'maxemg.mat'],'MaxEMGvalues')
+save([dirPath filesep 'maxemg.mat'],'MaxEMGvalues','MaxEMG_trials', 'MaxEMG_time')

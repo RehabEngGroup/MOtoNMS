@@ -1,4 +1,4 @@
-function MaxEMGvalues = computeMaxEMGvalues(EMGconsidered)
+function [MaxEMG_frames, MaxEMG_trials, MaxEMGvalues] = computeMaxEMGvalues(EMGconsidered)
 %
 % The file is part of matlab MOtion data elaboration TOolbox for
 % NeuroMusculoSkeletal applications (MOtoNMS). 
@@ -21,9 +21,22 @@ function MaxEMGvalues = computeMaxEMGvalues(EMGconsidered)
 % <ali.mantoan@gmail.com>, <monica.reggiani@gmail.com>
 
 %%
-for k=1:length(EMGconsidered)
-     TrialMaxEMG(k,:) = max(EMGconsidered{k}); 
-     %store max for each muscle of trial k [nTrials x nMuscle]
+
+nTr=size(EMGconsidered,2);
+
+for k=1:nTr
+    %store max value and the corresponding frame for all muscles of trial k
+    %[nTrials x nMuscle]
+     [TrialMaxEMG(k,:), frames(k,:)] = max(EMGconsidered{k}); 
 end
 
-MaxEMGvalues = max(TrialMaxEMG,[],1);
+[MaxEMGvalues, MaxEMG_trials] = max(TrialMaxEMG,[],1);
+%MaxEMG_trials, [1 x nMuscle], stores the trial in which the max among 
+%trials occurs
+
+nEMGs=size(MaxEMG_trials,2);
+for j=1:nEMGs %for each muscle
+    MaxEMG_frames(j)=frames(MaxEMG_trials(j),j);
+end
+
+
