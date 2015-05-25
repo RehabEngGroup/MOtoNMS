@@ -389,6 +389,8 @@ if isfield(parameters,'EMGsSelected')
         EMGOFileFormat='.mot';  %default EMG output file format
     end
     
+    foldersPath.maxemg=[foldersPath.elaboration filesep 'maxemg'];
+    mkdir(foldersPath.maxemg)
     %Loading Analog Raw Data from the choosen trials with the corresponding
     %labels
     [AnalogRawData, AnalogDataLabels, aFrames, aUnits]=loadMatData(foldersPath.sessionData, trialsList, 'AnalogData');
@@ -467,7 +469,7 @@ if isfield(parameters,'EMGsSelected')
         MaxEMG_time=MaxEMG_aframes/AnalogFrameRate;
 
         %print maxemg.txt
-        printMaxEMGvalues(foldersPath.elaboration, EMGsSelected_C3DLabels, MaxEMGvalues, sMaxEMG_trials, MaxEMG_time);
+        printMaxEMGvalues(foldersPath.maxemg, EMGsSelected_C3DLabels, MaxEMGvalues, sMaxEMG_trials, MaxEMG_time);
         
         disp('Printed maxemg.txt')
         
@@ -488,6 +490,16 @@ if isfield(parameters,'EMGsSelected')
             %Manual method for the Windows Selection has no window offset
             EnvelopePlotting(EMGsFiltered,MaxEMGvalues,EMGsSelected_C3DLabels, EMGsUnits, foldersPath.trialOutput, AnalogFrameRate,EMGOffset)
         end
+        
+        %storing all info related to max EMGs in a struct
+        MaxEMGstruct.values=MaxEMGvalues;
+        MaxEMGstruct.muscles=EMGsSelected_C3DLabels;
+        MaxEMGstruct.aframes=MaxEMG_aframes;
+        MaxEMGstruct.time=MaxEMG_time;
+        MaxEMGstruct.trials=numMaxEMG_trials;
+        MaxEMGstruct.trialNames=sMaxEMG_trials;
+        
+        maxEmgPlotting(EMGsSelectedForMax,EMGsForMax,EMGsUnits{1}{1},foldersPath.maxemg,AnalogFrameRate, MaxEMGstruct)
         
         % ------------------------------------------------------------------------
         %                            PRINT emg.txt

@@ -26,7 +26,7 @@ function [] = printMaxEMGvalues(dirPath, EMGLabels, MaxEMGvalues, MaxEMG_trials,
 
 nEMGChannels=length(EMGLabels);
 
-fid = fopen([dirPath, filesep 'maxemg.txt'], 'w');
+fid = fopen([dirPath filesep 'maxemg.txt'], 'w');
 
 fprintf(fid,'Muscle\tMaxEMGvalue\tTrial\tTime(s)\n');
 
@@ -37,4 +37,3 @@ end
 
 fclose(fid);
 
-save([dirPath filesep 'maxemg.mat'],'MaxEMGvalues','MaxEMG_trials', 'MaxEMG_time')
