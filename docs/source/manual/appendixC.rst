@@ -1,0 +1,65 @@
+.. _`AppendixC`:
+
+Appendix C: Revision History
+----------------------------
+
+
+**v. 1.0 (February 17, 2014)**
+
+INITIAL RELEASE
+
+**v. 2.0 (May 9, 2014)**
+
+NEW FEATURES:
+
+- Support to MATLAB 64 bit and multiplatform (``C3D2MAT`` based on BTK)
+- EMG selection using Analog Labels from each C3D input file
+- Shoulder, elbow, and wrist JC computation for static trials, and examples of setup files for Griffith University markerset
+- Missing values for markers trajectories identified by NaN instead of 0 in ``.trc`` output files
+
+CODE CHANGES:
+
+- Added ``src/shared`` folder to store functions common to several steps
+- Modified filtering of markers trajectories: they are filtered only when visible and only if they have no gaps (``DataFiltering.m``, ``ZeroLagButtFiltfilt.m``)
+- Modified filtering of GRF data from type 1 force platform: filtering is applied only to non zero values to avoid smoothing due to zero values  (data from force platform of type 1 are stored in C3D files after thresholding)
+- Modified data interpolation: markers trajectories are interpolated only if gaps of consecutive frames are shorter than a fixed number defined according to the video frame rate (``DataInterpolation.m``)
+- Modified retrieval of ``AnalogData`` in ``C3D2MAT``: removed assumption of analog data stored only in analog channels subsequent to those dedicated to force data. Now they can be stored in any analog channel independently from force data.
+- Renamed ``replaceWithNans.m`` as ``replaceMissingWithNaNs.m``
+- Renamed ``matfiltfilt2.m`` as ``ZeroLagButtFiltfilt.m``
+- Removed warning messages caused by the lack of subject's first and last names when loading a predefined ``acquisition.xml``
+- Added last selected folder in text fields of graphical user interfaces (GUIs)
+
+BUG FIXES:
+
+- Modified transformation of COP coordinates from local to global reference system: translation added only for non zero values.
+- User is not required to set a new identifier each time he/she load an already available ``elaboration.xml`` file as in version 1.0.
+- Changed the definition of the interval where markers are visible in ``replaceMissingWithNaNs.m`` (the definition of var 'index')
+- Fixed the computation of the hip joint center (HJC) with the Harrington method (``HJCHarrington.m``)
+
+
+**v. 2.1 (September 8, 2014)**
+
+NEW FEATURES:
+
+- Compatibility with MacOS X operating systems
+- Envelope plots with normalization scale (% max)
+- Plot of normalized EMG linear envelopes for all the muscles
+- ``.sto`` (OpenSim storage) file format for EMG output
+- ``.mot`` (SIMM and OpenSim motion) file format for EMG output (new default)
+
+CODE CHANGES:
+
+- Changed ``elaboration.xsd`` to add support of different output file formats, preserving compatibility with previous versions.
+- Renamed ``mainStaticElaboration.m`` as ``StaticInterface.m``
+- Moved main programs (``C3D2MAT.m``, ``ElaborationInterface.m``, ``StaticInterface.m``) to functions
+- Moved internal functions in  private folders
+- Renamed all ``readme.txt`` to ``README.md``
+- Modified y axis scale setting of envelope plots
+- Modified data storage structure: added ``dynamicElaborations`` folder to group all the multiple executions of ``DataProcessing``
+
+BUG FIXES:
+
+- Removed addition of mean values after EMG filtering
+- Fixed units in EMGs plotting
+- Fixed x label of envelope plots
+- Fixed trial type identification for filtering cutoff definition
