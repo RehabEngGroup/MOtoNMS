@@ -361,6 +361,8 @@ for k=1:length(c3dFiles)
     else
         Trial(k).Type=trialsName{k};
         Trial(k).RepetitionNumber='';
+        warning on
+        warning('Filename of input C3D data does not include repetition number. Trials must be named as: trial type (walking, running, fastwalking, etc.) + sequential number. Examples: walking1, fastwalking5, etc. Please, refer to MOtoNMS User Manual.')
     end
 
 

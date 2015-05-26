@@ -179,7 +179,14 @@ if nargin>1
         end
         
         TrialType{k}=acquisitionInfo.Trials.Trial(k).Type;
-        RepetitionNumber{k}=num2str(acquisitionInfo.Trials.Trial(k).RepetitionNumber);
+        %handling error of missing repetition number in acquisition.xml
+        %file
+        if isfield(acquisitionInfo.Trials.Trial(k), 'RepetitionNumber')
+            RepetitionNumber{k}=num2str(acquisitionInfo.Trials.Trial(k).RepetitionNumber);
+        else
+            RepetitionNumber{k}='';
+            fprintf('WARNING: Error handled. Filename of input C3D data does not include repetition number. Trials should be named as: trial type (walking, running,etc.) + sequential number. Examples: walking1, fastwalking5, etc. If you change the name accordingly, please run the AcquisitionInterface again. \n' )
+        end           
         InitialTrialsList{k}=strcat(TrialType{k},RepetitionNumber{k});
     end
     
