@@ -38,7 +38,7 @@ addSharedPath()
 runTerminalNote()
 
 %% Selection of input data 
-pathName = uigetdir(' ','Select your input data folder');
+pathName = uigetdir('Select your input data folder');
 c3dFiles = dir ([pathName filesep '*.c3d']);
 
 h = waitbar(0,'Elaborating data...Please wait!');

@@ -68,7 +68,7 @@ options.Resize='on';
 options.WindowStyle='modal';
 
 %% Dataset folder
-DataSetPath = uigetdir(' ','Select your dataset folder');
+DataSetPath = uigetdir('Select your dataset folder');
 
 
 %% -----------------------------------------------------------------------%

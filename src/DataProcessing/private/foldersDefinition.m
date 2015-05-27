@@ -27,7 +27,7 @@ if nargin>0
        
 else
     %Input data folder manual selection for the user interface
-    inputDataPath = uigetdir(' ','Select your input data folder');
+    inputDataPath = uigetdir('Select your input data folder');
     
 end
 
