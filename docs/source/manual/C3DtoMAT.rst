@@ -35,13 +35,13 @@ Please pay ATTENTION to the following IMPORTANT NOTES:
 
    + Input files folder MUST be inside a folder named ``InputData`` (:ref:`Folders: organize your work <DataOrganization>`).
 
-   + The execution of ``C3D2MAT`` does not overwrite information common to the acquisition session, i.e. that must be the same for all trials collected during an acquisition, as ``trialsName.mat``, ``Rates.mat``, ``dMLabels``, ``AnalogDataLabels.mat``, ``ForcePlatformsInfo.mat``. Cancel the ``sessionData`` folder before running again the program if you add trials or modify your data set.
+   + The execution of ``C3D2MAT`` does not overwrite information common to the acquisition session, i.e. that must be the same for all trials collected during an acquisition, as ``trialsName.mat``, ``Rates.mat``, ``dMLabels``, ``AnalogDataLabels.mat``, ``ForcePlatformsInfo.mat``. Please, keep in mind to cancel the ``sessionData`` folder before running again the program if you add trials or modify your data set.
 
    + Different events MUST have different name (`Analysis Window Definition <analysisWindDef>`_, ``WindowFromC3D``).
 
    + Events for foot strike and foot off must identify frames with non-zero force values (`Analysis Window Definition <analysisWindDef>`_, ``StanceOnFPfromC3D``).
 
-   + If you are using ``C3D2MAT_c3dserver``, remember to install `C3Dserver`_software (:ref:`Installation <installation>`) and that it works only on MATLAB 32 bit.
+   + If you are using ``C3D2MAT_c3dserver``, remember to install `C3Dserver <http://www.c3dserver.com/>`_ software (:ref:`Installation <installation>`) and that it works only on MATLAB 32 bit.
 
    + If you are using ``C3D2MAT_btk``, remember to download the correct `BTK <https://code.google.com/p/b-tk/wiki/MatlabBinaries>`_ version for your    system and to add it to the path of MATLAB. Type the command ``help btk`` in the MATLAB command window to verify that BTK is loaded in MATLAB (:ref:`Installation <installation>`).
 

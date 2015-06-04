@@ -22,7 +22,7 @@ The next chapters of the manual describe in details each part of MOtoNMS: its ob
 
 .. _codeorg:
 
-.. figure:: ../images/codeOrg.png
+.. figure:: ../images/codeOrganization.png
    :align: center
    :width: 33%
 

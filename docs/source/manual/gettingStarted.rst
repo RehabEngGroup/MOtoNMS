@@ -63,7 +63,7 @@ MOtoNMS is released under the GNU General Public Licence v.3or any later version
 Requirements
 ~~~~~~~~~~~~
 
-MOtoNMS is implemented in MATLAB and runs on the major operating systems (Windows, Linux, MacOS X). It works with MATLAB R2010b and later versions.
+MOtoNMS is implemented in MATLAB and runs on the major operating systems (Windows, Linux, MacOS X). It works with MATLAB R2009a and later versions.
 
 MOtoNMS requires one of the following software for the :ref:`C3D2MAT <C3D2MAT>` part:
 
@@ -76,4 +76,4 @@ You can choose to install either `C3Dserver <http://www.c3dserver.com/>`_ or `BT
 
 Laboratory requirements:
 
-+ Data collected with a motion capture and force plate system must be labeled and then exported as a C3D file, which is the input format for MOtoNMS. Markers labels MUST not include spaces (e.g. 'LLM' and not 'LLM') and duplicates of marker labels are NOT acceptable in the same markerset.
++ Data collected with a motion capture and force plate system must be labeled and then exported as a C3D file, which is the input format for MOtoNMS. Markers labels MUST not include spaces (e.g. 'LLM' and not 'L LM') and duplicates of marker labels are NOT acceptable in the same markerset.
