@@ -20,10 +20,8 @@ Details of the latest version can be found on the SimTK project page:
 
 
 ## Documentation ##
-A PDF version of MOtoNMS User Manual is included with this release. The most up-to-date 
-documentation can be found at <https://simtk.org/home/motonms> and 
-the latest version of the manual is always available at <http://goo.gl/Ukrw5B>.
-Documentation is also provided in the GitHub Project Pages available at <http://rehabenggroup.github.io/MOtoNMS/>.
+A PDF version of MOtoNMS User Manual is included with this release and can be downloaded from <https://simtk.org/home/motonms>.
+The most up-to-date documentation is also provided in the GitHub Project Pages available at <http://rehabenggroup.github.io/MOtoNMS/>.
 
 
 ## Installation ##
@@ -46,11 +44,9 @@ how to use MOtoNMS
 
 
 ## Contacts ##
-- You can send MOtoNMS bug reports to <ali.mantoan@gmail.com>.   
-- If you need help using MOtoNMS, send an email either to 
-     <ali.mantoan@gmail.com> or <monica.reggiani@gmail.com>
-- If you want to participate in developing MOtoNMS please send an 
-     email to <monica.reggiani@gmail.com>
+- If you need help using MOtoNMS, please ask your questions in the MOtoNMS Public Forum, available from the SimTK project page: <https://simtk.org/home/motonms>, or send an email to <ali.mantoan@gmail.com>
+- You can send MOtoNMS bug reports to <ali.mantoan@gmail.com>  
+- If you want to participate in developing MOtoNMS, please send an email to <monica.reggiani@gmail.com>
 
 
 ## Licensing ##
@@ -71,7 +67,8 @@ MOtoNMS; see the file license.  If not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-## Acknowledgment ##
+## Acknowledgments ##
 We would like to acknowledge Motion Lab Systems, Inc. (<http://www.motion-labs.com/>)
 for the C3Dserver SDK (software development kit), and Arnaud Barre and Stephane Armand for
 BTK (Biomechanical Toolkit, <https://code.google.com/p/b-tk/>) contribution.
+We would also thank all the researchers at the University of Western Australia and at the Griffith University that contributed to the initial processing pipeline.
