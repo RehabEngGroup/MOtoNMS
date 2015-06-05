@@ -9,6 +9,7 @@ MOtoNMS
 
     /manual/redistribution
     /manual/acknoledgments
+    /manual/newFeatures
     /manual/introduction
     /manual/gettingStarted
     /manual/folders
@@ -46,10 +47,11 @@ MOtoNMS
    .. index:
 
    .. toctree::
-      :maxdepth: 0
+      :maxdepth: 3
 
       /manual/redistribution
       /manual/acknoledgments
+      /manual/newFeatures	  
       /manual/gettingStarted
       /manual/folders
       /manual/acquisitionInterface
@@ -65,9 +67,9 @@ MOtoNMS
    provide feedback, comments, suggestions, and new modules using any of
    the following channels:
 
-   + the simtk.org web page: `<https://simtk.org/home/motonms>`_
+   + the MOtoNMS Public Forum, available from the SimTK project page: `<https://simtk.org/home/motonms>`_
    + the GitHub repository: `<https://github.com/RehabEngGroup/MOtoNMS>`_
-   + email: <ali.mantoan@gmail.com>.
+   + email: ali.mantoan@gmail.com, monica.reggiani@gmail.com.
 
 
 

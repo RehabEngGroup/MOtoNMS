@@ -3,7 +3,7 @@
 Appendix A: Setup Files
 -----------------------
 
-This appendix lists the setup files already available in MOtoNMS distribution. They are stored in  ``MOtoNMS\SetupFiles\`` folder (:num:`Fig. #codeorg`, :ref:`Code Organization <CodeOrganization>`). They are selected by the users through the GUIs to create the configuration files (``acquisition.xml``, ``elaboration.xml`` and ``static.xml``) required for processing.
+This appendix lists the setup files already available in MOtoNMS distribution. They are stored in  ``MOtoNMS\SetupFiles\`` folder (:ref:`Code organization figure <codeorg>`). They are selected by the users through the GUIs to create the configuration files (``acquisition.xml``, ``elaboration.xml`` and ``static.xml``) required for processing.
 
 
 Acquisition Interface

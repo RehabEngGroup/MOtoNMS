@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Acquisition Interface: describing your data &mdash; MOtoNMS 2.1 documentation</title>
+    <title>Acquisition Interface: describing your data &mdash; MOtoNMS 2.2 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,13 +23,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="MOtoNMS 2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.2 documentation" href="../index.html" />
     <link rel="next" title="C3DtoMAT: from C3D to MATLAB format" href="C3DtoMAT.html" />
     <link rel="prev" title="Folders: organize your work" href="folders.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,62 +41,67 @@
         <li class="right" >
           <a href="folders.html" title="Folders: organize your work"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="acquisition-interface-describing-your-data">
 <span id="acquisitioninterface"></span><h1>Acquisition Interface: describing your data<a class="headerlink" href="#acquisition-interface-describing-your-data" title="Permalink to this headline">¶</a></h1>
-<p>During this step, a graphical user interface (GUI) will assist you in the creation of a file describing the acquisition session (<tt class="docutils literal"><span class="pre">acquisition.xml</span></tt>). This file must be created and included in the folder with the C3D data before running the next steps (<a href="folders.html#dataorg">Fig.  9</a>). Furthermore, <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> is helpful when the data are shared among researchers as it allows to easily figure out all the details about the acquisition session.</p>
+<p>During this step, a graphical user interface (GUI) will assist you in the creation of a file describing the acquisition session (<code class="docutils literal"><span class="pre">acquisition.xml</span></code>). This file must be created and included in the folder with the C3D data before running the next steps (<a class="reference internal" href="folders.html#dataorg"><span>Folders: organize your work figure</span></a>). Furthermore, <code class="docutils literal"><span class="pre">acquisition.xml</span></code> is helpful when the data are shared among researchers as it allows to easily figure out all the details about the acquisition session.</p>
 <p>The procedure is quite simple: you will go through a sequence of questions about the tracked subjects, people that collected the data, marker and EMG protocol, laboratory characteristics, etc.</p>
-<p>The only tricky point is about the prefilled <em>setup files</em>. Information about the laboratory setup, markers and EMG protocols are usually common to several acquisitions. Therefore, instead of writing again and again the same values for each acquisition, these data are stored in setup files that can be selected from the GUI (<a href="#acquisition">Fig.  1</a>). Thus, before running the Acquisition Interface you need to have already all the necessary <a class="reference internal" href="#acquisitionsetupfiles"><em>setup files</em></a>. A few examples are available in the directories:</p>
+<p>The only tricky point is about the prefilled <em>setup files</em>. Information about the laboratory setup, markers and EMG protocols are usually common to several acquisitions. Therefore, instead of writing again and again the same values for each acquisition, these data are stored in setup files that can be selected from the GUI (<a href="#acquisition">Fig.  1</a>). Thus, before running the Acquisition Interface you need to have already all the necessary <a class="reference internal" href="#acquisitionsetupfiles"><span>setup files</span></a>. A few examples are available in the directories:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\Laboratories</span></tt> (Laboratory Configurations)</li>
-<li><tt class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\MarkersProtocols</span></tt> (Markers Protocols)</li>
-<li><tt class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\EMGsProtocols</span></tt> (EMG Protocols).</li>
+<li><code class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\Laboratories</span></code> (Laboratory Configurations)</li>
+<li><code class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\MarkersProtocols</span></code> (Markers Protocols)</li>
+<li><code class="docutils literal"><span class="pre">MOtoNMS\SetupFiles\AcquisitionInterface\EMGsProtocols</span></code> (EMG Protocols).</li>
 </ul>
-<p>If you need a setup files not already included in the folders, you can add new setup files following the instruction in the sections Setup Files of each chapter.</p>
-<div class="align-center figure align-center" id="acquisition">
-<a class="reference internal image-reference" href="../_images/acquisitionInterfaceSchema.png"><img alt="../_images/acquisitionInterfaceSchema.png" src="../_images/acquisitionInterfaceSchema.png" style="width: 413.0px; height: 345.8px;" /></a>
-<p class="caption">Figure 1: Acquisition Interface schema. The user uses the Acquisition Interface GUI to create <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt>. Information about Laboratory configuration and Markers and EMG Protocols are stored in prefilled setup files to avoid reentering data common to multiple acquisitions.</p>
+<p>If you need a setup file not already included in the folders, you can add new setup files following the instruction in the sections <code class="docutils literal"><span class="pre">Setup</span> <span class="pre">Files</span></code> of each chapter.</p>
+<div class="align-center figure" id="id3">
+<span id="acquisition"></span><a class="reference internal image-reference" href="../_images/acquisitionInterfaceSchema.png"><img alt="../_images/acquisitionInterfaceSchema.png" src="../_images/acquisitionInterfaceSchema.png" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Acquisition Interface schema. The user uses the Acquisition Interface GUI to create <code class="docutils literal"><span class="pre">acquisition.xml</span></code>. Information about Laboratory configuration and Markers and EMG Protocols are stored in prefilled setup files to avoid reentering data common to multiple acquisitions.</span></p>
 </div>
 <div class="section" id="how-to-run-the-program">
 <h2>How to run the program<a class="headerlink" href="#how-to-run-the-program" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Set MATLAB path to <tt class="docutils literal"><span class="pre">src\AcquisitionInterface</span></tt> folder</li>
-<li>Run <tt class="docutils literal"><span class="pre">mainAcquisitionInterface.m</span></tt> (this calls <tt class="docutils literal"><span class="pre">AcquisitionInterface.m</span></tt>, the core program)</li>
+<li>Set MATLAB path to <code class="docutils literal"><span class="pre">src\AcquisitionInterface</span></code> folder</li>
+<li>Run <code class="docutils literal"><span class="pre">mainAcquisitionInterface.m</span></code> (this calls <code class="docutils literal"><span class="pre">AcquisitionInterface.m</span></code>, the core program)</li>
 <li>Answer to questions with the required information</li>
 </ol>
-<p><strong>Output</strong>: <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file (saved in the <tt class="docutils literal"><span class="pre">InputData</span></tt> folder, <a href="folders.html#dataorg">Fig.  9</a> - red).</p>
-<p>At the beginning, the graphical interface asks whether the user wants to reload an <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file. This is a useful functionality when the user wants to start with information stored in a file already available.</p>
-<p>The resulting XML file is considered perfectly valid only when all the information is included (<a class="reference internal" href="appendixB.html#appendixb"><em>Appendix B: Validation of Setup and Configuration Files</em></a>). However, <tt class="docutils literal"><span class="pre">mainAcquisitionInterface.m</span></tt> only requires the data which are mandatory for the following processing allowing to skip some answers.</p>
+<p><strong>Output</strong>: <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file (saved in the <code class="docutils literal"><span class="pre">InputData</span></code> folder, <a class="reference internal" href="folders.html#dataorg"><span>Folders: organize your work figure</span></a> - red).</p>
+<p>At the beginning, the graphical interface asks whether the user wants to reload an <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file. This is a useful functionality when the user wants to start with information stored in a file already available.</p>
+<p>The resulting XML file is considered perfectly valid only when all the information is included (<a class="reference internal" href="appendixB.html#appendixb"><span>Appendix B: Validation of Setup and Configuration Files</span></a>). However, <code class="docutils literal"><span class="pre">mainAcquisitionInterface.m</span></code> only requires the data which are mandatory for the following processing, allowing to skip some answers.</p>
 <p>Please pay ATTENTION to the following IMPORTANT NOTES:</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <ul class="last simple">
-<li>Input files folder MUST include the <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file before running <a class="reference internal" href="dataProcessing.html#dataprocessing"><em>Data Processing</em></a> and <a class="reference internal" href="staticElaboration.html#staticelaboration"><em>Static Elaboration</em></a> steps.</li>
-<li>The <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file is NOT required for <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a>, so you can run <a class="reference internal" href="#acquisitioninterface"><em>Acquisition Interface</em></a> and <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a> in any order.</li>
-<li>Trials must be named as: <em>trial type</em> (<tt class="docutils literal"><span class="pre">walking,</span> <span class="pre">running,</span> <span class="pre">fastwalking</span></tt>,     etc.) + <em>sequential number</em>. Examples: <tt class="docutils literal"><span class="pre">walking1,</span> <span class="pre">fastwalking5</span></tt>, etc.</li>
+<li>Input files folder MUST include the <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file before running <a class="reference internal" href="dataProcessing.html#dataprocessing"><span>Data Processing</span></a> and <a class="reference internal" href="staticElaboration.html#staticelaboration"><span>Static Elaboration</span></a> steps.</li>
+<li>The <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file is NOT required for <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a>, so you can run <a class="reference internal" href="#acquisitioninterface"><span>Acquisition Interface</span></a> and <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a> in any order.</li>
+<li>Trials must be named as: <em>trial type</em> (<code class="docutils literal"><span class="pre">walking,</span> <span class="pre">running,</span> <span class="pre">fastwalking</span></code>,     etc.) + <em>sequential number</em>. Examples: <code class="docutils literal"><span class="pre">walking1,</span> <span class="pre">fastwalking5</span></code>, etc.</li>
 <li>The sequential number MUST not include any 0 in the front (write 1 not 001), otherwise errors may occur in the processing.</li>
-<li>Trial names in the <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> MUST correspond to the actual input file names.</li>
-<li>Gait trials gathered along the negative direction of motion are not currently supported: they may be processed without errors, but the results will not be correct. Please get in touch with the authors if you need to process trials along the negative direction.</li>
+<li>Trial names in the <code class="docutils literal"><span class="pre">acquisition.xml</span></code> MUST correspond to the actual input file names.</li>
+<li>Motion direction refers to the trial and is asked in the GUI (<a href="#trialgui">Fig.  2</a>). Default value is <code class="docutils literal"><span class="pre">forward</span></code>, which means that your subject is moving according to the positive direction of the laboratory coordinate system (CS). If this is not the case, you can choose among the following additional options: <code class="docutils literal"><span class="pre">backward</span></code>, <code class="docutils literal"><span class="pre">90left</span></code>, <code class="docutils literal"><span class="pre">90right</span></code>. All of them are defined with respect to the positive direction of your laboratory CS. If your data do not fit in any of the available choices, please select the remaining option (<code class="docutils literal"><span class="pre">-</span></code>, i.e. <em>unconventional</em> in the <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file). In this case, no extra rotations will be applied to your data: they will be projected in the OpenSim CS preserving the orientation they have in the laboratory CS. For static trials, please indicate the direction your subject is looking towards.</li>
+<li>If your force platforms include a plate pad on the surface, you can define the thickness of each pad in the laboratory setup file (<a class="reference internal" href="#lab"><span>Laboratory</span></a>). Addition of the <code class="docutils literal"><span class="pre">PadThickness</span></code> tag in the file is allowed but not mandatory (<a class="reference internal" href="#platepadding"><span>Plate Padding</span></a>). However, please note that if you add it for one force platform, you MUST do the same for ALL the other force platforms defined in the same XML, even if the pad is not present. In this case, you can set the pad thickness to 0.</li>
 </ul>
+</div>
+<div class="align-center figure" id="id4">
+<span id="trialgui"></span><a class="reference internal image-reference" href="../_images/trialGUIchoices.png"><img alt="../_images/trialGUIchoices.png" src="../_images/trialGUIchoices.png" /></a>
+<p class="caption"><span class="caption-text">Figure 2: Acquisition Interface: how to set the motion direction for each trial. This step of the GUI will ask you the leg that strikes on each force platform, and the direction of motion for each of your input data file. This information allows to support trials with different motion directions. Indeed, extra rotations can be required to align data with the positive direction of OpenSim coordinate system (CS).</span></p>
 </div>
 </div>
 <div class="section" id="setup-files">
-<span id="acquisitionsetupfiles"></span><h2>Setup files<a class="headerlink" href="#setup-files" title="Permalink to this headline">¶</a></h2>
-<p>The following files speed up the process of compiling the <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file that describes your acquisition session. When MOtoNMS has been already used in your laboratory to collect data with EMG and marker protocols do not go further: someone else should have already created these files. If you are not lucky and you have to write your own setup files, do not be scared: it is a simple procedure if you follow carefully the description in the this section.
-Additionally, once you are done, you can check that the final XML file respect the required syntax with the validation procedure (see <a class="reference internal" href="appendixB.html#appendixb"><em>Appendix B: Validation of Setup and Configuration Files</em></a>).</p>
+<span id="acquisitionsetupfiles"></span><h2>Setup Files<a class="headerlink" href="#setup-files" title="Permalink to this headline">¶</a></h2>
+<p>The following files speed up the process of compiling the <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file that describes your acquisition session. When MOtoNMS has been already used in your laboratory to collect data with EMG and marker protocols do not go further: someone else should have already created these files. If you are not lucky and you have to write your own setup files, do not be scared: it is a simple procedure if you follow carefully the description in this section.
+Additionally, once you are done, you can check that the final XML file respect the required syntax with the validation procedure (see <a class="reference internal" href="appendixB.html#appendixb"><span>Appendix B: Validation of Setup and Configuration Files</span></a>).</p>
 <div class="section" id="laboratory">
 <span id="lab"></span><h3>Laboratory<a class="headerlink" href="#laboratory" title="Permalink to this headline">¶</a></h3>
 <p>This XML setup file describes the characteristics of the laboratory where data are collected. It has been introduced to avoid re-entering same data for each acquisition carried on in the same laboratory. Its name should uniquely identify the laboratory to whom it refers. Therefore, the best choice is to use a combination of laboratory name, department, university.</p>
-<p>The following is an example of an XML setup file with information about the laboratory (available at SetupFilesAcquisitionInterfaceLaboratoriesUNIPD.xml).</p>
-<div class="highlight-xml" id="test"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>The following is an example of an XML setup file with information about the laboratory (available at <code class="docutils literal"><span class="pre">SetupFiles\AcquisitionInterface\Laboratories\UNIPD.xml</span></code>).</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -171,9 +174,9 @@ Additionally, once you are done, you can check that the final XML file respect t
 <span class="nt">&lt;/Laboratory&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>The file must include the following:</p>
+<p>The file MUST include:</p>
 <ol class="arabic simple">
-<li><strong>Orientation of the coordinate system</strong> (<tt class="docutils literal"><span class="pre">&lt;CoordinateSystemOrientation&gt;</span></tt> tag, line 4)</li>
+<li><strong>Orientation of the coordinate system</strong> (<code class="docutils literal"><span class="pre">&lt;CoordinateSystemOrientation&gt;</span></code> tag, line 4)</li>
 </ol>
 <p>The coordinate system orientation refers to the global or laboratory coordinate system. We used the following convention:</p>
 <ul class="simple">
@@ -181,42 +184,78 @@ Additionally, once you are done, you can check that the final XML file respect t
 <li>2nd axis: vertical axis</li>
 <li>3rd axis: right hand rule</li>
 </ul>
-<p>with the assumption that the 1st axis has the same verse of OpenSim 1st axis, i.e. it should be the positive direction of motion (<a href="#convention">Fig.  2</a>).
-This convention requires that for any combination of the three axes (e.g. YZX, XZY, YXZ, etc...), the first axis must always be the direction of motion in your lab, the second one your vertical axis, and the last the one results from the right hand rule (<a href="#convention">Fig.  2</a>). The adopted convention follows ISB recommendation <a class="footnote-reference" href="#id2" id="id1">[1]</a>. Line 4 shows an example of definition of coordinate system orientation.</p>
-<div class="align-center figure align-center" id="convention">
-<img alt="../_images/convention.png" src="../_images/convention.png" style="width: 35%;" />
-<p class="caption">Figure 2: Convention for Coordinate System Orientation: example of interpretation.</p>
+<p>with the assumption that the 1st axis has the same verse of OpenSim 1st axis, i.e. it should be the positive direction of motion (<a href="#convention">Fig.  3</a>).
+This convention requires that for any combination of the three axes (e.g. YZX, XZY, YXZ, etc...), the first axis must always be the direction of motion in your lab, the second one your vertical axis, and the last the one results from the right hand rule (<a href="#convention">Fig.  3</a>). The adopted convention follows ISB recommendation <a class="footnote-reference" href="#id2" id="id1">[1]</a>. Line 4 shows an example of definition of coordinate system orientation.</p>
+<div class="align-center figure" id="id5">
+<span id="convention"></span><a class="reference internal image-reference" href="../_images/convention.png"><img alt="../_images/convention.png" src="../_images/convention.png" style="width: 35%;" /></a>
+<p class="caption"><span class="caption-text">Figure 3: Convention for Coordinate System Orientation: example of interpretation.</span></p>
 </div>
-<p>Current version of MOtoNMS only manages data collected along the positive direction of motion. Gait trials gathered along the negative direction of motion may be processed without any output error, but the results will not be correct. Plese get in touch with the authors if you need to process trials in negative direction for a workaround suggestion.</p>
-<ol class="arabic simple">
-<li><strong>Type of force platforms</strong> (<tt class="docutils literal"><span class="pre">&lt;Type&gt;</span></tt> tag, lines 10 and 22)</li>
+<ol class="arabic simple" start="2">
+<li><strong>Type of force platforms</strong> (<code class="docutils literal"><span class="pre">&lt;Type&gt;</span></code> tag, lines 10 and 22)</li>
 </ol>
 <p>Force platform (FP) type must be indicated because it influences output data (refer to <a class="reference external" href="http://www.projects.science.uu.nl/umpm/c3dformat_ug.pdf">The C3D File Format User Guide</a>, by Motion Lab Systems, pag. 88 and to your force platform manual).</p>
 <p>MOtoNMS recognizes and processes data from force platforms of type 1, 2, 3, and 4. Each plaform returns different data as shown in the following:</p>
 <ul class="simple">
-<li>type 1: [Fx Fy FzPx PyMz]</li>
+<li>type 1: [Fx Fy Fz Px Py Mz]</li>
 <li>type 2 and 4: [Fx Fy Fz Mx My Mz]</li>
 <li>type 3: [Fx12 Fx34 Fy14 Fy23 Fz1 Fz2 Fz3 Fz4]</li>
 </ul>
 <p>where F are the measured reaction forces, M the moments, and P the center of pressure (CoP) along the three directions. Numbers in type 3 platform refers to the sensors (refer to the <a class="reference external" href="http://www.projects.science.uu.nl/umpm/c3dformat_ug.pdf">C3D File Format User Guide</a> for additional information).</p>
-<p>If your force platform includes a plate pad on the surface you need to correct CoP computation (please refer to <a class="reference external" href="http://www.kwon3d.com/theory/grf/pad.html">http://www.kwon3d.com/theory/grf/pad.html</a> for additional information). Future version of MOtoNMS will include this functionality. Please contact the authors for a workaround if you need it earlier.</p>
-<ol class="arabic simple">
-<li><strong>Rotation between the force platform and the global coordinates</strong> (<tt class="docutils literal"><span class="pre">&lt;FPtoGlobalRotations&gt;</span></tt> tag,  lines 12-17 and 24-33)</li>
+<p>MOtoNMS can process data from several FPs of different type at the same time (i.e. FPs in your laboratory can be of different types). However, there is a single exception: if you have a FP of type 1, all FP in your laboratory should be of type 1. If this is not the case (i.e. you have at least one FP of type 1 and at least another of a different type), please contact the authors for more information on how to proceed.</p>
+<ol class="arabic simple" start="3">
+<li><strong>Rotation between the force platform and the global coordinates</strong> (<code class="docutils literal"><span class="pre">&lt;FPtoGlobalRotations&gt;</span></code> tag,  lines 12-17 and 24-33)</li>
 </ol>
-<p>It is well known that each FP has its own coordinate system (<a href="#bertec">Fig.  3</a>) and that C3D files store FP data in the corresponding FP coordinate system. Therefore,  the configuration file about the laboratory must provide also the transformation to rotate each FP reference system to the global one (lines 12-17 and 24-33).</p>
-<div class="align-center figure align-center" id="bertec">
-<img alt="Bertec Plate Coordinate System" src="../_images/BertecFP.png" style="width: 35%;" />
-<p class="caption">Figure 3: Bertec Plate Coordinate System ( from Bertec Force Plates Manual, version 1.0.0, March 2012, <a class="reference external" href="http://bertec.com/uploads/pdfs/manuals/Force%20Plate%20Manual.pdf">http://bertec.com/uploads/pdfs/manuals/Force%20Plate%20Manual.pdf</a>).</p>
+<p>It is well known that each FP has its own coordinate system (<a href="#bertec">Fig.  4</a>) and that C3D files store FP data in the corresponding FP coordinate system. Therefore,  the configuration file about the laboratory must provide also the transformation to rotate each FP reference system to the global one (lines 12-17 and 24-33).</p>
+<div class="align-center figure" id="id6">
+<span id="bertec"></span><a class="reference internal image-reference" href="../_images/BertecFP.png"><img alt="Bertec Plate Coordinate System" src="../_images/BertecFP.png" style="width: 35%;" /></a>
+<p class="caption"><span class="caption-text">Figure 4: Bertec Plate Coordinate System (from Bertec Force Plates Manual, version 1.0.0, March 2012, <a class="reference external" href="http://bertec.com/uploads/pdfs/manuals/Force%20Plate%20Manual.pdf">http://bertec.com/uploads/pdfs/manuals/Force%20Plate%20Manual.pdf</a>).</span></p>
 </div>
-<p>The XML example shows how to configure two Bertec force platforms. Their relative position and coordinate systems is shown in <a href="#orientation">Fig.  4</a>.  Lines 12-17 (FP 1) and 24-33 (FP 2) list the required rotations. When more than one rotation is required, they are listed in sequence and estimated around moving axes (lines 24-33).</p>
-<div class="align-center figure align-center" id="orientation">
-<img alt="FP and global coordinate systems" src="../_images/FPUNIPD.png" style="width: 40%;" />
-<p class="caption">Figure 4: FP and global coordinate systems orientation of UNIPD Laboratory.</p>
+<p>The XML example shows how to configure two Bertec force platforms. Their relative position and coordinate systems is shown in <a href="#orientation">Fig.  5</a>.  Lines 12-17 (FP 1) and 24-33 (FP 2) list the required rotations. When more than one rotation is required, they are listed in sequence and estimated around moving axes (lines 24-33).</p>
+<div class="align-center figure" id="id7">
+<span id="orientation"></span><a class="reference internal image-reference" href="../_images/FPUNIPD.png"><img alt="FP and global coordinate systems" src="../_images/FPUNIPD.png" style="width: 40%;" /></a>
+<p class="caption"><span class="caption-text">Figure 5: FP and global coordinate systems orientation of UNIPD Laboratory.</span></p>
+</div>
+<div class="section" id="plate-padding">
+<span id="platepadding"></span><h4>Plate Padding<a class="headerlink" href="#plate-padding" title="Permalink to this headline">¶</a></h4>
+<p>An additional entry, <code class="docutils literal"><span class="pre">PadThickness</span></code> (line 6), may be included in the laboratory XML file, when data are collected with pads on the surface of FPs. This will allow to correct the computation of CoP coordinates accordingly (please refer to <a class="reference external" href="http://www.kwon3d.com/theory/grf/pad.html">http://www.kwon3d.com/theory/grf/pad.html</a> for additional information). Pad thickness value must be provided in the same unit of length of plate moments.</p>
+<p>The following is an example of definition of a force platform including a pad of 7.5mm, in the laboratory XML file.</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;ForcePlatform&gt;</span>
+     <span class="nt">&lt;ID&gt;</span>1<span class="nt">&lt;/ID&gt;</span>
+     <span class="nt">&lt;Brand&gt;</span>Bertec<span class="nt">&lt;/Brand&gt;</span>
+     <span class="nt">&lt;Type&gt;</span>1<span class="nt">&lt;/Type&gt;</span>
+     <span class="nt">&lt;FrameRate&gt;</span>960<span class="nt">&lt;/FrameRate&gt;</span>
+     <span class="nt">&lt;PadThickness&gt;</span>7.5<span class="nt">&lt;/PadThickness&gt;</span>
+     <span class="nt">&lt;FPtoGlobalRotations&gt;</span>
+       <span class="nt">&lt;Rot&gt;</span>
+         <span class="nt">&lt;Axis&gt;</span>X<span class="nt">&lt;/Axis&gt;</span>
+         <span class="nt">&lt;Degrees&gt;</span>-90<span class="nt">&lt;/Degrees&gt;</span>
+       <span class="nt">&lt;/Rot&gt;</span>
+     <span class="nt">&lt;/FPtoGlobalRotations&gt;</span>
+<span class="nt">&lt;/ForcePlatform&gt;</span>
+
+Addition of PadThickness tag in the laboratory XML file.
+</pre></div>
+</td></tr></table></div>
+<p>Please, note that if you add the pad thickness to one force platform, you need to do the same for all the other force platforms defined in the same XML setup file, even if the pad is not present. In this case, you can set the value to 0.</p>
 </div>
 </div>
 <div class="section" id="markers-protocols">
-<span id="labxml"></span><h3>Markers Protocols<a class="headerlink" href="#markers-protocols" title="Permalink to this headline">¶</a></h3>
-<p>Each marker protocol must be defined in a separate XML file. In the following an example of an XML  file with information about marker protocols  (available at SetupFilesAcquisitionInterfaceMarkersProtocolsUWA-Fullbody.xml)</p>
+<h3>Markers Protocols<a class="headerlink" href="#markers-protocols" title="Permalink to this headline">¶</a></h3>
+<p>Each marker protocol must be defined in a separate XML file. In the following an example of an XML  file with information about marker protocols  (available at <code class="docutils literal"><span class="pre">SetupFiles\AcquisitionInterface\MarkersProtocols\UWA-Fullbody.xml</span></code>)</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -228,12 +267,12 @@ This convention requires that for any combination of the three axes (e.g. YZX, X
 <span class="nt">&lt;/MarkersProtocol&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the example the markers set for both Static (<tt class="docutils literal"><span class="pre">&lt;MarkersSetStaticTrials&gt;</span></tt> tag, line 3) and Dynamic Trials (<tt class="docutils literal"><span class="pre">&lt;MarkersSetDynamicTrials&gt;</span></tt> tag, line 4) are defined. Names of the markers must match the labels used to identify the markers in the C3D files.</p>
+<p>In the example the markers set for both Static (<code class="docutils literal"><span class="pre">&lt;MarkersSetStaticTrials&gt;</span></code> tag, line 3) and Dynamic Trials (<code class="docutils literal"><span class="pre">&lt;MarkersSetDynamicTrials&gt;</span></code> tag, line 4) are defined. Names of the markers must match the labels used to identify the markers in the C3D files.</p>
 <p>The labels of the markers cannot include spaces as this would prevent the creation of this configuration file.</p>
 </div>
 <div class="section" id="emgs-protocols">
 <span id="emgsprotocols"></span><h3>EMGs Protocols<a class="headerlink" href="#emgs-protocols" title="Permalink to this headline">¶</a></h3>
-<p>EMG protocol must be defined in an XML file. An example (available at SetupFilesAcquisitionInterfaceEMGsProtocolsUNIPD-15noside-left.xml) is shown in the following:</p>
+<p>EMG protocol must be defined in an XML file. An example (available at <code class="docutils literal"><span class="pre">SetupFiles\AcquisitionInterface\EMGsProtocols\UNIPD-15noside-left.xml</span></code>) is shown in the following:</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -259,10 +298,10 @@ This convention requires that for any combination of the three axes (e.g. YZX, X
 </td></tr></table></div>
 <p>The XML file includes information about the name of the protocol (line 2), the list of the muscles (lines 3-9) and the instrumented leg (line 10).
 Muscles names (lines 4-8) MUST be those assigned during the acquisition session and, therefore, must agree with labels in the C3D files.</p>
-<p>When EMG data are collected, the XML file must define the instrumented leg.  Depending on the leg with EMG sensors its value will be <tt class="docutils literal"><span class="pre">Right,</span> <span class="pre">Left,</span> <span class="pre">Both,</span> <span class="pre">None</span></tt>. These are the only acceptable strings. When EMG signals are not collected during the acquisition session, this configuration file is not required, and the user just sets at 0 the number of EMG systems on the Acquisition Interface GUI (<a href="#emginterface">Fig.  5</a>).</p>
-<div class="align-center figure align-center" id="emginterface">
-<img alt="Number of EMGs System" src="../_images/nEMGsystems.png" style="width: 20%;" />
-<p class="caption">Figure 5: Acquisition Interface: how to set the Number of EMGs System used during the acquisition.</p>
+<p>When EMG data are collected, the XML file must define the instrumented leg.  Depending on the leg with EMG sensors its value will be <code class="docutils literal"><span class="pre">Right,</span> <span class="pre">Left,</span> <span class="pre">Both,</span> <span class="pre">None</span></code>. These are the only acceptable strings. When EMG signals are not collected during the acquisition session, this configuration file is not required, and the user just sets at 0 the number of EMG systems on the Acquisition Interface GUI (<a href="#emginterface">Fig.  6</a>).</p>
+<div class="align-center figure" id="id8">
+<span id="emginterface"></span><a class="reference internal image-reference" href="../_images/nEMGsystems.png"><img alt="Number of EMGs System" src="../_images/nEMGsystems.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-text">Figure 6: Acquisition Interface: how to set the Number of EMGs System used during the acquisition.</span></p>
 </div>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -278,14 +317,17 @@ Muscles names (lines 4-8) MUST be those assigned during the acquisition session 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Acquisition Interface: describing your data</a><ul>
 <li><a class="reference internal" href="#how-to-run-the-program">How to run the program</a></li>
-<li><a class="reference internal" href="#setup-files">Setup files</a><ul>
-<li><a class="reference internal" href="#laboratory">Laboratory</a></li>
+<li><a class="reference internal" href="#setup-files">Setup Files</a><ul>
+<li><a class="reference internal" href="#laboratory">Laboratory</a><ul>
+<li><a class="reference internal" href="#plate-padding">Plate Padding</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#markers-protocols">Markers Protocols</a></li>
 <li><a class="reference internal" href="#emgs-protocols">EMGs Protocols</a></li>
 </ul>
@@ -300,12 +342,14 @@ Muscles names (lines 4-8) MUST be those assigned during the acquisition session 
   <h4>Next topic</h4>
   <p class="topless"><a href="C3DtoMAT.html"
                         title="next chapter">C3DtoMAT: from C3D to MATLAB format</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/manual/acquisitionInterface.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/acquisitionInterface.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -322,7 +366,7 @@ Muscles names (lines 4-8) MUST be those assigned during the acquisition session 
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -334,12 +378,12 @@ Muscles names (lines 4-8) MUST be those assigned during the acquisition session 
         <li class="right" >
           <a href="folders.html" title="Folders: organize your work"
              >previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

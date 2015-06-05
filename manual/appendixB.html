@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Appendix B: Validation of Setup and Configuration Files &mdash; MOtoNMS 2.1 documentation</title>
+    <title>Appendix B: Validation of Setup and Configuration Files &mdash; MOtoNMS 2.2 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,13 +23,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="MOtoNMS 2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.2 documentation" href="../index.html" />
     <link rel="next" title="Appendix C: Revision History" href="appendixC.html" />
     <link rel="prev" title="Appendix A: Setup Files" href="appendixA.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,14 +41,14 @@
         <li class="right" >
           <a href="appendixA.html" title="Appendix A: Setup Files"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="appendix-b-validation-of-setup-and-configuration-files">
 <span id="appendixb"></span><h1>Appendix B: Validation of Setup and Configuration Files<a class="headerlink" href="#appendix-b-validation-of-setup-and-configuration-files" title="Permalink to this headline">¶</a></h1>
@@ -62,86 +60,90 @@
 <p>Choose one of the following links:</p>
 <p><a class="reference external" href="http://www.freeformatter.com/xml-validator-xsd.html">http://www.freeformatter.com/xml-validator-xsd.html</a></p>
 <p><a class="reference external" href="http://www.corefiling.com/opensource/schemaValidate.html">http://www.corefiling.com/opensource/schemaValidate.html</a></p>
-<p>and upload your XML file and the corresponding XMLSchema (the <tt class="docutils literal"><span class="pre">.xsd</span></tt> file).</p>
+<p>and upload your XML file and the corresponding XMLSchema (the <code class="docutils literal"><span class="pre">.xsd</span></code> file).</p>
 <p>The following tables are listing the XML Schema for each type of XML setup and configuration files that you find in MOtoNMS.</p>
-<table border="1" class="docutils" id="making-a-table">
+<blockquote id="making-a-table">
+<div><table border="1" class="docutils">
 <colgroup>
-<col width="55%" />
-<col width="45%" />
+<col width="57%" />
+<col width="43%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">XML</span> <span class="pre">Setup</span> <span class="pre">Files</span></tt></th>
-<th class="head"><tt class="docutils literal"><span class="pre">XML</span> <span class="pre">Scheme</span></tt></th>
+<tr class="row-odd"><th class="head"><code class="docutils literal"><span class="pre">XML</span> <span class="pre">Setup</span> <span class="pre">Files</span></code></th>
+<th class="head"><code class="docutils literal"><span class="pre">XML</span> <span class="pre">Scheme</span></code></th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><p class="first"><tt class="docutils literal"><span class="pre">GU-16muscles.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UNIPD-15noside-left.xml</span></tt></p>
-<p class="last"><tt class="docutils literal"><span class="pre">UWA-16muscles-r.xml</span></tt></p>
+<tr class="row-even"><td><p class="first"><code class="docutils literal"><span class="pre">GU-16muscles.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UNIPD-15noside-left.xml</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">UWA-16muscles-r.xml</span></code></p>
 </td>
-<td><tt class="docutils literal"><span class="pre">EMGsProtocol.xsd</span></tt></td>
+<td>EMGsProtocol.xsd</td>
 </tr>
-<tr class="row-odd"><td><p class="first"><tt class="docutils literal"><span class="pre">GU.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UMG.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UNIPD.xml</span></tt></p>
-<p class="last"><tt class="docutils literal"><span class="pre">UWA.xml</span></tt></p>
+<tr class="row-odd"><td><p class="first"><code class="docutils literal"><span class="pre">GU.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UMG.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UNIPD.xml</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">UWA.xml</span></code></p>
 </td>
-<td><tt class="docutils literal"><span class="pre">Laboratory.xsd</span></tt></td>
+<td>Laboratory.xsd</td>
 </tr>
-<tr class="row-even"><td><p class="first"><tt class="docutils literal"><span class="pre">GU-10pointsCluster.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UMG-OpenSim.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UNIPD_CASTforOpenSim.xml</span></tt></p>
-<p class="last"><tt class="docutils literal"><span class="pre">UWA-Fullbody.xml</span></tt></p>
+<tr class="row-even"><td><p class="first"><code class="docutils literal"><span class="pre">GU-10pointsCluster.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UMG-OpenSim.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UNIPD_CASTforOpenSim.xml</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">UWA-Fullbody.xml</span></code></p>
 </td>
-<td><tt class="docutils literal"><span class="pre">MarkersProtocol.xsd</span></tt></td>
+<td>MarkersProtocol.xsd</td>
 </tr>
-<tr class="row-odd"><td><p class="first"><tt class="docutils literal"><span class="pre">UNIPD15nosideL-CEINMS.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">UNIPD15nosideL-OpenSim.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">GU-CEINMS.xml</span></tt></p>
-<p class="last"><tt class="docutils literal"><span class="pre">UWA-CEINMS.xml</span></tt></p>
+<tr class="row-odd"><td><p class="first"><code class="docutils literal"><span class="pre">UNIPD15nosideL-CEINMS.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">UNIPD15nosideL-OpenSim.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">GU-CEINMS.xml</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">UWA-CEINMS.xml</span></code></p>
 </td>
-<td><tt class="docutils literal"><span class="pre">EMGLabels.xsd</span></tt></td>
+<td>EMGLabels.xsd</td>
 </tr>
-<tr class="row-even"><td><p class="first"><tt class="docutils literal"><span class="pre">AJCMidPoint.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">EJCMidPoint.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">HJCHarrington.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">KJCMidPoint.xml</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">SJCMidPoint.xml</span></tt></p>
-<p class="last"><tt class="docutils literal"><span class="pre">WJCMidPoint.xml</span></tt></p>
+<tr class="row-even"><td><p class="first"><code class="docutils literal"><span class="pre">AJCMidPoint.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">EJCMidPoint.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">HJCHarrington.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">KJCMidPoint.xml</span></code></p>
+<p><code class="docutils literal"><span class="pre">SJCMidPoint.xml</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">WJCMidPoint.xml</span></code></p>
 </td>
-<td><tt class="docutils literal"><span class="pre">JCcomputation.xsd</span></tt></td>
+<td>JCcomputation.xsd</td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+</div></blockquote>
+<blockquote id="id1">
+<div><table border="1" class="docutils">
 <colgroup>
-<col width="59%" />
-<col width="41%" />
+<col width="61%" />
+<col width="39%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">XML</span> <span class="pre">Configuration</span> <span class="pre">Files</span></tt></th>
-<th class="head"><tt class="docutils literal"><span class="pre">XML</span> <span class="pre">Scheme</span></tt></th>
+<tr class="row-odd"><th class="head"><code class="docutils literal"><span class="pre">XML</span> <span class="pre">Configuration</span> <span class="pre">Files</span></code></th>
+<th class="head"><code class="docutils literal"><span class="pre">XML</span> <span class="pre">Scheme</span></code></th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">acquisition.xml</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">acquisition.xsd</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">acquisition.xml</span></code></td>
+<td>acquisition.xsd</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">elaboration.xml</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">elaboration.xsd</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">elaboration.xml</span></code></td>
+<td>elaboration.xsd</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">static.xml</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">static.xsd</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">static.xml</span></code></td>
+<td>static.xsd</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </div>
 
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="appendixA.html"
@@ -149,12 +151,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="appendixC.html"
                         title="next chapter">Appendix C: Revision History</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/manual/appendixB.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/appendixB.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -171,7 +175,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -183,12 +187,12 @@
         <li class="right" >
           <a href="appendixA.html" title="Appendix A: Setup Files"
              >previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

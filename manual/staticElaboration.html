@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Static Elaboration: process your static trials &mdash; MOtoNMS 2.1 documentation</title>
+    <title>Static Elaboration: process your static trials &mdash; MOtoNMS 2.2 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,13 +23,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="MOtoNMS 2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.2 documentation" href="../index.html" />
     <link rel="next" title="Error Messages" href="errorMessages.html" />
     <link rel="prev" title="Data Processing: elaborate your dynamic trials" href="dataProcessing.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,34 +41,34 @@
         <li class="right" >
           <a href="dataProcessing.html" title="Data Processing: elaborate your dynamic trials"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="static-elaboration-process-your-static-trials">
 <span id="staticelaboration"></span><h1>Static Elaboration: process your static trials<a class="headerlink" href="#static-elaboration-process-your-static-trials" title="Permalink to this headline">¶</a></h1>
-<p>OpenSim requires static trials for the scaling procedure (<a class="reference external" href="http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+with+Scaling">http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+with+Scaling</a>). The objective of the elaboration of these trials is to produce for each static trial a markers trajectories file (<tt class="docutils literal"><span class="pre">.trc</span></tt>), optimized for the Scaling in OpenSim.</p>
-<p>Starting from the mat structures created by <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a>, Static Elaboration apply the same filter procedure used inData Processing. The main step is then joint centers (JC) estimation. These are points required to improve the accuracy of the OpenSim scaling procedure.</p>
-<p>In the current toolbox version, methods for hip (HJC), knee (KJC), ankle (AJC), elbow (EJC), shoulder (SJC) and wrist (WJC) joint centers computation are available. More specifically, HJC can be assessed exploiting Harrington <a class="footnote-reference" href="#id2" id="id1">[3]</a>, while the others can be computed as the mid points between anatomical landmarks specified in the corresponding setup files (<a class="reference internal" href="#staticsetupfiles"><em>Setup Files</em></a>). However, the structure of the software intentionally allows an easy integration of other algorithms for both lower and upper limbs joints. The resulting trajectories are then added to the markers list defined by the user (<a class="reference internal" href="#staticinterfaceconfig"><em>Static Interface: configure your elaboration</em></a>). The updated list is finally rotated into OpenSim reference system and stored in the output <tt class="docutils literal"><span class="pre">.trc</span></tt> file.</p>
+<p>OpenSim requires static trials for the scaling procedure <a class="footnote-reference" href="#id3" id="id1">[4]</a>. The objective of the elaboration of these trials is to produce for each static trial a markers trajectories file (<code class="docutils literal"><span class="pre">.trc</span></code>), optimized for the Scaling in OpenSim.</p>
+<p>Starting from the <code class="docutils literal"><span class="pre">.mat</span></code> structures created by <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a>, Static Elaboration apply the same filtering procedure used in Data Processing. The main step is then joint centers (JC) estimation. These are points usually recommended to improve the accuracy of the OpenSim scaling procedure.</p>
+<p>In the current toolbox version, methods for hip (HJC), knee (KJC), ankle (AJC), elbow (EJC), shoulder (SJC) and wrist (WJC) joint centers computation are available. More specifically, HJC can be assessed exploiting Harrington <a class="footnote-reference" href="#id4" id="id2">[5]</a>, while the others can be computed as the mid points between anatomical landmarks specified in the corresponding setup files (<a class="reference internal" href="#staticsetupfiles"><span>Setup Files</span></a>). However, the structure of the software intentionally allows an easy integration of other algorithms for both lower and upper limbs joints. The resulting trajectories are then added to the markers list defined by the user (<a class="reference internal" href="#staticinterfaceconfig"><span>Static Interface: configure your elaboration</span></a>). The updated list is finally rotated into OpenSim reference system and stored in the output <code class="docutils literal"><span class="pre">.trc</span></code> file.</p>
 <div class="section" id="static-interface-configure-your-elaboration">
 <span id="staticinterfaceconfig"></span><h2>Static Interface: configure your elaboration<a class="headerlink" href="#static-interface-configure-your-elaboration" title="Permalink to this headline">¶</a></h2>
-<p>As Data Processing (<a class="reference internal" href="dataProcessing.html#elaborationinterfaceconfig"><em>Elaboration Interface: configure your elaboration</em></a>), the execution of the Static Elaboration block is fully defined by a set of parameters selected by the user.</p>
-<p>All these parameters are enclosed in the <tt class="docutils literal"><span class="pre">static.xml</span></tt> configuration file, which can be obtained running a graphical user interface.</p>
-<p>The GUI will ask first to select the input data folder and next to enter an identifier for the current elaboration. The identifier will be used to name the new folder storing the results of this elaboration (e.g. <tt class="docutils literal"><span class="pre">staticelaboration01ID</span></tt>, <tt class="docutils literal"><span class="pre">staticelaboration02ID</span></tt> in <a href="folders.html#dataorg">Fig.  9</a>, <a class="reference internal" href="folders.html#dataorganization"><em>Folders: organize your work</em></a>). As shown in <a href="folders.html#dataorg">Fig.  9</a>, all static elaborations are grouped in the staticElaborationfolder to avoid confusion with the output folders of Data Processing.</p>
+<p>As Data Processing (<a class="reference internal" href="dataProcessing.html#elaborationinterfaceconfig"><span>Elaboration Interface: configure your elaboration</span></a>), the execution of the Static Elaboration block is fully defined by a set of parameters selected by the user.</p>
+<p>All these parameters are enclosed in the <code class="docutils literal"><span class="pre">static.xml</span></code> configuration file, which can be obtained running a graphical user interface.</p>
+<p>The GUI will ask first to select the input data folder and next to enter an identifier for the current elaboration. The identifier will be used to name the new folder storing the results of this elaboration (e.g. <code class="docutils literal"><span class="pre">staticelaboration01ID</span></code>, <code class="docutils literal"><span class="pre">staticelaboration02ID</span></code> in <a class="reference internal" href="folders.html#dataorg"><span>Folders: organize your work figure</span></a>). As shown in <a class="reference internal" href="folders.html#dataorg"><span>Folders: organize your work figure</span></a>, all static elaborations are grouped in the <code class="docutils literal"><span class="pre">staticElaborations</span></code> folder to avoid confusion with the output folders of Data Processing.</p>
 <p>Then, the GUI will ask the user the parameters required for the elaboration, which are briefly described in the following:</p>
 <ul class="simple">
-<li>Static trialto be processed</li>
-<li>Cutoff frequencyfor markersfiltering (Optional)</li>
-<li>Joints for center computation</li>
-<li>Methods for the computation of the joint centers, which are defined selecting the corresponding setup file (<a class="reference internal" href="#staticsetupfiles"><em>Setup Files</em></a>)</li>
-<li>List of markersto be written in <tt class="docutils literal"><span class="pre">.trc</span></tt> file</li>
+<li>Static trial to be processed</li>
+<li>Cut-off frequency for markers filtering (Optional)</li>
+<li>Joints for center computation (Optional)</li>
+<li>Methods for the computation of the joint centers, which are defined selecting the corresponding setup file (<a class="reference internal" href="#staticsetupfiles"><span>Setup Files</span></a>)</li>
+<li>List of markersto be written in <code class="docutils literal"><span class="pre">.trc</span></code> file</li>
 </ul>
-<p>An example of <tt class="docutils literal"><span class="pre">static.xml</span></tt> configuration file is shown in  the following:</p>
+<p>An example of <code class="docutils literal"><span class="pre">static.xml</span></code> configuration file is shown in  the following:</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -164,28 +162,28 @@
 <span class="nt">&lt;/static&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Before going into details about this file we need to give you some additional information about JC computation. Different methods for the computation of the different JC may require different input data. Usually these input data includes the markers position during the static acquisition. However, different marker protocols use different labels to identify the same body landmark. Thus, it is necessary to define the connection between the marker required by a method (i.e. the left and right anterior and posterior superior iliac spine forthe Harrington method) and their names according to the markers protocol used for the data collection. As it would be too complex and error prone to do it for each elaboration, this information is stored in a setup file (see <a class="reference internal" href="#staticsetupfiles"><em>Setup Files</em></a> in this chapter), one for each JC computational method. Each file describes how the landmarks of interested are named in different marker protocols. A user can add new protocols to the file when required.</p>
-<p>Static Elaboration retrieved from the Setup File of the selected JC computation method the marker labels in the marker protocol used in the static trial selected for the processing and save them in the <tt class="docutils literal"><span class="pre">static.xml</span></tt> file (lines 12-16, 24-28, and 36-39).</p>
-<p>The list of markers to be stored in the <tt class="docutils literal"><span class="pre">.trc</span></tt> file (line 44) MUST NOT include the estimated JC labels, as it will be automatically updated.</p>
+<p>Before going into details about this file we need to give you some additional information about JC computation. Different methods for the computation of the different JC may require different input data. Usually these input data includes the markers position during the static acquisition. However, different marker protocols use different labels to identify the same body landmark. Thus, it is necessary to define the connection between the marker required by a method (i.e. the left and right anterior and posterior superior iliac spine forthe Harrington method) and their names according to the markers protocol used for the data collection. As it would be too complex and error prone to do it for each elaboration, this information is stored in a setup file (see <a class="reference internal" href="#staticsetupfiles"><span>Setup Files</span></a> in this chapter), one for each JC computational method. Each file describes how the landmarks of interested are named in different marker protocols. A user can add new protocols to the file when required.</p>
+<p>Static Elaboration retrieved from the Setup File of the selected JC computation method the marker labels in the marker protocol used in the static trial selected for the processing and save them in the <code class="docutils literal"><span class="pre">static.xml</span></code> file (lines 12-17, 24-29, and 36-41).</p>
+<p>The list of markers to be stored in the <code class="docutils literal"><span class="pre">.trc</span></code> file (line 45) MUST NOT include the estimated JC labels, as it will be automatically updated.</p>
 </div>
 <div class="section" id="how-to-run-the-program">
 <h2>How to run the program<a class="headerlink" href="#how-to-run-the-program" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="create-settings-file-for-static-elaboration-static-interface">
 <h3>Create settings file for static elaboration (Static Interface)<a class="headerlink" href="#create-settings-file-for-static-elaboration-static-interface" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Set MATLAB path on <tt class="docutils literal"><span class="pre">src\StaticElaborationfolder</span></tt></li>
-<li>Run <tt class="docutils literal"><span class="pre">StaticInterface.m</span></tt></li>
+<li>Set MATLAB path on <code class="docutils literal"><span class="pre">src\StaticElaborationfolder</span></code></li>
+<li>Run <code class="docutils literal"><span class="pre">StaticInterface.m</span></code></li>
 </ol>
-<p><tt class="docutils literal"><span class="pre">StaticInterface.m</span></tt> is the program implementing the Static Interface.</p>
-<p><strong>Output</strong>: it generates <tt class="docutils literal"><span class="pre">static.xml</span></tt> file.</p>
-<p>At the end of the program the user is prompt with the request if he/she wants to run the elaboration code with the just created <tt class="docutils literal"><span class="pre">static.xml</span></tt> file.</p>
+<p><code class="docutils literal"><span class="pre">StaticInterface.m</span></code> is the program implementing the Static Interface.</p>
+<p><strong>Output</strong>: it generates <code class="docutils literal"><span class="pre">static.xml</span></code> file.</p>
+<p>At the end of the program the user is prompt with the request if he/she wants to run the elaboration code with the just created <code class="docutils literal"><span class="pre">static.xml</span></code> file.</p>
 </div>
 <div class="section" id="run-static-elaboration">
 <h3>Run static elaboration<a class="headerlink" href="#run-static-elaboration" title="Permalink to this headline">¶</a></h3>
-<p>If you have already the configuration file with the parameters of your elaboration (<tt class="docutils literal"><span class="pre">static.xml</span></tt>) , you can run directly the static elaboration with the command:</p>
-<p><tt class="docutils literal"><span class="pre">runStaticElaboration(ConfigFilePath)</span></tt></p>
-<p>where <tt class="docutils literal"><span class="pre">ConfigFilePathis</span></tt> the full path of the folder where your <tt class="docutils literal"><span class="pre">static.xml</span></tt> file is located.</p>
-<p><strong>Output</strong>: <tt class="docutils literal"><span class="pre">static.trc</span></tt>, with the processed markers trajectories and the computed JC</p>
+<p>If you have already the configuration file with the parameters of your elaboration (<code class="docutils literal"><span class="pre">static.xml</span></code>) , you can run directly the static elaboration with the command:</p>
+<p><code class="docutils literal"><span class="pre">runStaticElaboration(ConfigFilePath)</span></code></p>
+<p>where <code class="docutils literal"><span class="pre">ConfigFilePathis</span></code> the full path of the folder where your <code class="docutils literal"><span class="pre">static.xml</span></code> file is located.</p>
+<p><strong>Output</strong>: <code class="docutils literal"><span class="pre">static.trc</span></code>, with the processed markers trajectories and the computed JC</p>
 <p>Additional files are also generated to help in validation of obtained results:</p>
 <ul class="simple">
 <li>computed joint centers coordinate in .mat format</li>
@@ -195,11 +193,11 @@
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <ul class="last simple">
-<li>For any JC computation method, a setup file MUST be predefined (see <a class="reference internal" href="#staticsetupfiles"><em>Setup Files</em></a>).</li>
-<li>The marker protocol used in the data collection of the static trial must be among the one in the setup file for the selected JC computation method (see <a class="reference internal" href="#staticsetupfiles"><em>Setup Files</em></a>).</li>
-<li>Be careful to specify list of markers within the <tt class="docutils literal"><span class="pre">MarkerNames</span></tt> tag in the same order of the list of markers within the <tt class="docutils literal"><span class="pre">MarkersFullNames</span></tt> tag (lines 4-9 in the next listing).</li>
+<li>For any JC computation method, a setup file MUST be predefined (see <a class="reference internal" href="#staticsetupfiles"><span>Setup Files</span></a>).</li>
+<li>The marker protocol used in the data collection of the static trial must be among the one in the setup file for the selected JC computation method (see <a class="reference internal" href="#staticsetupfiles"><span>Setup Files</span></a>).</li>
+<li>Be careful to specify list of markers within the <code class="docutils literal"><span class="pre">MarkerNames</span></code> tag in the same order of the list of markers within the <code class="docutils literal"><span class="pre">MarkersFullNames</span></code> tag (lines 5-10 in the next listing).</li>
 <li>The plot of estimated JCs is based on data from the first frame: if JCs plot seems wrong there could be a problem on data in the first frame</li>
-<li><a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a> code MUST be run on the static trial before the static elaboration.</li>
+<li><a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a> code MUST be run on the static trial before the static elaboration.</li>
 </ul>
 </div>
 </div>
@@ -209,12 +207,12 @@
 <p>The main information that the user have to define for a static  elaboration is the joint centers he/she is interested in computing, the methods to be used for their computation and the parameters each method requires. The last one might be very long and error prone to be edited at each elaboration, so we decided that it would be easier to enclose this parameters in a setup file. The Static Interface will thus ask you to select a setup file for each JC computation. The following explains how to fill these setup files.</p>
 <div class="section" id="joint-center-computation-methods">
 <span id="jointcentercomputation"></span><h3>Joint Center Computation Methods<a class="headerlink" href="#joint-center-computation-methods" title="Permalink to this headline">¶</a></h3>
-<p>Each implemented JC computation method requires a file that list how the required input markers are labelled in each marker protocol. This file MUST be saved in <tt class="docutils literal"><span class="pre">SetupFiles\StaticElaboration\JCcomputation\</span></tt> within the folder of the corresponding joint, as shown in <a href="#sfoldorg">Fig.  12</a>. While not mandatory, our suggestion is to name the file with the acronym of the joint name followed by the identifier of the JC computation method. When only a method is available for a joint, the Static Interface will not ask to choose the setup file and select the only one available in the folder.</p>
-<div class="align-center figure align-center" id="sfoldorg">
-<img alt="Setup files organization for the Static Elaboration code" src="../_images/staticFolders.png" style="height: 500pt;" />
-<p class="caption">Figure 12: Setup files organization for the Static Elaboration code.</p>
+<p>Each implemented JC computation method requires a file that list how the required input markers are labelled in each marker protocol. This file MUST be saved in <code class="docutils literal"><span class="pre">SetupFiles\StaticElaboration\JCcomputation\</span></code> within the folder of the corresponding joint, as shown in <a href="#sfoldorg">Fig.  13</a>. While not mandatory, our suggestion is to name the file with the acronym of the joint name followed by the identifier of the JC computation method. When only a method is available for a joint, the Static Interface will not ask to choose the setup file and select the only one available in the folder.</p>
+<div class="align-center figure" id="id5">
+<span id="sfoldorg"></span><a class="reference internal image-reference" href="../_images/staticFolders.png"><img alt="Setup files organization for the Static Elaboration code" src="../_images/staticFolders.png" style="height: 500pt;" /></a>
+<p class="caption"><span class="caption-text">Figure 13: Setup files organization for the Static Elaboration code.</span></p>
 </div>
-<p>The following listing is an example of a setup file created for the Harrington method at the hip joint (available at: SetupFilesStaticElaborationJCcomputationHipHJCHarrington.xml)</p>
+<p>The following listing is an example of a setup file created for the Harrington method at the hip joint (available at: <code class="docutils literal"><span class="pre">SetupFiles\StaticElaboration\JCcomputation\Hip\HJCHarrington.xml</span></code>)</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -286,11 +284,17 @@
 <span class="nt">&lt;/Method&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>The file first lists the input required for the method (<tt class="docutils literal"><span class="pre">&lt;Input&gt;</span></tt> tag, lines 3-10). Required markers are listed with their full name within the <tt class="docutils literal"><span class="pre">&lt;MarkersFullNames&gt;</span></tt> tag (lines 4-9). Then, a tag named <tt class="docutils literal"><span class="pre">MarkersDefinition</span></tt> follows (line 11). It consists of a list of protocols and MUST include, for each of them, the corresponding input markers names. When new protocols are available, they must be added to the list of the method used for joint computation.</p>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<p>The file first lists the input required for the method (<code class="docutils literal"><span class="pre">&lt;Input&gt;</span></code> tag, lines 4-11). Required markers are listed with their full name within the <code class="docutils literal"><span class="pre">&lt;MarkersFullNames&gt;</span></code> tag (lines 5-10). Then, a tag named <code class="docutils literal"><span class="pre">MarkersDefinition</span></code> follows (line 13-34). It consists of a list of protocols and MUST include, for each of them, the corresponding input markers names. When new protocols are available, they must be added to the list of the method used for joint computation.</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[3]</a></td><td>Harrington ME, et al., Journal of Biomechanics,Biomechanics 40:595602, 2007</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[4]</a></td><td>&lt;<a class="reference external" href="http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+with+Scaling">http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+with+Scaling</a>&gt;</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[5]</a></td><td>Harrington ME, et al., Journal of Biomechanics,Biomechanics 40:595602, 2007</td></tr>
 </tbody>
 </table>
 </div>
@@ -301,7 +305,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -326,12 +330,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="errorMessages.html"
                         title="next chapter">Error Messages</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/manual/staticElaboration.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/staticElaboration.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -348,7 +354,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -360,12 +366,12 @@
         <li class="right" >
           <a href="dataProcessing.html" title="Data Processing: elaborate your dynamic trials"
              >previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

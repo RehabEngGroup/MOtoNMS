@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MOtoNMS Reference Documentation &mdash; MOtoNMS 2.1 documentation</title>
+    <title>MOtoNMS Reference Documentation &mdash; MOtoNMS 2.2 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.1',
+        URL_ROOT:    './',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,12 +23,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="MOtoNMS 2.1 documentation" href="#" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.2 documentation" href="#" />
     <link rel="next" title="Redistribution: Terms and Conditions" href="manual/redistribution.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -39,14 +37,14 @@
         <li class="right" >
           <a href="manual/redistribution.html" title="Redistribution: Terms and Conditions"
              accesskey="N">next</a> |</li>
-        <li><a href="#">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="motonms">
 <h1>MOtoNMS<a class="headerlink" href="#motonms" title="Permalink to this headline">¶</a></h1>
@@ -69,6 +67,7 @@ processing methods across laboratories.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="manual/redistribution.html">Redistribution: Terms and Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual/acknoledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual/newFeatures.html">New Features in MOtoNMS 2.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual/gettingStarted.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="manual/gettingStarted.html#architecture-overview">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/gettingStarted.html#supported-applications-opensim-and-ceinms">Supported Applications: OpenSim and CEINMS</a></li>
@@ -86,7 +85,7 @@ processing methods across laboratories.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/acquisitionInterface.html">Acquisition Interface: describing your data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="manual/acquisitionInterface.html#how-to-run-the-program">How to run the program</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/acquisitionInterface.html#setup-files">Setup files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual/acquisitionInterface.html#setup-files">Setup Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="manual/acquisitionInterface.html#laboratory">Laboratory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/acquisitionInterface.html#markers-protocols">Markers Protocols</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/acquisitionInterface.html#emgs-protocols">EMGs Protocols</a></li>
@@ -108,7 +107,7 @@ processing methods across laboratories.</p>
 <li class="toctree-l3"><a class="reference internal" href="manual/dataProcessing.html#run-processing">Run processing</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="manual/dataProcessing.html#dataprocessingsetupfiles">Setup Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual/dataProcessing.html#setup-files">Setup Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="manual/dataProcessing.html#emglabels">EMGs Labels</a></li>
 </ul>
 </li>
@@ -142,9 +141,9 @@ processing methods across laboratories.</p>
 provide feedback, comments, suggestions, and new modules using any of
 the following channels:</p>
 <ul class="simple">
-<li>the simtk.org web page: <a class="reference external" href="https://simtk.org/home/motonms">https://simtk.org/home/motonms</a></li>
+<li>the MOtoNMS Public Forum, available from the SimTK project page: <a class="reference external" href="https://simtk.org/home/motonms">https://simtk.org/home/motonms</a></li>
 <li>the GitHub repository: <a class="reference external" href="https://github.com/RehabEngGroup/MOtoNMS">https://github.com/RehabEngGroup/MOtoNMS</a></li>
-<li>email: &lt;<a class="reference external" href="mailto:ali&#46;mantoan&#37;&#52;&#48;gmail&#46;com">ali<span>&#46;</span>mantoan<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;.</li>
+<li>email: <a class="reference external" href="mailto:ali&#46;mantoan&#37;&#52;&#48;gmail&#46;com">ali<span>&#46;</span>mantoan<span>&#64;</span>gmail<span>&#46;</span>com</a>, <a class="reference external" href="mailto:monica&#46;reggiani&#37;&#52;&#48;gmail&#46;com">monica<span>&#46;</span>reggiani<span>&#64;</span>gmail<span>&#46;</span>com</a>.</li>
 </ul>
 </div>
 
@@ -152,17 +151,19 @@ the following channels:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Next topic</h4>
   <p class="topless"><a href="manual/redistribution.html"
                         title="next chapter">Redistribution: Terms and Conditions</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -179,7 +180,7 @@ the following channels:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -188,12 +189,12 @@ the following channels:</p>
         <li class="right" >
           <a href="manual/redistribution.html" title="Redistribution: Terms and Conditions"
              >next</a> |</li>
-        <li><a href="#">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

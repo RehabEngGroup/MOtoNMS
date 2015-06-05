@@ -3,11 +3,11 @@
 Static Elaboration: process your static trials
 ==============================================
 
-OpenSim requires static trials for the scaling procedure (`<http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+ with+Scaling>`_). The objective of the elaboration of these trials is to produce for each static trial a markers trajectories file (``.trc``), optimized for the Scaling in OpenSim.
+OpenSim requires static trials for the scaling procedure [4]_. The objective of the elaboration of these trials is to produce for each static trial a markers trajectories file (``.trc``), optimized for the Scaling in OpenSim.
 
-Starting from the mat structures created by :ref:`C3D2MAT <C3D2MAT>`, Static Elaboration apply the same filter procedure used inData Processing. The main step is then joint centers (JC) estimation. These are points required to improve the accuracy of the OpenSim scaling procedure.
+Starting from the ``.mat`` structures created by :ref:`C3D2MAT <C3D2MAT>`, Static Elaboration apply the same filtering procedure used in Data Processing. The main step is then joint centers (JC) estimation. These are points usually recommended to improve the accuracy of the OpenSim scaling procedure.
 
-In the current toolbox version, methods for hip (HJC), knee (KJC), ankle (AJC), elbow (EJC), shoulder (SJC) and wrist (WJC) joint centers computation are available. More specifically, HJC can be assessed exploiting Harrington [3]_, while the others can be computed as the mid points between anatomical landmarks specified in the corresponding setup files (:ref:`Setup Files <StaticSetupFiles>`). However, the structure of the software intentionally allows an easy integration of other algorithms for both lower and upper limbs joints. The resulting trajectories are then added to the markers list defined by the user (:ref:`Static Interface: configure your elaboration <StaticInterfaceConfig>`). The updated list is finally rotated into OpenSim reference system and stored in the output ``.trc`` file.
+In the current toolbox version, methods for hip (HJC), knee (KJC), ankle (AJC), elbow (EJC), shoulder (SJC) and wrist (WJC) joint centers computation are available. More specifically, HJC can be assessed exploiting Harrington [5]_, while the others can be computed as the mid points between anatomical landmarks specified in the corresponding setup files (:ref:`Setup Files <StaticSetupFiles>`). However, the structure of the software intentionally allows an easy integration of other algorithms for both lower and upper limbs joints. The resulting trajectories are then added to the markers list defined by the user (:ref:`Static Interface: configure your elaboration <StaticInterfaceConfig>`). The updated list is finally rotated into OpenSim reference system and stored in the output ``.trc`` file.
 
 
 .. _`StaticInterfaceConfig`:
@@ -19,13 +19,13 @@ As Data Processing (:ref:`Elaboration Interface: configure your elaboration <Ela
 
 All these parameters are enclosed in the ``static.xml`` configuration file, which can be obtained running a graphical user interface.
 
-The GUI will ask first to select the input data folder and next to enter an identifier for the current elaboration. The identifier will be used to name the new folder storing the results of this elaboration (e.g. ``staticelaboration01ID``, ``staticelaboration02ID`` in :num:`Fig. #dataorg`, :ref:`Folders: organize your work <DataOrganization>`). As shown in :num:`Fig. #dataorg`, all static elaborations are grouped in the staticElaborationfolder to avoid confusion with the output folders of Data Processing.
+The GUI will ask first to select the input data folder and next to enter an identifier for the current elaboration. The identifier will be used to name the new folder storing the results of this elaboration (e.g. ``staticelaboration01ID``, ``staticelaboration02ID`` in :ref:`Folders: organize your work figure <dataorg>`). As shown in :ref:`Folders: organize your work figure <dataorg>`, all static elaborations are grouped in the ``staticElaborations`` folder to avoid confusion with the output folders of Data Processing.
 
 Then, the GUI will ask the user the parameters required for the elaboration, which are briefly described in the following:
 
-+ Static trialto be processed
-+ Cutoff frequencyfor markersfiltering (Optional)
-+ Joints for center computation
++ Static trial to be processed
++ Cut-off frequency for markers filtering (Optional)
++ Joints for center computation (Optional)
 + Methods for the computation of the joint centers, which are defined selecting the corresponding setup file (:ref:`Setup Files <StaticSetupFiles>`)
 + List of markersto be written in ``.trc`` file
 
@@ -90,9 +90,9 @@ An example of ``static.xml`` configuration file is shown in  the following:
 Before going into details about this file we need to give you some additional information about JC computation. Different methods for the computation of the different JC may require different input data. Usually these input data includes the markers position during the static acquisition. However, different marker protocols use different labels to identify the same body landmark. Thus, it is necessary to define the connection between the marker required by a method (i.e. the left and right anterior and posterior superior iliac spine forthe Harrington method) and their names according to the markers protocol used for the data collection. As it would be too complex and error prone to do it for each elaboration, this information is stored in a setup file (see :ref:`Setup Files <StaticSetupFiles>` in this chapter), one for each JC computational method. Each file describes how the landmarks of interested are named in different marker protocols. A user can add new protocols to the file when required.
 
 
-Static Elaboration retrieved from the Setup File of the selected JC computation method the marker labels in the marker protocol used in the static trial selected for the processing and save them in the ``static.xml`` file (lines 12-16, 24-28, and 36-39).
+Static Elaboration retrieved from the Setup File of the selected JC computation method the marker labels in the marker protocol used in the static trial selected for the processing and save them in the ``static.xml`` file (lines 12-17, 24-29, and 36-41).
 
-The list of markers to be stored in the ``.trc`` file (line 44) MUST NOT include the estimated JC labels, as it will be automatically updated.
+The list of markers to be stored in the ``.trc`` file (line 45) MUST NOT include the estimated JC labels, as it will be automatically updated.
 
 
 
@@ -157,7 +157,7 @@ Please pay ATTENTION to the following IMPORTANT NOTES:
 
    + The marker protocol used in the data collection of the static trial must be among the one in the setup file for the selected JC computation method (see :ref:`Setup Files <StaticSetupFiles>`).
 
-   + Be careful to specify list of markers within the ``MarkerNames`` tag in the same order of the list of markers within the ``MarkersFullNames`` tag (lines 4-9 in the next listing).
+   + Be careful to specify list of markers within the ``MarkerNames`` tag in the same order of the list of markers within the ``MarkersFullNames`` tag (lines 5-10 in the next listing).
 
    + The plot of estimated JCs is based on data from the first frame: if JCs plot seems wrong there could be a problem on data in the first frame
 
@@ -195,7 +195,7 @@ Each implemented JC computation method requires a file that list how the require
 
 
 
-The following listing is an example of a setup file created for the Harrington method at the hip joint (available at: SetupFiles\StaticElaboration\JCcomputation\Hip\HJCHarrington.xml)
+The following listing is an example of a setup file created for the Harrington method at the hip joint (available at: ``SetupFiles\StaticElaboration\JCcomputation\Hip\HJCHarrington.xml``)
 
 .. _jcxml:
 
@@ -244,11 +244,12 @@ The following listing is an example of a setup file created for the Harrington m
 
 
 
-The file first lists the input required for the method (``<Input>`` tag, lines 3-10). Required markers are listed with their full name within the ``<MarkersFullNames>`` tag (lines 4-9). Then, a tag named ``MarkersDefinition`` follows (line 11). It consists of a list of protocols and MUST include, for each of them, the corresponding input markers names. When new protocols are available, they must be added to the list of the method used for joint computation.
+The file first lists the input required for the method (``<Input>`` tag, lines 4-11). Required markers are listed with their full name within the ``<MarkersFullNames>`` tag (lines 5-10). Then, a tag named ``MarkersDefinition`` follows (line 13-34). It consists of a list of protocols and MUST include, for each of them, the corresponding input markers names. When new protocols are available, they must be added to the list of the method used for joint computation.
 
 
 
 
 
 
-.. [3] Harrington ME, et al., Journal of Biomechanics,Biomechanics 40:595602, 2007
+.. [4] <http://simtk-confluence.stanford.edu:8080/display/OpenSim/Getting+Started+with+Scaling>
+.. [5] Harrington ME, et al., Journal of Biomechanics,Biomechanics 40:595602, 2007

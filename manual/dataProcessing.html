@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Data Processing: elaborate your dynamic trials &mdash; MOtoNMS 2.1 documentation</title>
+    <title>Data Processing: elaborate your dynamic trials &mdash; MOtoNMS 2.2 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,13 +23,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="MOtoNMS 2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="MOtoNMS 2.2 documentation" href="../index.html" />
     <link rel="next" title="Static Elaboration: process your static trials" href="staticElaboration.html" />
     <link rel="prev" title="C3DtoMAT: from C3D to MATLAB format" href="C3DtoMAT.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,40 +41,41 @@
         <li class="right" >
           <a href="C3DtoMAT.html" title="C3DtoMAT: from C3D to MATLAB format"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="data-processing-elaborate-your-dynamic-trials">
 <span id="dataprocessing"></span><h1>Data Processing: elaborate your dynamic trials<a class="headerlink" href="#data-processing-elaborate-your-dynamic-trials" title="Permalink to this headline">¶</a></h1>
-<p>Starting from motion data stored as MATLAB structures by <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a>, Data Processing (<a href="#flowchart">Fig.  6</a>) produces <tt class="docutils literal"><span class="pre">.trc</span></tt> and <tt class="docutils literal"><span class="pre">.mot</span></tt> files for OpenSim, storing respectively markers and forces information. When collected, it also processes EMG signals. Data Processing is only responsible for handling dynamic trials, static trials are managed by <a class="reference internal" href="staticElaboration.html#staticelaboration"><em>Static Elaboration</em></a>.</p>
+<p>Starting from motion data stored as MATLAB structures by <a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a>, Data Processing (<a href="#flowchart">Fig.  7</a>) produces <code class="docutils literal"><span class="pre">.trc</span></code> and <code class="docutils literal"><span class="pre">.mot</span></code> files for OpenSim, storing respectively markers and forces information. When collected, it also processes EMG signals. Data Processing is only responsible for handling dynamic trials, static trials are managed by <a class="reference internal" href="staticElaboration.html#staticelaboration"><span>Static Elaboration</span></a>.</p>
 <div class="section" id="markers-and-ground-reaction-forces-elaboration">
 <h2>Markers and Ground Reaction Forces Elaboration<a class="headerlink" href="#markers-and-ground-reaction-forces-elaboration" title="Permalink to this headline">¶</a></h2>
-<p>This section provides a description of the elaboration steps for marker trajectories and ground reaction forces (<a href="#flowchart">Fig.  6</a> - left column).</p>
-<p>At first, markers trajectories undergo piecewise cubic interpolation to fill any possible gap; a text file (<tt class="docutils literal"><span class="pre">InterpolationNote.txt</span></tt>) with information about the procedure is also saved. Interpolation is executed in the range between the first and last frames where marker occurs, while the values outside this range are set to zero.
-The Analog Data Splitting step (<a href="#flowchart">Fig.  6</a>) handles GRF data generated by the most common force plate types (<a class="reference external" href="http://www.projects.science.uu.nl/umpm/c3dformat_ug.pdf">http://www.projects.science.uu.nl/umpm/c3dformat_ug.pdf</a>). First, the plate moments and centers of pressure are computed with different procedure depending on the FP type and its output. Then, the pre-processed marker data and raw GRFs are filtered with a zero-lag second order low pass Butterworth filter at customizable cut-off frequencies (<a class="reference internal" href="#elaborationinterfaceconfig"><em>Elaboration Interface: configure your elaboration</em></a>). The analysis window definition sub-block (<a href="#flowchart">Fig.  6</a>) selects the portion of the data to be processed. Different methods are available and described in a dedicated section (<a class="reference external" href="analysisWindDef">Analysis Window Definition</a>). At this step, plots of the computed values (i.e., raw EMG, envelopes, and raw and filtered forces, CoP, and moments) are stored for offline visual inspection.
+<p>This section provides a description of the elaboration steps for marker trajectories and ground reaction forces (<a href="#flowchart">Fig.  7</a> - left column).</p>
+<p>At first, markers trajectories undergo piecewise cubic interpolation to fill possible gaps; a text file (<code class="docutils literal"><span class="pre">InterpolationNote.txt</span></code>) with information about the procedure is also saved. Interpolation is executed in the range between the first and last frames where marker occurs, while the values outside this range are set to zero.
+The FP Data Splitting step (<a href="#flowchart">Fig.  7</a>) handles GRF data generated by the most common force plate types (refer to <a class="reference external" href="http://www.projects.science.uu.nl/umpm/c3dformat_ug.pdf">The C3D File Format User Guide</a>) with different procedure depending on the FP type and its output. Then, the pre-processed marker data and raw GRFs are filtered with a zero-lag second order low pass Butterworth filter at customizable cut-off frequencies (<a class="reference internal" href="#elaborationinterfaceconfig"><span>Elaboration Interface: configure your elaboration</span></a>). When not available from FP data, the centers of pressure are computed exploiting the filtered GRFs.
+The analysis window definition sub-block (<a href="#flowchart">Fig.  7</a>) selects the portion of the data to be processed. Different methods are available and described in a dedicated section (<a class="reference external" href="analysisWindDef">Analysis Window Definition</a>). At this step, plots of the computed values (i.e., raw EMG, envelopes, and raw and filtered forces, CoP, and moments) are stored for offline visual inspection.
 Processed GRFs are used to compute free torques based on filtered forces, moments and CoP for the selected frames.
-Finally, marker and GRF data are projected from laboratory or FP reference system to the global reference system of the selected musculoskeletal application, i.e. OpenSim. Required rotations depend in the laboratory setup described in the Laboratory setup file.</p>
-<div class="align-center figure align-center" id="flowchart">
-<img alt="Flowchart of steps in the Data Processing part." src="../_images/dataProcessingScheme.png" style="height: 600pt;" />
-<p class="caption">Figure 6: Flowchart of steps in the Data Processing part.</p>
+Finally, marker and GRF data are projected from laboratory or FP reference system to the global reference system of the selected musculoskeletal application, i.e. OpenSim. Required rotations depend on the laboratory setup described in the laboratory setup file (<a class="reference internal" href="acquisitionInterface.html#lab"><span>Laboratory</span></a>).</p>
+<div class="align-center figure" id="id8">
+<span id="flowchart"></span><a class="reference internal image-reference" href="../_images/DataProcessingSteps-v22.png"><img alt="Flowchart of steps in the Data Processing part." src="../_images/DataProcessingSteps-v22.png" style="height: 600pt;" /></a>
+<p class="caption"><span class="caption-text">Figure 7: Flowchart of steps in the Data Processing part.</span></p>
 </div>
 </div>
 <div class="section" id="emg-processing">
 <h2>EMG Processing<a class="headerlink" href="#emg-processing" title="Permalink to this headline">¶</a></h2>
-<p>When available, EMG signals are also processed for EMG-driven neuromusculoskeletal applications. Currently, MOtoNMS supports CEINMS input format (<a class="reference external" href="https://simtk.org/home/ceinms">https://simtk.org/home/ceinms</a>) but the text file can be easily adapted to other applications.</p>
-<p>A subset of all the acquired muscles can be selected. Maximum value for each EMG signal is estimated from one or more trials defined by the user: when available, a trial of maximal voluntary isometric contraction can be used, as well as a subset of the input trials.
-Envelopes for the EMGs are computed and then normalized with their estimated maximum value. Obtained normalized envelopes are stored by default as a <tt class="docutils literal"><span class="pre">.mot</span></tt> (SIMM and OpenSim motion) file (<tt class="docutils literal"><span class="pre">emg.mot</span></tt>) with output labels that can be defined by the user (for details refer to <a class="reference external" href="DataProcessingSetupFiles">Setup Files</a> in this chapter). Plain text and <tt class="docutils literal"><span class="pre">.sto</span></tt> (OpenSim storage) file formats are also available for logging the results of EMG processing.</p>
+<p>When available, EMG signals are also processed for EMG-driven neuromusculoskeletal applications. Currently, MOtoNMS supports CEINMS input file formats (<a class="reference external" href="https://simtk.org/home/ceinms">https://simtk.org/home/ceinms</a>), but the results can be easily adapted to other applications.</p>
+<p>A subset of all the acquired muscles can be selected. Maximum value for each EMG signal is estimated from one or more trials defined by the user: when available, a trial of maximal voluntary isometric contraction can be used, as well as a subset of the input trials. A text file (<code class="docutils literal"><span class="pre">maxemg.txt</span></code>) logs information about this step (maximum EMGs value and the corresponding trial and time for each of them).
+Envelopes for the EMGs are computed and then normalized with their estimated maximum value. Obtained normalized envelopes are stored by default as a <code class="docutils literal"><span class="pre">.mot</span></code> (SIMM and OpenSim motion) file (<code class="docutils literal"><span class="pre">emg.mot</span></code>) with output labels that can be defined by the user (for details refer to <a class="reference internal" href="#dataprocessingsetupfiles"><span>Setup Files</span></a> in this chapter). Plain text and <code class="docutils literal"><span class="pre">.sto</span></code> (OpenSim storage) file formats are also available for logging the results of EMG processing.</p>
 </div>
 <div class="section" id="elaboration-interface-configure-your-elaboration">
 <span id="elaborationinterfaceconfig"></span><h2>Elaboration Interface: configure your elaboration<a class="headerlink" href="#elaboration-interface-configure-your-elaboration" title="Permalink to this headline">¶</a></h2>
-<p>The execution of Data Processing block is univocally defined by a set of parameters selected by the user. All these parameters are saved in the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> configuration file, which guarantees the high configurability and the fully reproducibility of the toolbox behavior.</p>
-<p>The following listing shows an example of an <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> configuration file.</p>
+<p>The execution of Data Processing block is univocally defined by a set of parameters selected by the user. All these parameters are saved in the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> configuration file, which guarantees the high configurability and the fully reproducibility of the toolbox behavior.</p>
+<p>The following listing shows an example of an <code class="docutils literal"><span class="pre">elaboration.xml</span></code> configuration file.</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -138,11 +137,19 @@ Envelopes for the EMGs are computed and then normalized with their estimated max
 59
 60
 61
-62</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+62
+63
+64
+65
+66</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;elaboration&gt;</span>
 <span class="nt">&lt;FolderName&gt;</span>.\InputData\UNIPDsubject\2014-06-09<span class="nt">&lt;/FolderName&gt;</span>
 
 <span class="nt">&lt;Trials&gt;</span>Walking1 Walking2 FastWalking1 FastWalking2 Running1<span class="nt">&lt;/Trials&gt;</span>
+
+<span class="nt">&lt;MarkersInterpolation&gt;</span>
+   <span class="nt">&lt;MaxGapSize&gt;</span>15<span class="nt">&lt;/MaxGapSize&gt;</span>
+<span class="nt">&lt;/MarkersInterpolation&gt;</span>
 
 <span class="nt">&lt;Filtering&gt;</span>
 
@@ -202,10 +209,10 @@ Envelopes for the EMGs are computed and then normalized with their estimated max
 <span class="nt">&lt;/elaboration&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>This configuration file can be obtained running a user-friendly graphical interface (GUI). The first thing the GUI will ask is to select the input data folder and next to enter an identificator for the current elaboration (<a href="#elabid">Fig.  7</a>). The identificator will be used to name a new folder in <tt class="docutils literal"><span class="pre">ElaboratedData</span></tt> storing the results of this elaboration (e.g., <tt class="docutils literal"><span class="pre">elaboration01ID</span></tt> and <tt class="docutils literal"><span class="pre">elaboration02ID</span></tt> in <a href="folders.html#dataorg">Fig.  9</a>, <a class="reference internal" href="folders.html#dataorganization"><em>Folders: organize your work</em></a>).</p>
-<div class="align-center figure align-center" id="elabid">
-<img alt="Elaboration Interface: setting the Elaboration Identificator" src="../_images/elaborationIdentifier.png" style="height: 100pt;" />
-<p class="caption">Figure 7: Elaboration Interface: setting the Elaboration Identificator</p>
+<p>This configuration file can be obtained running a user-friendly graphical interface (GUI). The first thing the GUI will ask is to select the input data folder and next to enter an identificator for the current elaboration (<a href="#elabid">Fig.  8</a>). The identificator will be used to name a new folder in <code class="docutils literal"><span class="pre">ElaboratedData</span></code> storing the results of this elaboration (e.g., <code class="docutils literal"><span class="pre">elaboration01ID</span></code> and <code class="docutils literal"><span class="pre">elaboration02ID</span></code> in <a class="reference internal" href="folders.html#dataorg"><span>Folders: organize your work figure</span></a>).</p>
+<div class="align-center figure" id="id9">
+<span id="elabid"></span><a class="reference internal image-reference" href="../_images/elaborationIdentifier.png"><img alt="Elaboration Interface: setting the Elaboration Identificator" src="../_images/elaborationIdentifier.png" style="height: 100pt;" /></a>
+<p class="caption"><span class="caption-text">Figure 8: Elaboration Interface: setting the Elaboration Identificator</span></p>
 </div>
 <p>Then, the GUI will ask the parameters required for the elaboration:</p>
 <ul class="simple">
@@ -214,36 +221,59 @@ Envelopes for the EMGs are computed and then normalized with their estimated max
 <li>Cutoff frequency for force filtering specified for each trial type (walking, running,..) (Optional)</li>
 <li>Cutoff frequency for CoP filtering depending on FP type (Optional)</li>
 <li>Analysis Window Computation method, with its own parameters (offset, C3D events labels, frames for the manual method). Available methods are further described in a dedicated section (<a class="reference external" href="analysisWindDef">Analysis Window Definition</a>)</li>
-<li>List of markersto be written in <tt class="docutils literal"><span class="pre">.trc</span></tt> file</li>
+<li>List of markersto be written in <code class="docutils literal"><span class="pre">.trc</span></code> file</li>
 </ul>
 <p>When EMG data are available:</p>
 <ul class="simple">
-<li>Trialsfor the computation of the maximum valueof EMG signals</li>
+<li>Trials for the computation of the maximum value of EMG signals</li>
 <li>Muscles to be considered in the processing (a subset of the acquired EMGs)</li>
 <li>EMG output labels. Different application names EMG signals differently. To avoid typing output labels several times, translation between EMG protocol labels (in C3D files) and application labels is stored in a setup file (see <a class="reference external" href="EMGlabels">EMGs Labels</a>) that can be selected  from the GUI.</li>
 </ul>
-<p>The only two parameters that cannot be modified through the GUI are the <tt class="docutils literal"><span class="pre">EMGOffset</span></tt> (line 49 in the example) and the <tt class="docutils literal"><span class="pre">OutputFileFormats</span></tt> (line 50-54).</p>
-<p>MOtoNMS stores the EMG values starting <tt class="docutils literal"><span class="pre">EMGOffset</span></tt> second before the initial frame. While MOtoNMS has not been designed to synchronize markers, ground reaction forces and EMGs, it accounts for the need of follow-up applications to deal with the electromechanical delay of muscles providing EMG data from an anterior offset in time. Default value is set to <span class="math">\(0.2\)</span> seconds. This setting does not allow to define analysis windows starting at the first frame. If you do not need to consider the electromechanical delay in your research, you can manually set <tt class="docutils literal"><span class="pre">EMGOffset</span></tt> to 0 in your <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file. This also enables the elaboration of data from the first frame.</p>
-<p>Starting from version 2.1, MOtoNMS allows also the definition of output file formats within the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> configuration file (lines 50-54).</p>
-<p>Default values are automatically assigned when running the GUI, so the user is not asked to input them each time. However, once the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file is created, the user can manually change the file format for all the output (i.e. marker trajectories, GRF and EMG), before running the elaboration. MOtoNMS currently supports a single choice for marker trajectories and GRF, i.e. <tt class="docutils literal"><span class="pre">.trc</span></tt> and <tt class="docutils literal"><span class="pre">.mot</span></tt> respectively, which are also the default formats. Nevertheless, the possibility to manage output file formats in the configuration file is a first step toward a future extension of available file formats.</p>
-<p>Conversely, EMG can already be stored differently according to user preference. Current available file formats are: .``mot`` (SIMM and OpenSim motion, set as default), <tt class="docutils literal"><span class="pre">.sto</span></tt> (OpenSim storage), and plain text file (<tt class="docutils literal"><span class="pre">emg.txt</span></tt>).</p>
+<p>Besides, there are also a few additional parameters that can be set for each elaboration. As their default values usually accomplish a wide range of applications and needs, they are automatically assigned when running the GUI, so the user is not asked to input them each time.
+However, if necessary, they can be manually modified directly in the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> configuration file, once it has been created with the GUI and before running the elaboration.
+These parameters are:</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">MaxGapSize</span></code>  (line 7-9)</p>
+<p>Marker trajectories are piecewise interpolated and each gap is considered for interpolation only if its size is smaller than the maximum gap size allowed (i.e., <code class="docutils literal"><span class="pre">MaxGapSize</span></code>).  Otherwise, interpolation for that gap is not performed and a message is printed on the MATLAB Command Window.
+The <code class="docutils literal"><span class="pre">MaxGapSize</span></code> parameter is assigned according to the Video Frame Rate of your data. Default value is fixed to 15 frames at 60Hz <a class="footnote-reference" href="#id3" id="id2">[2]</a>: the corresponding value for a different frame rate is computed and set.
+You can try different values for this parameter and check how it affects the interpolation process looking at the <code class="docutils literal"><span class="pre">InterpolationNote.txt</span></code> file.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">EMGOffset</span></code> (line 58)</p>
+<p>MOtoNMS stores the EMG values starting <code class="docutils literal"><span class="pre">EMGOffset</span></code> second before the initial frame. While MOtoNMS has not been designed to synchronize markers, ground reaction forces and EMGs, it accounts for the need of follow-up applications to deal with the electromechanical delay of muscles providing EMG data from an anterior offset in time. Default value is set to <span class="math">\(0.2\)</span> seconds. This setting does not allow to define analysis windows starting at the first frame. If you do not need to consider the electromechanical delay in your research, you can manually set <code class="docutils literal"><span class="pre">EMGOffset</span></code> to 0 in your <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file. This also enables the elaboration of data from the first frame.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">OutputFileFormats</span></code> (line 60-64).</p>
+<p>Starting from version 2.1, MOtoNMS allows also the definition of file formats for all the output (i.e. marker trajectories, GRF and EMG) within the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> configuration file (lines 60-64).
+MOtoNMS currently supports a single choice for marker trajectories and GRF, i.e. <code class="docutils literal"><span class="pre">.trc</span></code> and <code class="docutils literal"><span class="pre">.mot</span></code> respectively, which are also the default formats. Nevertheless, the possibility to manage output file formats in the configuration file is a first step toward a future extension of available file formats.
+Conversely, EMG can already be stored differently according to user preference. Current available file formats are: <code class="docutils literal"><span class="pre">.mot</span></code> (SIMM and OpenSim motion, set as default), <code class="docutils literal"><span class="pre">.sto</span></code> (OpenSim storage), and plain text file (<code class="docutils literal"><span class="pre">emg.txt</span></code>).</p>
+</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>&lt;<a class="reference external" href="http://biomch-l.isbweb.org/threads/4734-Summary-Missing-Markers?highlight=markers+interpolation">http://biomch-l.isbweb.org/threads/4734-Summary-Missing-Markers?highlight=markers+interpolation</a>&gt;</td></tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="analysiswinddef">
-<span id="id2"></span><h2>Analysis Window Definition<a class="headerlink" href="#analysiswinddef" title="Permalink to this headline">¶</a></h2>
-<p>Different methods to define the analysis window are available. If events are stored in C3D files, they may be selected as start and end frames of the analysis, otherwise desired frames can be inserted manually. An automatic detection of gait events is also possible based on a thresholding algorithm based on force plate data <a class="footnote-reference" href="#id4" id="id3">[2]</a> . The following explains the available methods with additional details.</p>
-<p><strong>ComputeStancePhase</strong>: automatic detection of stance phase using a thresholding algorithm based on force plate data. This method needs only to know the leg of the stance. When only one leg is instrumented (see <a class="reference internal" href="acquisitionInterface.html#emgsprotocols"><em>EMGs Protocols</em></a>), this information can be automatically obtained from the <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file. When both legs are instrumented, the user is asked to indicate the leg he/she wants to consider. Once that the leg is defined, the stance phase is selected based on force data from the FP struck by this leg (line 3 in the following listing). It is also possible to add an offset to the stance phase such that the analysis window will start offset frames before the heel strike and end offset frames after the toe off (line 2).</p>
+<span id="id4"></span><h2>Analysis Window Definition<a class="headerlink" href="#analysiswinddef" title="Permalink to this headline">¶</a></h2>
+<p>Different methods to define the analysis window are available. If events are stored in C3D files, they may be selected as start and end frames of the analysis, otherwise desired frames can be inserted manually. An automatic detection of gait events is also possible based on a thresholding algorithm based on force plate data <a class="footnote-reference" href="#id6" id="id5">[3]</a> . The following explains the available methods with additional details.</p>
+<p><strong>ComputeStancePhase</strong>: automatic detection of stance phase using a thresholding algorithm based on force plate data. This method needs only to know the leg of the stance. When only one leg is instrumented (see <a class="reference internal" href="acquisitionInterface.html#emgsprotocols"><span>EMGs Protocols</span></a>), this information can be automatically obtained from the <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file. When both legs are instrumented, the user is asked to indicate the leg he/she wants to consider. Once that the leg is defined, the stance phase is selected based on force data from the FP struck by this leg (line 3 in the following listing). It is also possible to add an offset to the stance phase such that the analysis window will start offset frames before the heel strike and end offset frames after the toe off (line 2).</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;ComputeStancePhase&gt;</span>
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;ComputeStancePhase&gt;</span>
   <span class="nt">&lt;Offset&gt;</span>20<span class="nt">&lt;/Offset&gt;</span>
   <span class="nt">&lt;Leg&gt;</span>Right<span class="nt">&lt;/Leg&gt;</span>
 <span class="nt">&lt;/ComputeStancePhase&gt;</span>
+
+Example of ComputeStancePhase tag in an elaboration.xml file
 </pre></div>
 </td></tr></table></div>
 <p><strong>StanceOnFPfromC3D</strong>:method for the selection of analysis window based on events stored in C3D files. It looks for the windows defined by the selected events and chooses the one when the instrumented leg struck the force plate.</p>
-<p>Events must be specified by the user and correspond to the label used in the C3D files (<a class="reference internal" href="#elaborationinterfaceconfig"><em>Elaboration Interface: configure your elaboration</em></a>).
-Instrumented leg can be selected from the EMG protocol (<a class="reference internal" href="acquisitionInterface.html#emgsprotocols"><em>EMGs Protocols</em></a>, line 11 in the following listing) or defined by the user when both limbs are instrumented.</p>
+<p>Events must be specified by the user and correspond to the label used in the C3D files (<a class="reference internal" href="#elaborationinterfaceconfig"><span>Elaboration Interface: configure your elaboration</span></a>).
+Instrumented leg can be selected from the EMG protocol (<a class="reference internal" href="acquisitionInterface.html#emgsprotocols"><span>EMGs Protocols</span></a>, line 11 in the following listing) or defined by the user when both limbs are instrumented.</p>
 <p>Events must precisely define the stance window: MOtoNMS checks force platform values to ensure the validity of the events on the C3D files and errors may be raised. Finally, this method allows to add an offset to the selected events to consider a wider analysis window (line 5).</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -263,7 +293,7 @@ Example of StanceOnFPfromC3D tag in an elaboration.xml file
 </pre></div>
 </td></tr></table></div>
 <p><strong>WindowFromC3D</strong>: this method allows to select any kind of events stored in the C3D files. It differs from the previous one since it does not focus on specific gait events such as foot strike or foot off. Thus, force data and the instrumented leg are not checked during the elaboration.</p>
-<p>The identification of the right event in the C3D files requires that different labels are used for the automatic selection of events. The user is asked to state the full labels (i.e., the <tt class="docutils literal"><span class="pre">Context</span></tt>, which might be <tt class="docutils literal"><span class="pre">Right,</span> <span class="pre">Left,</span> <span class="pre">or</span> <span class="pre">General</span></tt>, + <tt class="docutils literal"><span class="pre">Label</span></tt>) associated to the start and stop events he/she wants to select for the Analysis Window (lines 2-3 in the following listing). <tt class="docutils literal"><span class="pre">Offset</span></tt> can also be applied to this method (line 4).</p>
+<p>The identification of the right event in the C3D files requires that different labels are used for the automatic selection of events. The user is asked to state the full labels (i.e., the <code class="docutils literal"><span class="pre">Context</span></code>, which might be <code class="docutils literal"><span class="pre">Right,</span> <span class="pre">Left,</span> <span class="pre">or</span> <span class="pre">General</span></code>, + <code class="docutils literal"><span class="pre">Label</span></code>) associated to the start and stop events he/she wants to select for the Analysis Window (lines 2-3 in the following listing). <code class="docutils literal"><span class="pre">Offset</span></code> can also be applied to this method (line 4).</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -279,7 +309,7 @@ Example of StanceOnFPfromC3D tag in an elaboration.xml file
 Example of WindowFromC3D tag in an elaboration.xml file
 </pre></div>
 </td></tr></table></div>
-<p><strong>Manual</strong>: a manual definition of frames to be considered for the elaboration has been implemented as well. It requires to specify start and end frame for each trial (lines 4-5 in the following listing). This gives the user the full freedom in the choice of the analysis window, but it has the drawback to be quite long and complex in the compilation of the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file, especially in the case of several trials, as start and end frame must be defined for each one.</p>
+<p><strong>Manual</strong>: a manual definition of frames to be considered for the elaboration has been implemented as well. It requires to specify start and end frame for each trial (lines 4-5 in the following listing). This gives the user the full freedom in the choice of the analysis window, but it has the drawback to be quite long and complex in the compilation of the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file, especially in the case of several trials, as start and end frame must be defined for each one.</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -303,10 +333,10 @@ Example of WindowFromC3D tag in an elaboration.xml file
 Example of Manual tag in an elaboration.xmlfile
 </pre></div>
 </td></tr></table></div>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Rueterbories J et al., Medical Engineering &amp; Physics 32: 545-552,2010</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>Rueterbories J et al., Medical Engineering &amp; Physics 32: 545-552,2010</td></tr>
 </tbody>
 </table>
 </div>
@@ -315,55 +345,56 @@ Example of Manual tag in an elaboration.xmlfile
 <div class="section" id="create-settings-file-for-elaboration-elaboration-interface">
 <h3>Create settings file for elaboration (Elaboration Interface)<a class="headerlink" href="#create-settings-file-for-elaboration-elaboration-interface" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Set MATLAB path on <tt class="docutils literal"><span class="pre">src\DataProcessingfolder</span></tt></li>
-<li>Run <tt class="docutils literal"><span class="pre">ElaborationInterface.m</span></tt></li>
+<li>Set MATLAB path on <code class="docutils literal"><span class="pre">src\DataProcessingfolder</span></code></li>
+<li>Run <code class="docutils literal"><span class="pre">ElaborationInterface.m</span></code></li>
 </ol>
-<p><strong>Output</strong>: it generates <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file, which will be saved in the elaboration folder. It also asks if the user wants to run the data processing code using parameters from the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file just created.</p>
+<p><strong>Output</strong>: it generates <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file, which will be saved in the elaboration folder. It also asks if the user wants to run the data processing code using parameters from the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file just created.</p>
 </div>
 <div class="section" id="run-processing">
 <h3>Run processing<a class="headerlink" href="#run-processing" title="Permalink to this headline">¶</a></h3>
-<p>If you already have the XML settings file, you can skip the execution of the Elaboration Interface and run directly the code through the command:</p>
-<p><tt class="docutils literal"><span class="pre">runDataProcessing(ElaborationFilePath)</span></tt></p>
-<p>where <tt class="docutils literal"><span class="pre">ElaborationFilePath</span></tt> is the path of the folder where the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file you want to run is located.</p>
+<p>If you already have the XML configuration file, you can skip the execution of the Elaboration Interface and run directly the code through the command:</p>
+<p><code class="docutils literal"><span class="pre">runDataProcessing(ElaborationFilePath)</span></code></p>
+<p>where <code class="docutils literal"><span class="pre">ElaborationFilePath</span></code> is the path of the folder where the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file you want to run is located.</p>
 <p><strong>Example</strong></p>
-<p><tt class="docutils literal"><span class="pre">runDataProcessing(C:\MOtoNMSv10\TestData\ElaboratedData\GUsubject\date</span>
-<span class="pre">\testRightStanceFromC3D)</span></tt></p>
-<p><strong>Output</strong>:<tt class="docutils literal"><span class="pre">.trc</span></tt>, <tt class="docutils literal"><span class="pre">.mot</span></tt>, and <tt class="docutils literal"><span class="pre">emg.mot|.sto|.txt</span></tt> for each trial</p>
+<p><code class="docutils literal"><span class="pre">runDataProcessing(C:\MOtoNMSv10\TestData\ElaboratedData\GUsubject\date</span>
+<span class="pre">\testRightStanceFromC3D)</span></code></p>
+<p><strong>Output</strong>:<code class="docutils literal"><span class="pre">.trc</span></code>, <code class="docutils literal"><span class="pre">.mot</span></code>, and <code class="docutils literal"><span class="pre">emg.mot|.sto|.txt</span></code> for each trial</p>
 <p>Additional files are also created for further possible analysis:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">InterpolationNote.txt</span></tt> information about the marker interpolation step;</li>
-<li>filtered data within the analysis window and the analysis window frames in mat format;</li>
+<li><code class="docutils literal"><span class="pre">InterpolationNote.txt</span></code> information about the marker interpolation step;</li>
+<li>filtered data within the analysis window and the analysis window frames in <code class="docutils literal"><span class="pre">.mat</span></code> format;</li>
 <li>Plot comparing raw and filtered force plate data within the analysis window;</li>
 <li>Plot of EMG raw;</li>
 <li>Plot of EMG envelopes within the analysis window for each muscle;</li>
-<li><tt class="docutils literal"><span class="pre">AllNormalizedEnvelopes.fig</span></tt>: plot of normalized EMG linear envelopes of all the muscles;</li>
-<li>EMG selected for the elaboration: raw (<tt class="docutils literal"><span class="pre">EMGs/Raw/EMGsSelectedRaw.mat</span></tt>), linear EMG envelopes before (<tt class="docutils literal"><span class="pre">EMGs/Envelope/EMGsSelectedEnvelope.mat</span></tt>) and after normalization (<tt class="docutils literal"><span class="pre">EMGs/Envelope/emg.mat</span></tt>), in mat format;</li>
-<li><tt class="docutils literal"><span class="pre">maxemg.txt/maxemg.mat</span></tt>, storing the maximum EMG values for each muscle.</li>
+<li><code class="docutils literal"><span class="pre">AllNormalizedEnvelopes.fig</span></code>: plot of normalized EMG linear envelopes of all the muscles;</li>
+<li>EMG selected for the elaboration: raw (<code class="docutils literal"><span class="pre">EMGs/Raw/EMGsSelectedRaw.mat</span></code>), linear EMG envelopes before (<code class="docutils literal"><span class="pre">EMGs/Envelope/EMGsSelectedEnvelope.mat</span></code>) and after normalization (<code class="docutils literal"><span class="pre">EMGs/Envelope/emg.mat</span></code>), in mat format;</li>
+<li><code class="docutils literal"><span class="pre">maxemg/maxemg.txt</span></code> and <code class="docutils literal"><span class="pre">maxemg/maxemg.mat</span></code>, storing the maximum EMG value for each muscle, together with the trial and time in which they occur;</li>
+<li>EMG selected for the maximum EMG values computation: raw (<code class="docutils literal"><span class="pre">maxemg/EMGsRawForMax.mat</span></code>) and the corresponding linear envelopes (<code class="docutils literal"><span class="pre">maxemg/EMGsEnvelopeForMax.mat</span></code>);</li>
+<li>Plot of raw EMG, envelope and maximum EMG value for each muscle, corresponding to the trial where the maximum EMG value occurs.</li>
 </ul>
 <p>Please pay ATTENTION to the following IMPORTANT NOTES:</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <ul class="last simple">
-<li>C3D files MUST be converted in mat format before the execution of Data Processing (<a class="reference internal" href="C3DtoMAT.html#c3d2mat"><em>C3D2MAT</em></a>).</li>
-<li>Input data folder requires an <tt class="docutils literal"><span class="pre">acquisition.xml</span></tt> file. This can be generated with <tt class="docutils literal"><span class="pre">mainAquisitionInterface.m</span></tt> (<a class="reference internal" href="acquisitionInterface.html#acquisitioninterface"><em>Acquisition Interface</em></a>).</li>
+<li>C3D files MUST be converted in mat format before the execution of Data Processing (<a class="reference internal" href="C3DtoMAT.html#c3d2mat"><span>C3D2MAT</span></a>).</li>
+<li>Input data folder requires an <code class="docutils literal"><span class="pre">acquisition.xml</span></code> file. This can be generated with <code class="docutils literal"><span class="pre">mainAquisitionInterface.m</span></code> (<a class="reference internal" href="acquisitionInterface.html#acquisitioninterface"><span>Acquisition Interface</span></a>).</li>
 <li>Static trial MUST NOT be selected: Data Processing is only for dynamic trials. To process static trials use Static Elaboration.</li>
-<li>Only trials along the positive direction of motion can be correctly processed (<a class="reference internal" href="acquisitionInterface.html#lab"><em>Laboratory</em></a>).</li>
-<li>Selection of the first <span class="math">\(0.2\)</span> sec is NOT possible due to the <tt class="docutils literal"><span class="pre">EMGOffset</span></tt>. Be careful to select an Analysis Window with at least 0.2 sec time before the start frame. This value can be changed in the <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file.</li>
-<li>If your application does not need data to manage the electromechanical delay, you can set the <tt class="docutils literal"><span class="pre">EMGOffset</span></tt> to 0 in your <tt class="docutils literal"><span class="pre">elaboration.xml</span></tt> file.</li>
+<li>Selection of the first <span class="math">\(0.2\)</span> sec is NOT possible due to the <code class="docutils literal"><span class="pre">EMGOffset</span></code>. Be careful to select an Analysis Window with at least 0.2 sec time before the start frame. This value can be changed in the <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file.</li>
+<li>If your application does not need data to manage the electromechanical delay, you can set the <code class="docutils literal"><span class="pre">EMGOffset</span></code> to 0 in your <code class="docutils literal"><span class="pre">elaboration.xml</span></code> file.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="section" id="dataprocessingsetupfiles">
-<span id="id5"></span><h2>Setup Files<a class="headerlink" href="#dataprocessingsetupfiles" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setup-files">
+<span id="dataprocessingsetupfiles"></span><h2>Setup Files<a class="headerlink" href="#setup-files" title="Permalink to this headline">¶</a></h2>
 <p>The only setup file required for this step is about the EMGs. Thus, if you didnt collect EMGs, you can skip this part.</p>
 <div class="section" id="emglabels">
-<span id="id6"></span><h3>EMGs Labels<a class="headerlink" href="#emglabels" title="Permalink to this headline">¶</a></h3>
+<span id="id7"></span><h3>EMGs Labels<a class="headerlink" href="#emglabels" title="Permalink to this headline">¶</a></h3>
 <p>If you gathered EMG signals, probably you need to process them and use the results of the processing for some investigations and/or other applications. Some applications require predefined names for their input data. For example, CEINMS software used fixed labels for each EMG signal in input, that usually differ from those assigned during the acquisition session. Therefore, after the execution of Data Processing, you would be required to manually change the original EMG labels stored in your results according to the needs of CEINMS or any other application you want to use.</p>
-<p>MOtoNMS allows you to avoid this tedious manual process, and does it for you. The toolbox can save results changing EMG labels coming from the acquisition (stored in the C3D files) in those desidered by the user. You just have to specify the labels you need in your results, and the <tt class="docutils literal"><span class="pre">emg.txt</span></tt> output file will be saved using them.</p>
-<p>However, you are not asked to input this information, usually common for a set of elaboration, each time you are running the Elaboration InterfaceGUI. It would be time consuming, boring and therefore error prone, especially considering the number of EMG signals that can be acquired during an acquisition. Instead, this association between EMG labels stored in C3D files and those required for an application is defined in a XML setup file, that can be selected through the GUI.</p>
-<p>This file MUST be saved in <tt class="docutils literal"><span class="pre">SetupFiles\DataProcessing\EMGsLabels\</span></tt> and named with the sequence of EMG protocol and application names. (e.g., <tt class="docutils literal"><span class="pre">UNIPD15nosideL-CEINMS.xml</span></tt>). The name stands for the EMG labels collected in a certain laboratory that must be translated in those required for a certain application.</p>
-<p>An example of how to compile it is shown in the following listing (available at: SetupFilesDataProcessingEMGsLabelsUNIPD15nosideL-CEINMS.xml). You have to manually edit this file but it is fairly easy and you can check your file with respect to the required syntax with the validation procedure (see <a class="reference internal" href="appendixB.html#appendixb"><em>Appendix B: Validation of Setup and Configuration Files</em></a>).</p>
+<p>MOtoNMS allows you to avoid this tedious manual process, and does it for you. The toolbox can save results changing EMG labels coming from the acquisition (stored in the C3D files) in those desidered by the user. You just have to specify the labels you need in your results, and the <code class="docutils literal"><span class="pre">emg.txt</span></code> output file will be saved using them.</p>
+<p>However, you are not asked to input this information, usually common for a set of elaboration, each time you are running the Elaboration Interface GUI. It would be time consuming, boring and therefore error prone, especially considering the number of EMG signals that can be acquired during an acquisition. Instead, this association between EMG labels stored in C3D files and those required for an application is defined in a XML setup file, that can be selected through the GUI.</p>
+<p>This file MUST be saved in <code class="docutils literal"><span class="pre">SetupFiles\DataProcessing\EMGsLabels\</span></code> and named with the sequence of EMG protocol and application names. (e.g., <code class="docutils literal"><span class="pre">UNIPD15nosideL-CEINMS.xml</span></code>). The name stands for the EMG labels collected in a certain laboratory that must be translated in those required for a certain application.</p>
+<p>An example of how to compile it is shown in the following listing (available at: <code class="docutils literal"><span class="pre">SetupFiles\DataProcessing\EMGsLabels\UNIPD15nosideL-CEINMS.xml</span></code>). You have to manually edit this file but it is fairly easy and you can check your file with respect to the required syntax with the validation procedure (see <a class="reference internal" href="appendixB.html#appendixb"><span>Appendix B: Validation of Setup and Configuration Files</span></a>).</p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -411,7 +442,7 @@ Example of Manual tag in an elaboration.xmlfile
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -425,7 +456,7 @@ Example of Manual tag in an elaboration.xmlfile
 <li><a class="reference internal" href="#run-processing">Run processing</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataprocessingsetupfiles">Setup Files</a><ul>
+<li><a class="reference internal" href="#setup-files">Setup Files</a><ul>
 <li><a class="reference internal" href="#emglabels">EMGs Labels</a></li>
 </ul>
 </li>
@@ -439,12 +470,14 @@ Example of Manual tag in an elaboration.xmlfile
   <h4>Next topic</h4>
   <p class="topless"><a href="staticElaboration.html"
                         title="next chapter">Static Elaboration: process your static trials</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/manual/dataProcessing.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/dataProcessing.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -461,7 +494,7 @@ Example of Manual tag in an elaboration.xmlfile
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -473,12 +506,12 @@ Example of Manual tag in an elaboration.xmlfile
         <li class="right" >
           <a href="C3DtoMAT.html" title="C3DtoMAT: from C3D to MATLAB format"
              >previous</a> |</li>
-        <li><a href="../index.html">MOtoNMS 2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MOtoNMS 2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Alice Mantoan, Monica Reggiani.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

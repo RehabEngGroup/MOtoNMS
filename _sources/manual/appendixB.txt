@@ -26,59 +26,61 @@ and upload your XML file and the corresponding XMLSchema (the ``.xsd`` file).
 
 The following tables are listing the XML Schema for each type of XML setup and configuration files that you find in MOtoNMS.
 
+
 .. _making-a-table:
 
-+-------------------------------+-------------------------+
-|``XML Setup Files``            |``XML Scheme``           |
-+===============================+=========================+
-|``GU-16muscles.xml``           |``EMGsProtocol.xsd``     |
-|                               |                         |
-|``UNIPD-15noside-left.xml``    |                         |
-|                               |                         |
-|``UWA-16muscles-r.xml``        |                         |
-+-------------------------------+-------------------------+
-|``GU.xml``                     |``Laboratory.xsd``       |
-|                               |                         |
-|``UMG.xml``                    |                         |
-|                               |                         |
-|``UNIPD.xml``                  |                         |
-|                               |                         |
-|``UWA.xml``                    |                         |
-+-------------------------------+-------------------------+
-|``GU-10pointsCluster.xml``     |``MarkersProtocol.xsd``  |
-|                               |                         |
-|``UMG-OpenSim.xml``            |                         |
-|                               |                         |
-|``UNIPD_CASTforOpenSim.xml``   |                         |
-|                               |                         |
-|``UWA-Fullbody.xml``           |                         |
-+-------------------------------+-------------------------+
-|``UNIPD15nosideL-CEINMS.xml``  |``EMGLabels.xsd``        |
-|                               |                         |
-|``UNIPD15nosideL-OpenSim.xml`` |                         |
-|                               |                         |
-|``GU-CEINMS.xml``              |                         |
-|                               |                         |
-|``UWA-CEINMS.xml``             |                         |
-+-------------------------------+-------------------------+
-|``AJCMidPoint.xml``            |``JCcomputation.xsd``    |
-|                               |                         |
-|``EJCMidPoint.xml``            |                         |
-|                               |                         |
-|``HJCHarrington.xml``          |                         |
-|                               |                         |
-|``KJCMidPoint.xml``            |                         |
-|                               |                         |
-|``SJCMidPoint.xml``            |                         |
-|                               |                         |
-|``WJCMidPoint.xml``            |                         |
-+-------------------------------+-------------------------+
+    +------------------------------+-----------------------+
+    |``XML Setup Files``           |``XML Scheme``         |
+    +==============================+=======================+
+    |``GU-16muscles.xml``          |                       |
+    |                              |EMGsProtocol.xsd       |
+    |``UNIPD-15noside-left.xml``   |                       |
+    |                              |                       |
+    |``UWA-16muscles-r.xml``       |                       |
+    +------------------------------+-----------------------+
+    |``GU.xml``                    |Laboratory.xsd         |
+    |                              |                       |
+    |``UMG.xml``                   |                       |
+    |                              |                       |
+    |``UNIPD.xml``                 |                       |
+    |                              |                       |
+    |``UWA.xml``                   |                       |
+    +------------------------------+-----------------------+
+    |``GU-10pointsCluster.xml``    |MarkersProtocol.xsd    |
+    |                              |                       |
+    |``UMG-OpenSim.xml``           |                       |
+    |                              |                       |
+    |``UNIPD_CASTforOpenSim.xml``  |                       |
+    |                              |                       |
+    |``UWA-Fullbody.xml``          |                       |
+    +------------------------------+-----------------------+
+    |``UNIPD15nosideL-CEINMS.xml`` |                       |
+    |                              |                       |
+    |``UNIPD15nosideL-OpenSim.xml``|EMGLabels.xsd          | 
+    |                              |                       |
+    |``GU-CEINMS.xml``             |                       |
+    |                              |                       |
+    |``UWA-CEINMS.xml``            |                       |
+    +------------------------------+-----------------------+
+    |``AJCMidPoint.xml``           |JCcomputation.xsd      |
+    |                              |                       |
+    |``EJCMidPoint.xml``           |                       |
+    |                              |                       |
+    |``HJCHarrington.xml``         |                       |
+    |                              |                       |
+    |``KJCMidPoint.xml``           |                       |
+    |                              |                       |
+    |``SJCMidPoint.xml``           |                       |
+    |                              |                       |
+    |``WJCMidPoint.xml``           |                       |
+    +------------------------------+-----------------------+
 
+.. _making-a-table:
 
-===========================  =================
-``XML Configuration Files``  ``XML Scheme``
-===========================  =================
-``acquisition.xml``          ``acquisition.xsd``
-``elaboration.xml``          ``elaboration.xsd``
-``static.xml``               ``static.xsd``
-===========================  =================
+    ===========================  =================
+    ``XML Configuration Files``  ``XML Scheme``
+    ===========================  =================
+    ``acquisition.xml``          acquisition.xsd
+    ``elaboration.xml``          elaboration.xsd
+    ``static.xml``               static.xsd
+    ===========================  =================

@@ -10,7 +10,7 @@ Code Organization
 
 :num:`Fig. #codeorg` shows MOtoNMS code structure. It is organized in threeparts:
 
-+ *Source Code* (``MOtoNMS/src/``) directories include MOtoNMS code. Functions are organized in several directories reflecting the main parts of the toolbox, that will be described in the next chapters: :ref:`Acquisition Interface <AcquisitionInterface>` (:num:`Fig. #overview` - blue boxes) and :ref:`C3D2MAT <C3D2MAT>`,  :ref:`Data Processing <DataProcessing>` and :ref:`Static Elaboration <StaticElaboration>` (:num:`Fig. #overview` - orange boxes). Two  implementations for :ref:`C3D2MAT <C3D2MAT>` are available, each one using a different tool (`C3Dserver <http://www.c3dserver.com/>`_ and `BTK <https://code.google.com/p/b-tk/>`_) to access C3D files. A directory (``src/shared``) stores MATLAB functions common to  more than one processing step.
++ *Source Code* (``MOtoNMS/src/``) directories include MOtoNMS code. Functions are organized in several directories reflecting the main parts of the toolbox, that will be described in the next chapters: :ref:`Acquisition Interface <AcquisitionInterface>` (:ref:`figure MOtoNMS overview schema <overview>` - blue boxes) and :ref:`C3D2MAT <C3D2MAT>`,  :ref:`Data Processing <DataProcessing>` and :ref:`Static Elaboration <StaticElaboration>` (:ref:`figure MOtoNMS overview schema <overview>` - orange boxes). Two  implementations for :ref:`C3D2MAT <C3D2MAT>` are available, each one using a different tool (`C3Dserver <http://www.c3dserver.com/>`_ and `BTK <https://code.google.com/p/b-tk/>`_) to access C3D files. A directory (``src/shared``) stores MATLAB functions common to  more than one processing step.
 
 
 + *Setup Files* (``MOtoNMS/SetupFiles/``) directory that includes files describing the laboratory setup, markers and EMG protocols, EMG output labels depending on the final application (see :ref:`Setup Files in Data  Processing <DataProcessingSetupFiles>` ), and information for join center computation methods (see  :ref:`Setup Files in Static Elaboration <StaticSetupFiles>`). Their organization in folders matches the source code structure. Several setup files are already available in the toolbox distribution (:ref:`Appendix B: Validation of Setup and Configuration Files <AppendixB>`) and are often used as examples in the manual. If you need to create new ones, refer to the *Setup Files* sections in each chapter as a reference for their editing.
@@ -22,7 +22,7 @@ The next chapters of the manual describe in details each part of MOtoNMS: its ob
 
 .. _codeorg:
 
-.. figure:: ../images/codeOrg.png
+.. figure:: ../images/codeOrganization.png
    :align: center
    :width: 33%
 
