@@ -1,23 +1,15 @@
 New Features in MOtoNMS 2.2 
 ============================
 
-In MOtoNMS 2.2, we have added some important features. The most relevant are:
+MOtoNMS 2.2 has been updated to support two largely required features:
 
-	+ Processing of data along different motion directions with respect to the global reference system (e.g. backward)
-	+ CoP coordinates computation when plate pads are used
-	+ Optionality in computation of joint centers in :ref:`Static Elaboration <StaticElaboration>` 
+	+ **trials with different directions of motion**
+	+ **force plates with pads**
 
-We have also concentrated in providing the users with more logging information about the processing of EMG signals and the computation of the maximum EMG values for normalization:
+MOtoNMS 2.2 also provides the users with additional logging information about the **EMG processing** steps. 
+An new output folder (``maxemg``) is created for each dynamic elaboration, with plots and log data related to the computation of maximum EMG values.
 
-	+ EMG labels are included while saving EMG data in ``.mat`` format
-	+ An output folder named ``maxemg`` is now created for each dynamic elaboration, to group log data related to the maximum EMG values computation
-	+ All raw EMGs selected for the maximum EMG values computation and the corresponding envelopes are stored as ``mat`` files within the ``maxemg`` folder
-	+ Information about the trial and time when maximum EMG value for each EMG envelope occurs are printed in ``maxemg.txt`` output file, and saved in ``.mat`` format (``maxemg.mat``)
-	+ Raw EMG, envelope and maximum EMG value for each muscle, corresponding to the trial where the maximum EMG value is obtained, are plotted in MATLAB figures for visual inspection
+A last objective of this release is improving the **processing of marker trajectories**. 
+Users have the possibility to define the gaps' maximum size that will be interpolated, and a **piecewise filtering** has been implemented for markers trajectories that still have NaN values. 
 
-At last, improving the processing of marker trajectories is another objective of this release. In order to do that, we have:
-
-	+ Implemented interpolation for all the gaps in marker trajectories with size less than ``MaxGapSize``
-	+ Given the user the possibility to define the ``MaxGapSize`` as a parameter in the ``elaboration.xml`` file
-	+ Tracked the interpolation process for each gap, updating the logging in the ``InterpolationNote.txt`` file
-	+ Implemented a piecewise filtering for marker trajectories still having NaN values due to a missed interpolation
+Finally, computation of **joint centers** in `Static Elaboration <StaticElaboration>`_ is no more mandatory.

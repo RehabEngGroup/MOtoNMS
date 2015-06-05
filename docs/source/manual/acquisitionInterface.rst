@@ -48,7 +48,7 @@ Please pay ATTENTION to the following IMPORTANT NOTES:
    + Trials must be named as: *trial type* (``walking, running, fastwalking``,     etc.) + *sequential number*. Examples: ``walking1, fastwalking5``, etc.
    + The sequential number MUST not include any 0 in the front (write 1 not 001), otherwise errors may occur in the processing.
    + Trial names in the ``acquisition.xml`` MUST correspond to the actual input file names.
-   + Information about the motion direction of each trial is asked in the GUI (:num:`Fig. #trialgui`). This is, indeed, a propriety of the trial, NOT of the laboratory. Please, fill the XML setup file for your laboratory (:ref:`Laboratory <lab>`) following the convention (:num:`Fig. #convention`), regardless the direction of motion of your data. 
+   + Motion direction refers to the trial and is asked in the GUI (:num:`Fig. #trialgui`). Default value is ``forward``, which means that your subject is moving according to the positive direction of the laboratory coordinate system (CS). If this is not the case, you can choose among the following additional options: ``backward``, ``90left``, ``90right``. All of them are defined with respect to the positive direction of your laboratory CS. If your data do not fit in any of the available choices, please select the remaining option (``-``, i.e. *unconventional* in the ``acquisition.xml`` file). In this case, no extra rotations will be applied to your data: they will be projected in the OpenSim CS preserving the orientation they have in the laboratory CS. For static trials, please indicate the direction your subject is looking towards.
    + If your force platforms include a plate pad on the surface, you can define the thickness of each pad in the laboratory setup file (:ref:`Laboratory <lab>`). Addition of the ``PadThickness`` tag in the file is allowed but not mandatory (:ref:`Plate Padding <platePadding>`). However, please note that if you add it for one force platform, you MUST do the same for ALL the other force platforms defined in the same XML, even if the pad is not present. In this case, you can set the pad thickness to 0.
 
 .. _trialgui:
@@ -58,7 +58,7 @@ Please pay ATTENTION to the following IMPORTANT NOTES:
    :scale: 70
    :figclass: align-center
    
-   Acquisition Interface GUI. This step of the GUI will ask you the leg that strikes on each force platform, and the direction of motion for each of your input data file. If your subject is moving ``forward``, you do not need to do anything: this is the default option already set. If it is not, you can choose among the following additional options: ``backward``, ``90left``, ``90right``. *Right* and *left* (as well as *forward* and *backward*) are defined with respect to the positive direction of the global reference system. If your data do not fit to any of the available choices, please select the remaining option (``-``, i.e. *unconventional* in the ``acquisition.xml`` file). For static trials, please indicate the direction your subject is looking towards.
+   Acquisition Interface: how to set the motion direction for each trial. This step of the GUI will ask you the leg that strikes on each force platform, and the direction of motion for each of your input data file. This information allows to support trials with different motion directions. Indeed, extra rotations can be required to align data with the positive direction of OpenSim coordinate system (CS).
    
 
 .. _`acquisitionSetupFiles`:
@@ -197,7 +197,7 @@ The XML example shows how to configure two Bertec force platforms. Their relativ
 Plate Padding
 """""""""""""
  
-An additional entry, ``PadThickness`` (line 6), may be provided in the laboratory XML file, if a plate pad is added on the surface of a FP. This will allow to correct the CoP coordinates computation accordingly (please refer to `<http://www.kwon3d.com/theory/grf/pad.html>`_ for additional information). Pad thickness value must be provided in the same unit of length of plate moments. 
+An additional entry, ``PadThickness`` (line 6), may be included in the laboratory XML file, when data are collected with pads on the surface of FPs. This will allow to correct the computation of CoP coordinates accordingly (please refer to `<http://www.kwon3d.com/theory/grf/pad.html>`_ for additional information). Pad thickness value must be provided in the same unit of length of plate moments. 
 
 The following is an example of definition of a force platform including a pad of 7.5mm, in the laboratory XML file.
 

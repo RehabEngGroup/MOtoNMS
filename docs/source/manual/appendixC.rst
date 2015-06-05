@@ -4,35 +4,34 @@ Appendix C: Revision History
 ----------------------------
 
 
-**RELEASE 2.2**   (*June 4, 2015*) 
+**RELEASE 2.2**   (*June 5, 2015*) 
 
 ----------------------------------
 
 **New Features**
 
-- Processing of data along different motion directions with respect to the global reference system (e.g. backward)
-- CoP coordinates computation when plate pads are used
-- Optionality in computation of joint centers in ``StaticElaboration``
-- Interpolation of all gaps in marker trajectories with size less than ``MaxGapSize`` (with ``MaxGapSize`` defined by the user in the ``elaboration.xml`` file)
-- Piecewise filtering for marker trajectories when NaN values are found
-- Storing of EMG labels while saving EMG data in mat format
-- Output folder named ``maxemg`` for each dynamic elaboration, to log data related to the maximum EMG values computation
-- Storing of all raw EMGs selected for the maximum EMG values computation and the obtained envelopes as mat files (within ``maxemg`` folder)
-- Printing of trial and time corresponding to each maximum EMG value in ``maxemg.txt`` output file, and logging in mat format (update of ``maxemg.mat``)
-- Plot of the raw EMG and envelope for each muscle, corresponding to the trial where the maximum EMG value is found
-- GitHub Project Pages
-- Addition of the ``docs`` folder including the source files required to generate MOtoNMS documentation using Sphinx
+- Processing of data along different motion directions with respect to the laboratory reference system (``forward``, ``backward``, ``90right``, ``90left``)
+- Computation of CoP coordinates for force platforms with pads
+- Possibility to skip the computation of joint centers in ``StaticElaboration``
+- Interpolation of gaps in marker trajectories with size less than ``MaxGapSize`` (chosen by the user in the ``elaboration.xml`` file)
+- Piecewise filtering for marker trajectories having NaN values due to a missed interpolation
+- Inclusion of EMG labels while saving EMG data in ``.mat`` format
+- Definition of a new output folder (``maxemg``) for each dynamic elaboration, with plots and log data related to the computation of maximum EMG values
+- Storing of all raw EMGs selected for the computation of maximum EMG values and the corresponding envelopes as ``.mat`` files
+- Addition of information about the trial and the time corresponding to each maximum EMG value, when printing the ``maxemg.txt`` output file and logging in ``.mat`` format (``maxemg.mat``)
+- Plot of raw EMG and envelope for each muscle, corresponding to the trial where the maximum EMG value occurs
+- Availability of multiple formats documentation (`GitHub Project Pages <http://rehabenggroup.github.io/MOtoNMS/>`_)
 - Compatibility with MATLAB R2014b
 
 
 **Code Changes**
 
-- Added optional ``MotionDirection`` element in ``acquisition.xsd`` to implement processing of data along different motion directions
-- Added optional ``PadThickness`` element in ``laboratory.xsd`` and ``acquisition.xsd`` to account for plate padding in CoP computation
-- Added ``MarkersInterpolationType`` with ``MaxGapSize`` element in ``elaboration.xsd`` to let the user define the maximum gap size for marker trajectories interpolation
-- Modified identification of first and last frame for marker trajectories: added case of NaN values when markers are initially not visible
-- Added way to disable warnings from BTK tool in `C3D2MAT_btk`
-- Moved storing of ``maxemg.txt`` output file within ``maxemg`` folder
+- Added optional ``MotionDirection`` element in ``acquisition.xsd`` to support trials with different directions of motion 
+- Added optional ``PadThickness`` element in ``laboratory.xsd`` and ``acquisition.xsd``, to account for plate padding in the computation of CoP coordinates
+- Added ``MarkersInterpolationType`` with ``MaxGapSize`` element in ``elaboration.xsd``, to let the user define the gaps' maximum size for the interpolation of marker trajectories 
+- Modified identification of the first and last frame for marker trajectories: added case of NaN values when markers are initially not visible
+- Added possibility to disable warnings from BTK tool in ``C3D2MAT_btk``
+- Moved saving of ``maxemg.txt`` output file inside ``maxemg`` folder
 - Handled error that can occur if input C3D file names do not include the repetition number (as required)
 - Handled error in Y axis scale setting in ``EnvelopePlotting.m``
 - Renamed ``CHANGES.txt`` to ``CHANGES.md``
@@ -40,11 +39,11 @@ Appendix C: Revision History
 
 **Bug Fixes**
 
-- Fixed reading C3D files when no force plate (FP) data are stored
-- Fixed handling FP data when more than 2 FPs of different types are involved
-- Fixed selection of ``Leg on ForcePlatform`` in ``AcquisitionInterface`` GUI when more than 2 FPs are involved
+- Fixed reading of C3D files without data from force platforms (FP)
+- Fixed handling of FP data when a laboratory has more than 2 FPs of different types
+- Fixed selection of ``Leg on ForcePlatform`` in ``AcquisitionInterface`` when there are more than 2 FPs in the laboratory
 - Fixed definition of ``timeStartFrame`` and ``timeEndFrame`` in ``selectionData.m`` to account for an initial starting condition of t=0 and frame number=1. Fixed accordingly the definition of ``frameArray`` in ``writetrc.m``
-- Fixed the computation of the hip joint center (HJC) with the Harrington method (``HJCHarrington.m``) when the input static file has a frame number lower than 3
+- Fixed computation of the hip joint center (HJC) with the Harrington method (``HJCHarrington.m``) when the input static file has a frame number lower than 3
 
 |
 **RELEASE 2.1**   (*September 8, 2014*) 

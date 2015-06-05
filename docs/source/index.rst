@@ -67,9 +67,9 @@ MOtoNMS
    provide feedback, comments, suggestions, and new modules using any of
    the following channels:
 
-   + the MOtoNMS Public Forum, available from the simtk.org web page: `<https://simtk.org/home/motonms>`_
+   + the MOtoNMS Public Forum, available from the SimTK project page: `<https://simtk.org/home/motonms>`_
    + the GitHub repository: `<https://github.com/RehabEngGroup/MOtoNMS>`_
-   + email: <ali.mantoan@gmail.com>.
+   + email: ali.mantoan@gmail.com, monica.reggiani@gmail.com.
 
 
 

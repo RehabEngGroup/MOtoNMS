@@ -17,7 +17,7 @@ The present user manual is under license cc by-sa, meaning Attribution
 Share Alike. You can visit `the creative commons page <http://creativecommons.org/licenses/>`_ to get more
 information.
 
-The latest version of this manual is available from the `GitHub Project Pages <http://rehabenggroup.github.io/MOtoNMS/>`_.
+The latest version of this manual is provided in the GitHub Project Pages: `<http://rehabenggroup.github.io/MOtoNMS/>`_.
 
 
 .. figure:: ../images/qrcode.png
