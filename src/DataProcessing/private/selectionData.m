@@ -29,38 +29,71 @@ if nargin<4
     offset=0;
 end
 
+
 for k=1:length(filtData)
-    
-    %Conversion in time to substract the offset(sec) and then startFrame is
-    %expressed in the rate of the given filtData (necessary because rate of
-    %filtData may be different): we are already sure start frame will be
-    %included in the values of lower frequency time vector because it has
-    %been calculated in computeStancePhase converting in VideoFrameRate
-    %(that is the lowest)
-    DataAnalysisWindow{k}.startFrame=round((AnalysisWindow{k}.startFrame/AnalysisWindow{k}.rate-offset)*Rate);
-    %conversion of endFrame into Rate
+        
+    OrigDataStartFrame=AnalysisWindow{k}.LabeledDataOffset+1;
+     
+
+    if AnalysisWindow{k}.startFrame==1
+    %Case AnalysisWindow{k}.startFrame==1 requires to be handled separately:         
+         %the subtraction of 1 to account for the time/frame shift causes 
+         %problems to analog data with different frame rates, since in this  
+         %case timeStartFrame has always to be set to 0 (it can not assume 
+         %negative values), but within the same DataAnalyisWindow, the time
+         %vector may have different sizes for data with different sample  
+         %rates. Subtracting 1 at the VideoFrameRate, as done in the other 
+         %cases, may cause the loss of AnalogData, which usually have an  
+         %higher frame rate.        
+         DataAnalysisWindow{k}.startFrame=1;
+         
+         if  AnalysisWindow{k}.LabeledDataOffset==0
+               
+             timeStartFrame=0;
+         else
+             timeStartFrame=round(((AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate-offset)*Rate); %the use of only LabeledDataOffset already includes the subtraction of 1            
+         end
+
+         timeEndFrame=round((((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset)/AnalysisWindow{k}.rate)-1/Rate)*Rate);
+         
+         %Time-Frame Conversions:
+         %First, the AnalysisWindow's start and end frames are converted in  
+         %time to substract the EMG offset (sec). Then they are reported in  
+         %the rate of the given filtData (necessary because the rates of 
+         %filtData may be different). The resulting timeStartFrame and 
+         %timeEndFrame should correspond to values in the time vector,since 
+         %they have been calculated in computeStancePhase.m based on the 
+         %VideoFrameRate (which is the lowest frame rate)
+         
+     else
+         
+         DataAnalysisWindow{k}.startFrame=round(((AnalysisWindow{k}.startFrame)/AnalysisWindow{k}.rate-offset)*Rate);
+             
+         timeStartFrame=round((((AnalysisWindow{k}.startFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate)-offset)*Rate);       
+         timeEndFrame=round((((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate))*Rate);    
+         
+         %Use of LabeledDataOffset: 
+         %in the case of Manual method, DataAnalysisWindow already accounts 
+         %for the LabeledDataOffset, since it has been subtracted in 
+         %AnalysisWindowSelection.m.
+         %Frames are referred to vectors length in all the other cases.
+         %Thus, to write the corresponding original time and frames in .trc
+         %and .mot files, LabeledDataOffset must always be added(regardless 
+         %the Analysis Window Definition Method used)
+     end
+     
     DataAnalysisWindow{k}.endFrame=round((AnalysisWindow{k}.endFrame/AnalysisWindow{k}.rate)*Rate);
     
-    %Time vector computation:
-    %In the case of Manual method, DataAnalysisWindow accounts for the 
-    %LabeledDataOffset as it was subtract in AnalysisWindowSelection.m
-    %For the other methods, frames are refered to vectors length
-    %Thus, in order to write the corresponding original time and frames
-    %in .trc and .mot files, LabeledDataOffset must be added and for
-    %all the Analysis Window Definition Methods
-
-    timeStartFrame=round(((AnalysisWindow{k}.startFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate-offset)*Rate);
-    timeEndFrame=round(((AnalysisWindow{k}.endFrame+AnalysisWindow{k}.LabeledDataOffset-1)/AnalysisWindow{k}.rate)*Rate);
-    
+    %Time vector computation: 
     time{k}=[timeStartFrame/Rate: 1/Rate: timeEndFrame/Rate]';
+
     
-    try
-        
+    try      
         if length(size(filtData{k}))>2
             
             for i=1:size(filtData{k},3)
                 
-                %Data selection from filtData
+                %Data selection from filtData (based on DataAnalysisWindow)
                 DataSelected{k}(:,:,i)=filtData{k}(DataAnalysisWindow{k}.startFrame:DataAnalysisWindow{k}.endFrame,:,i);
             end
         else
@@ -68,12 +101,8 @@ for k=1:length(filtData)
             
         end
     catch
-        
-        %error('Data selection not working: Analysis Window out of available data. Try to change method or frames of the analysis window')
-        
         error('ErrorTests:convertTest', ...
-            ['----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nAnalysis Window out of available data for trial ' num2str(k) '. \nPLEASE CHANGE method or frames of the analysis window for that trial in your configuration file and TRY again. \n----------------------------------------------------------------'])
-        
+            ['----------------------------------------------------------------\nWARNING: WRONG PARAMETERS SELECTION in the configuration file. \nAnalysis Window out of available data for trial ' num2str(k) '. \nPLEASE CHANGE method or frames of the analysis window for that trial in your configuration file and TRY again. \n----------------------------------------------------------------'])        
     end
 end
 
