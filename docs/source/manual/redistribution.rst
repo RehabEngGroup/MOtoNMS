@@ -28,7 +28,8 @@ The latest version of this manual is provided in the GitHub Project Pages: `<htt
 When using MOtoNMS please acknowledge the authors and cite the
 following paper:
 
-A. Mantoan, M. Reggiani, M. Sartori, Z. Sawacha, C. Pizzolato, C.
-Cobelli, *A MATLAB generic tool to efficiently process C3D data files
-for applications in OpenSim*, XXIV Congress of International Society of
-BIomechanics (ISB 2013), Nadal, Brazil, 2013.
+| A. Mantoan, C. Pizzolato, M. Sartori, Z. Sawacha, C. Cobelli, and M. Reggiani.
+| MOtoNMS: A MATLAB toolbox to process motion data for neuromusculoskeletal modeling and simulation.	
+| `Source Code for Biology and Medicine`, 10:12, November 2015.	
+| DOI: 10.1186/s13029-015-0044-4	
+| URL: `<http://www.scfbm.org/content/10/1/12>`_

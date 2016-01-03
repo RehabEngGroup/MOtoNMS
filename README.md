@@ -66,6 +66,14 @@ You should have received a copy of the GNU General Public License along with
 MOtoNMS; see the file license.  If not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
 
+When using MOtoNMS please acknowledge the authors and cite the following publication:
+
+> A. Mantoan, C. Pizzolato, M. Sartori, Z. Sawacha, C. Cobelli, and M. Reggiani.
+MOtoNMS: A MATLAB toolbox to process motion data for neuromusculoskeletal modeling and simulation.	
+_Source Code for Biology and Medicine_, 10:12, November 2015.	
+DOI: 10.1186/s13029-015-0044-4
+URL: <http://www.scfbm.org/content/10/1/12>
+
 
 ## Acknowledgments ##
 We would like to acknowledge Motion Lab Systems, Inc. (<http://www.motion-labs.com/>)
