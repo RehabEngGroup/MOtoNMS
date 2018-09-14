@@ -44,9 +44,9 @@ fprintf('\n------------------------------------------');
 
 % Print header information
 fprintf(fid,'PathFileType\t4\t(X/Y/Z)\t%s\n',FullFileName);
-fprintf(fid,'DataRate\tCameraRate\tNumFrames\tNumMarkers\tUnits\tOrigDataRate\tDataStartFrame\n');
-fprintf(fid, '%g\t%g\t%d\t%d\t%s\t%g\t%d\n', ...
-    VideoFrameRate, VideoFrameRate, nFrames, nMarkers, 'mm', VideoFrameRate, DataStartFrame);
+fprintf(fid,'DataRate\tCameraRate\tNumFrames\tNumMarkers\tUnits\tOrigDataRate\tOrigDataStartFrame\tOrigNumFrames\n');
+fprintf(fid, '%g\t%g\t%d\t%d\t%s\t%g\t%d\t%d\n', ...
+    VideoFrameRate, VideoFrameRate, nFrames, nMarkers, 'mm', VideoFrameRate, DataStartFrame,DataStartFrame+nFrames-1);
 fprintf(fid,'Frame#\tTime');
 for i = 1:nMarkers
     fprintf(fid,'\t%s\t\t%s',MLabels{i});
