@@ -21,6 +21,8 @@ Choose one of the following links:
 
 `<http://www.corefiling.com/opensource/schemaValidate.html>`_
 
+`<https://extendsclass.com/xml-schema-validator.html>`_
+
 
 and upload your XML file and the corresponding XMLSchema (the ``.xsd`` file).
 
